@@ -672,7 +672,7 @@ if($step eq 'TBamend') {
 opendir(JOINDIR,"$JOIN_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: $!";
 opendir(AMENDDIR,"$AMEND_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: $!";
 @join_files		=	grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\.tab$/ && -f "$JOIN_OUT/$_" } readdir(JOINDIR);
-@amend_files            =       grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\__samples$sample_number\_amended_u$unambigous\_phylo_w$window.tab$/ && -f "$AMEND_OUT/$_" } readdir(AMENDDIR);
+@amend_files            =       grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window.tab$/ && -f "$AMEND_OUT/$_" } readdir(AMENDDIR);
 closedir(JOINDIR);
 closedir(AMENDDIR);
 if(scalar(@join_files) == 0) {
