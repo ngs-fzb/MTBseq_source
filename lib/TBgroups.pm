@@ -4,7 +4,7 @@
 
         TBseq - a computational pipeline for detecting variants in NGS-data
 
-        Copyright (C) 2016 Thomas A. Kohl, Maria R. De Filippo, Robin Koch, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
+        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@
 
 =cut
 
+# tabstop is set to 8.
+
 package TBgroups;
 
 use strict;
@@ -36,24 +38,23 @@ use vars qw($VERSION @ISA @EXPORT);
 ### filtered according to phylogeny SNPs                                                         		###
 ###                                                                                                             ###
 ### Input:      _amended_u95_phylo_w12.tab                                                                      ###
-### Output:     .bam, .bam.bai, .bamlog                                                                         ###
+### Output:     .matrix .groups                                                                                 ###
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION        =       1.00;
+$VERSION        =       1.10;
 @ISA            =       qw(Exporter);
 @EXPORT         =       qw(tbgroups);
 
 
 sub tbgroups {
-	# Switches autoflush for direct printing on.
-	$| 					= 	1; 
 	# Get parameter and input from front-end.
-	my $AMEND_OUT				=	shift;
-	my $GROUPS_OUT				=	shift;
-	my $distance				=	shift;
-	my @joint_files				=	@_;
-	my $strip_ids                           =       1;
+	my $logprint			=	shift;
+	my $AMEND_OUT			=	shift;
+	my $GROUPS_OUT			=	shift;
+	my $distance			=	shift;
+	my @joint_files			=	@_;
+	my $strip_ids			=       1;
 	# Start logic...
 	foreach my $joint_file(sort { $a cmp $b } @joint_files) {
 		my $matrix_file				=	"";
@@ -64,15 +65,15 @@ sub tbgroups {
 		my $strains				=	[];
 		$matrix_file				=	strip($joint_file,".matrix");
 		$group_file				=	strip($joint_file,("_d" . $distance . ".groups"));
-		print  "<INFO>\t",timer(),"\tStart parsing $joint_file...\n";
-		parse_amend_table($AMEND_OUT,$joint_file,$pivot_hash,$strains,$position_info);
-		print  "<INFO>\t",timer(),"\tFinsiehd parsing $joint_file!\n";
- 		print  "<INFO>\t",timer(),"\tStart building distance matrix for $joint_file...\n";
+		print $logprint "<INFO>\t",timer(),"\tStart parsing $joint_file...\n";
+		parse_amend_table($logprint,$AMEND_OUT,$joint_file,$pivot_hash,$strains,$position_info);
+		print $logprint "<INFO>\t",timer(),"\tFinsiehd parsing $joint_file!\n";
+ 		print $logprint "<INFO>\t",timer(),"\tStart building distance matrix for $joint_file...\n";
 		build_matrix($GROUPS_OUT,$matrix_file,$pivot_hash,$distance_matrix,$strains);
-		print  "<INFO>\t",timer(),"\tFinished building distance matrix for $joint_file!\n";
-		print  "<INFO>\t",timer(),"\tStart calling groups for $joint_file...\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished building distance matrix for $joint_file!\n";
+		print $logprint "<INFO>\t",timer(),"\tStart calling groups for $joint_file...\n";
 		call_groups($GROUPS_OUT,$group_file,$distance,$strip_ids,$strains,$distance_matrix);
-		print  "<INFO>\t",timer(),"\tFinished calling groups for $joint_file!\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished calling groups for $joint_file!\n";
 	}
 }
 

@@ -4,7 +4,7 @@
 
         TBseq - a computational pipeline for detecting variants in NGS-data
 
-        Copyright (C) 2016 Thomas A. Kohl, Maria R. De Filippo, Robin Koch, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
+        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@
 
 =cut
 
+# tabstop is set to 8.
+
 package TBamend;
 
 use strict;
@@ -34,19 +36,18 @@ use vars qw($VERSION @ISA @EXPORT);
 ###                                                                                                             ###
 ### Description: This package creates an amended joint variant list from input samples                          ###
 ###                                                                                                             ###
-### Input:  joint_cf*_cr*_fr*_ph*_out_mode*_samples*.tab                                            		###
+### Input:  joint_cf*_cr*_fr*_ph*_outmode*_samples*.tab                                            		###
 ### Output:                                                                                          		###
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION	=	1.00;
+$VERSION	=	1.10;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbamend);
 
 sub tbamend {
-	# Switches autoflush for direct printing on.
-	$|			=	1; 
 	# Get parameter and input from front-end.
+	my $logprint		=	shift;
 	my $JOIN_OUT		=	shift;
 	my $AMEND_OUT		=	shift;
 	my $micovf		=	shift;
@@ -62,19 +63,19 @@ sub tbamend {
 	my $cats		=	{};
         my $variant_infos	=	{};
         my $resi_gene		=	{};
-	print  "<INFO>\t",timer(),"\tStart parsing $categories..\n";
-	parse_categories($categories,$cats);
-	print  "<INFO>\t",timer(),"\tFinished parsing $categories!\n";
-	print  "<INFO>\t",timer(),"\tStart parsing $resi_list_master and $int_regions..\n";
-	parse_variant_infos($variant_infos,$resi_gene,$resi_list_master,$int_regions);
-	print  "<INFO>\t",timer(),"\tFinished parsing $resi_list_master and $int_regions!\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $categories..\n";
+	parse_categories($logprint,$categories,$cats);
+	print $logprint "<INFO>\t",timer(),"\tFinished parsing $categories!\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $resi_list_master and $int_regions..\n";
+	parse_variant_infos($logprint,$variant_infos,$resi_gene,$resi_list_master,$int_regions);
+	print $logprint "<INFO>\t",timer(),"\tFinished parsing $resi_list_master and $int_regions!\n";
 	# Start logic...
 	foreach my $join_file(sort { $a cmp $b } @join_files) {
 		# At present, process file per line to save RAM.
-		my ($amended_file,$phylo_file) = amend_joint_table($JOIN_OUT,$AMEND_OUT,$cats,$variant_infos,$resi_gene,$unambigous,$micovf,$micovr,$mifreq,$miphred20,$join_file);
-		print  "<INFO>\t",timer(),"\tStart creating $phylo_file with window length $window...\n";
-		filter_wlength($AMEND_OUT,$phylo_file,$window);
-		print  "<INFO>\t",timer(),"\tFinished creating $phylo_file with window length $window!\n";
+		my ($amended_file,$phylo_file) = amend_joint_table($logprint,$JOIN_OUT,$AMEND_OUT,$cats,$variant_infos,$resi_gene,$unambigous,$micovf,$micovr,$mifreq,$miphred20,$join_file);
+		print $logprint "<INFO>\t",timer(),"\tStart creating $phylo_file with window length $window...\n";
+		filter_wlength($logprint,$AMEND_OUT,$phylo_file,$window);
+		print $logprint "<INFO>\t",timer(),"\tFinished creating $phylo_file with window length $window!\n";
 	}
 }
 
