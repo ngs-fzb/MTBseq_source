@@ -1,0 +1,614 @@
+Variant position genome start	Variant position genome stop	Var. type	Number	WT base	Var. base	Region	Gene ID	Gene Name	Gene start	Gene stop	Gene length	Dir.	WT AA	Codon nr.	Codon nr. E. coli	Var. AA	AA change	Codon change	Variant position gene start	Variant position gene stop	Antibiotic	Reference PMID	High Confidence SNP
+6575	6575	SNP	1	c	t	coding	Rv0005	gyrB	5240	7267	2028	+	Arg	446	-	Cys	Arg446Cys	cgt/tgt	1336	1336	fluoroquinolones (FQ)	19470506	
+6620	6620	SNP	1	g	c	coding	Rv0005	gyrB	5240	7267	2028	+	Asp	461	-	His	Asp461His	gac/cac	1381	1381	fluoroquinolones (FQ)	24055765	yes
+6620	6620	SNP	1	g	a	coding	Rv0005	gyrB	5240	7267	2028	+	Asp	461	-	Asn	Asp461Asn	gac/aac	1381	1381	fluoroquinolones (FQ)	19721073	yes
+6621	6621	SNP	1	a	c	coding	Rv0005	gyrB	5240	7267	2028	+	Asp	461	-	Ala	Asp461Ala	gac/gcc	1382	1382	fluoroquinolones (FQ)	24055765	yes
+6734	6734	SNP	1	a	g	coding	Rv0005	gyrB	5240	7267	2028	+	Asn	499	-	Asp	Asn499Asp	aac/gac	1495	1495	fluoroquinolones (FQ)	17412727	yes
+6735	6735	SNP	1	a	c	coding	Rv0005	gyrB	5240	7267	2028	+	Asn	499	-	Thr	Asn499Thr	aac/acc	1496	1496	fluoroquinolones (FQ)	24055765	yes
+6736	6736	SNP	1	c	g	coding	Rv0005	gyrB	5240	7267	2028	+	Asn	499	-	Lys	Asn499Lys	aac/aag	1497	1497	fluoroquinolones (FQ)	24055765	yes
+6737	6737	SNP	1	a	c	coding	Rv0005	gyrB	5240	7267	2028	+	Thr	500	-	Pro	Thr500Pro	acc/ccc	1498	1498	fluoroquinolones (FQ)	24055765	yes
+6738	6738	SNP	1	c	a	coding	Rv0005	gyrB	5240	7267	2028	+	Thr	500	-	Asn	Thr500Asn	acc/aac	1499	1499	fluoroquinolones (FQ)	24055765	yes
+6741	6741	SNP	1	a	t	coding	Rv0005	gyrB	5240	7267	2028	+	Glu	501	-	Val	Glu501Val	gaa/gta	1502	1502	fluoroquinolones (FQ)	19721073	yes
+6742	6742	SNP	1	a	t	coding	Rv0005	gyrB	5240	7267	2028	+	Glu	501	-	Asp	Glu501Asp	gaa/gat	1503	1503	fluoroquinolones (FQ)	19721073	yes
+6749	6749	SNP	1	g	a	coding	Rv0005	gyrB	5240	7267	2028	+	Ala	504	-	Thr	Ala504Thr	gcg/acg	1510	1510	fluoroquinolones (FQ)	19470506	
+6750	6750	SNP	1	c	t	coding	Rv0005	gyrB	5240	7267	2028	+	Ala	504	-	Val	Ala504Val	gcg/gtg	1511	1511	fluoroquinolones (FQ)	24055765	yes
+7563	7563	SNP	1	g	t	coding	Rv0006	gyrA	7302	9818	2517	+	Gly	88	-	Cys	Gly88Cys	ggc/tgc	262	262	fluoroquinolones (FQ)	24055765	yes
+7564	7564	SNP	1	g	c	coding	Rv0006	gyrA	7302	9818	2517	+	Gly	88	-	Ala	Gly88Ala	ggc/gcc	263	263	fluoroquinolones (FQ)	24055765	yes
+7566	7566	SNP	1	g	a	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	89	-	Asn	Asp89Asn	gac/aac	265	265	fluoroquinolones (FQ)	19687244	
+7570	7570	SNP	1	c	t	coding	Rv0006	gyrA	7302	9818	2517	+	Ala	90	-	Val	Ala90Val	gcg/gtg	269	269	fluoroquinolones (FQ)	21300839	yes
+7572	7572	SNP	1	t	c	coding	Rv0006	gyrA	7302	9818	2517	+	Ser	91	-	Pro	Ser91Pro	tcg/ccg	271	271	fluoroquinolones (FQ)	21562102	yes
+7581	7581	SNP	1	g	c	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	94	-	His	Asp94His	gac/cac	280	280	fluoroquinolones (FQ)	21562102	yes
+7581	7581	SNP	1	g	a	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	94	-	Asn	Asp94Asn	gac/aac	280	280	fluoroquinolones (FQ)	21562102	yes
+7581	7581	SNP	1	g	t	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	94	-	Tyr	Asp94Tyr	gac/tac	280	280	fluoroquinolones (FQ)	21562102	yes
+7582	7582	SNP	1	a	g	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	94	-	Gly	Asp94Gly	gac/ggc	281	281	fluoroquinolones (FQ)	21300839	yes
+7582	7582	SNP	1	a	c	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	94	-	Ala	Asp94Ala	gac/gcc	281	281	fluoroquinolones (FQ)	21300839	yes
+7582	7582	SNP	1	a	t	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	94	-	Val	Asp94Val	gac/gtc	281	281	fluoroquinolones (FQ)	17434825	
+575729	575729	SNP	1	c	t	coding	Rv0486	mshA	575348	576790	1443	+	Gln	128	-	STOP	Gln128STOP	cag/tag	382	382	ethionamide (ETH)	18651841	
+576164	576164	SNP	1	c	t	coding	Rv0486	mshA	575348	576790	1443	+	Arg	273	-	Cys	Arg273Cys	cgc/tgc	817	817	ethionamide (ETH)	18651841	
+576242	576242	SNP	1	g	t	coding	Rv0486	mshA	575348	576790	1443	+	Gly	299	-	Cys	Gly299Cys	ggc/tgc	895	895	ethionamide (ETH)	18651841	
+576338	576338	SNP	1	c	t	coding	Rv0486	mshA	575348	576790	1443	+	Gln	331	-	STOP	Gln331STOP	cag/tag	991	991	ethionamide (ETH)	18651841	
+576414	576414	SNP	1	g	a	coding	Rv0486	mshA	575348	576790	1443	+	Gly	356	-	Asp	Gly356Asp	ggc/gac	1067	1067	ethionamide (ETH)	18651841	
+576429	576429	SNP	1	a	c	coding	Rv0486	mshA	575348	576790	1443	+	Glu	361	-	Ala	Glu361Ala	gag/gcg	1082	1082	ethionamide (ETH)	18651841	
+760314	760314	SNP	1	g	t	coding	Rv0667	rpoB	759807	763325	3519	+	Val	170	146	Phe	Val170Phe	gtc/ttc	508	508	rifampicin (RMP)	11136757	yes
+761004	761004	SNP	1	a	g	coding	Rv0667	rpoB	759807	763325	3519	+	Thr	400	481	Ala	Thr400Ala	acc/gcc	1198	1198	rifampicin (RMP)	22646308	
+761093	761093	SNP	1	g	c	coding	Rv0667	rpoB	759807	763325	3519	+	Gln	429	510	His	Gln429His	cag/cac	1287	1287	rifampicin (RMP)	15184414	
+761095	761095	SNP	1	t	c	coding	Rv0667	rpoB	759807	763325	3519	+	Leu	430	511	Pro	Leu430Pro	ctg/ccg	1289	1289	rifampicin (RMP)	8027320	
+761095	761095	SNP	1	t	g	coding	Rv0667	rpoB	759807	763325	3519	+	Leu	430	511	Arg	Leu430Arg	ctg/cgg	1289	1289	rifampicin (RMP)	8027320	
+761098	761098	SNP	1	g	t	coding	Rv0667	rpoB	759807	763325	3519	+	Ser	431	512	Ile	Ser431Ile	agc/atc	1292	1292	rifampicin (RMP)	24055765	
+761098	761098	SNP	1	g	c	coding	Rv0667	rpoB	759807	763325	3519	+	Ser	431	512	Thr	Ser431Thr	agc/acc	1292	1292	rifampicin (RMP)	8027320	
+761100	761100	SNP	1	c	a	coding	Rv0667	rpoB	759807	763325	3519	+	Gln	432	513	Lys	Gln432Lys	caa/aaa	1294	1294	rifampicin (RMP)	11136757	
+761101	761101	SNP	1	a	c	coding	Rv0667	rpoB	759807	763325	3519	+	Gln	432	513	Pro	Gln432Pro	caa/cca	1295	1295	rifampicin (RMP)	9003625	
+761101	761101	SNP	1	a	t	coding	Rv0667	rpoB	759807	763325	3519	+	Gln	432	513	Leu	Gln432Leu	caa/cta	1295	1295	rifampicin (RMP)	16672384	yes
+761108	761108	SNP	1	g	t	coding	Rv0667	rpoB	759807	763325	3519	+	Met	434	515	Ile	Met434Ile	atg/att	1302	1302	rifampicin (RMP)	15184414	
+761109	761109	SNP	1	g	t	coding	Rv0667	rpoB	759807	763325	3519	+	Asp	435	516	Tyr	Asp435Tyr	gac/tac	1303	1303	rifampicin (RMP)	11880449	yes
+761110	761110	SNP	1	a	g	coding	Rv0667	rpoB	759807	763325	3519	+	Asp	435	516	Gly	Asp435Gly	gac/ggc	1304	1304	rifampicin (RMP)	24055765	yes
+761110	761110	SNP	1	a	t	coding	Rv0667	rpoB	759807	763325	3519	+	Asp	435	516	Val	Asp435Val	gac/gtc	1304	1304	rifampicin (RMP)	21300839	yes
+761111	761111	SNP	1	c	g	coding	Rv0667	rpoB	759807	763325	3519	+	Asp	435	516	Glu	Asp435Glu	gac/gag	1305	1305	rifampicin (RMP)	8027320	
+761117	761120	Del	3	caac	c	coding	Rv0667	rpoB	759807	763325	3519	+	Asn	438	519	-	Asn438-	aac/_	1312	1314	rifampicin (RMP)	11136757	
+761120	761120	SNP	1	c	g	coding	Rv0667	rpoB	759807	763325	3519	+	Asn	438	519	Lys	Asn438Lys	aac/aag	1314	1314	rifampicin (RMP)	19721079	
+761128	761128	SNP	1	c	t	coding	Rv0667	rpoB	759807	763325	3519	+	Ser	441	522	Leu	Ser441Leu	tcg/ttg	1322	1322	rifampicin (RMP)	7759399	
+761128	761128	SNP	1	c	g	coding	Rv0667	rpoB	759807	763325	3519	+	Ser	441	522	Trp	Ser441Trp	tcg/tgg	1322	1322	rifampicin (RMP)	15814606	
+761139	761139	SNP	1	c	a	coding	Rv0667	rpoB	759807	763325	3519	+	His	445	526	Asn	His445Asn	cac/aac	1333	1333	rifampicin (RMP)	14729930	yes
+761139	761139	SNP	1	c	g	coding	Rv0667	rpoB	759807	763325	3519	+	His	445	526	Asp	His445Asp	cac/gac	1333	1333	rifampicin (RMP)	21300839	yes
+761139	761139	SNP	1	c	t	coding	Rv0667	rpoB	759807	763325	3519	+	His	445	526	Tyr	His445Tyr	cac/tac	1333	1333	rifampicin (RMP)	21300839	yes
+761140	761140	SNP	1	a	c	coding	Rv0667	rpoB	759807	763325	3519	+	His	445	526	Pro	His445Pro	cac/ccc	1334	1334	rifampicin (RMP)	7759399	yes
+761140	761140	SNP	1	a	g	coding	Rv0667	rpoB	759807	763325	3519	+	His	445	526	Arg	His445Arg	cac/cgc	1334	1334	rifampicin (RMP)	9003625	yes
+761140	761140	SNP	1	a	t	coding	Rv0667	rpoB	759807	763325	3519	+	His	445	526	Leu	His445Leu	cac/ctc	1334	1334	rifampicin (RMP)	10921994	
+761141	761141	SNP	1	c	a	coding	Rv0667	rpoB	759807	763325	3519	+	His	445	526	Gln	His445Gln	cac/caa	1335	1335	rifampicin (RMP)	8027320	
+761154	761154	SNP	1	t	g	coding	Rv0667	rpoB	759807	763325	3519	+	Ser	450	531	Ala	Ser450Ala	tcg/gcg	1348	1348	rifampicin (RMP)	11136757	
+761155	761155	SNP	1	c	g	coding	Rv0667	rpoB	759807	763325	3519	+	Ser	450	531	Trp	Ser450Trp	tcg/tgg	1349	1349	rifampicin (RMP)	7759399	yes
+761155	761155	SNP	1	c	t	coding	Rv0667	rpoB	759807	763325	3519	+	Ser	450	531	Leu	Ser450Leu	tcg/ttg	1349	1349	rifampicin (RMP)	21300839	yes
+761161	761161	SNP	1	t	c	coding	Rv0667	rpoB	759807	763325	3519	+	Leu	452	533	Pro	Leu452Pro	ctg/ccg	1355	1355	rifampicin (RMP)	8913484	yes
+761277	761277	SNP	1	a	t	coding	Rv0667	rpoB	759807	763325	3519	+	Ile	491	572	Phe	Ile491Phe	atc/ttc	1471	1471	rifampicin (RMP)	10565894	yes
+781687	781687	SNP	1	a	g	coding	Rv0682	rpsL	781560	781934	375	+	Lys	43	-	Arg	Lys43Arg	aag/agg	128	128	streptomycin (SM)	22646308	yes
+781821	781821	SNP	1	a	c	coding	Rv0682	rpsL	781560	781934	375	+	Lys	88	-	Gln	Lys88Gln	aag/cag	262	262	streptomycin (SM)	8849220	
+781822	781822	SNP	1	a	g	coding	Rv0682	rpsL	781560	781934	375	+	Lys	88	-	Arg	Lys88Arg	aag/agg	263	263	streptomycin (SM)	22646308	yes
+801268	801268	SNP	1	t	c	coding	Rv0701	rplC	800809	801462	654	+	Cys	154	-	Arg	Cys154Arg	tgt/cgt	460	460	linezolid (LZD)	22371899	
+1472337	1472337	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	492	492	streptomycin (SM)	9160326	
+1472358	1472358	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	513	513	streptomycin (SM)	7540819	
+1472359	1472359	SNP	1	a	c	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	514	514	streptomycin (SM)	9160326	
+1472362	1472362	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	517	517	streptomycin (SM)	9160326	
+1472750	1472750	SNP	1	c	a	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	905	905	streptomycin (SM)	7540819	
+1472751	1472751	SNP	1	a	g	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	906	906	streptomycin (SM)	9160326	
+1472752	1472752	SNP	1	a	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	907	907	streptomycin (SM)	9160326	
+1473246	1473246	SNP	1	a	g	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1401	1401	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	21300839	yes
+1473247	1473247	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1402	1402	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	16048924	yes
+1473329	1473329	SNP	1	g	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1484	1484	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	21562102	yes
+1475956	1475956	SNP	1	g	t	ribosomal	MTB000020	rrl	1473658	1476795	3138	+	-	-	-	-	---	-	2299	2299	linezolid (LZD)	18070973	
+1476471	1476471	SNP	1	g	t	ribosomal	MTB000020	rrl	1473658	1476795	3138	+	-	-	-	-	---	-	2814	2814	linezolid (LZD)	18070973	
+1673423	1673423	SNP	1	g	t	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-17	-17	isoniazid (INH)	14638486	
+1673424	1673424	SNP	1	a	g	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-16	-16	isoniazid (INH)	19494067	
+1673425	1673425	SNP	1	c	t	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-15	-15	isoniazid (INH)	21300839	yes
+1673432	1673432	SNP	1	t	a	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-8	-8	isoniazid (INH)	19494067	yes
+1673432	1673432	SNP	1	t	c	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-8	-8	isoniazid (INH)	21300839	yes
+1674481	1674481	SNP	1	t	g	coding	Rv1484	inhA	1674202	1675011	810	+	Ser	94	-	Ala	Ser94Ala	tcg/gcg	280	280	isoniazid (INH) ethionamide (ETH)	24055765	yes
+1674782	1674782	SNP	1	t	c	coding	Rv1484	inhA	1674202	1675011	810	+	Ile	194	-	Thr	Ile194Thr	atc/acc	581	581	isoniazid (INH) ethionamide (ETH)	21110864	
+1833909	1833909	SNP	1	a	c	coding	Rv1630	rpsA	1833542	1834987	1446	+	Asp	123	-	Ala	Asp123Ala	gac/gcc	368	368	pyrazinamide (PZA)	21835980	
+1834325	1834325	SNP	1	g	a	coding	Rv1630	rpsA	1833542	1834987	1446	+	Val	262	-	Met	Val262Met	gtg/atg	784	784	pyrazinamide (PZA)	21835980	
+1834852	1834855	Del	3	cgcc	c	coding	Rv1630	rpsA	1833542	1834987	1446	+	Ala	438	-	-	Ala438-	gcc/_	1312	1314	pyrazinamide (PZA)	21835980	
+1917946	1917946	SNP	1	c	t	coding	Rv1694	tlyA	1917940	1918746	807	+	Arg	3	-	STOP	Arg3STOP	cga/tga	7	7	capreomycin (CPR)	15673735	
+1917979	1917979	SNP	1	c	t	coding	Rv1694	tlyA	1917940	1918746	807	+	Arg	14	-	Trp	Arg14Trp	cgg/tgg	40	40	capreomycin (CPR)	15673735	
+1917991	1917991	SNP	1	c	t	coding	Rv1694	tlyA	1917940	1918746	807	+	Arg	18	-	STOP	Arg18STOP	cga/tga	52	52	capreomycin (CPR)	15673735	
+1918003	1918003	SNP	1	c	t	coding	Rv1694	tlyA	1917940	1918746	807	+	Gln	22	-	STOP	Gln22STOP	cag/tag	64	64	capreomycin (CPR)	15673735	
+1918139	1918139	SNP	1	c	a	coding	Rv1694	tlyA	1917940	1918746	807	+	Ala	67	-	Glu	Ala67Glu	gcg/gag	200	200	capreomycin (CPR)	15673735	
+1918144	1918144	SNP	1	a	g	coding	Rv1694	tlyA	1917940	1918746	807	+	Lys	69	-	Glu	Lys69Glu	aaa/gaa	205	205	capreomycin (CPR)	15673735	
+1918211	1918211	SNP	1	c	a	coding	Rv1694	tlyA	1917940	1918746	807	+	Ala	91	-	Glu	Ala91Glu	gca/gaa	272	272	capreomycin (CPR)	15673735	
+1918292	1918292	SNP	1	t	c	coding	Rv1694	tlyA	1917940	1918746	807	+	Leu	118	-	Pro	Leu118Pro	ctg/ccg	353	353	capreomycin (CPR)	15673735	
+1918322	1918322	SNP	1	t	a	coding	Rv1694	tlyA	1917940	1918746	807	+	Val	128	-	Glu	Val128Glu	gtg/gag	383	383	capreomycin (CPR)	15673735	
+1918388	1918388	SNP	1	t	c	coding	Rv1694	tlyA	1917940	1918746	807	+	Leu	150	-	Pro	Leu150Pro	ctg/ccg	449	449	capreomycin (CPR)	15673735	
+1918487	1918487	SNP	1	c	t	coding	Rv1694	tlyA	1917940	1918746	807	+	Pro	183	-	Leu	Pro183Leu	ccg/ctg	548	548	capreomycin (CPR)	15673735	
+1918489	1918489	SNP	1	c	a	coding	Rv1694	tlyA	1917940	1918746	807	+	Gln	184	-	Lys	Gln184Lys	cag/aag	550	550	capreomycin (CPR)	15673735	
+1918489	1918489	SNP	1	c	t	coding	Rv1694	tlyA	1917940	1918746	807	+	Gln	184	-	STOP	Gln184STOP	cag/tag	550	550	capreomycin (CPR)	15673735	
+1918494	1918494	SNP	1	t	g	coding	Rv1694	tlyA	1917940	1918746	807	+	Phe	185	-	Leu	Phe185Leu	ttt/ttg	555	555	capreomycin (CPR)	15673735	
+1918651	1918651	SNP	1	g	a	coding	Rv1694	tlyA	1917940	1918746	807	+	Glu	238	-	Lys	Glu238Lys	gag/aag	712	712	capreomycin (CPR)	15673735	
+2102240	2102240	SNP	1	g	a	coding	Rv1854c	ndh	2103042	2101651	1392	-	Arg	268	-	His	Arg268His	cgc/cac	803	803	isoniazid (INH) ethionamide (ETH)	11408244	
+2102715	2102715	SNP	1	a	g	coding	Rv1854c	ndh	2103042	2101651	1392	-	Thr	110	-	Ala	Thr110Ala	acc/gcc	328	328	isoniazid (INH) ethionamide (ETH)	11408244	
+2155167	2155167	SNP	1	c	g	coding	Rv1908c	katG	2156111	2153889	2223	-	Ser	315	-	Arg	Ser315Arg	agc/agg	945	945	isoniazid (INH)	16870753	
+2155167	2155167	SNP	1	c	a	coding	Rv1908c	katG	2156111	2153889	2223	-	Ser	315	-	Arg	Ser315Arg	agc/aga	945	945	isoniazid (INH)	17403134	
+2155168	2155168	SNP	1	g	c	coding	Rv1908c	katG	2156111	2153889	2223	-	Ser	315	-	Thr	Ser315Thr	agc/acc	944	944	isoniazid (INH)	8878604	yes
+2155168	2155168	SNP	1	g	a	coding	Rv1908c	katG	2156111	2153889	2223	-	Ser	315	-	Asn	Ser315Asn	agc/aac	944	944	isoniazid (INH)	9210694	yes
+2155168	2155168	SNP	1	g	t	coding	Rv1908c	katG	2156111	2153889	2223	-	Ser	315	-	Ile	Ser315Ile	agc/atc	944	944	isoniazid (INH)	9210694	yes
+2155169	2155169	SNP	1	a	g	coding	Rv1908c	katG	2156111	2153889	2223	-	Ser	315	-	Gly	Ser315Gly	agc/ggc	943	943	isoniazid (INH)	8878604	yes
+2155206	2155206	SNP	1	c	g	coding	Rv1908c	katG	2156111	2153889	2223	-	Ser	302	-	Arg	Ser302Arg	agc/agg	906	906	isoniazid (INH)	22646308	
+2155212	2155212	SNP	1	g	c	coding	Rv1908c	katG	2156111	2153889	2223	-	Trp	300	-	Cys	Trp300Cys	tgg/tgc	900	900	isoniazid (INH)	22646308	
+2155214	2155214	SNP	1	t	g	coding	Rv1908c	katG	2156111	2153889	2223	-	Trp	300	-	Gly	Trp300Gly	tgg/ggg	898	898	isoniazid (INH)	24055765	yes
+2155222	2155222	SNP	1	g	t	coding	Rv1908c	katG	2156111	2153889	2223	-	Gly	297	-	Val	Gly297Val	ggc/gtc	890	890	isoniazid (INH)	11796356	
+2155289	2155289	SNP	1	a	c	coding	Rv1908c	katG	2156111	2153889	2223	-	Thr	275	-	Pro	Thr275Pro	acc/ccc	823	823	isoniazid (INH)	24055765	yes
+2155699	2155699	SNP	1	a	g	coding	Rv1908c	katG	2156111	2153889	2223	-	Asn	138	-	Ser	Asn138Ser	aac/agc	413	413	isoniazid (INH)	16870753	
+2288683	2288683	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	STOP	187	-	Arg	STOP187Arg	tga/cga	559	559	pyrazinamide (PZA)	25336456	yes
+2288697	2288697	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	182	-	Ser	Leu182Ser	ttg/tcg	545	545	pyrazinamide (PZA)	25336456	yes
+2288703	2288703	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	180	-	Ala	Val180Ala	gtc/gcc	539	539	pyrazinamide (PZA)	25336456	yes
+2288703	2288703	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	180	-	Gly	Val180Gly	gtc/ggc	539	539	pyrazinamide (PZA)	25336456	yes
+2288704	2288704	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	180	-	Phe	Val180Phe	gtc/ttc	538	538	pyrazinamide (PZA)	11641519	
+2288718	2288718	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Met	175	-	Thr	Met175Thr	atg/acg	524	524	pyrazinamide (PZA)	25336456	yes
+2288719	2288719	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Met	175	-	Val	Met175Val	atg/gtg	523	523	pyrazinamide (PZA)	25336456	yes
+2288727	2288727	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	172	-	Pro	Leu172Pro	ctg/ccg	515	515	pyrazinamide (PZA)	22646308	
+2288730	2288730	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	171	-	Val	Ala171Val	gcg/gtg	512	512	pyrazinamide (PZA)	10471589	
+2288740	2288740	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	168	-	Pro	Thr168Pro	acc/ccc	502	502	pyrazinamide (PZA)	25336456	yes
+2288752	2288752	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ser	164	-	Pro	Ser164Pro	tcg/ccg	490	490	pyrazinamide (PZA)	25336456	yes
+2288754	2288754	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	163	-	Ala	Val163Ala	gtg/gcg	488	488	pyrazinamide (PZA)	25336456	yes
+2288757	2288757	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	162	-	Asp	Gly162Asp	ggt/gat	485	485	pyrazinamide (PZA)	22646308	
+2288761	2288761	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	161	-	Pro	Ala161Pro	gcg/ccg	481	481	pyrazinamide (PZA)	25336456	yes
+2288764	2288764	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	160	-	Pro	Thr160Pro	aca/cca	478	478	pyrazinamide (PZA)	25336456	yes
+2288766	2288766	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	159	-	Arg	Leu159Arg	ctg/cgg	476	476	pyrazinamide (PZA)	11641519	
+2288772	2288772	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	157	-	Ala	Val157Ala	gtg/gcg	470	470	pyrazinamide (PZA)	25336456	yes
+2288772	2288772	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	157	-	Gly	Val157Gly	gtg/ggg	470	470	pyrazinamide (PZA)	25336456	yes
+2288778	2288778	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	155	-	Gly	Val155Gly	gtg/ggg	464	464	pyrazinamide (PZA)	25336456	yes
+2288779	2288779	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	155	-	Met	Val155Met	gtg/atg	463	463	pyrazinamide (PZA)	25336456	yes
+2288782	2288782	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Arg	154	-	Gly	Arg154Gly	agg/ggg	460	460	pyrazinamide (PZA)	21300839	
+2288805	2288805	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	146	-	Glu	Ala146Glu	gcg/gag	437	437	pyrazinamide (PZA)	22646308	
+2288805	2288805	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	146	-	Val	Ala146Val	gcg/gtg	437	437	pyrazinamide (PZA)	25336456	yes
+2288806	2288806	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	146	-	Pro	Ala146Pro	gcg/ccg	436	436	pyrazinamide (PZA)	25336456	yes
+2288806	2288806	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	146	-	Thr	Ala146Thr	gcg/acg	436	436	pyrazinamide (PZA)	11641519	
+2288817	2288817	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	142	-	Lys	Thr142Lys	acg/aag	425	425	pyrazinamide (PZA)	25336456	yes
+2288817	2288817	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	142	-	Met	Thr142Met	acg/atg	425	425	pyrazinamide (PZA)	25336456	yes
+2288818	2288818	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	142	-	Ala	Thr142Ala	acg/gcg	424	424	pyrazinamide (PZA)	25336456	yes
+2288820	2288820	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Gln	141	-	Pro	Gln141Pro	cag/ccg	422	422	pyrazinamide (PZA)	8640557	
+2288821	2288821	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Gln	141	-	STOP	Gln141STOP	cag/tag	421	421	pyrazinamide (PZA)	11641519	
+2288823	2288823	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Arg	140	-	Pro	Arg140Pro	cgc/ccc	419	419	pyrazinamide (PZA)	25336456	yes
+2288826	2288826	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	139	-	Gly	Val139Gly	gtg/ggg	416	416	pyrazinamide (PZA)	25336456	yes
+2288827	2288827	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	139	-	Leu	Val139Leu	gtg/ctg	415	415	pyrazinamide (PZA)	25336456	yes
+2288828	2288828	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Cys	138	-	Trp	Cys138Trp	tgt/tgg	414	414	pyrazinamide (PZA)	25336456	yes
+2288830	2288830	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Cys	138	-	Arg	Cys138Arg	tgt/cgt	412	412	pyrazinamide (PZA)	25336456	yes
+2288832	2288832	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	137	-	Arg	His137Arg	cat/cgt	410	410	pyrazinamide (PZA)	25336456	yes
+2288832	2288832	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	His	137	-	Pro	His137Pro	cat/cct	410	410	pyrazinamide (PZA)	25336456	yes
+2288833	2288833	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	137	-	Asp	His137Asp	cat/gat	409	409	pyrazinamide (PZA)	25336456	yes
+2288836	2288836	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	136	-	Asn	Asp136Asn	gat/aat	406	406	pyrazinamide (PZA)	11641519	
+2288836	2288836	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	136	-	Tyr	Asp136Tyr	gat/tat	406	406	pyrazinamide (PZA)	11641519	
+2288838	2288838	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	135	-	Asn	Thr135Asn	acc/aac	404	404	pyrazinamide (PZA)	25336456	yes
+2288839	2288839	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	135	-	Pro	Thr135Pro	acc/ccc	403	403	pyrazinamide (PZA)	25336456	yes
+2288841	2288841	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	134	-	Val	Ala134Val	gcc/gtc	401	401	pyrazinamide (PZA)	25336456	yes
+2288844	2288844	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ile	133	-	Thr	Ile133Thr	att/act	398	398	pyrazinamide (PZA)	10390239	
+2288847	2288847	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	132	-	Ala	Gly132Ala	ggt/gct	395	395	pyrazinamide (PZA)	25336456	yes
+2288847	2288847	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	132	-	Asp	Gly132Asp	ggt/gat	395	395	pyrazinamide (PZA)	25336456	yes
+2288848	2288848	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	132	-	Cys	Gly132Cys	ggt/tgt	394	394	pyrazinamide (PZA)	25336456	yes
+2288848	2288848	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	132	-	Ser	Gly132Ser	ggt/agt	394	394	pyrazinamide (PZA)	9055989	
+2288853	2288853	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	130	-	Ala	Val130Ala	gtg/gcg	389	389	pyrazinamide (PZA)	25336456	yes
+2288853	2288853	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	130	-	Gly	Val130Gly	gtg/ggg	389	389	pyrazinamide (PZA)	25336456	yes
+2288857	2288857	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	129	-	Tyr	Asp129Tyr	gat/tat	385	385	pyrazinamide (PZA)	25336456	yes
+2288859	2288859	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	128	-	Gly	Val128Gly	gtc/ggc	383	383	pyrazinamide (PZA)	15616332	
+2288868	2288868	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	125	-	Gly	Val125Gly	gtc/ggc	374	374	pyrazinamide (PZA)	25336456	yes
+2288869	2288869	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	125	-	Phe	Val125Phe	gtc/ttc	373	373	pyrazinamide (PZA)	25336456	yes
+2288874	2288874	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Arg	123	-	Pro	Arg123Pro	cgc/ccc	368	368	pyrazinamide (PZA)	25336456	yes
+2288880	2288880	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Arg	121	-	Pro	Arg121Pro	cgg/ccg	362	362	pyrazinamide (PZA)	25336456	yes
+2288883	2288883	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	120	-	Arg	Leu120Arg	ctg/cgg	359	359	pyrazinamide (PZA)	21300839	
+2288883	2288883	SNP	1	t	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	120	-	Gln	Leu120Gln	ctg/cag	359	359	pyrazinamide (PZA)	25336456	yes
+2288883	2288883	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	120	-	Pro	Leu120Pro	ctg/ccg	359	359	pyrazinamide (PZA)	25336456	yes
+2288885	2288885	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	119	-	STOP	Trp119STOP	tgg/tga	357	357	pyrazinamide (PZA)	11641519	
+2288886	2288886	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	119	-	Ser	Trp119Ser	tgg/tcg	356	356	pyrazinamide (PZA)	25336456	yes
+2288886	2288886	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	119	-	STOP	Trp119STOP	tgg/tag	356	356	pyrazinamide (PZA)	25336456	yes
+2288887	2288887	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	119	-	Arg	Trp119Arg	tgg/cgg	355	355	pyrazinamide (PZA)	25336456	yes
+2288887	2288887	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	119	-	Gly	Trp119Gly	tgg/ggg	355	355	pyrazinamide (PZA)	25336456	yes
+2288895	2288895	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	116	-	Arg	Leu116Arg	ctg/cgg	347	347	pyrazinamide (PZA)	25336456	yes
+2288895	2288895	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	116	-	Pro	Leu116Pro	ctg/ccg	347	347	pyrazinamide (PZA)	25336456	yes
+2288902	2288902	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	114	-	Pro	Thr114Pro	acg/ccg	340	340	pyrazinamide (PZA)	9692180	
+2288920	2288920	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	108	-	Arg	Gly108Arg	gga/aga	322	322	pyrazinamide (PZA)	25336456	yes
+2288920	2288920	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	108	-	Arg	Gly108Arg	gga/cga	322	322	pyrazinamide (PZA)	25336456	yes
+2288928	2288928	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	105	-	Asp	Gly105Asp	ggc/gac	314	314	pyrazinamide (PZA)	25336456	yes
+2288930	2288930	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Ser	104	-	Arg	Ser104Arg	agc/aga	312	312	pyrazinamide (PZA)	25336456	yes
+2288931	2288931	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Ser	104	-	Ile	Ser104Ile	agc/atc	311	311	pyrazinamide (PZA)	25336456	yes
+2288933	2288933	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	103	-	STOP	Tyr103STOP	tac/tag	309	309	pyrazinamide (PZA)	25336456	yes
+2288934	2288934	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	103	-	Cys	Tyr103Cys	tac/tgc	308	308	pyrazinamide (PZA)	25336456	yes
+2288934	2288934	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	103	-	Ser	Tyr103Ser	tac/tcc	308	308	pyrazinamide (PZA)	11641519	
+2288935	2288935	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	103	-	Asp	Tyr103Asp	tac/gac	307	307	pyrazinamide (PZA)	25336456	yes
+2288938	2288938	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	102	-	Thr	Ala102Thr	gcg/acg	304	304	pyrazinamide (PZA)	25336456	yes
+2288944	2288944	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	100	-	Ala	Thr100Ala	acc/gcc	298	298	pyrazinamide (PZA)	25336456	yes
+2288944	2288944	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	100	-	Pro	Thr100Pro	acc/ccc	298	298	pyrazinamide (PZA)	25336456	yes
+2288945	2288945	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	99	-	STOP	Tyr99STOP	tac/taa	297	297	pyrazinamide (PZA)	25336456	yes
+2288952	2288952	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	97	-	Ala	Gly97Ala	ggt/gct	290	290	pyrazinamide (PZA)	25336456	yes
+2288952	2288952	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	97	-	Asp	Gly97Asp	ggt/gat	290	290	pyrazinamide (PZA)	25336456	yes
+2288953	2288953	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	97	-	Ser	Gly97Ser	ggt/agt	289	289	pyrazinamide (PZA)	10681313	
+2288954	2288954	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Lys	96	-	Asn	Lys96Asn	aag/aac	288	288	pyrazinamide (PZA)	25336456	yes
+2288955	2288955	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Lys	96	-	Arg	Lys96Arg	aag/agg	287	287	pyrazinamide (PZA)	25336456	yes
+2288955	2288955	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Lys	96	-	Thr	Lys96Thr	aag/acg	287	287	pyrazinamide (PZA)	25336456	yes
+2288956	2288956	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Lys	96	-	Gln	Lys96Gln	aag/cag	286	286	pyrazinamide (PZA)	25336456	yes
+2288956	2288956	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Lys	96	-	Glu	Lys96Glu	aag/gag	286	286	pyrazinamide (PZA)	22646308	
+2288957	2288957	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	95	-	STOP	Tyr95STOP	tac/tag	285	285	pyrazinamide (PZA)	25336456	yes
+2288960	2288960	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	94	-	Leu	Phe94Leu	ttc/tta	282	282	pyrazinamide (PZA)	25336456	yes
+2288960	2288960	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	94	-	Leu	Phe94Leu	ttc/ttg	282	282	pyrazinamide (PZA)	25336456	yes
+2288961	2288961	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	94	-	Cys	Phe94Cys	ttc/tgc	281	281	pyrazinamide (PZA)	25336456	yes
+2288961	2288961	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	94	-	Ser	Phe94Ser	ttc/tcc	281	281	pyrazinamide (PZA)	25336456	yes
+2288962	2288962	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	94	-	Leu	Phe94Leu	ttc/ctc	280	280	pyrazinamide (PZA)	25336456	yes
+2288971	2288971	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Glu	91	-	STOP	Glu91STOP	gag/tag	271	271	pyrazinamide (PZA)	25336456	yes
+2288982	2288982	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	87	-	Met	Thr87Met	acg/atg	260	260	pyrazinamide (PZA)	10390238	
+2288988	2288988	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	85	-	Arg	Leu85Arg	ctg/cgg	254	254	pyrazinamide (PZA)	25336456	yes
+2288988	2288988	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	85	-	Pro	Leu85Pro	ctg/ccg	254	254	pyrazinamide (PZA)	9055989	
+2288997	2288997	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	82	-	Arg	His82Arg	cat/cgt	245	245	pyrazinamide (PZA)	25336456	yes
+2288998	2288998	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	82	-	Asp	His82Asp	cat/gat	244	244	pyrazinamide (PZA)	25336456	yes
+2289000	2289000	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	81	-	Cys	Phe81Cys	ttc/tgc	242	242	pyrazinamide (PZA)	25336456	yes
+2289000	2289000	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	81	-	Ser	Phe81Ser	ttc/tcc	242	242	pyrazinamide (PZA)	25336456	yes
+2289001	2289001	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	81	-	Val	Phe81Val	ttc/gtc	241	241	pyrazinamide (PZA)	25336456	yes
+2289016	2289016	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	76	-	Pro	Thr76Pro	act/cct	226	226	pyrazinamide (PZA)	9056006	
+2289028	2289028	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Cys	72	-	Arg	Cys72Arg	tgc/cgc	214	214	pyrazinamide (PZA)	25336456	yes
+2289029	2289029	SNP	1	t	a	coding	Rv2043c	pncA	2289241	2288681	561	-	His	71	-	Gln	His71Gln	cat/caa	213	213	pyrazinamide (PZA)	25336456	yes
+2289030	2289030	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	71	-	Arg	His71Arg	cat/cgt	212	212	pyrazinamide (PZA)	25336456	yes
+2289031	2289031	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	His	71	-	Tyr	His71Tyr	cat/tat	211	211	pyrazinamide (PZA)	16848344	
+2289036	2289036	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Pro	69	-	Leu	Pro69Leu	cca/cta	206	206	pyrazinamide (PZA)	10390238	
+2289038	2289038	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	68	-	Cys	Trp68Cys	tgg/tgc	204	204	pyrazinamide (PZA)	25336456	yes
+2289038	2289038	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	68	-	Cys	Trp68Cys	tgg/tgt	204	204	pyrazinamide (PZA)	25336456	yes
+2289039	2289039	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	68	-	Ser	Trp68Ser	tgg/tcg	203	203	pyrazinamide (PZA)	11641519	
+2289039	2289039	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	68	-	STOP	Trp68STOP	tgg/tag	203	203	pyrazinamide (PZA)	25336456	yes
+2289040	2289040	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	68	-	Arg	Trp68Arg	tgg/cgg	202	202	pyrazinamide (PZA)	11641519	
+2289040	2289040	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Trp	68	-	Gly	Trp68Gly	tgg/ggg	202	202	pyrazinamide (PZA)	11641519	
+2289043	2289043	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ser	67	-	Pro	Ser67Pro	tcg/ccg	199	199	pyrazinamide (PZA)	25336456	yes
+2289049	-	Ins	1	a	at	coding	Rv2043c	pncA	2289241	2288681	561	-	Ser	65	-	-	Ser65-	tcc/atcc	193	193	pyrazinamide (PZA)	22646308	
+2289050	2289050	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	64	-	STOP	Tyr64STOP	tat/tag	192	192	pyrazinamide (PZA)	25336456	yes
+2289052	2289052	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	64	-	Asp	Tyr64Asp	tat/gat	190	190	pyrazinamide (PZA)	11641519	
+2289054	2289054	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	63	-	Gly	Asp63Gly	gac/ggc	188	188	pyrazinamide (PZA)	9692180	
+2289057	2289057	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Pro	62	-	Leu	Pro62Leu	ccg/ctg	185	185	pyrazinamide (PZA)	25336456	yes
+2289061	2289061	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	61	-	Pro	Thr61Pro	aca/cca	181	181	pyrazinamide (PZA)	10390238	
+2289068	2289068	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	58	-	Leu	Phe58Leu	ttc/tta	174	174	pyrazinamide (PZA)	25336456	yes
+2289068	2289068	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	58	-	Leu	Phe58Leu	ttc/ttg	174	174	pyrazinamide (PZA)	25336456	yes
+2289070	2289070	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	58	-	Leu	Phe58Leu	ttc/ctc	172	172	pyrazinamide (PZA)	25336456	yes
+2289071	2289071	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	57	-	Gln	His57Gln	cac/ag 	171	171	pyrazinamide (PZA)	25336456	yes
+2289072	2289072	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	57	-	Arg	His57Arg	cac/cgc	170	170	pyrazinamide (PZA)	25336456	yes
+2289072	2289072	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	His	57	-	Pro	His57Pro	cac/ccc	170	170	pyrazinamide (PZA)	25336456	yes
+2289073	2289073	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	57	-	Asp	His57Asp	cac/gac	169	169	pyrazinamide (PZA)	19861002	
+2289073	2289073	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	His	57	-	Tyr	His57Tyr	cac/tac	169	169	pyrazinamide (PZA)	16848344	
+2289081	2289081	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Pro	54	-	Arg	Pro54Arg	ccg/cgg	161	161	pyrazinamide (PZA)	25336456	yes
+2289081	2289081	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Pro	54	-	Gln	Pro54Gln	ccg/cag	161	161	pyrazinamide (PZA)	25336456	yes
+2289081	2289081	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Pro	54	-	Leu	Pro54Leu	ccg/ctg	161	161	pyrazinamide (PZA)	16848344	
+2289082	2289082	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Pro	54	-	Ser	Pro54Ser	ccg/tcg	160	160	pyrazinamide (PZA)	25336456	yes
+2289089	2289089	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	His	51	-	Gln	His51Gln	cac/caa	153	153	pyrazinamide (PZA)	25336456	yes
+2289090	2289090	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	51	-	Arg	His51Arg	cac/cgc	152	152	pyrazinamide (PZA)	25336456	yes
+2289090	2289090	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	His	51	-	Pro	His51Pro	cac/ccc	152	152	pyrazinamide (PZA)	25336456	yes
+2289091	2289091	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	His	51	-	Tyr	His51Tyr	cac/tac	151	151	pyrazinamide (PZA)	25336456	yes
+2289096	2289096	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	49	-	Ala	Asp49Ala	gac/gcc	146	146	pyrazinamide (PZA)	11641519	
+2289096	2289096	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	49	-	Gly	Asp49Gly	gac/ggc	146	146	pyrazinamide (PZA)	10390239	
+2289097	2289097	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	49	-	Asn	Asp49Asn	gac/aac	145	145	pyrazinamide (PZA)	25336456	yes
+2289100	2289100	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Lys	48	-	Glu	Lys48Glu	aag/gag	142	142	pyrazinamide (PZA)	25336456	yes
+2289100	2289100	SNP	1	a	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Lys	48	-	STOP	Lys48STOP	aag/tag	142	142	pyrazinamide (PZA)	25336456	yes
+2289103	2289103	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	47	-	Ala	Thr47Ala	acc/gcc	139	139	pyrazinamide (PZA)	22646308	
+2289103	2289103	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Thr	47	-	Pro	Thr47Pro	acc/ccc	139	139	pyrazinamide (PZA)	25336456	yes
+2289108	2289108	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	45	-	Gly	Val45Gly	gtg/ggg	134	134	pyrazinamide (PZA)	11641519	
+2289111	2289111	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	44	-	Gly	Val44Gly	gtc/ggc	131	131	pyrazinamide (PZA)	25336456	yes
+2289133	2289133	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Glu	37	-	top	Glu37top	gaa/taa	109	109	pyrazinamide (PZA)	25336456	yes
+2289138	2289138	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	35	-	Pro	Leu35Pro	ctg/ccg	104	104	pyrazinamide (PZA)	25336456	yes
+2289140	2289140	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Tyr	34	-	STOP	Tyr34STOP	tac/tag	102	102	pyrazinamide (PZA)	25336456	yes
+2289150	2289150	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Ile	31	-	Ser	Ile31Ser	atc/agc	92	92	pyrazinamide (PZA)	25336456	yes
+2289159	2289159	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	28	-	Asp	Ala28Asp	gcc/gac	83	83	pyrazinamide (PZA)	11641519	
+2289162	2289162	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	27	-	Pro	Leu27Pro	ctg/ccg	80	80	pyrazinamide (PZA)	25336456	yes
+2289171	2289171	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	24	-	Asp	Gly24Asp	ggc/gac	71	71	pyrazinamide (PZA)	25336456	yes
+2289180	2289180	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	21	-	Gly	Val21Gly	gta/gga	62	62	pyrazinamide (PZA)	25336456	yes
+2289186	2289186	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	19	-	Pro	Leu19Pro	ctg/ccg	56	56	pyrazinamide (PZA)	25336456	yes
+2289193	2289193	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gly	17	-	Ser	Gly17Ser	ggc/agc	49	49	pyrazinamide (PZA)	25336456	yes
+2289200	2289200	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Cys	14	-	STOP	Cys14STOP	tgc/tga	42	42	pyrazinamide (PZA)	25336456	yes
+2289201	2289201	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Cys	14	-	Tyr	Cys14Tyr	tgc/tac	41	41	pyrazinamide (PZA)	11641519	
+2289202	2289202	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Cys	14	-	Arg	Cys14Arg	tgc/cgc	40	40	pyrazinamide (PZA)	25336456	yes
+2289203	2289203	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	13	-	Leu	Phe13Leu	ttc/ttg	39	39	pyrazinamide (PZA)	25336456	yes
+2289204	2289204	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Phe	13	-	Ser	Phe13Ser	ttc/tcc	38	38	pyrazinamide (PZA)	10390238	
+2289206	2289206	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	12	-	Glu	Asp12Glu	gac/gag	36	36	pyrazinamide (PZA)	25336456	yes
+2289207	2289207	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	12	-	Ala	Asp12Ala	gac/gcc	35	35	pyrazinamide (PZA)	25336456	yes
+2289208	2289208	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	12	-	Asn	Asp12Asn	gac/aac	34	34	pyrazinamide (PZA)	9055989	
+2289213	2289213	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Gln	10	-	Arg	Gln10Arg	cag/cgg	29	29	pyrazinamide (PZA)	10681313	
+2289213	2289213	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Gln	10	-	Pro	Gln10Pro	cag/ccg	29	29	pyrazinamide (PZA)	21300839	
+2289214	2289214	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Gln	10	-	Lys	Gln10Lys	cag/aag	28	28	pyrazinamide (PZA)	25336456	yes
+2289216	2289216	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	9	-	Ala	Val9Ala	gtg/gcg	26	26	pyrazinamide (PZA)	11641519	
+2289216	2289216	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	9	-	Gly	Val9Gly	gtg/ggg	26	26	pyrazinamide (PZA)	11641519	
+2289218	2289218	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	8	-	Glu	Asp8Glu	gac/gaa	24	24	pyrazinamide (PZA)	25336456	yes
+2289219	2289219	SNP	1	a	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	8	-	Ala	Asp8Ala	gac/gcc	23	23	pyrazinamide (PZA)	25336456	yes
+2289219	2289219	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	8	-	Gly	Asp8Gly	gac/ggc	23	23	pyrazinamide (PZA)	11641519	
+2289220	2289220	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Asp	8	-	Asn	Asp8Asn	gac/aac	22	22	pyrazinamide (PZA)	25336456	yes
+2289222	2289222	SNP	1	t	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	7	-	Asp	Val7Asp	gtc/gac	20	20	pyrazinamide (PZA)	11641519	
+2289222	2289222	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	7	-	Gly	Val7Gly	gtc/ggc	20	20	pyrazinamide (PZA)	25336456	yes
+2289223	2289223	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	7	-	Phe	Val7Phe	gtc/ttc	19	19	pyrazinamide (PZA)	25336456	yes
+2289225	2289225	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ile	6	-	Thr	Ile6Thr	atc/acc	17	17	pyrazinamide (PZA)	25336456	yes
+2289226	-	Ins	1	t	tg	coding	Rv2043c	pncA	2289241	2288681	561	-	Ile	6	-	-	Ile6-	atc/catc	16	16	pyrazinamide (PZA)	22646308	
+2289231	2289231	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	4	-	Ser	Leu4Ser	ttg/tcg	11	11	pyrazinamide (PZA)	25336456	yes
+2289231	2289231	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	4	-	Trp	Leu4Trp	ttg/tgg	11	11	pyrazinamide (PZA)	11641519	
+2289234	2289234	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	3	-	Glu	Ala3Glu	gcg/gag	8	8	pyrazinamide (PZA)	25336456	yes
+2289235	2289235	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	3	-	Pro	Ala3Pro	gcg/ccg	7	7	pyrazinamide (PZA)	10390238	
+2289239	2289239	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Met	1	-	Ile	Met1Ile	atg/att	3	3	pyrazinamide (PZA)	11641519	
+2289239	2289239	SNP	1	g	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Met	1	-	Ile	Met1Ile	atg/ata	3	3	pyrazinamide (PZA)	25336456	yes
+2289240	2289240	SNP	1	t	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Met	1	-	Lys	Met1Lys	atg/aag	2	2	pyrazinamide (PZA)	25336456	yes
+2289240	2289240	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Met	1	-	Thr	Met1Thr	atg/acg	2	2	pyrazinamide (PZA)	25336456	yes
+2289248	2289248	SNP	1	t	c	intergenic	Rv2043c	pncA	2289241	2288681	561	-	-	-	-	-	---	-	-7	-7	pyrazinamide (PZA)	25336456	yes
+2289248	2289248	SNP	1	t	g	intergenic	Rv2043c	pncA	2289241	2288681	561	-	-	-	-	-	---	-	-7	-7	pyrazinamide (PZA)	25336456	yes
+2289252	2289252	SNP	1	a	g	intergenic	Rv2043c	pncA	2289241	2288681	561	-	-	-	-	-	---	-	-11	-11	pyrazinamide (PZA)	22646308	yes
+2289252	2289252	SNP	1	a	c	intergenic	Rv2043c	pncA	2289241	2288681	561	-	-	-	-	-	---	-	-11	-11	pyrazinamide (PZA)	25336456	yes
+2289252	2289252	SNP	1	a	t	intergenic	Rv2043c	pncA	2289241	2288681	561	-	-	-	-	-	---	-	-11	-11	pyrazinamide (PZA)	25336456	yes
+2715342	2715342	SNP	1	g	a	intergenic	Rv2416c	eis	2715332	2714124	1209	-	-	-	-	-	---	-	-10	-10	kanamycin (KAN)	21300839	
+2715346	2715346	SNP	1	c	t	intergenic	Rv2416c	eis	2715332	2714124	1209	-	-	-	-	-	---	-	-14	-14	kanamycin (KAN)	21300839	
+2726136	2726136	SNP	1	c	t	intergenic	Rv2428	ahpC	2726193	2726780	588	+	-	-	-	-	---	-	-57	-57	isoniazid (INH)	22646308	
+2726145	2726145	SNP	1	g	a	intergenic	Rv2428	ahpC	2726193	2726780	588	+	-	-	-	-	---	-	-48	-48	isoniazid (INH)	12654653	
+3073808	3073808	SNP	1	c	g	coding	Rv2764c	thyA	3074471	3073680	792	-	Arg	222	-	Gly	Arg222Gly	cgc/ggc	664	664	para-aminosalicylic acid (PAS)	15225321	
+4241078	4241078	SNP	1	a	g	coding	Rv3793	embC	4239863	4243147	3285	+	Ile	406	-	Val	Ile406Val	atc/gtc	1216	1216	ethambutol (EMB)	20427375	
+4243221	4243221	SNP	1	c	t	intergenic	Rv3794	embA	4243233	4246517	3285	+	-	-	-	-	---	-	-12	-12	ethambutol (EMB)	20427375	
+4243225	4243225	SNP	1	c	a	intergenic	Rv3794	embA	4243233	4246517	3285	+	-	-	-	-	---	-	-8	-8	ethambutol (EMB)	20427375	
+4243242	4243242	SNP	1	g	a	coding	Rv3794	embA	4243233	4246517	3285	+	Asp	4	-	Asn	Asp4Asn	gac/aac	10	10	ethambutol (EMB)	10639358	
+4243245	4243245	SNP	1	g	a	coding	Rv3794	embA	4243233	4246517	3285	+	Gly	5	-	Ser	Gly5Ser	ggt/agt	13	13	ethambutol (EMB)	10639358	
+4243833	4243833	SNP	1	g	a	coding	Rv3794	embA	4243233	4246517	3285	+	Ala	201	-	Thr	Ala201Thr	gcg/acg	601	601	ethambutol (EMB)	10639358	
+4244193	4244193	SNP	1	g	a	coding	Rv3794	embA	4243233	4246517	3285	+	Gly	321	-	Ser	Gly321Ser	ggc/agc	961	961	ethambutol (EMB)	10639358	
+4244281	4244281	SNP	1	g	a	coding	Rv3794	embA	4243233	4246517	3285	+	Gly	350	-	Asp	Gly350Asp	ggc/gac	1049	1049	ethambutol (EMB)	10639358	
+4244617	4244617	SNP	1	c	t	coding	Rv3794	embA	4243233	4246517	3285	+	Ala	462	-	Val	Ala462Val	gcg/gtg	1385	1385	ethambutol (EMB)	10639358	
+4245730	4245730	SNP	1	a	c	coding	Rv3794	embA	4243233	4246517	3285	+	Asp	833	-	Ala	Asp833Ala	gac/gcc	2498	2498	ethambutol (EMB)	10639358	
+4246734	4246734	SNP	1	t	g	coding	Rv3795	embB	4246514	4249810	3297	+	Leu	74	-	Arg	Leu74Arg	ctg/cgg	221	221	ethambutol (EMB)	20427375	
+4247402	4247402	SNP	1	t	g	coding	Rv3795	embB	4246514	4249810	3297	+	Ser	297	-	Ala	Ser297Ala	tcg/gcg	889	889	ethambutol (EMB)	10639358	
+4247429	4247429	SNP	1	a	g	coding	Rv3795	embB	4246514	4249810	3297	+	Met	306	-	Val	Met306Val	atg/gtg	916	916	ethambutol (EMB)	21300839	yes
+4247429	4247429	SNP	1	a	c	coding	Rv3795	embB	4246514	4249810	3297	+	Met	306	-	Leu	Met306Leu	atg/ctg	916	916	ethambutol (EMB)	9257740	yes
+4247430	4247430	SNP	1	t	c	coding	Rv3795	embB	4246514	4249810	3297	+	Met	306	-	Thr	Met306Thr	atg/acg	917	917	ethambutol (EMB)	11854934	yes
+4247431	4247431	SNP	1	g	a	coding	Rv3795	embB	4246514	4249810	3297	+	Met	306	-	Ile	Met306Ile	atg/ata	918	918	ethambutol (EMB)	21300839	yes
+4247431	4247431	SNP	1	g	c	coding	Rv3795	embB	4246514	4249810	3297	+	Met	306	-	Ile	Met306Ile	atg/atc	918	918	ethambutol (EMB)	21300839	yes
+4247431	4247431	SNP	1	g	t	coding	Rv3795	embB	4246514	4249810	3297	+	Met	306	-	Ile	Met306Ile	atg/att	918	918	ethambutol (EMB)	21300839	yes
+4247469	4247469	SNP	1	a	c	coding	Rv3795	embB	4246514	4249810	3297	+	Tyr	319	-	Ser	Tyr319Ser	tat/tct	956	956	ethambutol (EMB)	16641474	
+4247495	4247495	SNP	1	g	t	coding	Rv3795	embB	4246514	4249810	3297	+	Asp	328	-	Tyr	Asp328Tyr	gat/tat	982	982	ethambutol (EMB)	10639358	
+4247496	4247496	SNP	1	a	g	coding	Rv3795	embB	4246514	4249810	3297	+	Asp	328	-	Gly	Asp328Gly	gat/ggt	983	983	ethambutol (EMB)	10639358	
+4247507	4247507	SNP	1	t	c	coding	Rv3795	embB	4246514	4249810	3297	+	Trp	332	-	Arg	Trp332Arg	tgg/cgg	994	994	ethambutol (EMB)	22646308	
+4247513	4247513	SNP	1	t	c	coding	Rv3795	embB	4246514	4249810	3297	+	Tyr	334	-	His	Tyr334His	tac/cac	1000	1000	ethambutol (EMB)	16641474	
+4247573	4247573	SNP	1	g	a	coding	Rv3795	embB	4246514	4249810	3297	+	Asp	354	-	Asn	Asp354Asn	gac/aac	1060	1060	ethambutol (EMB)	20427375	
+4247717	4247717	SNP	1	c	g	coding	Rv3795	embB	4246514	4249810	3297	+	Leu	402	-	Val	Leu402Val	ctg/gtg	1204	1204	ethambutol (EMB)	20427375	
+4247723	4247723	SNP	1	c	t	coding	Rv3795	embB	4246514	4249810	3297	+	Pro	404	-	Ser	Pro404Ser	ccg/tcg	1210	1210	ethambutol (EMB)	20427375	
+4247729	4247729	SNP	1	g	a	coding	Rv3795	embB	4246514	4249810	3297	+	Gly	406	-	Ser	Gly406Ser	ggc/agc	1216	1216	ethambutol (EMB)	20427375	yes
+4247729	4247729	SNP	1	g	t	coding	Rv3795	embB	4246514	4249810	3297	+	Gly	406	-	Cys	Gly406Cys	ggc/tgc	1216	1216	ethambutol (EMB)	24055765	yes
+4247730	4247730	SNP	1	g	c	coding	Rv3795	embB	4246514	4249810	3297	+	Gly	406	-	Ala	Gly406Ala	ggc/gcc	1217	1217	ethambutol (EMB)	20427375	yes
+4247730	4247730	SNP	1	g	a	coding	Rv3795	embB	4246514	4249810	3297	+	Gly	406	-	Asp	Gly406Asp	ggc/gac	1217	1217	ethambutol (EMB)	20427375	yes
+4247863	4247863	SNP	1	c	g	coding	Rv3795	embB	4246514	4249810	3297	+	Ile	450	-	Met	Ile450Met	atc/atg	1350	1350	ethambutol (EMB)	20427375	
+4247873	4247873	SNP	1	g	a	coding	Rv3795	embB	4246514	4249810	3297	+	Ala	454	-	Thr	Ala454Thr	gcg/acg	1360	1360	ethambutol (EMB)	20427375	
+4248002	4248002	SNP	1	c	a	coding	Rv3795	embB	4246514	4249810	3297	+	Gln	497	-	Lys	Gln497Lys	cag/aag	1489	1489	ethambutol (EMB)	20427375	
+4248003	4248003	SNP	1	a	g	coding	Rv3795	embB	4246514	4249810	3297	+	Gln	497	-	Arg	Gln497Arg	cag/cgg	1490	1490	ethambutol (EMB)	20427375	yes
+4248747	4248747	SNP	1	g	a	coding	Rv3795	embB	4246514	4249810	3297	+	Gly	745	-	Asp	Gly745Asp	ggc/gac	2234	2234	ethambutol (EMB)	10639358	
+4249518	4249518	SNP	1	a	g	coding	Rv3795	embB	4246514	4249810	3297	+	His	1002	-	Arg	His1002Arg	cac/cgc	3005	3005	ethambutol (EMB)	22646308	
+4326087	4326087	SNP	1	c	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Arg	463	-	Ser	Arg463Ser	cgt/agt	1387	1387	ethionamide (ETH)	14638486	
+4326236	4326236	SNP	1	g	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Gly	413	-	Asp	Gly413Asp	ggt/gat	1238	1238	ethionamide (ETH)	14638486	
+4326300	4326300	SNP	1	a	g	coding	Rv3854c	ethA	4327473	4326004	1470	-	Thr	392	-	Ala	Thr392Ala	acg/gcg	1174	1174	ethionamide (ETH)	14638486	
+4326320	4326320	SNP	1	g	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Gly	385	-	Asp	Gly385Asp	ggc/gac	1154	1154	ethionamide (ETH)	14638486	
+4326333	4326333	SNP	1	g	c	coding	Rv3854c	ethA	4327473	4326004	1470	-	Ala	381	-	Pro	Ala381Pro	gcc/ccc	1141	1141	ethionamide (ETH)	10944230	
+4326449	4326449	SNP	1	c	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Thr	342	-	Lys	Thr342Lys	acg/aag	1025	1025	ethionamide (ETH)	10944230	
+4326461	4326461	SNP	1	t	g	coding	Rv3854c	ethA	4327473	4326004	1470	-	Ile	338	-	Ser	Ile338Ser	atc/agc	1013	1013	ethionamide (ETH)	14638486	
+4326738	4326738	SNP	1	c	t	coding	Rv3854c	ethA	4327473	4326004	1470	-	Gln	246	-	STOP	Gln246STOP	cag/tag	736	736	ethionamide (ETH)	14638486	
+4326807	4326807	SNP	1	g	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Glu	223	-	Lys	Glu223Lys	gag/aag	667	667	ethionamide (ETH)	14638486	
+4326917	4326917	SNP	1	c	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Thr	186	-	Lys	Thr186Lys	acg/aag	557	557	ethionamide (ETH)	10944230	
+4327224	4327224	SNP	1	t	g	coding	Rv3854c	ethA	4327473	4326004	1470	-	Tyr	84	-	Asp	Tyr84Asp	tac/gac	250	250	ethionamide (ETH)	10944230	
+4327301	4327301	SNP	1	a	c	coding	Rv3854c	ethA	4327473	4326004	1470	-	Asp	58	-	Ala	Asp58Ala	gac/gcc	173	173	ethionamide (ETH)	10944230	
+4327307	4327307	SNP	1	a	c	coding	Rv3854c	ethA	4327473	4326004	1470	-	Asp	56	-	Ala	Asp56Ala	gac/gcc	167	167	ethionamide (ETH)	14638486	
+4327322	4327322	SNP	1	c	t	coding	Rv3854c	ethA	4327473	4326004	1470	-	Pro	51	-	Leu	Pro51Leu	ccc/ctc	152	152	ethionamide (ETH)	10944230	
+4327346	4327346	SNP	1	g	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Gly	43	-	Asp	Gly43Asp	ggc/gac	128	128	ethionamide (ETH)	14638486	
+4327347	4327347	SNP	1	g	t	coding	Rv3854c	ethA	4327473	4326004	1470	-	Gly	43	-	Cys	Gly43Cys	ggc/tgc	127	127	ethionamide (ETH)	10944230	
+4407604	4407604	SNP	1	c	a	coding	Rv3919c	gidB	4408202	4407528	675	-	Ala	200	-	Glu	Ala200Glu	gcg/gag	599	599	streptomycin (SM)	22646308	
+4407790	4407790	SNP	1	c	t	coding	Rv3919c	gidB	4408202	4407528	675	-	Ala	138	-	Val	Ala138Val	gcg/gtg	413	413	streptomycin (SM)	22646308	
+4407824	4407824	SNP	1	c	t	coding	Rv3919c	gidB	4408202	4407528	675	-	Gln	127	-	STOP	Gln127STOP	caa/taa	379	379	streptomycin (SM)	22646308	
+4407931	4407931	SNP	1	t	c	coding	Rv3919c	gidB	4408202	4407528	675	-	Leu	91	-	Pro	Leu91Pro	cta/cca	272	272	streptomycin (SM)	22646308	
+4407940	4407940	SNP	1	t	c	coding	Rv3919c	gidB	4408202	4407528	675	-	Val	88	-	Ala	Val88Ala	gta/gca	263	263	streptomycin (SM)	22646308	
+4407992	4407992	SNP	1	g	a	coding	Rv3919c	gidB	4408202	4407528	675	-	Gly	71	-	Arg	Gly71Arg	gga/aga	211	211	streptomycin (SM)	22646308	
+4408009	4408009	SNP	1	t	g	coding	Rv3919c	gidB	4408202	4407528	675	-	Val	65	-	Gly	Val65Gly	gtc/ggc	194	194	streptomycin (SM)	22646308	
+4408102	4408102	SNP	1	g	c	coding	Rv3919c	gidB	4408202	4407528	675	-	Gly	34	-	Ala	Gly34Ala	ggg/gcg	101	101	streptomycin (SM)	22646308	
+156593	156593	SNP	1	t	c	coding	Rv0129c	fbpC	157600	156578	1023	-	Ala	336	-	Ala	Ala336Ala	gct/gcc	1008	1008	phylo (M. canettii)	22768315	
+157129	157129	SNP	1	g	a	coding	Rv0129c	fbpC	157600	156578	1023	-	Gly	158	-	Ser	Gly158Ser	ggc/agc	472	472	phylo (Delhi/CAS)	22768315	
+157292	157292	SNP	1	g	a	coding	Rv0129c	fbpC	157600	156578	1023	-	Glu	103	-	Glu	Glu103Glu	gag/gaa	309	309	phylo (LAM)	22768315	
+273265	273265	SNP	1	g	t	coding	Rv0228	-	273055	274278	1224	+	Gly	71	-	Cys	Gly71Cys	ggc/tgc	211	211	phylo (West African 2)	22768315	
+491591	491591	SNP	1	a	t	coding	Rv0407	fgd1	490783	491793	1011	+	Lys	270	-	Met	Lys270Met	aag/atg	809	809	phylo (Haarlem)	22768315	
+491668	491668	SNP	1	a	g	coding	Rv0407	fgd1	490783	491793	1011	+	Lys	296	-	Glu	Lys296Glu	aag/gag	886	886	phylo (West African 2)	22768315	
+491742	491742	SNP	1	t	c	coding	Rv0407	fgd1	490783	491793	1011	+	Phe	320	-	Phe	Phe320Phe	ttt/ttc	960	960	phylo (not Euro-American, M. africanum, M. bovis, M. canettii, M. caprae, M. microti, M. pinipedii, Beijing, Delhi/CAS, EAI)	22768315	
+495108	495108	SNP	1	c	a	coding	Rv0410c	pknG	497314	495062	2253	-	Thr	736	-	Lys	Thr736Lys	acg/aag	2207	2207	phylo (West African 2)	22768315	
+495322	495322	SNP	1	g	a	coding	Rv0410c	pknG	497314	495062	2253	-	Ala	665	-	Thr	Ala665Thr	gcc/acc	1993	1993	phylo (West African 1a, West African 1b)	22768315	
+495473	495473	SNP	1	g	a	coding	Rv0410c	pknG	497314	495062	2253	-	Ser	614	-	Ser	Ser614Ser	tcg/tca	1842	1842	phylo (EAI)	22768315	
+497108	497108	SNP	1	g	a	coding	Rv0410c	pknG	497314	495062	2253	-	Pro	69	-	Pro	Pro69Pro	ccg/cca	207	207	phylo (M. bovis, M. caprae)	22768315	
+648756	648756	SNP	1	c	t	coding	Rv0557	mgtA	648536	649672	1137	+	Thr	74	-	Ile	Thr74Ile	acg/atg	221	221	phylo (West African 1a, West African 1b)	22768315	
+648856	648856	SNP	1	t	c	coding	Rv0557	mgtA	648536	649672	1137	+	Gly	107	-	Gly	Gly107Gly	ggt/ggc	321	321	phylo (not Euro-American, M. africanum, M. bovis, M. canettii, M. caprae, M. microti, M. pinipedii, Beijing, Delhi/CAS, EAI)	22768315	
+648990	648990	SNP	1	g	c	coding	Rv0557	mgtA	648536	649672	1137	+	Arg	152	-	Pro	Arg152Pro	cgc/ccc	455	455	phylo (Haarlem)	22768315	
+648992	648992	SNP	1	c	g	coding	Rv0557	mgtA	648536	649672	1137	+	Leu	153	-	Val	Leu153Val	ctg/gtg	457	457	phylo (S-type)	22768315	
+649067	649067	SNP	1	c	g	coding	Rv0557	mgtA	648536	649672	1137	+	Arg	178	-	Gly	Arg178Gly	cgg/ggg	532	532	phylo (Cameroon)	22768315	
+649345	649345	SNP	1	c	t	coding	Rv0557	mgtA	648536	649672	1137	+	Ala	270	-	Ala	Ala270Ala	gcc/gct	810	810	phylo (EAI)	22768315	
+649446	649446	SNP	1	g	a	coding	Rv0557	pimB	648536	649672	1137	+	Gly	304	-	Asp	Gly304Asp	ggc/gac	911	911	phylo (West African 1a, West African 1b)	22768315	
+649585	649585	SNP	1	g	a	coding	Rv0557	mgtA	648536	649672	1137	+	Val	350	-	Val	Val350Val	gtg/gta	1050	1050	phylo (M. caprae)	22768315	
+649601	649601	SNP	1	c	t	coding	Rv0557	mgtA	648536	649672	1137	+	Pro	356	-	Ser	Pro356Ser	ccg/tcg	1066	1066	phylo (M. canettii)	22768315	
+1128814	1128814	SNP	1	g	a	coding	Rv1009	rpfB	1128091	1129179	1089	+	Glu	242	-	Lys	Glu242Lys	gag/aag	724	724	phylo (EAI Manila)	22768315	
+1128825	1128825	SNP	1	c	t	coding	Rv1009	rpfB	1128091	1129179	1089	+	Gly	245	-	Gly	Gly245Gly	ggc/ggt	735	735	phylo (M. microti, M. pinipedii)	22768315	
+1128915	1128915	SNP	1	g	c	coding	Rv1009	rpfB	1128091	1129179	1089	+	Glu	275	-	Asp	Glu275Asp	gag/gac	825	825	phylo (M. canettii)	22768315	
+1128935	1128935	SNP	1	g	a	coding	Rv1009	rpfB	1128091	1129179	1089	+	Gly	282	-	Glu	Gly282Glu	gga/gaa	845	845	phylo (M. bovis, M. caprae)	22768315	
+1129124	1129124	SNP	1	t	a	coding	Rv1009	rpfB	1128091	1129179	1089	+	Leu	345	-	Gln	Leu345Gln	ctg/cag	1034	1034	phylo (M. canettii)	22768315	
+1129128	1129128	SNP	1	t	c	coding	Rv1009	rpfB	1128091	1129179	1089	+	Arg	346	-	Arg	Arg346Arg	cgt/cgc	1038	1038	phylo (M. canettii)	22768315	
+1129160	1129160	SNP	1	c	t	coding	Rv1009	rpfB	1128091	1129179	1089	+	Ala	357	-	Val	Ala357Val	gca/gta	1070	1070	phylo (M. bovis)	22768315	
+1129165	1129165	SNP	1	g	a	coding	Rv1009	rpfB	1128091	1129179	1089	+	Ala	359	-	Thr	Ala359Thr	gcg/acg	1075	1075	phylo (TUR)	22768315	
+1816848	1816848	SNP	1	g	t	coding	Rv1617	pykA	1816189	1817607	1419	+	Glu	220	-	Asp	Glu220Asp	gag/gat	660	660	phylo (M. africanum, M. caprae, M. microti, M. pinipedii)	22768315	
+2053454	2053454	SNP	1	g	a	coding	Rv1811	mgtC	2053443	2054147	705	+	Leu	4	-	Leu	Leu4Leu	ctg/cta	12	12	phylo (Ural)	22768315	
+2053487	2053487	SNP	1	c	t	coding	Rv1811	mgtC	2053443	2054147	705	+	Val	15	-	Val	Val15Val	gtc/gtt	45	45	phylo (M. canettii)	22768315	
+2053682	2053682	SNP	1	c	t	coding	Rv1811	mgtC	2053443	2054147	705	+	Ile	80	-	Ile	Ile80Ile	atc/att	240	240	phylo (LAM)	22768315	
+2053726	2053726	SNP	1	c	t	coding	Rv1811	mgtC	2053443	2054147	705	+	Thr	95	-	Met	Thr95Met	acg/atg	284	284	phylo (West African 1b)	22768315	
+2053762	2053762	SNP	1	c	t	coding	Rv1811	mgtC	2053443	2054147	705	+	Ala	107	-	Val	Ala107Val	gcc/gtc	320	320	phylo (West African 2)	22768315	
+2053987	2053987	SNP	1	g	a	coding	Rv1811	mgtC	2053443	2054147	705	+	Arg	182	-	His	Arg182His	cgc/cac	545	545	phylo (Haarlem)	22768315	
+2134258	2134258	SNP	1	c	t	coding	Rv1884c	rpfC	2134261	2133731	531	-	His	2	-	Tyr	His2Tyr	cat/tat	4	4	phylo (M. canettii)	22768315	
+2223896	2223896	SNP	1	t	c	coding	Rv1980c	mpt64	2224029	2223343	687	-	Met	45	-	Thr	Met45Thr	atg/acg	134	134	phylo (M. canettii)	22768315	
+2223902	2223902	SNP	1	t	a	coding	Rv1980c	mpt64	2224029	2223343	687	-	Ile	43	-	Asn	Ile43Asn	att/aat	128	128	phylo (West African 1a, West African 1b)	22768315	
+2279228	2279228	SNP	1	g	t	coding	Rv2032	acg	2279129	2280124	996	+	Ala	34	-	Ser	Ala34Ser	gcc/tcc	100	100	phylo (M. caprae)	22768315	
+2279314	2279314	SNP	1	g	c	coding	Rv2032	acg	2279129	2280124	996	+	Gly	62	-	Gly	Gly62Gly	ggg/ggc	186	186	phylo (M. canettii)	22768315	
+2280081	2280081	SNP	1	c	t	coding	Rv2032	acg	2279129	2280124	996	+	Pro	318	-	Leu	Pro318Leu	cca/cta	953	953	phylo (M. bovis, M. caprae)	22768315	
+2726105	2726105	SNP	1	g	a	intergenic	Rv2428	ahpC	2726193	2726780	588	+	-	-	-	-	---	-	-88	-88	phylo (Delhi/CAS, 3)	22768315	
+2751764	2751764	SNP	1	g	a	coding	Rv2450c	rpfE	2752180	2751662	519	-	Gly	139	-	Gly	Gly139Gly	ggg/gga	417	417	phylo (M. canettii)	22768315	
+2751866	2751866	SNP	1	g	a	coding	Rv2450c	rpfE	2752180	2751662	519	-	Ala	105	-	Ala	Ala105Ala	gcg/gca	315	315	phylo (M. canettii)	22768315	
+2752122	2752122	SNP	1	c	g	coding	Rv2450c	rpfE	2752180	2751662	519	-	Thr	20	-	Arg	Thr20Arg	acg/agg	59	59	phylo (Beijing)	22768315	
+2752132	2752132	SNP	1	t	c	coding	Rv2450c	rpfE	2752180	2751662	519	-	Leu	17	-	Leu	Leu17Leu	ttg/ctg	49	49	phylo (West African 1a, West African 1b)	22768315	
+2936944	2936944	SNP	1	c	g	coding	Rv2609c	-	2937865	2936810	1056	-	Gln	308	-	Glu	Gln308Glu	cag/gag	922	922	phylo (M. canettii)	22768315	
+2939177	2939177	SNP	1	t	c	coding	Rv2611c	-	2939962	2939012	951	-	Tyr	262	-	Tyr	Tyr262Tyr	tat/tac	786	786	phylo (West African 2)	22768315	
+2939577	2939577	SNP	1	t	g	coding	Rv2611c	-	2939962	2939012	951	-	Leu	129	-	Arg	Leu129Arg	ctc/cgc	386	386	phylo (M. canettii)	22768315	
+2939716	2939716	SNP	1	t	c	coding	Rv2611c	-	2939962	2939012	951	-	Cys	83	-	Arg	Cys83Arg	tgc/cgc	247	247	phylo (M. canettii)	22768315	
+2940461	2940461	SNP	1	t	c	coding	Rv2612c	pgsA1	2940612	2939959	654	-	Met	51	-	Thr	Met51Thr	atg/acg	152	152	phylo (M. canettii)	22768315	
+2940562	2940562	SNP	1	c	t	coding	Rv2612c	pgsA1	2940612	2939959	654	-	Thr	17	-	Thr	Thr17Thr	acc/act	51	51	phylo (M. canettii)	22768315	
+2940608	2940608	SNP	1	g	a	coding	Rv2612c	pgsA1	2940612	2939959	654	-	Ser	2	-	Asn	Ser2Asn	agc/aac	5	5	phylo (EAI)	22768315	
+2940930	2940930	SNP	1	c	t	coding	Rv2613c	-	2941196	2940609	588	-	Pro	89	-	Pro	Pro89Pro	ccc/cct	267	267	phylo (M. canettii)	22768315	
+2941179	2941179	SNP	1	c	t	coding	Rv2613c	-	2941196	2940609	588	-	Arg	6	-	Arg	Arg6Arg	cgc/cgt	18	18	phylo (Delhi/CAS)	22768315	
+2955135	2955135	SNP	1	a	c	coding	Rv2628	-	2955058	2955420	363	+	Ile	26	-	Ile	Ile26Ile	ata/atc	78	78	phylo (M. canettii)	22768315	
+2955202	2955202	SNP	1	t	g	coding	Rv2628	-	2955058	2955420	363	+	Ser	49	-	Ala	Ser49Ala	tcc/gcc	145	145	phylo (M. canettii)	22768315	
+2955233	2955233	SNP	1	c	t	coding	Rv2628	-	2955058	2955420	363	+	Ser	59	-	Leu	Ser59Leu	tcg/ttg	176	176	phylo (M.africanum, M. bovis, M. canettii, M. caprae, M. microti, M. pinipedii, EAI)	22768315	
+2955305	2955305	SNP	1	t	g	coding	Rv2628	-	2955058	2955420	363	+	Leu	83	-	Trp	Leu83Trp	ttg/tgg	248	248	phylo (M. microti, M. pinipedii)	22768315	
+2955310	2955310	SNP	1	a	g	coding	Rv2628	-	2955058	2955420	363	+	Thr	85	-	Ala	Thr85Ala	acc/gcc	253	253	phylo (M. canettii)	22768315	
+2955343	2955343	SNP	1	g	a	coding	Rv2628	-	2955058	2955420	363	+	Ala	96	-	Thr	Ala96Thr	gcg/acg	286	286	phylo (West African 1a, West African 1b)	22768315	
+2955957	2955957	SNP	1	a	c	coding	Rv2629	-	2955767	2956891	1125	+	Asp	64	-	Ala	Asp64Ala	gat/gct	191	191	phylo (Beijing)	22768315	
+2956731	2956731	SNP	1	c	t	coding	Rv2629	-	2955767	2956891	1125	+	Pro	322	-	Leu	Pro322Leu	ccg/ctg	965	965	phylo (Ghana)	22768315	
+3296371	-	Ins	7	g	gccgcggc	coding	Rv2947c	pks15	3297840	3296350	1491	-	Gly	490	-	-	Gly490-	ggc/gggccgcggc	1470	1470	phylo (not Euro-American, M. africanum, M. bovis, M. canettii, M. caprae, M. microti, M. pinipedii, Beijing, Delhi/CAS, EAI)	18578864	
+3986987	3986987	SNP	1	g	t	coding	Rv3547	ddn	3986844	3987299	456	+	Leu	48	-	Leu	Leu48Leu	ctg/ctt	144	144	phylo (West African 1a, West African 1b)	22768315	
+3987050	3987050	SNP	1	c	t	coding	Rv3547	ddn	3986844	3987299	456	+	Asp	69	-	Asp	Asp69Asp	gac/gat	207	207	phylo (M. canettii)	22768315	
+3987111	3987111	SNP	1	c	g	coding	Rv3547	ddn	3986844	3987299	456	+	Leu	90	-	Val	Leu90Val	ctc/gtc	268	268	phylo (M. microti, M. pinipedii)	22768315	
+3987180	3987180	SNP	1	g	a	coding	Rv3547	ddn	3986844	3987299	456	+	Asp	113	-	Asn	Asp113Asn	gac/aac	337	337	phylo (West African 1a, West African 1b)	22768315	
+3987287	3987287	SNP	1	t	c	coding	Rv3547	ddn	3986844	3987299	456	+	Val	148	-	Val	Val148Val	gtt/gtc	444	444	phylo (M. canettii)	22768315	
+7539	7539	SNP	1	a	g	coding	Rv0006	gyrA	7302	9818	2517	+	Thr	80	-	Ala	Thr80Ala	acc/gcc	238	238	phylo (Uganda I+II, 4,6,1) 	24458512	
+7585	7585	SNP	1	g	c	coding	Rv0006	gyrA	7302	9818	2517	+	Ser	95	-	Thr	Ser95Thr	agc/acc	284	284	phylo (not H37Rv)	24458512	
+491595	491595	SNP	1	c	t	coding	Rv0407	fgd1	490783	491793	1011	+	Ala	271	-	Ala	Ala271Ala	gcc/gct	813	813	phylo (West African 1a)	24458512	
+575665	575665	SNP	1	g	c	coding	Rv0486	mshA	575348	576790	1443	+	Gly	106	-	Gly	Gly106Gly	ggg/ggc	318	318	phylo (M. canettii)	24458512	
+575679	575679	SNP	1	a	g	coding	Rv0486	mshA	575348	576790	1443	+	Asn	111	-	Ser	Asn111Ser	aac/agc	332	332	phylo (Haarlem)	24458512	
+575907	575907	SNP	1	c	t	coding	Rv0486	mshA	575348	576790	1443	+	Ala	187	-	Val	Ala187Val	gca/gta	560	560	phylo (Beijing)	24458512	
+576077	576077	SNP	1	c	t	coding	Rv0486	mshA	575348	576790	1443	+	Leu	244	-	Leu	Leu244Leu	ctg/ttg	730	730	phylo (Tur)	24458512	
+1461251	1461251	SNP	1	g	t	coding	Rv1305	atpE	1461045	1461290	246	+	Ala	69	-	Ala	Ala69Ala	gcg/gct	207	207	phylo (West African 2)	24458512	
+1471848	-	Ins	1	t	tt	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	4	4	phylo (M. canettii)	24458512	
+1471851	1471851	SNP	1	t	g	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	6	6	phylo (M. canettii)	24458512	
+1473079	1473079	SNP	1	g	a	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1234	1234	phylo (M. microti)	24458512	
+1473094	1473094	SNP	1	t	c	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1249	1249	phylo (M. pinipedii)	24458512	
+1673338	1673338	SNP	1	g	a	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-102	-102	phylo (West African 1a, West African 1b)	24458512	
+1674434	1674434	SNP	1	t	c	coding	Rv1484	inhA	1674202	1675011	810	+	Val	78	-	Ala	Val78Ala	gtg/gcg	233	233	phylo (West African 2, 6)	24458512	
+1674520	1674520	SNP	1	c	t	coding	Rv1484	inhA	1674202	1675011	810	+	Pro	107	-	Ser	Pro107Ser	ccg/tcg	319	319	phylo (M. pinipedii)	24458512	
+1674816	1674816	SNP	1	t	c	coding	Rv1484	inhA	1674202	1675011	810	+	Gly	205	-	Gly	Gly205Gly	ggt/ggc	615	615	phylo (M. canettii)	24458512	
+1833554	1833554	SNP	1	a	g	coding	Rv1630	rpsA	1833542	1834987	1446	+	Thr	5	-	Ala	Thr5Ala	acc/gcc	13	13	phylo (M. canettii)	24458512	
+1833568	1833568	SNP	1	g	c	coding	Rv1630	rpsA	1833542	1834987	1446	+	Pro	9	-	Pro	Pro9Pro	ccg/ccc	27	27	phylo (M. canettii)	24458512	
+1834169	1834169	SNP	1	a	g	coding	Rv1630	rpsA	1833542	1834987	1446	+	Thr	210	-	Ala	Thr210Ala	acc/gcc	628	628	phylo (M. canettii)	24458512	
+1834177	1834177	SNP	1	a	c	coding	Rv1630	rpsA	1833542	1834987	1446	+	Arg	212	-	Arg	Arg212Arg	cga/cgc	636	636	phylo (Beijing, 2)	24458512	
+1834859	1834859	SNP	1	g	a	coding	Rv1630	rpsA	1833542	1834987	1446	+	Ala	440	-	Thr	Ala440Thr	gcg/acg	1318	1318	phylo (M. bovis, M. caprae)	24458512	
+1834912	1834912	SNP	1	a	g	coding	Rv1630	rpsA	1833542	1834987	1446	+	Glu	457	-	Glu	Glu457Glu	gaa/gag	1371	1371	phylo (M. canettii)	24458512	
+2154724	2154724	SNP	1	g	t	coding	Rv1908c	katG	2156111	2153889	2223	-	Arg	463	-	Leu	Arg463Leu	cgg/ctg	1388	1388	phylo (not Euro-American, M. africanum, M. bovis, M . canettii, M. caprae, M. Microti, M. pinipedii, Beijing, Delhi/CAS, EAI, 4)	9275218	
+2289047	2289047	SNP	1	c	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Ser	65	-	Ser	Ser65Ser	tcc/tct	195	195	phylo (Delhi/CAS)	24458512	
+2289073	2289073	SNP	1	c	g	coding	Rv2043c	pncA	2289241	2288681	561	-	His	57	-	Asp	His57Asp	cac/gac	169	169	phylo (M. bovis)	24458512	
+2289104	2289104	SNP	1	a	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	46	-	Ala	Ala46Ala	gca/gcg	138	138	phylo (M. canettii)	24458512	
+3073868	3073868	SNP	1	a	g	coding	Rv2764c	thyA	3074471	3073680	792	-	Thr	202	-	Ala	Thr202Ala	acc/gcc	604	604	phylo (LAM)	24458512	
+3326554	3326554	SNP	1	a	c	coding	Rv2971	-	3326101	3326949	849	+	Asn	152	-	His	Asn152His	aac/cac	454	454	phylo (not Euro-American, M. africanum, M. bovis, M . canettii, M. caprae, M. Microti, M. pinipedii, Beijing, Delhi/CAS, EAI)	22911768	
+4240671	4240671	SNP	1	c	t	coding	Rv3793	embC	4239863	4243147	3285	+	Thr	270	-	Ile	Thr270Ile	acc/atc	809	809	phylo (M. africanum, M. bovis, M. canettii, M.caprae, M. Microti, M. pinipedii, EAI)	24458512	
+4242075	4242075	SNP	1	g	a	coding	Rv3793	embC	4239863	4243147	3285	+	Arg	738	-	Gln	Arg738Gln	cgg/cag	2213	2213	phylo (Delhi/CAS, 3)	20427375	
+4242803	4242803	SNP	1	g	c	coding	Rv3793	embC	4239863	4243147	3285	+	Val	981	-	Leu	Val981Leu	gtg/ctg	2941	2941	phylo (Ghana, Haarlem, X-Type, 4,1)	22646308	
+4242970	4242970	SNP	1	c	t	coding	Rv3793	embC	4239863	4243147	3285	+	Thr	1036		Thr	Thr1036Thr	acc/act	3108	3108	phylo (M. bovis, M. caprae)	24458512	
+4243377	4243377	SNP	1	a	c	coding	Rv3794	embA	4243233	4246517	3285	+	Ser	49	-	Arg	Ser49Arg	agc/cgc	145	145	phylo (M. canettii)	24458512	
+4243460	4243460	SNP	1	c	t	coding	Rv3794	embA	4243233	4246517	3285	+	Cys	76	-	Cys	Cys76Cys	tgc/tgt	228	228	phylo (Beijing, 2,2)	20427375	
+4243690	4243690	SNP	1	t	c	coding	Rv3794	embA	4243233	4246517	3285	+	Met	153	-	Thr	Met153Thr	atg/acg	458	458	phylo (M. canettii)	24458512	
+4247590	4247590	SNP	1	a	g	coding	Rv3795	embB	4246514	4249810	3297	+	Leu	359	-	Leu	Leu359Leu	cta/ctg	1077	1077	phylo (M. canettii)	24458512	
+4247646	4247646	SNP	1	a	c	coding	Rv3795	embB	4246514	4249810	3297	+	Glu	378	-	Ala	Glu378Ala	gag/gcg	1133	1133	phylo (M. africanum, M. bovis, M. canettii, M. caprae, M. Microti, M. pinipedii, EAI)	24458512	
+4247815	4247815	SNP	1	c	t	coding	Rv3795	embB	4246514	4249810	3297	+	Ala	434	-	Ala	Ala434Ala	gcc/gct	1302	1302	phylo (M. canettii)	24458512	
+4248195	4248195	SNP	1	a	g	coding	Rv3795	embB	4246514	4249810	3297	+	Lys	561	-	Arg	Lys561Arg	aag/agg	1682	1682	phylo (M. canettii)	24458512	
+4248206	4248206	SNP	1	a	g	coding	Rv3795	embB	4246514	4249810	3297	+	Ser	565	-	Gly	Ser565Gly	agc/ggc	1693	1693	phylo (M. canettii)	24458512	
+4248439	4248439	SNP	1	c	t	coding	Rv3795	embB	4246514	4249810	3297	+	Thr	642	-	Thr	Thr642Thr	acc/act	1926	1926	phylo (M. canettii)	24458512	
+4407588	4407588	SNP	1	a	g	coding	Rv3919c	gidB	4408202	4407528	675	-	Ala	205	-	Ala	Ala205Ala	gca/gcg	615	615	phylo (M. africanum, M. bovis, M. canettii, M. caprae, M. Microti, M. pinipedii, Beijing, Delhi/CAS, EAI, 4)	24458512	
+4407873	4407873	SNP	1	g	t	coding	Rv3919c	gidB	4408202	4407528	675	-	Val	110	-	Val	Val110Val	gtg/gtt	330	330	phylo (EAI, 1)	24458512	
+4407927	4407927	SNP	1	a	c	coding	Rv3919c	gidB	4408202	4407528	675	-	Glu	92	-	Asp	Glu92Asp	gaa/gac	276	276	phylo (Beijing, 2,2)	24458512	
+4408156	4408156	SNP	1	t	g	coding	Rv3919c	gidB	4408202	4407528	675	-	Leu	16	-	Arg	Leu16Arg	ctt/cgt	47	47	phylo (LAM, 4,3)	22646308	
+4408185	4408185	SNP	1	c	t	coding	Rv3919c	gidB	4408202	4407528	675	-	Pro	6	-	Pro	Pro6Pro	ccc/cct	18	18	phylo (M. canettii)	24458512	
+4408213	4408213	SNP	1	c	t	intergenic	Rv3919c	gidB	4408202	4407528	675	-	-	-	-	-	---	-	-11	-11	phylo (Ural)	24458512	
+5520	5520	SNP	1	c	t	coding	Rv0005	gyrB	5240	7267	2028	+	Pro	94	-	Leu	Pro94Leu	ccg/ctg	281	281	phylo (4,3,2,1)	25176035	
+6112	6112	SNP	1	g	c	coding	Rv0005	gyrB	5240	7267	2028	+	Met	291	-	Ile	Met291Ile	atg/atc	873	873	phylo (1)	25176035	
+6124	6124	SNP	1	c	t	coding	Rv0005	gyrB	5240	7267	2028	+	Ala	295	-	Ala	Ala295Ala	gcc/gct	885	885	phylo (1,1,2)	25176035	
+7222	7222	SNP	1	c	t	coding	Rv0005	gyrB	5240	7267	2028	+	Ser	661	-	Ser	Ser661Ser	agc/agt	1983	1983	phylo (4,3,2,1)	25176035	
+7892	7892	SNP	1	g	a	coding	Rv0006	gyrA	7302	9818	2517	+	Leu	197	-	Leu	Leu197Leu	ctg/cta	591	591	phylo (4,5)	25176035	
+8040	8040	SNP	1	g	a	coding	Rv0006	gyrA	7302	9818	2517	+	Gly	247	-	Ser	Gly247Ser	ggc/agc	739	739	phylo (4,3,3)	25176035	
+8452	8452	SNP	1	c	t	coding	Rv0006	gyrA	7302	9818	2517	+	Ala	384	-	Val	Ala384Val	gca/gta	1151	1151	phylo (1)	25176035	
+8876	8876	SNP	1	c	t	coding	Rv0006	gyrA	7302	9818	2517	+	Tyr	525	-	Tyr	Tyr525Tyr	tac/tat	1575	1575	phylo (7)	25176035	
+9260	9260	SNP	1	g	c	coding	Rv0006	gyrA	7302	9818	2517	+	Leu	653	-	Leu	Leu653Leu	ctg/ctc	1959	1959	phylo (1,2,1)	25176035	
+9566	9566	SNP	1	c	t	coding	Rv0006	gyrA	7302	9818	2517	+	Tyr	755	-	Tyr	Tyr755Tyr	tac/tat	2265	2265	phylo (5)	25176035	
+9611	9611	SNP	1	c	t	coding	Rv0006	gyrA	7302	9818	2517	+	Asp	770	-	Asp	Asp770Asp	gac/gat	2310	2310	phylo (3,1,2,2)	25176035	
+62657	62657	SNP	1	g	a	coding	Rv0058	dnaB	60396	63020	2625	+	Pro	754	-	Pro	Pro754Pro	ccg/cca	2262	2262	phylo (4,1)	25176035	
+107794	107794	SNP	1	c	t	coding	Rv0098	fcoT	107600	108151	552	+	Ala	65	-	Ala	Ala65Ala	gcc/gct	195	195	phylo (4,1,2,1)	25176035	
+346693	346693	SNP	1	g	t	coding	Rv0284	eccC3	345635	349627	3993	+	Ser	353	-	Ser	Ser353Ser	tcg/tct	1059	1059	phylo (2,2,2)	25176035	
+355181	355181	SNP	1	g	a	coding	Rv0291	mycP3	354498	355883	1386	+	Lys	228	-	Lys	Lys228Lys	aag/aaa	684	684	phylo (4,4,1,1)	25176035	
+403364	403364	SNP	1	c	t	coding	Rv0338c	-	405841	403193	2649	-	Pro	826	-	Pro	Pro826Pro	ccc/cct	2478	2478	phylo (4,3,3)	25176035	
+497491	497491	SNP	1	c	t	coding	Rv0411c	glnH	498300	497314	987	-	Asp	270	-	Asp	Asp270Asp	gac/gat	810	810	phylo (2)	25176035	
+514245	514245	SNP	1	g	a	coding	Rv0425c	ctpH	515321	510702	4620	-	Val	359	-	Val	Val359Val	gtg/gta	1077	1077	phylo (4,1,1)	25176035	
+541048	541048	SNP	1	a	c	coding	Rv0450c	mmpL4	541491	538588	2904	-	Ser	148	-	Ser	Ser148Ser	tca/tcc	444	444	phylo (4,1,1,2)	25176035	
+615614	615614	SNP	1	c	a	coding	Rv0524	hemL	614835	616223	1389	+	Ala	260	-	Ala	Ala260Ala	gcc/gca	780	780	phylo (4,3,1)	25176035	
+615938	615938	SNP	1	g	a	coding	Rv0524	hemL	614835	616223	1389	+	Glu	368	-	Glu	Glu368Glu	gag/gaa	1104	1104	phylo (1)	25176035	
+762434	762434	SNP	1	t	g	coding	Rv0667	rpoB	759807	763325	3519	+	Gly	876	-	Gly	Gly876Gly	ggt/ggg	2628	2628	phylo (3)	25176035	
+763031	763031	SNP	1	t	c	coding	Rv0667	rpoB	759807	763325	3519	+	Ala	1075	-	Ala	Ala1075Ala	gct/gcc	3225	3225	phylo (4)	25176035	
+763884	763884	SNP	1	c	t	coding	Rv0668	rpoC	763370	767320	3951	+	Ala	172	-	Val	Ala172Val	gcc/gtc	515	515	phylo (1)	25176035	
+763886	763886	SNP	1	c	a	coding	Rv0668	rpoC	763370	767320	3951	+	Arg	173	-	Arg	Arg173Arg	cgg/agg	517	517	phylo (1)	25176035	
+764013	764013	SNP	1	a	c	coding	Rv0668	rpoC	763370	767320	3951	+	Glu	215	-	Ala	Glu215Ala	gag/gcg	644	644	phylo (7)	25176035	
+764995	764995	SNP	1	c	g	coding	Rv0668	rpoC	763370	767320	3951	+	Ala	542	-	Ala	Ala542Ala	gcc/gcg	1626	1626	phylo (4,3)	25176035	
+765150	765150	SNP	1	g	a	coding	Rv0668	rpoC	763370	767320	3951	+	Gly	594	-	Glu	Gly594Glu	ggg/gag	1781	1781	phylo (4,1)	25176035	
+765171	765171	SNP	1	c	t	coding	Rv0668	rpoC	763370	767320	3951	+	Pro	601	-	Leu	Pro601Leu	ccg/ctg	1802	1802	phylo (1,1)	25176035	
+765230	765230	SNP	1	g	a	coding	Rv0668	rpoC	763370	767320	3951	+	Ala	621	-	Thr	Ala621Thr	gcg/acg	1861	1861	phylo (1,1,3)	25176035	
+766955	766955	SNP	1	g	a	coding	Rv0668	rpoC	763370	767320	3951	+	Glu	1196	-	Lys	Glu1196Lys	gag/aag	3586	3586	phylo (7)	25176035	
+783601	783601	SNP	1	a	c	coding	Rv0684	fusA1	782485	784590	2106	+	Arg	373	-	Arg	Arg373Arg	agg/cgg	1117	1117	phylo (4,2,1)	25176035	
+797736	797736	SNP	1	c	t	coding	Rv0697	-	796933	798372	1440	+	Leu	268	-	Leu	Leu268Leu	ctc/ctt	804	804	phylo (2,2,1)	25176035	
+874787	874787	SNP	1	g	a	coding	Rv0782	ptrBb	874732	876390	1659	+	Arg	19	-	Gln	Arg19Gln	cgg/cag	56	56	phylo (4,6,1,1)	25176035	
+891756	891756	SNP	1	t	c	coding	Rv0798c	cfp29	892269	891472	798	-	Leu	172	-	Leu	Leu172Leu	ttg/ctg	514	514	phylo (4,1,2)	25176035	
+931123	931123	SNP	1	t	c	coding	Rv0835	lpqQ	930953	931597	645	+	Tyr	57	-	Tyr	Tyr57Tyr	tat/tac	171	171	phylo (not 4)	25176035	
+1084911	1084911	SNP	1	c	t	coding	Rv0973c	accA2	1085750	1083747	2004	-	Tyr	280	-	Tyr	Tyr280Tyr	tac/tat	840	840	phylo (3,1,1)	25176035	
+1132368	1132368	SNP	1	c	t	coding	Rv1013	pks16	1131625	1133259	1635	+	Thr	248	-	Thr	Thr248Thr	acc/act	744	744	phylo (4,3,4,2)	25176035	
+1137518	1137518	SNP	1	c	t	coding	Rv1018c	glmU	1138060	1136573	1488	-	Asn	181	-	Asn	Asn181Asn	aac/aat	543	543	phylo (7)	25176035	
+1237818	1237818	SNP	1	g	c	coding	Rv1111c	-	1238192	1237209	984	-	Leu	125	-	Leu	Leu125Leu	ctg/ctc	375	375	phylo (3,1,2,1)	25176035	
+1416410	1416410	SNP	1	t	g	coding	Rv1267c	embR	1417347	1416181	1167	-	Leu	313	-	Arg	Leu313Arg	ctg/cgg	938	938	phylo (4,6,1,2)	25176035	
+1416702	1416702	SNP	1	t	c	coding	Rv1267c	embR	1417347	1416181	1167	-	Tyr	216	-	His	Tyr216His	tac/cac	646	646	phylo (4,6,2,1)	25176035	
+1416977	1416977	SNP	1	a	g	coding	Rv1267c	embR	1417347	1416181	1167	-	His	124	-	Arg	His124Arg	cac/cgc	371	371	phylo (7)	25176035	
+1417019	1417019	SNP	1	g	a	coding	Rv1267c	embR	1417347	1416181	1167	-	Cys	110	-	Tyr	Cys110Tyr	tgc/tac	329	329	phylo (1)	25176035	
+1455780	1455780	SNP	1	t	c	coding	Rv1299	prfA	1455495	1456568	1074	+	Leu	96	-	Leu	Leu96Leu	ttg/ctg	286	286	phylo (4,2,2,1)	25176035	
+1472337	1472337	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	492	492	phylo (4,3,2)	25176035	
+1487796	1487796	SNP	1	c	a	coding	Rv1324	-	1487161	1488075	915	+	Ile	212	-	Ile	Ile212Ile	atc/ata	636	636	phylo (4,2,2)	25176035	
+1491275	1491275	SNP	1	c	t	coding	Rv1326c	glgB	1492312	1490117	2196	-	His	346	-	His	His346His	cac/cat	1038	1038	phylo (1,1,3)	25176035	
+1501468	1501468	SNP	1	g	c	coding	Rv1332	-	1500926	1501582	657	+	Pro	181	-	Pro	Pro181Pro	ccg/ccc	543	543	phylo (4,6,1,2)	25176035	
+1502120	1502120	SNP	1	c	a	coding	Rv1333	-	1501599	1502633	1035	+	Thr	174	-	Thr	Thr174Thr	acc/aca	522	522	phylo (4,3,4,2,1)	25176035	
+1719757	1719757	SNP	1	g	t	coding	Rv1524	-	1718726	1719970	1245	+	Pro	344	-	Pro	Pro344Pro	ccg/cct	1032	1032	phylo (4,5)	25176035	
+1759252	1759252	SNP	1	g	t	coding	Rv1552	frdA	1757681	1759432	1752	+	Ser	524	-	Ser	Ser524Ser	tcg/tct	1572	1572	phylo (not 4,9)	25176035	
+1799921	1799921	SNP	1	c	a	coding	Rv1599	hisD	1799583	1800899	1317	+	Gly	113	-	Gly	Gly113Gly	ggc/gga	339	339	phylo (5)	25176035	
+1816587	1816587	SNP	1	c	g	coding	Rv1617	pykA	1816189	1817607	1419	+	Val	133	-	Val	Val133Val	gtc/gtg	399	399	phylo (6)	25176035	
+1834916	1834916	SNP	1	a	c	coding	Rv1630	rpsA	1833542	1834987	1446	+	Thr	459	-	Pro	Thr459Pro	acc/ccc	1375	1375	phylo (7)	25176035	
+1850119	1850119	SNP	1	g	a	coding	Rv1640c	lysX	1852035	1848517	3519	-	Thr	639	-	Thr	Thr639Thr	acg/aca	1917	1917	phylo (4,1,1,1)	25176035	
+1881090	1881090	SNP	1	c	t	coding	Rv1661	pks7	1875304	1881684	6381	+	Gly	1929	-	Gly	Gly1929Gly	ggc/ggt	5787	5787	phylo (2,1)	25176035	
+1882180	1882180	SNP	1	c	t	coding	Rv1662	pks8	1881704	1886512	4809	+	Ala	159	-	Ala	Ala159Ala	gcc/gct	477	477	phylo (BOV_AFRI)	25176035	
+1918281	1918281	SNP	1	a	c	coding	Rv1694	tlyA	1917940	1918746	807	+	Gly	114	-	Gly	Gly114Gly	gga/ggc	342	342	phylo (7)	25176035	
+2101921	2101921	SNP	1	g	a	coding	Rv1854c	ndh	2103042	2101651	1392	-	Ser	374	-	Ser	Ser374Ser	tcg/tca	1122	1122	phylo (5)	25176035	
+2102218	2102218	SNP	1	c	t	coding	Rv1854c	ndh	2103042	2101651	1392	-	Val	275	-	Val	Val275Val	gtc/gtt	825	825	phylo (7)	25176035	
+2102990	2102990	SNP	1	t	c	coding	Rv1854c	ndh	2103042	2101651	1392	-	Val	18	-	Ala	Val18Ala	gtg/gcg	53	53	phylo (4,4,1)	25176035	
+2155503	2155503	SNP	1	c	t	coding	Rv1908c	katG	2156111	2153889	2223	-	Thr	203	-	Thr	Thr203Thr	acc/act	609	609	phylo (BOV_AFRI)	25176035	
+2411730	2411730	SNP	1	c	g	coding	Rv2152c	murC	2412122	2410638	1485	-	Ser	131	-	Ser	Ser131Ser	tcc/tcg	393	393	phylo (4,2)	25176035	
+2505085	2505085	SNP	1	c	t	coding	Rv2231c	cobC	2505699	2504605	1095	-	Ala	205	-	Ala	Ala205Ala	gcc/gct	615	615	phylo (2,2)	25176035	
+2518919	2518919	SNP	1	g	a	coding	Rv2245	kasA	2518115	2519365	1251	+	Gly	269	-	Ser	Gly269Ser	ggt/agt	805	805	phylo (4,3,3)	25176035	
+2622402	2622402	SNP	1	c	t	coding	Rv2343c	dnaG	2622452	2620533	1920	-	Ala	17	-	Ala	Ala17Ala	gcc/gct	51	51	phylo (1,1,2)	25176035	
+2694560	2694560	SNP	1	c	g	coding	Rv2397c	cysA1	2694964	2693909	1056	-	Leu	135	-	Leu	Leu135Leu	ctc/ctg	405	405	phylo (4,4,1,2)	25176035	
+2831482	2831482	SNP	1	t	c	coding	Rv2515c	-	2832591	2831344	1248	-	Gly	370	-	Gly	Gly370Gly	ggt/ggc	1110	1110	phylo (BOV)	25176035	
+2874344	2874344	SNP	1	c	t	coding	Rv2555c	alaS	2876485	2873771	2715	-	Arg	714	-	Arg	Arg714Arg	cgc/cgt	2142	2142	phylo (3,1,2,2)	25176035	
+2875883	2875883	SNP	1	g	a	coding	Rv2555c	alaS	2876485	2873771	2715	-	Leu	201	-	Leu	Leu201Leu	ctg/cta	603	603	phylo (4,6,2,2)	25176035	
+3021283	3021283	SNP	1	g	a	coding	Rv2707	-	3020573	3021547	975	+	Arg	237	-	Arg	Arg237Arg	cgg/cga	711	711	phylo (1,1,1)	25176035	
+3216553	3216553	SNP	1	c	t	coding	Rv2907c	rimM	3216891	3216361	531	-	Val	113	-	Val	Val113Val	gtc/gtt	339	339	phylo (1,1,1,1)	25176035	
+3273107	3273107	SNP	1	c	a	coding	Rv2936	drrA	3272214	3273209	996	+	Ala	298	-	Ala	Ala298Ala	gcc/gca	894	894	phylo (3)	25176035	
+3388166	3388166	SNP	1	g	c	coding	Rv3029c	fixA	3388870	3388070	801	-	Thr	235	-	Thr	Thr235Thr	acg/acc	705	705	phylo (4,3,2,1)	25176035	
+3466426	3466426	SNP	1	c	t	coding	Rv3097c	lipY	3467091	3465778	1314	-	Val	222	-	Val	Val222Val	gtc/gtt	666	666	phylo (4,6)	25176035	
+3470377	3470377	SNP	1	g	a	coding	Rv3101c	ftsX	3470679	3469786	894	-	Gln	101	-	Gln	Gln101Gln	cag/caa	303	303	phylo (1,2,2)	25176035	
+3479545	3479545	SNP	1	c	a	coding	Rv3111	moaC1	3479171	3479683	513	+	Ala	125	-	Ala	Ala125Ala	gcc/gca	375	375	phylo (1,2,1)	25176035	
+3513538	3513538	SNP	1	a	t	coding	Rv3148	nuoD	3513338	3514660	1323	+	Glu	67	-	Asp	Glu67Asp	gaa/gat	201	201	phylo (2,1)	25176035	
+3514512	3514512	SNP	1	g	c	coding	Rv3148	nuoD	3513338	3514660	1323	+	Gly	392	-	Ala	Gly392Ala	ggt/gct	1175	1175	phylo (4,3,4,2)	25176035	
+3570528	3570528	SNP	1	g	c	coding	Rv3198c	uvrD2	3571211	3569109	2103	-	Arg	228	-	Arg	Arg228Arg	cgg/cgc	684	684	phylo (4,6,2,1)	25176035	
+3722702	3722702	SNP	1	c	g	coding	Rv3336c	trpS	3723631	3722621	1011	-	Leu	310	-	Leu	Leu310Leu	ctc/ctg	930	930	phylo (3,1,2)	25176035	
+3836274	3836274	SNP	1	c	t	coding	Rv3417c	groEL1	3836891	3835272	1620	-	Phe	206	-	Phe	Phe206Phe	ttc/ttt	618	618	phylo (2,2,1,2)	25176035	
+3836739	3836739	SNP	1	c	t	coding	Rv3417c	groEL1	3836891	3835272	1620	-	Asp	51	-	Asp	Asp51Asp	gac/gat	153	153	phylo (4,8)	25176035	
+3977226	3977226	SNP	1	g	a	coding	Rv3538	-	3977062	3977922	861	+	Leu	55	-	Leu	Leu55Leu	ttg/tta	165	165	phylo (4,3,4)	25176035	
+4125058	4125058	SNP	1	g	c	coding	Rv3683	-	4124417	4125376	960	+	Arg	214	-	Arg	Arg214Arg	cgg/cgc	642	642	phylo (4,6,2)	25176035	
+4151558	4151558	SNP	1	c	t	coding	Rv3708c	asd	4152217	4151180	1038	-	Gly	220	-	Gly	Gly220Gly	ggc/ggt	660	660	phylo (4,4,1)	25176035	
+4229087	4229087	SNP	1	c	t	coding	Rv3782	glfT1	4228347	4229261	915	+	Asn	247	-	Asn	Asn247Asn	aac/aat	741	741	phylo (4,1,1,3)	25176035	
+4238120	4238120	SNP	1	g	a	coding	Rv3792	aftA	4237932	4239863	1932	+	Gln	63	-	Gln	Gln63Gln	cag/caa	189	189	phylo (1,2,2)	25176035	
+4238778	4238778	SNP	1	g	a	coding	Rv3792	aftA	4237932	4239863	1932	+	Val	283	-	Met	Val283Met	gtg/atg	847	847	phylo (7)	25176035	
+4238963	4238963	SNP	1	c	t	coding	Rv3792	aftA	4237932	4239863	1932	+	His	344	-	His	His344His	cac/cat	1032	1032	phylo (4,4)	25176035	
+4239298	4239298	SNP	1	c	t	coding	Rv3792	aftA	4237932	4239863	1932	+	Ala	456	-	Val	Ala456Val	gcc/gtc	1367	1367	phylo (4,1,2,1)	25176035	
+4239843	4239843	SNP	1	a	c	coding	Rv3792	aftA	4237932	4239863	1932	+	Lys	638	-	Gln	Lys638Gln	aag/cag	1912	1912	phylo (5)	25176035	
+4240153	4240153	SNP	1	g	a	coding	Rv3793	embC	4239863	4243147	3285	+	Ser	97	-	Ser	Ser97Ser	tcg/tca	291	291	phylo (7)	25176035	
+4240897	4240897	SNP	1	c	g	coding	Rv3793	embC	4239863	4243147	3285	+	Arg	345	-	Arg	Arg345Arg	cgc/cgg	1035	1035	phylo (4,1,1,1)	25176035	
+4241042	4241042	SNP	1	a	g	coding	Rv3793	embC	4239863	4243147	3285	+	Asn	394	-	Asp	Asn394Asp	aac/gac	1180	1180	phylo (1)	25176035	
+4241562	4241562	SNP	1	g	a	coding	Rv3793	embC	4239863	4243147	3285	+	Arg	567	-	His	Arg567His	cgc/cac	1700	1700	phylo (3,1,1)	25176035	
+4242643	4242643	SNP	1	c	t	coding	Rv3793	embC	4239863	4243147	3285	+	Arg	927	-	Arg	Arg927Arg	cgc/cgt	2781	2781	phylo (4,9)	25176035	
+4242883	4242883	SNP	1	c	t	coding	Rv3793	embC	4239863	4243147	3285	+	Pro	1007	-	Pro	Pro1007Pro	ccc/cct	3021	3021	phylo (4,6,2,1)	25176035	
+4243848	4243848	SNP	1	g	a	coding	Rv3794	embA	4243233	4246517	3285	+	Val	206	-	Met	Val206Met	gtg/atg	616	616	phylo (1,1)	25176035	
+4244420	4244420	SNP	1	g	c	coding	Rv3794	embA	4243233	4246517	3285	+	Val	396	-	Val	Val396Val	gtg/gtc	1188	1188	phylo (1,2,1)	25176035	
+4245055	4245055	SNP	1	c	a	coding	Rv3794	embA	4243233	4246517	3285	+	Thr	608	-	Asn	Thr608Asn	acc/aac	1823	1823	phylo (4,6,1,2)	25176035	
+4245969	4245969	SNP	1	c	t	coding	Rv3794	embA	4243233	4246517	3285	+	Pro	913	-	Ser	Pro913Ser	ccg/tcg	2737	2737	phylo (1)	25176035	
+4246088	4246088	SNP	1	a	g	coding	Rv3794	embA	4243233	4246517	3285	+	Gln	952	-	Gln	Gln952Gln	caa/cag	2856	2856	phylo (2,1)	25176035	
+4246508	4246508	SNP	1	g	a	coding	Rv3794	embA	4243233	4246517	3285	+	Ala	1092	-	Ala	Ala1092Ala	gcg/gca	3276	3276	phylo (4,4,2)	25176035	
+4246864	4246864	SNP	1	c	t	coding	Rv3795	embB	4246514	4249810	3297	+	Val	117	-	Val	Val117Val	gtc/gtt	351	351	phylo (BOV_AFRI)	25176035	
+4246930	4246930	SNP	1	g	c	coding	Rv3795	embB	4246514	4249810	3297	+	Gln	139	-	His	Gln139His	cag/cac	417	417	phylo (4,1,1,2)	25176035	
+4248073	4248073	SNP	1	c	t	coding	Rv3795	embB	4246514	4249810	3297	+	Thr	520	-	Thr	Thr520Thr	acc/act	1560	1560	phylo (7)	25176035	
+4248115	4248115	SNP	1	c	t	coding	Rv3795	embB	4246514	4249810	3297	+	Asp	534	-	Asp	Asp534Asp	gac/gat	1602	1602	phylo (2,2,1,1)	25176035	
+4249012	4249012	SNP	1	g	a	coding	Rv3795	embB	4246514	4249810	3297	+	Leu	833	-	Leu	Leu833Leu	ctg/cta	2499	2499	phylo (4,4,1,2)	25176035	
+4249732	4249732	SNP	1	c	g	coding	Rv3795	embB	4246514	4249810	3297	+	Ala	1073	-	Ala	Ala1073Ala	gcc/gcg	3219	3219	phylo (4,7)	25176035	
+4260268	4260268	SNP	1	c	g	coding	Rv3800c	pks13	4261146	4255945	5202	-	Ala	293	-	Ala	Ala293Ala	gcc/gcg	879	879	phylo (4,6,1)	25176035	
+4268928	4268928	SNP	1	c	t	coding	Rv3806c	ubiA	4269833	4268925	909	-	Gly	302	-	Gly	Gly302Gly	ggc/ggt	906	906	phylo (4,4,2)	25176035	
+4269351	4269351	SNP	1	c	t	coding	Rv3806c	ubiA	4269833	4268925	909	-	Ala	161	-	Ala	Ala161Ala	gcc/gct	483	483	phylo (BOV_AFRI)	25176035	
+4269375	4269375	SNP	1	g	a	coding	Rv3806c	ubiA	4269833	4268925	909	-	Val	153	-	Val	Val153Val	gtg/gta	459	459	phylo (4,4,2)	25176035	
+4307886	4307886	SNP	1	c	t	coding	Rv3834c	serS	4308914	4307655	1260	-	Arg	343	-	Arg	Arg343Arg	cgc/cgt	1029	1029	phylo (4,4)	25176035	
+4316114	4316114	SNP	1	c	t	coding	Rv3843c	-	4316596	4315568	1029	-	Ala	161	-	Ala	Ala161Ala	gcc/gct	483	483	phylo (4,3,2)	25176035	
+4326176	4326176	SNP	1	a	c	coding	Rv3854c	ethA	4327473	4326004	1470	-	Glu	433	-	Ala	Glu433Ala	gag/gcg	1298	1298	phylo (3,1,2,2)	25176035	
+4326439	4326439	SNP	1	c	a	coding	Rv3854c	ethA	4327473	4326004	1470	-	Asn	345	-	Lys	Asn345Lys	aac/aaa	1035	1035	phylo (1,2,2)	25176035	
+4326739	4326739	SNP	1	c	g	coding	Rv3854c	ethA	4327473	4326004	1470	-	Arg	245	-	Arg	Arg245Arg	cgc/cgg	735	735	phylo (4,6,2,2)	25176035	
+4328004	4328004	SNP	1	g	a	coding	Rv3855	ethR	4327549	4328199	651	+	Val	152	-	Val	Val152Val	gtg/gta	456	456	phylo (4,6,2,2)	25176035	
+4398141	4398141	SNP	1	g	a	coding	Rv3910	-	4396597	4400151	3555	+	Ser	515	-	Ser	Ser515Ser	tcg/tca	1545	1545	phylo (4,3,4,1)	25176035	
+4404247	4404247	SNP	1	g	a	coding	Rv3915	-	4403192	4404412	1221	+	Leu	352	-	Leu	Leu352Leu	ctg/cta	1056	1056	phylo (1,1)	25176035	
+4407780	4407780	SNP	1	g	a	coding	Rv3919c	gid	4408202	4407528	675	-	Ala	141	-	Ala	Ala141Ala	gcg/gca	423	423	phylo (1,1,3)	25176035	
