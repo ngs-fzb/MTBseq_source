@@ -41,7 +41,7 @@ use vars qw($VERSION @ISA @EXPORT);
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION	=	1.10;
+$VERSION	=	1.11;
 @ISA		= 	qw(Exporter);
 @EXPORT		= 	qw(tbvariants);
 
@@ -81,7 +81,7 @@ sub tbvariants {
 	parse_variant_infos($logprint,$variant_infos,$resi_gene,$resi_list_master,$int_regions);
 	print $logprint "<INFO>\t",timer(),"\tFinished parsing $resi_list_master and $int_regions!\n";
 	# Start logic...
-	foreach my $file(sort { $a cmp $b } @pos_files) {
+	foreach my $file (sort { $a cmp $b } @pos_files) {
 		my $position_table		=	{};
 		my $variants			=	{};
 		my $statistics			=	{};
@@ -112,6 +112,7 @@ sub tbvariants {
 	$genes					=	{};
 	$variant_infos				=	{};
 	$resi_gene				=	{};
+	@pos_files				=	();
 }
 
 

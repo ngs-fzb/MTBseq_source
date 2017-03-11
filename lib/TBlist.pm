@@ -43,7 +43,7 @@ use vars qw($VERSION @ISA @EXPORT);
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION	=	1.10;
+$VERSION	=	1.11;
 @ISA		= 	qw(Exporter);
 @EXPORT		= 	qw(tblist);
 
@@ -70,13 +70,14 @@ sub tblist {
 		exit 1;
 	}
 	# Start logic...
-	foreach my $mpileup_file(sort { $a cmp $b } @mpileup_files) {
+	foreach my $mpileup_file (sort { $a cmp $b } @mpileup_files) {
 		my $output	=	$mpileup_file;
 		$output		=~	s/.mpileup/_position_table.tab/;
 		# Create a position table.
 		parse_mpile($logprint,$MPILE_OUT,$POS_OUT,$output,$mpileup_file,$ref_hash,$mibqual,$threads);
 	}
 	$ref_hash		=	{};
+	@mpileup_files		=	();
 }
 
 

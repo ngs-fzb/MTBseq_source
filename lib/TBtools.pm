@@ -46,7 +46,7 @@ use vars qw($VERSION @ISA @EXPORT);
 
 $VERSION	=	1.10;
 @ISA		=	qw(Exporter);
-@EXPORT		=	qw(parse_reference parse_fasta parse_mpile parse_position_table parse_annotation parse_variant_infos parse_categories parse_variants parse_amend_table parse_classification print_variants prepare_stats print_joint_table_scaffold print_joint_table print_position_stats help nostep badstep strip by_number timer cat log2 amend_joint_table filter_wlength build_matrix call_variants call_groups translate_homolka2coll translate_coll2homolka specificator_beijing_easy specificator_coll_easy specificator_coll_branch specificator_homolka);
+@EXPORT		=	qw(parse_reference parse_fasta parse_mpile parse_position_table parse_annotation parse_variant_infos parse_categories parse_variants parse_amend_table parse_classification print_variants prepare_stats print_joint_table_scaffold print_joint_table print_position_stats help nostep badstep strip by_number timer cat log2 amend_joint_table filter_wlength build_matrix get_seq_len call_variants call_groups translate_homolka2coll translate_coll2homolka specificator_beijing_easy specificator_coll_easy specificator_coll_branch specificator_homolka);
 
 
 
@@ -1439,9 +1439,9 @@ sub help { # Print a help message.
 		TBlist		Creation of position list(s)
 		TBvariants	Calling variants
 		TBstats         Statisitcs of mapping(s) and variant calling(s)
+		TBstrains       Calling lineage from sample(s)
 		TBjoin		Joint variant analysis from defined samples
 		TBamend		Amending joint variant table(s)
-		TBstrains	Calling lineage from sample(s)
 		TBgroups	Detecting groups of samples
 	
 	--continue
@@ -1470,9 +1470,6 @@ sub help { # Print a help message.
 
 	--run nXXXX
 	<OPTIONAL> Defines the [Run] field within the read naming scheme.
-
-	--readlen 151
-	<OPTIONAL> Defines the [Readlength] field within the read naming scheme. Essential for correct statistics calculation.
 
 	--minbqual 13
         <OPTIONAL> Defines minimum positional mapping quality during variant calling.
@@ -1525,7 +1522,7 @@ sub help { # Print a help message.
 	TBseq --step TBbwa --continue
 	Default values and execute the \"TBbwa\" module as well as the downstream modules.
 
-	TBseq --step TBfull --threads 8 --machine nextseq --run n0101 --readlen 151
+	TBseq --step TBfull --threads 8 --machine nextseq --run n0101
 	Execute the whole pipeline with 8 threads and supported values.
 
 	TBseq --help
@@ -1984,6 +1981,23 @@ sub build_matrix { # Builds a strain matrix.
         }
         print OUT "\n";
         close(OUT);
+}
+
+
+
+sub get_seq_len {
+	my $logprint		=	shift;
+	my $W_dir		=	shift;
+	my @files 		=	@_;
+	my $seq_len;
+	open(IN, "gunzip -c $files[0] |") || die print $logprint "<ERROR>\t",timer(),"\t Can't open file $files[0]\n";
+		<IN>;
+		my $line	=	<IN>;
+		chomp($line);
+		$seq_len 	=	length($line);
+	close(IN);
+	$seq_len		.=	"bp";
+	return($seq_len);
 }
 
 

@@ -42,7 +42,7 @@ use vars qw($VERSION @ISA @EXPORT);
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION        =       1.10;
+$VERSION        =       1.11;
 @ISA            =       qw(Exporter);
 @EXPORT         =       qw(tbstrains);
 
@@ -98,13 +98,13 @@ sub tbstrains {
 	print $logprint "<INFO>\t",timer(),"\t","Finsihed loading classification schemes!\n";
 	print $logprint "<INFO>\t",timer(),"\t","Start combining classification schemes...\n";
 	# This hash will contain the data we need.
-	foreach my $pos(keys %$phylo_positions_homolka) {
+	foreach my $pos (keys %$phylo_positions_homolka) {
 		$phylo_positions->{$pos}->{0}		=	$phylo_positions_homolka->{$pos};
 	}
-	foreach my $pos(keys %$phylo_positions_coll) {
+	foreach my $pos (keys %$phylo_positions_coll) {
 		$phylo_positions->{$pos}->{0}		=	$phylo_positions_coll->{$pos};
 	}
-	foreach my $pos(keys %$phylo_positions_beijing) {
+	foreach my $pos (keys %$phylo_positions_beijing) {
 		$phylo_positions->{$pos}->{0}		=	$phylo_positions_beijing->{$pos};
 	}
 	print $logprint "<INFO>\t",timer(),"\t","Finished combining classification schemes!\n";
@@ -122,7 +122,7 @@ sub tbstrains {
 	}
 	open(OUT,">>$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: $!\n";
 	# Start logic...
-	foreach my $file(sort { $a cmp $b } @position_tables) {
+	foreach my $file (sort { $a cmp $b } @position_tables) {
     		print $logprint "<INFO>\t",timer(),"\t","Start parsing $file...\n";
 		$file =~ /(\S+)\.gatk_position_table\.tab$/;
 		my $id 		=	$1;
@@ -136,8 +136,8 @@ sub tbstrains {
 		my $phylo_position_table	= 	{};
 		parse_position_table($logprint,$POS_OUT,$file,$micovf,$micovr,$miphred20,$mifreq,$position_table);
 		# Skip every position not included in phylo positions.
-		foreach my $pos(keys %$phylo_positions) {
-			foreach my $index(keys %{$phylo_positions->{$pos}}) {
+		foreach my $pos (keys %$phylo_positions) {
+			foreach my $index (keys %{$phylo_positions->{$pos}}) {
 				$phylo_position_table->{$pos}->{$index}		=	$position_table->{$pos}->{$index};
 			}
 		}
@@ -160,7 +160,7 @@ sub tbstrains {
 			my $quality_coll	=	"good";
 			my $quality_beijing	=	"good";
 			my $IDpositions		=	{};
-			foreach my $pos(keys %$phylo_positions_homolka) {
+			foreach my $pos (keys %$phylo_positions_homolka) {
 				my $allel1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[2];
 				my $freq1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[6];		
 				my $count1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[11];
@@ -168,7 +168,7 @@ sub tbstrains {
 				$quality_homolka	=	"bad"	unless(($freq1 >= 75) && ($count1 >= 10)); # hard coded frequency and coverage.
 				$IDpositions->{$pos}	=	$allel1;
 			}
-			foreach my $pos(keys(%$phylo_positions_coll)) {
+			foreach my $pos (keys %$phylo_positions_coll) {
 				my $allel1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[2];
 				my $freq1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[6];
 				my $count1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[11];
@@ -176,7 +176,7 @@ sub tbstrains {
 				$quality_coll		=	"bad"	unless(($freq1 >= 75) && ($count1 >= 10)); # hard coded frequency and coverage.
 				$IDpositions->{$pos} 	= 	$allel1;
 			}	
-			foreach my $pos(keys(%$phylo_positions_beijing)) {
+			foreach my $pos (keys %$phylo_positions_beijing) {
 				my $allel1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[2];
 				my $freq1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[6];
 				my $count1		=	(split(/\t/, $positions_data->{$id}->{$pos}->{0}))[11];
@@ -224,6 +224,7 @@ sub tbstrains {
 		print $logprint "<INFO>\t",timer(),"\t","Finished writing lineage result for $id!\n";
 	}
 	close(OUT);
+	undef(%check_up);
 	print $logprint "<INFO>\t",timer(),"\t","Finished writing $output_file!\n";
 }
 

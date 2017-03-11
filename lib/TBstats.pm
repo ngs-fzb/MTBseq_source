@@ -41,7 +41,7 @@ use vars qw($VERSION @ISA @EXPORT);
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION	=	1.10;
+$VERSION	=	1.11;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbstats);
 
@@ -88,31 +88,31 @@ sub tbstats {
 		close(IN);
 	}
 	# Start logic...
-	foreach my $file_bam(sort { $a cmp $b } @bam_files) {
-		next unless (-f "$BAM_OUT/$file_bam");
-    		my @file_name		=	split(/_/,$file_bam);
-		my $sampleID		=	$file_name[0];
-		my $libID		=	$file_name[1];
-    		my $source		=	$file_name[2];
-    		my $date		=	$file_name[3];
-    		my $length		=	$file_name[4];
-    		$length			=~	s/(\d+).*$/$1/;
-    		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$length));
-		if(exists $check_up{"\'$file_name[0]"."\'$file_name[1]"."\'$file_name[2]"."\'$file_name[3]"}) {
+	foreach my $file (sort { $a cmp $b } @bam_files) {
+		next unless (-f "$BAM_OUT/$file");
+    		my @file_name		=	split(/_/,$file);
+		my $sampleID		=	shift(@file_name);
+		my $libID		=	shift(@file_name);
+    		my $source		=	shift(@file_name);
+    		my $date		=	shift(@file_name);
+    		my $seqlength		=	shift(@file_name);
+    		$seqlength		=~	s/(\d+).*$/$1/;
+    		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$seqlength));
+		if(exists $check_up{"\'$sampleID"."\'$libID"."\'$source"."\'$date"}) {
 			print $logprint "<INFO>\t",timer(),"\tSkipping, statistics calculation for $fullID. Statisitcs already existing!\n";
 			next;
 		}
-		print $logprint "<INFO>\t",timer(),"\tStart using Samtools for statistics of BWA mapping for $file_bam...\n";
-		my $content		=	qx/$SAMTOOLS_dir\/samtools flagstat $BAM_OUT\/$file_bam/;	
-		die print $logprint "$BAM_OUT/$file_bam does not exist" if(!$content);
+		print $logprint "<INFO>\t",timer(),"\tStart using Samtools for statistics of BWA mapping for $file...\n";
+		my $content		=	qx/$SAMTOOLS_dir\/samtools flagstat $BAM_OUT\/$file/;	
+		die print $logprint "$BAM_OUT/$file does not exist" if(!$content);
 		my @lines		=	split(/\n/,$content);
 		$lines[0]		=~	s/^(\d+)\s.*/$1/;
 		$lines[4]		=~	s/^(\d+)\s.*/$1/;
 		# Calculate theoretical coverage.
-		my $tcov 		= 	($lines[0] * $length) / length($genome);
+		my $tcov 		= 	($lines[0] * $seqlength) / length($genome);
 		$tcov			=	sprintf("%.2f",$tcov);
 		# Calculate real coverage.
-		my $rcov 		= 	($lines[4] * $length) / length($genome);
+		my $rcov 		= 	($lines[4] * $seqlength) / length($genome);
 		$rcov    		= 	sprintf("%.2f",$rcov);
 		# Calculate reads mapped in percent.
 		my $relmap		=	0;
@@ -126,7 +126,7 @@ sub tbstats {
 		my $lratio		=	0;
 		$lratio			=	log2(($tcov / $rcov)) if($rcov != 0);
 		$lratio			=	sprintf("%.2f",$lratio);
-		print $logprint "<INFO>\t",timer(),"\tFinished using Samtools for statistics of BWA mapping for $file_bam!\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished using Samtools for statistics of BWA mapping for $file!\n";
 		my $pos_file		=	$fullID."\.gatk_position_table\.tab";
 		print $logprint "<INFO>\t",timer(),"\tStart parsing position list of $pos_file...\n";
 		# Get the variant statistics.
@@ -142,7 +142,7 @@ sub tbstats {
 		print $logprint "<INFO>\t",timer(),"\tFinished fetching variant statistics from $pos_file...\n";
 		print $logprint "<INFO>\t",timer(),"\tStart preparing statistics for $fullID...\n";
 		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$source\t'$date\t'$lines[0]\t'$lines[4] ($relmap)\t'$tcov\t'$rcov\t'$ratio\t'$lratio\t";
-		$result = $result.prepare_stats($statistics);
+		$result 		=	$result.prepare_stats($statistics);
 		$statistics		=	{};
 		print $logprint "<INFO>\t",timer(),"\tFinished preparing statistics for $fullID...\n";
 		# Print statistics.
@@ -161,6 +161,8 @@ sub tbstats {
 	}
 	$genes		=	{};
 	$annotation	=	{};
+	@bam_files	=	();
+	undef(%check_up);
 	# Finished.
    	print $logprint "<INFO>\t",timer(),"\tFinished printing statistics!\n";
 }

@@ -102,7 +102,7 @@ sub tbjoin {
     	print $logprint "<INFO>\t",timer(),"\tFinished printing joint variant file scaffold!\n";
 	# Start logic..
 	print $logprint "<INFO>\t",timer(),"\tParsing position lists, extend called variants and complete joint variant list...\n";
-	foreach my $id(@ids) {
+	foreach my $id (@ids) {
 		my $position_file		=	$id.".gatk_position_table.tab";
 		next unless(-f "$POS_OUT/$position_file");
 		# Parse position_table.
@@ -110,8 +110,8 @@ sub tbjoin {
 		parse_position_table($logprint,$POS_OUT,$position_file,$micovf,$micovr,$miphred20,$mifreq,$position_table,$position_stats);
 		# Skip every position not included in $var_positions.
 		my $joint_position_table	=	{};
-		foreach my $pos(keys %$var_positions) {
-			foreach my $insertion_index(keys %{$var_positions->{$pos}}) {
+		foreach my $pos (keys %$var_positions) {
+			foreach my $insertion_index (keys %{$var_positions->{$pos}}) {
 				if($insertion_index != 0) {
 					$joint_position_table->{$pos}->{$insertion_index}	=	$position_table->{$pos}->{$insertion_index} if(exists $position_table->{$pos}->{$insertion_index});
 					$joint_position_table->{$pos}->{"0"}       		=       $position_table->{$pos}->{"0"};

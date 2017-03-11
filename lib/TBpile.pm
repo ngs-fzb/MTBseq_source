@@ -45,7 +45,7 @@ use vars qw($VERSION @ISA @EXPORT);
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION	=	1.10;
+$VERSION	=	1.11;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbpile);
 
@@ -61,17 +61,16 @@ sub tbpile {
 	my $ref                 =       shift;
 	my $threads		=	shift;
 	my @gbam_files		=	@_;
-	my $input		= 	{};
 	# Start logic...
-	foreach my $file(sort { $a cmp $b } @gbam_files) {
+	foreach my $file (sort { $a cmp $b } @gbam_files) {
 		my @file_name		=	split(/_/,$file);
-		my $sampleID		= 	$file_name[0];
-		my $libID 		=	$file_name[1];
-		my $source		= 	$file_name[2];
-		my $date		= 	$file_name[3];
-		my $length		= 	$file_name[4];
-		$length                 =~      s/(\d+).*$/$1/;
-		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$length));
+		my $sampleID		= 	shift(@file_name);
+		my $libID 		=	shift(@file_name);
+		my $source		= 	shift(@file_name);
+		my $date		= 	shift(@file_name);
+		my $seqlength		=	shift(@file_name);
+		$seqlength		=~	s/\.gatk\.bam//;
+		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$seqlength));
 		print $logprint "<INFO>\t",timer(),"\tUpdating logfile for $fullID...\n";		
 		my $basename		=	$file; 
 		$basename		=~	s/\.bam$//;
@@ -112,11 +111,13 @@ sub tbpile {
    		#unlink("$GATK_OUT/$fullID.g.vcf.idx") 	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.g.vcf.idx: No such file!\n";
         	# Create .mpileup files.
         	print $logprint "<INFO>\t",timer(),"\tStart using samtools for creating a .mpileup file for $fullID...\n";
-        	system("$SAMTOOLS_dir/samtools mpileup -B -A -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile");
+        	print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools mpileup -B -A -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile\n";
+		system("$SAMTOOLS_dir/samtools mpileup -B -A -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile");
         	print $logprint "<INFO>\t",timer(),"\tFinished using samtools for creating a .mpileup file for $fullID!\n";
 		# Finished.
         	print $logprint "<INFO>\t",timer(),"\tGATK variant calling finished for $fullID!\n";
 	}
+	@gbam_files = ();
 }
 
 

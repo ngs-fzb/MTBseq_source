@@ -42,7 +42,7 @@ use vars qw($VERSION @ISA @EXPORT);
 ###                                                                                                             ###
 ###################################################################################################################
 
-$VERSION	=	1.10;
+$VERSION	=	1.11;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbmerge);
 
@@ -59,45 +59,44 @@ sub tbmerge {
     	my $CALL_OUT		=	shift;
     	my $threads		=	shift;
 	my @bam_files		=	@_;
-	my $input		=	{};
+	my %input;
 	# Prepare input.
-	foreach my $file(sort { $a cmp $b } @bam_files) {
+	foreach my $file (sort { $a cmp $b } @bam_files) {
 		my @file_name		=	split(/_/,$file);
-		my $sampleID		=	$file_name[0];
-		my $libID		=	$file_name[1];
-		my $source		=	$file_name[2];
-		my $date		=	$file_name[3];
-		my $length		=	$file_name[4];
-		$length                 =~      s/(\d+).*$/$1/;
-		next 				unless($libID =~ /^lib\d+$/);
+		my $sampleID		=	shift(@file_name);
+		my $libID		=	shift(@file_name);
+		my $machine		=	shift(@file_name);
+		my $run			=	shift(@file_name);
+		my $seqlength		=	shift(@file_name);
 		my $samplelib		=	$sampleID."_".$libID;
-		push(@{$input->{$samplelib}},$file);
+		push(@{$input{$samplelib}},$file);
 	}
+	@bam_files = ();
 	# Start logic...
-	foreach my $samplelib(sort { $a cmp $b } keys %$input) {
-		my @bams		=	@{$input->{$samplelib}};
+	foreach my $samplelib (sort { $a cmp $b } keys %input) {
+		my @bams		=	@{$input{$samplelib}};
 		if(scalar(@bams) == 1) {
 			print $logprint  "<INFO>\t",timer(),"\tSkipping merging workflow for $samplelib, nothing to merge!\n";
 			next;
 		}
 		my $sampleID			=	"";
 		my $libID			=	"";
-		my $source			=	"";
-		my $date			=	"";
-		my $length			=	"";
+		my $machine			=	"";
+		my $run				=	"";
+		my $seqlength			=	"";
+		$seqlength			=~	s/bp//;
 		my $multi_merge 		= 	0;
 		my $old_multi_mergelog_file	=	"";
 		my @lengths         		=	();
-		foreach my $file(sort { $a cmp $b } @bams) {
+		foreach my $file (sort { $a cmp $b } @bams) {
 			my @file_name		=	split(/_/,$file);
-			$sampleID		= 	$file_name[0];
-			$libID			= 	$file_name[1];
-			$source			= 	$file_name[2];
-			$date			= 	$file_name[3];
-			$length			= 	$file_name[4];
-			$length                 =~      s/(\d+).*$/$1/;
-			push(@lengths,$length);
-			if($source =~ /^multi(\d+)/) {	
+			$sampleID		= 	shift(@file_name);
+			$libID			= 	shift(@file_name);
+			$machine		= 	shift(@file_name);
+			$run			= 	shift(@file_name);
+			
+			push(@lengths,$seqlength);
+			if($machine =~ /^multi(\d+)/) {	
 				$multi_merge			=	$1;
 				$old_multi_mergelog_file	= 	$file;
 				$old_multi_mergelog_file	=~	s/\.bam$/\.mergelog/;
@@ -124,23 +123,25 @@ sub tbmerge {
 			move("$BAM_OUT/$old_multi_mergelog_file","$MBAM_OUT/$old_multi_mergelog_file") 		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
 		}
 		my $bam_string;
-		foreach my $bam(sort { $a cmp $b } @bams) {
+		foreach my $bam (sort { $a cmp $b } @bams) {
 			$bam_string		.=	" $BAM_OUT/$bam";
 		}
 		# Merge .bam files using combined header.
 		print $logprint "<INFO>\t",timer(),"\tStart merging using sambamba...\n";
+		print $logprint "<INFO>\t",timer(),"\t$SAMBAMBA_dir/sambamba merge -t $threads $BAM_OUT/$multi_file $bam_string\n";
 		system("$SAMBAMBA_dir/sambamba merge -t $threads $BAM_OUT/$multi_file $bam_string");
 		print $logprint "<INFO>\t",timer(),"\tFinished merging using sambamba!\n";
 		# Recreate index with sambamba.
 		print $logprint "<INFO>\t",timer(),"\tStart recreating index using sambamba...\n";
+		rint $logprint "<INFO>\t",timer(),"\t$SAMBAMBA_dir/sambamba index $BAM_OUT/$multi_file\n";
 		system("$SAMBAMBA_dir/sambamba index $BAM_OUT/$multi_file");
 		print $logprint "<INFO>\t",timer(),"\tFinished recreating index using sambamba!\n";
 		# Moving into specific directories.
 		print $logprint "<INFO>\t",timer(),"\tMoving files to certain directories...\n";
-		foreach my $file(sort { $a cmp $b } @bams) {
+		foreach my $file (sort { $a cmp $b } @bams) {
 			my $bamlog_file		=	$file . "log";
 			my $bai_file		=	$file . ".bai";
-			cat($logprint,"$BAM_OUT/$bamlog_file","$BAM_OUT/$logfile")		|| die print $logprint "<ERROR>\t",timer(),"\tcat failed: $!\n";
+			cat($logprint,"$BAM_OUT/$bamlog_file","$BAM_OUT/$logfile")	|| die print $logprint "<ERROR>\t",timer(),"\tcat failed: $!\n";
 			move("$BAM_OUT/$file","$MBAM_OUT/$file")			|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
 			move("$BAM_OUT/$bamlog_file","$MBAM_OUT/$bamlog_file")		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
 			move("$BAM_OUT/$bai_file","$MBAM_OUT/$bai_file")		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
@@ -153,7 +154,9 @@ sub tbmerge {
 		unlink glob("$CALL_OUT/$samplelib*") 	|| print $logprint "<WARN>\t",timer(),"\tCan't delete \"Called\" old downstream files for $samplelib: Files not found!\n";
 		# Finished.
         	print $logprint "<INFO>\t",timer(),"\tMerging finished for $samplelib!\n";
+		@bams = ();
 	}
+	undef(%input);
 }
 
 

@@ -56,7 +56,7 @@ sub tbgroups {
 	my @joint_files			=	@_;
 	my $strip_ids			=       1;
 	# Start logic...
-	foreach my $joint_file(sort { $a cmp $b } @joint_files) {
+	foreach my $joint_file (sort { $a cmp $b } @joint_files) {
 		my $matrix_file				=	"";
 		my $group_file				=	"";
 		my $pivot_hash				=	{};

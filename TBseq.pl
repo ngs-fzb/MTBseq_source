@@ -89,7 +89,6 @@ my	$categories		=	"";
 my  	$ref			=	"";
 my  	$machine		=	"";
 my  	$run_number		=	"";
-my  	$seq_length		=	"";
 my	$mibqual		=	"";
 my	$all_vars		=	"";
 my	$snp_vars		=	"";
@@ -116,7 +115,6 @@ GetOptions	(	'step:s'        =>	\$step,
 			'ref:s'         =>	\$ref,
 			'machine:s'     =>	\$machine,
 			'run:s'         =>	\$run_number,
-			'readlen:i'     =>	\$seq_length,
 			'minbqual:i'	=>	\$mibqual,
 			'all_vars'	=>	\$all_vars,
 			'snp_vars'	=>	\$snp_vars,
@@ -161,7 +159,6 @@ if($categories		eq      ''      )       {       $categories		=       "NONE";    
 if($ref			eq	''	)	{	$ref            	=	"M._tuberculosis_H37Rv_2015-11-13";	}
 if($machine		eq	''	)	{	$machine        	=	"NGS";					}
 if($run_number		eq	''	)	{	$run_number   		=	"nXXXX";				}
-if($seq_length		eq 	''	)	{	$seq_length   		=	"151";					}
 if($mibqual		eq	''	)	{	$mibqual        	=	13;					}
 if($all_vars            eq      ''      )       {       $all_vars               =       0;                                      }
 if($snp_vars            eq      ''      )       {       $snp_vars               =       0;                                      }
@@ -184,9 +181,9 @@ $refg       .=      "_genes.txt";
 
 # If $ref is MTB than turn on resistance check.
 if($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
-	$resi_list_master       =       "$RealBin/var/res/MTB_Resistance_Mediating.txt"; # MTBC Resistance mediating variants and MTBC phylogentic SNPs.
-	$int_regions            =       "$RealBin/var/res/MTB_Extended_Resistance_Mediating.txt"; # MTBC extended intergenic resistance mediating positions.	
-	$categories             =       "$RealBin/var/cat/MTB_Gene_Categories.txt"; # MTBC essential and non-essential genes.
+	$resi_list_master       =       "$RealBin/var/res/MTB_Resistance_Mediating.txt" if($resi_list_master eq 'NONE'); 	# MTBC Resistance mediating variants and MTBC phylogentic SNPs.
+	$int_regions            =       "$RealBin/var/res/MTB_Extended_Resistance_Mediating.txt" if($int_regions eq 'NONE'); 	# MTBC extended intergenic resistance mediating positions.	
+	$categories             =       "$RealBin/var/cat/MTB_Gene_Categories.txt" if($categories eq 'NONE'); 			# MTBC essential and non-essential genes.
 }
 
 # Creating log file and log on screen if --quiet is unset.
@@ -194,7 +191,8 @@ my $logprint;
 if($quiet == 0) {
 	open($logprint, "|-", "tee -a $W_dir/TBseq_$date_string\_$ENV{USER}.log");
 }
-# And if it is set.
+
+# And if --quiet is set.
 else {
 	open($logprint, ">>", "$W_dir/TBseq_$date_string\_$ENV{USER}.log");
 }
@@ -216,7 +214,6 @@ print $logprint "<INFO>\t",timer(),"\t--categories\t$categories\n";
 print $logprint "<INFO>\t",timer(),"\t--ref\t\t$ref\n";
 print $logprint "<INFO>\t",timer(),"\t--machine\t$machine\n";
 print $logprint "<INFO>\t",timer(),"\t--run\t\t$run_number\n";
-print $logprint "<INFO>\t",timer(),"\t--readlen\t$seq_length\n";
 print $logprint "<INFO>\t",timer(),"\t--minbqual\t$mibqual\n";
 print $logprint "<INFO>\t",timer(),"\t--all_vars\t$all_vars\n";
 print $logprint "<INFO>\t",timer(),"\t--snp_vars\t$snp_vars\n";
@@ -230,7 +227,7 @@ print $logprint "<INFO>\t",timer(),"\t--window\t$window\n";
 print $logprint "<INFO>\t",timer(),"\t--distance\t$distance\n";
 print $logprint "<INFO>\t",timer(),"\t--quiet\t\t$quiet\n";
 
-print $logprint "\n<INFO>\t",timer(),"\tFollowing programs will be used, if necessary:\n"; 
+print $logprint "\n<INFO>\t",timer(),"\tThe following programs will be used, if necessary:\n"; 
 print $logprint "<INFO>\t",timer(),"\t$BWA_dir\n";
 print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir\n";
 print $logprint "<INFO>\t",timer(),"\t$PICARD_dir\n";
@@ -238,7 +235,7 @@ print $logprint "<INFO>\t",timer(),"\t$SAMBAMBA_dir\n";
 print $logprint "<INFO>\t",timer(),"\t$IGV_dir\n";
 print $logprint "<INFO>\t",timer(),"\t$GATK_dir\n";
 
-print $logprint "\n<INFO>\t",timer(),"\tFollowing directories will be used, if necessary:\n";
+print $logprint "\n<INFO>\t",timer(),"\tThe following directories will be used, if necessary:\n";
 print $logprint "<INFO>\t",timer(),"\t$BAM_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$MBAM_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$GATK_OUT\n";
@@ -318,7 +315,7 @@ TBreads:
 if($step eq 'TBreads') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBreads] selected ###\n";
 }	
-opendir(WORKDIR,"$W_dir") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: $!";
+opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: $!";
 @fastq_files		=	grep { $_ =~ /^\w.*\.fastq/ && -f "$W_dir/$_" } readdir(WORKDIR);
 closedir(WORKDIR);
 if(scalar(@fastq_files) == 0) {
@@ -330,7 +327,7 @@ foreach my $fastq (sort { $a cmp $b } @fastq_files) {
 	print $logprint "<INFO>\t",timer(),"\t$fastq\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart read file processing...\n";
-tbreads($logprint,$W_dir,$machine,$run_number,$seq_length,@fastq_files);
+tbreads($logprint,$W_dir,$machine,$run_number,@fastq_files);
 print $logprint "<INFO>\t",timer(),"\tFinished read file processing!\n";
 @fastq_files		=	();
 if($continue == 0 && $step ne 'TBfull') { exit 1; }
@@ -341,8 +338,8 @@ TBbwa:
 if($step eq 'TBbwa') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBbwa] selected ###\n";
 }
-opendir(WORKDIR,"$W_dir") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: $!";
-opendir(BAMDIR,"$BAM_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
+opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: $!";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
 @fastq_files		=	grep { $_ =~ /^\w.*R\d+\.fastq\.gz/ && -f "$W_dir/$_" } readdir(WORKDIR);
 @bam_files              =       grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 closedir(WORKDIR);
@@ -352,7 +349,7 @@ if(scalar(@fastq_files) == 0) {
         exit 1;
 }
 %check_up		=	map { (my $id = $_) =~ s/\.bam$//; $id => $id; } @bam_files;
-for(my $i = 0;$i < scalar(@fastq_files);$i++) {
+for(my $i = 0; $i < scalar(@fastq_files); $i++) {
 	my $tmp		=	$fastq_files[$i];
 	$tmp		=~	s/_R\d\.fastq.gz//;
 	$tmp            =~      s/(.*)bp$/$1/;
@@ -383,7 +380,7 @@ TBmerge:
 if($step eq 'TBmerge') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBmerge] selected ###\n";
 }
-opendir(BAMDIR,"$BAM_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
 @bam_files 		= 	grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 closedir(BAMDIR);
 if(scalar(@bam_files) == 0) {
@@ -406,8 +403,8 @@ TBrefine:
 if($step eq 'TBrefine') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBrefine] selected ###\n";
 }
-opendir(BAMDIR,"$BAM_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
-opendir(GATKDIR,"$GATK_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: $!";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
+opendir(GATKDIR,"$GATK_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: $!";
 @bam_files 		= 	grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 @gatk_files		=	grep { $_ =~ /^\w.*\.gatk\.bam$/ && -f "$GATK_OUT/$_" } readdir(GATKDIR);
 closedir(BAMDIR);
@@ -417,7 +414,7 @@ if(scalar(@bam_files) == 0) {
     	exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\.gatk\.bam$//; $id => $id; } @gatk_files;
-for(my $i = 0;$i < scalar(@bam_files);$i++) {
+for(my $i = 0; $i < scalar(@bam_files); $i++) {
         my $tmp         =       $bam_files[$i];
         $tmp            =~      s/\.bam//;
         if(!exists $check_up{$tmp}) {
@@ -447,8 +444,8 @@ TBpile:
 if($step eq 'TBpile') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBpile] selected ###\n";
 }
-opendir(GATKDIR,"$GATK_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: $!";
-opendir(MPILEDIR,"$MPILE_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: $!";
+opendir(GATKDIR,"$GATK_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: $!";
+opendir(MPILEDIR,"$MPILE_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: $!";
 @gatk_files 		= 	grep { $_ =~ /^\w.*\.gatk\.bam$/ && -f "$GATK_OUT/$_" } readdir(GATKDIR);
 @mpile_files		=	grep { $_ =~ /^\w.*\.gatk\.mpileup$/ && -f "$MPILE_OUT/$_" } readdir(MPILEDIR);
 closedir(GATKDIR);
@@ -458,7 +455,7 @@ if(scalar(@gatk_files) == 0) {
 	exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\.mpileup$//; $id => $id; } @mpile_files;
-for(my $i = 0;$i < scalar(@gatk_files);$i++) {
+for(my $i = 0; $i < scalar(@gatk_files); $i++) {
         my $tmp         =       $gatk_files[$i];
         $tmp            =~      s/\.bam//;
         if(!exists $check_up{$tmp}) {
@@ -488,8 +485,8 @@ TBlist:
 if($step eq 'TBlist') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBlist] selected ###\n";
 }
-opendir(MPILEDIR,"$MPILE_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: $!";
-opendir(POSDIR,"$POS_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
+opendir(MPILEDIR,"$MPILE_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: $!";
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
 @mpile_files 		= 	grep { $_ =~ /^\w.*\.gatk\.mpileup$/ && -f "$MPILE_OUT/$_" } readdir(MPILEDIR);
 @pos_files		=	grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
 closedir(MPILEDIR);
@@ -499,7 +496,7 @@ if(scalar(@mpile_files) == 0) {
     	exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\.gatk_position_table\.tab$//; $id => $id; } @pos_files;
-for(my $i = 0;$i < scalar(@mpile_files);$i++) {
+for(my $i = 0; $i < scalar(@mpile_files); $i++) {
         my $tmp         =       $mpile_files[$i];
         $tmp            =~      s/\.gatk\.mpileup//;
         if(!exists $check_up{$tmp}) {
@@ -529,8 +526,8 @@ TBvariants:
 if($step eq 'TBvariants') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBvariants] selected ###\n";
 }
-opendir(POSDIR,"$POS_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
-opendir(CALLDIR,"$CALL_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: $!";
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
+opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: $!";
 @pos_files 		= 	grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
 @var_files		=	grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$/ && -f "$CALL_OUT/$_" } readdir(CALLDIR);
 closedir(POSDIR);
@@ -540,7 +537,7 @@ if(scalar(@pos_files) == 0) {
     	exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\.gatk_position_variants_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$//; $id => $id; } @var_files;
-for(my $i = 0;$i < scalar(@pos_files);$i++) {
+for(my $i = 0; $i < scalar(@pos_files); $i++) {
         my $tmp         =       $pos_files[$i];
         $tmp            =~      s/\.gatk_position_table\.tab//;
         if(!exists $check_up{$tmp}) {
@@ -570,8 +567,8 @@ TBstats:
 if($step eq 'TBstats') {
         print $logprint "\n<INFO>\t",timer(),"\t### [TBstats] selected ###\n";
 }
-opendir(BAMDIR,"$BAM_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
-opendir(POSDIR,"$POS_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
 @bam_files              =       grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 @pos_files              =       grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
 closedir(BAMDIR);
@@ -581,7 +578,7 @@ if(scalar(@bam_files) == 0) {
         exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\.gatk_position_table\.tab$//; $id => $id; } @pos_files;
-for(my $i = 0;$i < scalar(@bam_files);$i++) {
+for(my $i = 0; $i < scalar(@bam_files); $i++) {
         my $tmp         =       $bam_files[$i];
         $tmp            =~      s/\.bam//;
         if(exists $check_up{$tmp}) {
@@ -606,6 +603,29 @@ if($continue == 0 && $step ne 'TBfull') { exit 1; }
 
 
 
+TBstrains:
+if($step eq 'TBstrains') {
+        print $logprint "\n<INFO>\t",timer(),"\t### [TBstrains] selected ###\n";
+}
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
+@pos_files              =       grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
+closedir(POSDIR);
+if(scalar(@pos_files) == 0) {
+        print $logprint "\n<ERROR>\t",timer(),"\tNo files to call strains! Check content of $POS_OUT!\n";
+        exit 1;
+}
+print $logprint "\n<INFO>\t",timer(),"\tCalling strains:\n";
+foreach my $pos_file (sort { $a cmp $b } @pos_files) {
+        print $logprint "<INFO>\t",timer(),"\t$pos_file\n";
+}
+print $logprint "\n<INFO>\t",timer(),"\tStart strain call...\n";
+tbstrains($logprint,$VAR_dir,$POS_OUT,$STRAIN_OUT,$ref,$refg,$micovf,$micovr,$mifreq,$miphred20,$date_string,$all_vars,$snp_vars,$lowfreq_vars,@pos_files);
+print $logprint "<INFO>\t",timer(),"\tFinished strain call!\n";
+@pos_files              =       ();
+if($continue == 0 && $step ne 'TBfull') { exit 1; }
+
+
+
 TBjoin:
 if($step eq 'TBjoin') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBjoin] selected ###\n";
@@ -623,8 +643,8 @@ while(<IN>) {
 	$check_up{$fields[0]."_".$fields[1]}	=   $fields[0]."_".$fields[1];
 }
 close(IN);
-opendir(CALLDIR,"$CALL_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: $!";
-opendir(JOINDIR,"$JOIN_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: $!";
+opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: $!";
+opendir(JOINDIR,"$JOIN_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: $!";
 @var_files		=	grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovf\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$/ && -f "$CALL_OUT/$_" } readdir(CALLDIR);
 @join_files		=	grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\.tab$/ && -f "$JOIN_OUT/$_" } readdir(JOINDIR);
 closedir(CALLDIR);
@@ -637,7 +657,7 @@ if(scalar(@join_files) != 0) {
 	print $logprint "\n<ERROR>\t",timer(),"\tIt seems that you already created a joint analysis for project $group_name! Check content of $JOIN_OUT!\n";
 	exit 1;
 }
-for(my $i = 0;$i < scalar(@var_files);$i++) {
+for(my $i = 0; $i < scalar(@var_files); $i++) {
         my @tmp         =       split(/_/,$var_files[$i]);
         if(exists $check_up{$tmp[0]."_".$tmp[1]}) {
 		print $logprint "\n<INFO>\t",timer(),"\tFound $var_files[$i]! Using file for joint analysis...";
@@ -669,8 +689,8 @@ if($step eq 'TBamend') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBamend] selected ###\n";
 }
 
-opendir(JOINDIR,"$JOIN_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: $!";
-opendir(AMENDDIR,"$AMEND_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: $!";
+opendir(JOINDIR,"$JOIN_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: $!";
+opendir(AMENDDIR,"$AMEND_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: $!";
 @join_files		=	grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\.tab$/ && -f "$JOIN_OUT/$_" } readdir(JOINDIR);
 @amend_files            =       grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window.tab$/ && -f "$AMEND_OUT/$_" } readdir(AMENDDIR);
 closedir(JOINDIR);
@@ -680,7 +700,7 @@ if(scalar(@join_files) == 0) {
     	exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\_amended_u$unambigous\_phylo_w$window.tab//; $id => $id; } @amend_files;
-for(my $i = 0;$i < scalar(@join_files);$i++) {
+for(my $i = 0; $i < scalar(@join_files); $i++) {
         my $tmp         =       $join_files[$i];
         $tmp            =~      s/\.tab//;
         if(!exists $check_up{$tmp}) {
@@ -706,34 +726,11 @@ if($continue == 0 && $step ne 'TBfull') { exit 1; }
 
 
 
-TBstrains:
-if($step eq 'TBstrains') {
-    	print $logprint "\n<INFO>\t",timer(),"\t### [TBstrains] selected ###\n";
-}
-opendir(POSDIR,"$POS_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
-@pos_files          	=       grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
-closedir(POSDIR);
-if(scalar(@pos_files) == 0) {
-    	print $logprint "\n<ERROR>\t",timer(),"\tNo files to call strains! Check content of $POS_OUT!\n";
-    	exit 1;
-}
-print $logprint "\n<INFO>\t",timer(),"\tCalling strains:\n";
-foreach my $pos_file (sort { $a cmp $b } @pos_files) {
-        print $logprint "<INFO>\t",timer(),"\t$pos_file\n";
-}
-print $logprint "\n<INFO>\t",timer(),"\tStart strain call...\n";
-tbstrains($logprint,$VAR_dir,$POS_OUT,$STRAIN_OUT,$ref,$refg,$micovf,$micovr,$mifreq,$miphred20,$date_string,$all_vars,$snp_vars,$lowfreq_vars,@pos_files);
-print $logprint "<INFO>\t",timer(),"\tFinished strain call!\n";
-@pos_files		=	();
-if($continue == 0 && $step ne 'TBfull') { exit 1; }
-
-
-
 TBgroups:
 if($step eq 'TBgroups') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBgroups] selected ###\n";
 }
-opendir(AMENDDIR,"$AMEND_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: $!";
+opendir(AMENDDIR,"$AMEND_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: $!";
 opendir(GROUPDIR,"$GROUPS_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GROUPS_OUT: $!";
 @amend_files            =       grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window\.tab$/ && -f "$AMEND_OUT/$_" } readdir(AMENDDIR);
 @group_files		=	grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window\.matrix$/ && -f "$GROUPS_OUT/$_" } readdir(GROUPDIR);
@@ -744,7 +741,7 @@ if(scalar(@amend_files) == 0) {
     	exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\.matrix$//; $id => $id; } @group_files;
-for(my $i = 0;$i < scalar(@amend_files);$i++) {
+for(my $i = 0; $i < scalar(@amend_files); $i++) {
         my $tmp         =       $amend_files[$i];
         $tmp		=~	s/\.tab//;
 	if(!exists $check_up{$tmp}) {

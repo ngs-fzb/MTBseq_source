@@ -70,7 +70,7 @@ sub tbamend {
 	parse_variant_infos($logprint,$variant_infos,$resi_gene,$resi_list_master,$int_regions);
 	print $logprint "<INFO>\t",timer(),"\tFinished parsing $resi_list_master and $int_regions!\n";
 	# Start logic...
-	foreach my $join_file(sort { $a cmp $b } @join_files) {
+	foreach my $join_file (sort { $a cmp $b } @join_files) {
 		# At present, process file per line to save RAM.
 		my ($amended_file,$phylo_file) = amend_joint_table($logprint,$JOIN_OUT,$AMEND_OUT,$cats,$variant_infos,$resi_gene,$unambigous,$micovf,$micovr,$mifreq,$miphred20,$join_file);
 		print $logprint "<INFO>\t",timer(),"\tStart creating $phylo_file with window length $window...\n";
