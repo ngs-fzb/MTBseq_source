@@ -1197,6 +1197,7 @@ sub print_variants { # Print a variant file.
 sub prepare_stats { # Prints a statistics file.
 	my $statistics			=	shift;
 	my $ref_genome_size 		=	$statistics->{reference}->{size};
+	$ref_genome_size		=	0	unless($ref_genome_size);
 	my $ref_a       		=	$statistics->{reference}->{A};
 	my $ref_c       		=	$statistics->{reference}->{C};
 	my $ref_g       		=	$statistics->{reference}->{G};
@@ -1209,16 +1210,23 @@ sub prepare_stats { # Prints a statistics file.
 	}
 	$gc_content_ref			=	sprintf("%.2f",$gc_content_ref);
     	my $any_size    		=	$statistics->{any}->{size};
+	$any_size			=	0 					unless($any_size);
     	my $any_perc    		=	$any_size / $ref_genome_size;
     	$any_perc       		=	sprintf("%.2f",$any_perc);
 	my $any_a       		=	$statistics->{any}->{A};
+	$any_a				=	0					unless($any_a);
 	my $any_c       		=	$statistics->{any}->{C};
+	$any_c				=	0					unless($any_c);
 	my $any_g       		=	$statistics->{any}->{G};
+	$any_g				=	0					unless($any_g);
     	my $any_t       		=	$statistics->{any}->{T};
+	$any_t				=	0					unless($any_t);
     	my $any_n       		=	$statistics->{any}->{N};
+	$any_n				=	0					unless($any_n);
     	my $any_gaps    		=	$statistics->{any}->{gap};
+	$any_gaps			=	0					unless($any_gaps);
     	my $gc_content_any  		= 	0;
-    	$gc_content_any 		= 	($any_g + $any_c) / ($any_a + $any_t + $any_g + $any_c) * 100;
+    	$gc_content_any 		= 	($any_g + $any_c) / ($any_a + $any_t + $any_g + $any_c) * 100 if(($any_a + $any_t + $any_g + $any_c) != 0);
     	$gc_content_any 		= 	sprintf("%.2f",$gc_content_any);
     	my @any_coverage 		= 	(0);
 	if(exists($statistics->{any}->{coverage})) {
@@ -1228,14 +1236,21 @@ sub prepare_stats { # Prints a statistics file.
 	$any_mean_coverage      	= 	sprintf("%.2f",$any_mean_coverage);
 	my $any_median_coverage 	= 	median(@any_coverage);
 	my $ein_size    		= 	$statistics->{eindeutig}->{size};
-	my $ein_perc    		= 	$ein_size / $ref_genome_size;
-	$ein_perc			= 	sprintf("%.2f",$ein_perc);
+	$ein_size			=	0				unless($ein_size);
+	my $ein_perc    		= 	$ein_size / $ref_genome_size 	if($ref_genome_size != 0);
+	$ein_perc			= 	sprintf("%.2f",$ein_perc)	if($ein_perc);
 	my $ein_a       		=	$statistics->{eindeutig}->{A};
+	$ein_a				=	0				unless($ein_a);
 	my $ein_c       		=	$statistics->{eindeutig}->{C};
+	$ein_c                          =       0                               unless($ein_c);
 	my $ein_g       		=	$statistics->{eindeutig}->{G};
+	$ein_g                          =       0                               unless($ein_g);
 	my $ein_t       		=	$statistics->{eindeutig}->{T};
+	$ein_t                          =       0                               unless($ein_t);
 	my $ein_n       		=	$statistics->{eindeutig}->{N};
+	$ein_n                          =       0                               unless($ein_n);
 	my $ein_gaps    		=	$statistics->{eindeutig}->{gap};
+	$ein_gaps                       =       0                               unless($ein_gaps);
 	my $gc_content_ein      	=	0;
 	my $testifnull          	=	($ein_a + $ein_t + $ein_g + $ein_c);
 	my $ein_mean_coverage   	=	0;
@@ -1996,7 +2011,6 @@ sub get_seq_len {
 		chomp($line);
 		$seq_len 	=	length($line);
 	close(IN);
-	$seq_len		.=	"bp";
 	return($seq_len);
 }
 

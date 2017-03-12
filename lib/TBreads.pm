@@ -28,6 +28,7 @@ package TBreads;
 use strict;
 use warnings;
 use File::Copy;
+use List::Util qw(max);
 use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
@@ -119,9 +120,12 @@ sub tbreads {
                                 next;
                         }
 			if(@forward_files && @reverse_files) {
-				my $seq_len	=	get_seq_len($logprint,$W_dir,@forward_files);
+				my @seq_len;
+				push(@seq_len,get_seq_len($logprint,$W_dir,@forward_files));
+				push(@seq_len,get_seq_len($logprint,$W_dir,@reverse_files));
+				my $seq_len	=	max(@seq_len);
+				$seq_len	.=	"bp";
 				$output_file_R1 =~ 	s/(.*)_.*bp.*$/$1\_$seq_len\_R1.fastq.gz/;
-				$seq_len        =       get_seq_len($logprint,$W_dir,@reverse_files);
 				$output_file_R2 =~	s/(.*)_.*bp.*$/$1\_$seq_len\_R2.fastq.gz/;
 				if(scalar(@forward_files) == 1 && scalar(@reverse_files == 1)) {
 					print $logprint "<INFO>\t",timer(),"\t$sampleID has no multiple files!\n";
@@ -210,7 +214,11 @@ sub tbreads {
 			@forward_files = ();
 			@reverse_files = ();
 			if(@uni_files) {
-				my $seq_len 	=	get_seq_len($logprint,$W_dir,@uni_files);
+                                my @seq_len;
+                                push(@seq_len,get_seq_len($logprint,$W_dir,@forward_files));
+                                push(@seq_len,get_seq_len($logprint,$W_dir,@reverse_files));
+                                my $seq_len     =       max(@seq_len);				
+				$seq_len	.=	"bp";
 				$output_file_R0 =~ 	s/(.*)_.*bp.*$/$1\_$seq_len\_R0.fastq.gz/;
 				if(scalar(@uni_files) == 1) {
 					print $logprint "<INFO>\t",timer(),"\t$sampleID has no multiple files!\n";

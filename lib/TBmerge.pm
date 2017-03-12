@@ -94,7 +94,7 @@ sub tbmerge {
 			$libID			= 	shift(@file_name);
 			$machine		= 	shift(@file_name);
 			$run			= 	shift(@file_name);
-			
+			$seqlength		=	shift(@file_name);
 			push(@lengths,$seqlength);
 			if($machine =~ /^multi(\d+)/) {	
 				$multi_merge			=	$1;

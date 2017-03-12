@@ -96,8 +96,9 @@ sub tbstats {
     		my $source		=	shift(@file_name);
     		my $date		=	shift(@file_name);
     		my $seqlength		=	shift(@file_name);
-    		$seqlength		=~	s/(\d+).*$/$1/;
+		$seqlength		=~	s/\.bam//;
     		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$seqlength));
+		$seqlength              =~      s/(\d+)bp.*$/$1/;
 		if(exists $check_up{"\'$sampleID"."\'$libID"."\'$source"."\'$date"}) {
 			print $logprint "<INFO>\t",timer(),"\tSkipping, statistics calculation for $fullID. Statisitcs already existing!\n";
 			next;
