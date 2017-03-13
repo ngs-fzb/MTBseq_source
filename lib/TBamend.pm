@@ -32,16 +32,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package creates an amended joint variant list from input samples                          ###
-###                                                                                                             ###
-### Input:  joint_cf*_cr*_fr*_ph*_outmode*_samples*.tab                                            		###
-### Output:                                                                                          		###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.10;
+$VERSION	=	1.2.0;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbamend);
 

@@ -32,20 +32,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package creates groups from a joint SNP analyis. It uses the Joint SNP tables that were   ###
-### filtered according to phylogeny SNPs                                                         		###
-###                                                                                                             ###
-### Input:      _amended_u95_phylo_w12.tab                                                                      ###
-### Output:     .matrix .groups                                                                                 ###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION        =       1.10;
+$VERSION        =       1.2.0
 @ISA            =       qw(Exporter);
 @EXPORT         =       qw(tbgroups);
-
 
 sub tbgroups {
 	# Get parameter and input from front-end.
