@@ -31,21 +31,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package creates a variant lists from your input samples					###
-###                                                                                                             ###
-### Input:  .gatk_position_table.tab                   								###
-### Output: .gatk_position_variants_cf*_cr*_fr*_ph*_outmode*.tab						###
-###	    .gatk_position_uncovered_cf*_cr*_fr*_ph*_outmode*.tab                                               ###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.11;
+$VERSION	=	1.2.0;
 @ISA		= 	qw(Exporter);
 @EXPORT		= 	qw(tbvariants);
-
-my $tbvariants;
 
 sub tbvariants {
 	# Get parameter and input from front-end.
@@ -70,14 +58,14 @@ sub tbvariants {
 	my $variant_infos		=	{};
 	my $resi_gene			=	{};
 	# Parse the genomic sequence for determining substitutions.
-	print $logprint "<INFO>\t",timer(),"\tParsing $ref...\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $ref...\n";
 	my $genome			=	parse_fasta($logprint,$VAR_dir,$ref);
     	print $logprint "<INFO>\t",timer(),"\tFinished parsing $ref!\n";
 	# Parse all necessary annotation information.
     	print $logprint "<INFO>\t",timer(),"\tParsing $refg...\n";
 	parse_annotation($logprint,$VAR_dir,$genes,$annotation,$refg);
     	print $logprint "<INFO>\t",timer(),"\tFinished parsing $refg!\n";
-	print $logprint "<INFO>\t",timer(),"\tParsing $resi_list_master and $int_regions...\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $resi_list_master and $int_regions...\n";
 	parse_variant_infos($logprint,$variant_infos,$resi_gene,$resi_list_master,$int_regions);
 	print $logprint "<INFO>\t",timer(),"\tFinished parsing $resi_list_master and $int_regions!\n";
 	# Start logic...
@@ -108,11 +96,11 @@ sub tbvariants {
 		$variants			=	{};
 		print $logprint "<INFO>\t",timer(),"\tPrinting finished!\n";
 	}
+	@pos_files                              =       ();
 	$annotation				=	{};
 	$genes					=	{};
 	$variant_infos				=	{};
 	$resi_gene				=	{};
-	@pos_files				=	();
 }
 
 

@@ -32,23 +32,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package use GATK for variant calling. Currently, using the  HaplotypeCaller is under 	###
-### construction. An .mpileup file is created in order to prepare an input for a precise home brewed variant 	###
-### calling pipeline.                                        							###
-###                                                                                                             ###
-### Input:  .gatk.bam                                                                                           ###
-### Output: [.gatk.vcf], [.gatk.vcflog], gatk.mpileup, .gatk.mpileuplog                                         ###
-###														###
-### [] = not produced at the moment.										###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.11;
+$VERSION	=	1.2.0;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbpile);
-
 
 sub tbpile {
 	# Get parameter and input from front-end.
@@ -68,9 +54,8 @@ sub tbpile {
 		my $libID 		=	shift(@file_name);
 		my $source		= 	shift(@file_name);
 		my $date		= 	shift(@file_name);
-		my $seqlength		=	shift(@file_name);
-		$seqlength		=~	s/\.gatk\.bam//;
-		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$seqlength));
+		$date			=~	s/\.gatk\.bam//;
+		my $fullID		=	join("_",($sampleID,$libID,$source,$date));
 		print $logprint "<INFO>\t",timer(),"\tUpdating logfile for $fullID...\n";		
 		my $basename		=	$file; 
 		$basename		=~	s/\.bam$//;
@@ -78,11 +63,11 @@ sub tbpile {
 		my $vcf_logfile		=	$basename.".vcflog";
 		my $mpile_logfile	=	$basename.".mpileuplog";
 		my $mpile_file		=	$basename.".mpileup";
-		unlink("$GATK_OUT/$vcf_logfile")	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $vcf_logfile: $!\n";
-		unlink("$GATK_OUT/$mpile_logfile")	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $mpile_logfile: $!\n";
+		unlink("$GATK_OUT/$vcf_logfile");
+		unlink("$GATK_OUT/$mpile_logfile");
 		if(-f "$GATK_OUT/$old_logfile") {
-			#cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$vcf_logfile")	|| die "<ERROR>\t",timer(),"\tcat failed: $?\n";
-			cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$mpile_logfile") 	|| die "<ERROR>\t",timer(),"\tcat failed: $!\n";
+			# cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$vcf_logfile")	|| die "<ERROR>\t",timer(),"\tcat failed: $?\n";
+			cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$mpile_logfile") 	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile line 84.\n";
 		}
 
 ### UNDER CONSTRUCTION - Haplotype Caller and VCF Files ###
@@ -106,9 +91,9 @@ sub tbpile {
 
 =cut	
     		
-		print $logprint "<INFO>\t",timer(),"\tRemoving temporary files for $fullID...\n";
-    		#unlink("$GATK_OUT/$fullID.g.vcf")	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.g.vcf: No such file!\n";
-   		#unlink("$GATK_OUT/$fullID.g.vcf.idx") 	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.g.vcf.idx: No such file!\n";
+		# print $logprint "<INFO>\t",timer(),"\tRemoving temporary files for $fullID...\n";
+    		# unlink("$GATK_OUT/$fullID.g.vcf")		|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.g.vcf: No such file!\n";
+   		# unlink("$GATK_OUT/$fullID.g.vcf.idx") 	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.g.vcf.idx: No such file!\n";
         	# Create .mpileup files.
         	print $logprint "<INFO>\t",timer(),"\tStart using samtools for creating a .mpileup file for $fullID...\n";
         	print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools mpileup -B -A -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile\n";

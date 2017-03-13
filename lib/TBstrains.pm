@@ -32,17 +32,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package uses Position Tables and Variant Calling for determining the underling Lineage.	###
-###                                                          							###
-###                                                                                                             ###
-### Input:      .position_table.tab                                                                             ###
-### Output:     strain_classification.tab                                                                       ###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION        =       1.11;
+$VERSION        =       1.2.0;
 @ISA            =       qw(Exporter);
 @EXPORT         =       qw(tbstrains);
 
@@ -72,10 +62,10 @@ sub tbstrains {
 	my $phylo_positions             =       {};
 	my $positions_data		=	{};
 	my %check_up;
-	my $output_file			=	"strain_classification.tab";
-	# Check what is already existing in this file.
+	my $output_file			=	"Strain_Classification.tab";
+	# Save already detected strains.
 	if(-f "$STRAIN_OUT/$output_file") {
-		open(IN,"$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output_file: $!\n";
+		open(IN,"$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output_file: TBstrains line 78.\n";
 		<IN>;
 		while(<IN>) {
 			my $line		=	$_;
@@ -85,10 +75,10 @@ sub tbstrains {
 		}
 	}
 	# Parse the genomic sequence for determining substitutions.
-        print $logprint "<INFO>\t",timer(),"\tParsing $ref...\n";
+        print $logprint "<INFO>\t",timer(),"\tStart parsing $ref...\n";
         my $genome                      =       parse_fasta($logprint,$VAR_dir,$ref);
         print $logprint "<INFO>\t",timer(),"\tFinished parsing $ref!\n";
-	print $logprint "<INFO>\t",timer(),"\tParsing $refg...\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $refg...\n";
         # Parse annotation.
 	parse_annotation($logprint,$VAR_dir,$genes,$annotation,$refg);
         print $logprint "<INFO>\t",timer(),"\tFinished parsing $refg!\n";
@@ -110,7 +100,7 @@ sub tbstrains {
 	print $logprint "<INFO>\t",timer(),"\t","Finished combining classification schemes!\n";
 	unless(-f "$STRAIN_OUT/$output_file") {
 		print $logprint "<INFO>\t",timer(),"\t","Start writing $output_file...\n";
-		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: $!\n";
+		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 113.\n";
 		my $header      =       "Date\tSampleID\tLibraryID\tSource\tRun";
         	$header         .=      "\tHomolka species\tHomolka lineage\tHomolka group\tQuality";
         	$header         .=      "\tColl lineage (branch)\tColl lineage_name (branch)\tColl quality (branch)";
@@ -119,14 +109,16 @@ sub tbstrains {
         	$header         .=      "\n";
         	print OUT $header;
 		close(OUT);
+		print $logprint "<INFO>\t",timer(),"\t","Finished writing $output_file!\n";
 	}
-	open(OUT,">>$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: $!\n";
+	open(OUT,">>$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 124.\n";
 	# Start logic...
 	foreach my $file (sort { $a cmp $b } @position_tables) {
     		print $logprint "<INFO>\t",timer(),"\t","Start parsing $file...\n";
 		$file =~ /(\S+)\.gatk_position_table\.tab$/;
 		my $id 		=	$1;
 		my @sample	=	split(/_/,$id);
+		# Check if strains classification already exists.
 		if(exists $check_up{"\'$sample[0]"."_"."\'$sample[1]"."_"."\'$sample[2]"."_"."\'$sample[3]"}) {
 			print $logprint "<INFO>\t",timer(),"\t","Skipping $file. Lineage classification already existing!\n";
 			next;
@@ -143,14 +135,14 @@ sub tbstrains {
 		}
 		$position_table 		=	{};
 		print $logprint "<INFO>\t",timer(),"\t","Finished parsing $file!\n";
-		print $logprint "<INFO>\t",timer(),"\t","Start calling variants for $id...\n";
+		print $logprint "<INFO>\t",timer(),"\t","Start fetching variants for $id...\n";
 		my $variants 			=	{};
 		my $statistics			=	{};
 		call_variants($logprint,$phylo_position_table,$variants,$statistics,$micovf,$micovr,$miphred20,$mifreq,$annotation,$genes,$genome,$all_vars,$snp_vars,$lowfreq_vars);
 		$statistics			=	{};
 		$phylo_position_table		=	{};
 		$positions_data->{$id} = $variants;
-		print $logprint "<INFO>\t",timer(),"\t","Finished calling variants for $id!\n";
+		print $logprint "<INFO>\t",timer(),"\t","Finished fetching variants for $id!\n";
 		print $logprint "<INFO>\t",timer(),"\t","Start writing lineage result for $id...\n";
 		foreach my $id (sort { $a cmp $b } keys %$positions_data) {
 			my $lineage		=	"unknown";
@@ -225,7 +217,6 @@ sub tbstrains {
 	}
 	close(OUT);
 	undef(%check_up);
-	print $logprint "<INFO>\t",timer(),"\t","Finished writing $output_file!\n";
 }
 
 

@@ -33,19 +33,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###														###
-### Description: This package converts the native Illumina naming scheme into a more practical naming scheme.	###
-###														###
-### Input: 	[SampleID]_[LibID]_[Dir].fastq.gz								###
-### Output:	[SampleID]_[LibID]_[Machine]_[Run]_[Dir].fastq.gz						###
-###														###
-###################################################################################################################
-
-$VERSION	=	1.15;
+$VERSION	=	1.2.0;
 @ISA		=	qw(Exporter);
 @EXPORT		= 	qw(tbreads);
-
 
 sub tbreads {
 	# Get parameter and input from front-end.
@@ -62,7 +52,7 @@ sub tbreads {
 	foreach my $file (sort {$a cmp $b } @fastq_files) {
 		my @file_name            =       split(/_/,$file);
 		if(scalar(@file_name) < 3 || (!$file =~ /lib/)) {
-			print $logprint "<WARN>\t",timer(),"\tRequire at least [SampleID]_[LibID]_[Direction] field within the file name of $file! [LibID] must start with \'lib\' Check README.pdf for more information!\n";
+			print $logprint "<ERROR>\t",timer(),"\tRequire at least [SampleID]_[LibID]_[Direction] field within the file name of $file! [LibID] must start with \'lib\' Check README.pdf for more information!\n";
                         exit;
                 }
 		my $sampleID		=	shift(@file_name);
@@ -70,16 +60,14 @@ sub tbreads {
 		my $dir			=	pop(@file_name);
 		my $machine_f		=	shift(@file_name);
 		my $run_f		=	shift(@file_name);
-		my $seq_f               =       shift(@file_name);
 		if(!$dir || !$dir =~ /R\d/) {
-			print $logprint "<WARN>\t",timer(),"\tCannot find [Direction] field in file name of $file! Check README.pdf for more information!\n";
+			print $logprint "<ERROR>\t",timer(),"\tCannot find [Direction] field in file name of $file! Check README.pdf for more information!\n";
 			exit;
 		}
 		$dir			=~	s/\.fastq.*$//;
 		push(@{$samples_hash{$sampleID}{$libID}{$dir}},$file);
-		$machine_f_hash{$sampleID}{$libID}		=	$machine_f	if($machine_f && $run_f && $seq_f);
-		$run_f_hash{$sampleID}{$libID}			=	$run_f		if($machine_f && $run_f && $seq_f);
-		$seq_f_hash{$sampleID}{$libID}{$dir}          	=	$seq_f		if($machine_f && $run_f && $seq_f);
+		$machine_f_hash{$sampleID}{$libID}		=	$machine_f	if($machine_f && $run_f);
+		$run_f_hash{$sampleID}{$libID}			=	$run_f		if($machine_f && $run_f);
 	}
 	@fastq_files = ();
 	# Do the logic for every sample within the working directory.
@@ -94,15 +82,9 @@ sub tbreads {
 			my @forward_files	=	@{$samples_hash{$sampleID}{$libID}{R1}} if(exists $samples_hash{$sampleID}{$libID}{R1});
 			my @reverse_files	=	@{$samples_hash{$sampleID}{$libID}{R2}} if(exists $samples_hash{$sampleID}{$libID}{R2});
 			my @uni_files		=	@{$samples_hash{$sampleID}{$libID}{R0}} if(exists $samples_hash{$sampleID}{$libID}{R0});
-			my $seq_len_R1		=	"1bp";
-			my $seq_len_R2          =       "1bp";
-			my $seq_len_R0          =       "1bp";
-			$seq_len_R1		=	$seq_f_hash{$sampleID}{$libID}{R1}	if(exists $seq_f_hash{$sampleID}{$libID}{R1});
-			$seq_len_R2		=	$seq_f_hash{$sampleID}{$libID}{R2}      if(exists $seq_f_hash{$sampleID}{$libID}{R2});
-                        $seq_len_R0		=       $seq_f_hash{$sampleID}{$libID}{R0}      if(exists $seq_f_hash{$sampleID}{$libID}{R0});
-			my @output_file_R1      =       ($sampleID,$libID,$machine,$run_number,$seq_len_R1);
-			my @output_file_R2      =       ($sampleID,$libID,$machine,$run_number,$seq_len_R2);
-			my @output_file_R0      =       ($sampleID,$libID,$machine,$run_number,$seq_len_R0);
+			my @output_file_R1      =       ($sampleID,$libID,$machine,$run_number);
+			my @output_file_R2      =       ($sampleID,$libID,$machine,$run_number);
+			my @output_file_R0      =       ($sampleID,$libID,$machine,$run_number);
 			$output_file_R1[2]	=	$machine_f_hash{$sampleID}{$libID}	if(exists $machine_f_hash{$sampleID}{$libID});
 			$output_file_R2[2]      =       $machine_f_hash{$sampleID}{$libID}      if(exists $machine_f_hash{$sampleID}{$libID});
 			$output_file_R0[2]      =       $machine_f_hash{$sampleID}{$libID}      if(exists $machine_f_hash{$sampleID}{$libID});
@@ -120,38 +102,31 @@ sub tbreads {
                                 next;
                         }
 			if(@forward_files && @reverse_files) {
-				my @seq_len;
-				push(@seq_len,get_seq_len($logprint,$W_dir,@forward_files));
-				push(@seq_len,get_seq_len($logprint,$W_dir,@reverse_files));
-				my $seq_len	=	max(@seq_len);
-				$seq_len	.=	"bp";
-				$output_file_R1 =~ 	s/(.*)_.*bp.*$/$1\_$seq_len\_R1.fastq.gz/;
-				$output_file_R2 =~	s/(.*)_.*bp.*$/$1\_$seq_len\_R2.fastq.gz/;
 				if(scalar(@forward_files) == 1 && scalar(@reverse_files == 1)) {
 					print $logprint "<INFO>\t",timer(),"\t$sampleID has no multiple files!\n";
 					if($forward_files[0] =~ /fastq\.gz$/) {
 						print $logprint "<INFO>\t",timer(),"\t$forward_files[0] already compressed! Will only rename the file.\n";
-						move("$W_dir/$forward_files[0]","$output_file_R1") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+						move("$W_dir/$forward_files[0]","$output_file_R1") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 119.\n";
 					} 
 					else {
 						print $logprint "<INFO>\t",timer(),"\t$forward_files[0] is not compressed! Will compress and rename the file!\n";
                                                 system("gzip $forward_files[0]");
                                                 print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $forward_files[0]...\n";
-                                                unlink("$W_dir/$forward_files[0]") || print $logprint "<WARN>\t",timer(),"\tCan't delete $forward_files[0]: No such file!\n";
+                                                unlink("$W_dir/$forward_files[0]");
                                                 print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $forward_files[0]!\n";
-						move("$W_dir/$forward_files[0].gz","$output_file_R1") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+						move("$W_dir/$forward_files[0].gz","$output_file_R1") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 127.\n";
 					}
                                         if($reverse_files[0] =~ /fastq\.gz$/) {
                                                 print $logprint "<INFO>\t",timer(),"\t$reverse_files[0] already compressed! Will only rename the file.\n";
-						move("$W_dir/$reverse_files[0]","$output_file_R2") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+						move("$W_dir/$reverse_files[0]","$output_file_R2") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 131.\n";
                                         }
                                         else {
 						print $logprint "<INFO>\t",timer(),"\t$reverse_files[0] is not compressed! Will compress and rename the file!\n";
                                                 system("gzip $reverse_files[0]");
                                                 print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $reverse_files[0]...\n";
-                                                unlink("$W_dir/$reverse_files[0]") || print $logprint "<WARN>\t",timer(),"\tCan't delete $reverse_files[0]: No such file!\n";
+                                                unlink("$W_dir/$reverse_files[0]");
                                                 print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $reverse_files[0]!\n";
-						move("$W_dir/$reverse_files[0].gz","$output_file_R2") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+						move("$W_dir/$reverse_files[0].gz","$output_file_R2") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 139.\n";
                                         }
 				}
 				else {
@@ -166,7 +141,7 @@ sub tbreads {
 							print $logprint "<INFO>\t",timer(),"\t$forward_files[$i] is not compressed! Will compress and rename the file!\n";
 							system("gzip $forward_files[$i]");
 							print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $forward_files[$i]...\n";
-							unlink("$W_dir/$forward_files[$i]") || print $logprint "<WARN>\t",timer(),"\tCan't delete $forward_files[$i]: No such file!\n";
+							unlink("$W_dir/$forward_files[$i]");
 							print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $forward_files[$i]!\n"; 
 						}
 					}
@@ -178,7 +153,7 @@ sub tbreads {
 							print $logprint "<INFO>\t",timer(),"\t$reverse_files[$i] is not compressed! Will compress and rename the file!\n";
 							system("gzip $reverse_files[$i]");
 							print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $reverse_files[$i]...\n";
-							unlink("$W_dir/$reverse_files[$i]") || print $logprint "<WARN>\t",timer(),"\tCan't delete $reverse_files[$i]: No such file!\n";
+							unlink("$W_dir/$reverse_files[$i]");
 							print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $reverse_files[$i]!\n";
 						}
 					}
@@ -203,36 +178,30 @@ sub tbreads {
 				print $logprint "<INFO>\t",timer(),"\tStart removing multiple files for $sampleID...\n";
 				foreach my $file (sort { $a cmp $b } @forward_files) {
 					$file =~ s/\.fastq.*$//;
-					unlink("$W_dir/$file.fastq.gz") || print $logprint "<WARN>\t",timer(),"\tCan't delete $file: No such file!\n";
+					unlink("$W_dir/$file.fastq.gz");
 				}
 				foreach my $file (sort { $a cmp $b } @reverse_files) {
 					$file =~ s/\.fastq.*$//;
-					unlink("$W_dir/$file.fastq.gz") || print $logprint "<WARN>\t",timer(),"\tCan't delete $file: No such file!\n";
+					unlink("$W_dir/$file.fastq.gz");
 				}
 				print $logprint "<INFO>\t",timer(),"\tFinished removing multiple files for $sampleID!\n";
 			}
 			@forward_files = ();
 			@reverse_files = ();
 			if(@uni_files) {
-                                my @seq_len;
-                                push(@seq_len,get_seq_len($logprint,$W_dir,@forward_files));
-                                push(@seq_len,get_seq_len($logprint,$W_dir,@reverse_files));
-                                my $seq_len     =       max(@seq_len);				
-				$seq_len	.=	"bp";
-				$output_file_R0 =~ 	s/(.*)_.*bp.*$/$1\_$seq_len\_R0.fastq.gz/;
 				if(scalar(@uni_files) == 1) {
 					print $logprint "<INFO>\t",timer(),"\t$sampleID has no multiple files!\n";
                                         if($uni_files[0] =~ /fastq\.gz$/) {
                                                 print $logprint "<INFO>\t",timer(),"\t$uni_files[0] already compressed! Will only rename the file.\n";
-                                                move("$W_dir/$uni_files[0]","$output_file_R0") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+                                                move("$W_dir/$uni_files[0]","$output_file_R0") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 206.\n";
                                         }
                                         else {
 						print $logprint "<INFO>\t",timer(),"\t$uni_files[0] is not compressed! Will compress and rename the file!\n";
                                                 system("gzip $uni_files[0]");
                                                 print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $uni_files[0]...\n";
-                                                unlink("$W_dir/$uni_files[0]") || print $logprint "<WARN>\t",timer(),"\tCan't delete $uni_files[0]: No such file!\n";
+                                                unlink("$W_dir/$uni_files[0]");
                                                 print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $uni_files[0]!\n";
-                                                move("$W_dir/$uni_files[0].gz","$output_file_R0") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+                                                move("$W_dir/$uni_files[0].gz","$output_file_R0") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 214.\n";
                                         }
                                 } 
 				else {
@@ -244,7 +213,7 @@ sub tbreads {
 							print $logprint "<INFO>\t",timer(),"\t$uni_files[$i] is not compressed! Will compress and rename the file!\n";
                                                 	system("gzip $uni_files[$i]");
 					        	print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $uni_files[$i]...\n";
-                                                	unlink("$W_dir/$uni_files[$i]") || print $logprint "<WARN>\t",timer(),"\tCan't delete $uni_files[$i]: No such file!\n";
+                                                	unlink("$W_dir/$uni_files[$i]");
                                                 	print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $uni_files[$i]!\n";
 						}
 					}
@@ -263,12 +232,12 @@ sub tbreads {
 				print $logprint "<INFO>\t",timer(),"\tFinished merging and compressing files for $sampleID!\n";
                                 foreach my $file (sort { $a cmp $b } @uni_files) {
 					$file =~ s/\.fastq.*$//;
-                                        unlink("$W_dir/$file.fastq.gz") || print $logprint "<WARN>\t",timer(),"\tCan't delete $file: No such file!\n";
+                                        unlink("$W_dir/$file.fastq.gz");
                                 }
 			}
 			@uni_files = ();
-			print $logprint "<INFO>\t",timer(),"\tFinished file processing for $sampleID!\n";
 		}
+		print $logprint "<INFO>\t",timer(),"\tFinished file processing for $sampleID!\n";
 		@libID = ();
 	}
 	undef(%samples_hash);

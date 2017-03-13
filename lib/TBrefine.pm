@@ -32,21 +32,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package use GATK for mapping refinement. It uses realignment around InDels and Base Call	###
-### recalibration. In future this step will not be important anymore when switching to the Haplotype caller	###
-### for variant detection.										        ###
-###                                                                                                             ###
-### Input:  .bam                                                                                          	###
-### Output: .gatk.bam, .gatk.grp, gatk.intervals, .gatk.bamlog, .bamlog                                         ###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.12;
+$VERSION	=	1.2.0;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbrefine);
-
 
 sub tbrefine {
 	# Get parameter and input from front-end.
@@ -70,41 +58,39 @@ sub tbrefine {
 		my $libID		=	shift(@file_name);
 		my $source		=	shift(@file_name);
 		my $date		=	shift(@file_name);
-		my $seqlength		=	shift(@file_name);
-		$seqlength		=~      s/\.bam//;
-		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$seqlength));
+		$date			=~	s/\.bam//;
+		my $fullID		=	join("_",($sampleID,$libID,$source,$date));
 		push(@{$input{$fullID}},$file);
 	}
 	@bam_files = ();
 	foreach my $fullID (sort { $a cmp $b } keys %input) {
 		my @bams		=	@{$input{$fullID}};
 		if(scalar(@bams > 1)) {
-			print $logprint "<WARN>\t",timer(),"\tSkipping $fullID, more than one file for $fullID!\n";
-			next;	
+			print $logprint "<WARN>\t",timer(),"\tSkipping $fullID, more than one .bam file for $fullID!\n";
+			next;
 		}
 		my @file_name		=	split(/_/,$fullID);
 		my $sampleID		=	shift(@file_name);
 		my $libID		=	shift(@file_name);
 		my $source		=	shift(@file_name);
 		my $date		=	shift(@file_name);
-		my $seqlength		=	shift(@file_name);
-		$seqlength              =~      s/\.bam//;
+		$date			=~      s/\.bam//;
 		print $logprint "<INFO>\t",timer(),"\tUpdating log file for $fullID...\n";
 		my $old_logfile		=	$fullID.".bamlog";
 		my $merge_logfile	=	$fullID.".mergelog";
 		$old_logfile		=	$merge_logfile 	if (-f "$BAM_OUT/$merge_logfile");
 		my $logfile		=	$fullID.".gatk.bamlog";
-		unlink("$GATK_OUT/$logfile") || print $logprint "<WARN>\t",timer(),"\tCan't delete $logfile: No such file!\n";
+		unlink("$GATK_OUT/$logfile");
 		if(-f "$BAM_OUT/$old_logfile") {
-			cat($logprint,"$BAM_OUT/$old_logfile","$GATK_OUT/$logfile") || die print $logprint "<ERROR>\t",timer(),"\tcat failed: $!\n";
+			cat($logprint,"$BAM_OUT/$old_logfile","$GATK_OUT/$logfile") || die print $logprint "<ERROR>\t",timer(),"\tcat failed: TBrefine line 97.\n";
 		}
 		my $dict		=	$ref;
 		$dict			=~	s/\.fasta/.dict/;
-		unlink("$VAR_dir/$dict") || print $logprint "<WARN>\t",timer(),"\tCan't delete $dict: $!\n";
-		print $logprint "<INFO>\t",timer(),"\tStart using Picard Tools for creating a dictionary of the reference genome...\n";
+		unlink("$VAR_dir/$dict");
+		print $logprint "<INFO>\t",timer(),"\tStart using Picard Tools for creating a dictionary of $ref...\n";
 		print $logprint "<INFO>\t",timer(),"\tjava -jar $PICARD_dir/picard.jar CreateSequenceDictionary R=$VAR_dir/$ref O=$VAR_dir/$dict 2>> $GATK_OUT/$logfile\n";
 		system("java -jar $PICARD_dir/picard.jar CreateSequenceDictionary R=$VAR_dir/$ref O=$VAR_dir/$dict 2>> $GATK_OUT/$logfile");
-		print $logprint "<INFO>\t",timer(),"\tFinished using Picard Tools for creating a dictionary of the reference genome!\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished using Picard Tools for creating a dictionary of $ref!\n";
 		# Use RealignerTargetCreator.
 		print $logprint "<INFO>\t",timer(),"\tStart using GATK RealignerTargetCreator for $fullID...\n";
 		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type RealignerTargetCreator --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --downsample_to_coverage 10000 --num_threads $threads --out $GATK_OUT/$fullID.gatk.intervals 2>> $GATK_OUT/$logfile\n";
@@ -118,8 +104,8 @@ sub tbrefine {
 		# If $ref is not h37rv than we skip the next parts.
 		unless($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
 			print $logprint "<INFO>\t",timer(),"\tSkipping GATK BaseRecalibrator! This is only possible with M._tuberculosis_H37Rv_2015-11-13 as reference!\n";
-			move("$GATK_OUT/$fullID.realigned.bam","$GATK_OUT/$fullID.gatk.bam") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
-			move("$GATK_OUT/$fullID.realigned.bai","$GATK_OUT/$fullID.gatk.bai") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+			move("$GATK_OUT/$fullID.realigned.bam","$GATK_OUT/$fullID.gatk.bam") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line 119.\n";
+			move("$GATK_OUT/$fullID.realigned.bai","$GATK_OUT/$fullID.gatk.bai") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line 120.!\n";
 			next;
 		}
 		# Index resistance list.
@@ -144,9 +130,9 @@ sub tbrefine {
 		print $logprint "<INFO>\t",timer(),"\tFinished using IGVtools for indexing of $ref!\n";
 		# Removing temporary files.
 		print $logprint "<INFO>\t",timer(),"\tRemoving temporary files...\n";
-		unlink("$GATK_OUT/$fullID.realigned.bam")	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.realigned.bam: No such file!\n";
-		unlink("$GATK_OUT/$fullID.realigned.bai")	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.realigned.bai: No such file!\n";
-		unlink("$W_dir/igv.log")			|| print $logprint "<WARN>\t",timer(),"\tCan't delete igv.log: No such file!\n";
+		unlink("$GATK_OUT/$fullID.realigned.bam");
+		unlink("$GATK_OUT/$fullID.realigned.bai");
+		unlink("$W_dir/igv.log");
 		# Finished.
 		print $logprint "<INFO>\t",timer(),"\tGATK refinement finished for $fullID!\n";
 	}

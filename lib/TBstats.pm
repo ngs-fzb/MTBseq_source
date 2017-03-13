@@ -32,19 +32,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package use Samtools flagst for mapping statistics on the reference			###
-###                                                                                                             ###
-### Input:  .bam                                                 	                                      	###
-### Output: Mapping_and_Variant_Statistics.txt                                                                  ###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.11;
+$VERSION	=	1.2.0;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbstats);
-
 
 sub tbstats {
 	# Get parameter and input.
@@ -70,11 +60,15 @@ sub tbstats {
 	my $genes		=	{};
 	my $annotation		=	{};
 	my %check_up;
+	# Parsing Genome.
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $ref...\n";
 	my $genome		=	parse_fasta($logprint,$VAR_dir,$ref);
-	# Parsing Annotation
-	print $logprint "<INFO>\t",timer(),"\tParsing $refg...\n";
+	print $logprint "<INFO>\t",timer(),"\tFinished parsing $ref!\n";
+	# Parsing Annotation.
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $refg...\n";
 	parse_annotation($logprint,$VAR_dir,$genes,$annotation,$refg);
 	print $logprint "<INFO>\t",timer(),"\tFinished parsing $refg!\n";
+	# Save existing statistics.
 	if(-f "$STATS_OUT/$stats_file") {
 		open(IN,"$STATS_OUT/$stats_file");
 		<IN>;
@@ -95,42 +89,27 @@ sub tbstats {
 		my $libID		=	shift(@file_name);
     		my $source		=	shift(@file_name);
     		my $date		=	shift(@file_name);
-    		my $seqlength		=	shift(@file_name);
-		$seqlength		=~	s/\.bam//;
-    		my $fullID		=	join("_",($sampleID,$libID,$source,$date,$seqlength));
-		$seqlength              =~      s/(\d+)bp.*$/$1/;
+		$date			=~	s/\.bam//;
+    		my $fullID		=	join("_",($sampleID,$libID,$source,$date));
+		# Check if sttistics for sample already exist.
 		if(exists $check_up{"\'$sampleID"."\'$libID"."\'$source"."\'$date"}) {
 			print $logprint "<INFO>\t",timer(),"\tSkipping, statistics calculation for $fullID. Statisitcs already existing!\n";
 			next;
 		}
-		print $logprint "<INFO>\t",timer(),"\tStart using Samtools for statistics of BWA mapping for $file...\n";
+		print $logprint "<INFO>\t",timer(),"\tStart using Samtools for BWA mapping statistics of $file...\n";
 		my $content		=	qx/$SAMTOOLS_dir\/samtools flagstat $BAM_OUT\/$file/;	
 		die print $logprint "$BAM_OUT/$file does not exist" if(!$content);
 		my @lines		=	split(/\n/,$content);
 		$lines[0]		=~	s/^(\d+)\s.*/$1/;
 		$lines[4]		=~	s/^(\d+)\s.*/$1/;
-		# Calculate theoretical coverage.
-		my $tcov 		= 	($lines[0] * $seqlength) / length($genome);
-		$tcov			=	sprintf("%.2f",$tcov);
-		# Calculate real coverage.
-		my $rcov 		= 	($lines[4] * $seqlength) / length($genome);
-		$rcov    		= 	sprintf("%.2f",$rcov);
 		# Calculate reads mapped in percent.
 		my $relmap		=	0;
 		$relmap 		=	($lines[4] / $lines[0]) * 100 if($lines[0] != 0);
 		$relmap 		=  	sprintf("%.2f",$relmap);
-		# Calculate a ratio between theoretical coverage and real coverage.
-		my $ratio		=	0;
-		$ratio			=	($tcov / $rcov) if($rcov != 0);
-		$ratio   		=	sprintf("%.2f",$ratio);
-		# Calculate the log2 of the ratio in order to be able to compare large differences.
-		my $lratio		=	0;
-		$lratio			=	log2(($tcov / $rcov)) if($rcov != 0);
-		$lratio			=	sprintf("%.2f",$lratio);
-		print $logprint "<INFO>\t",timer(),"\tFinished using Samtools for statistics of BWA mapping for $file!\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished using Samtools for BWA mapping statistics of $file!\n";
 		my $pos_file		=	$fullID."\.gatk_position_table\.tab";
 		print $logprint "<INFO>\t",timer(),"\tStart parsing position list of $pos_file...\n";
-		# Get the variant statistics.
+		# Get variant statistics.
 		my $position_table      =       {};
 		my $variants            =       {};
 		my $statistics          =       {};
@@ -140,32 +119,32 @@ sub tbstats {
 		call_variants($logprint,$position_table,$variants,$statistics,$micovf,$micovr,$miphred20,$mifreq,$annotation,$genes,$genome,$all_vars,$snp_vars,$lowfreq_vars);
 		$position_table		=	{};
 		$variants		=	{};
-		print $logprint "<INFO>\t",timer(),"\tFinished fetching variant statistics from $pos_file...\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished fetching variant statistics from $pos_file!\n";
 		print $logprint "<INFO>\t",timer(),"\tStart preparing statistics for $fullID...\n";
-		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$source\t'$date\t'$lines[0]\t'$lines[4] ($relmap)\t'$tcov\t'$rcov\t'$ratio\t'$lratio\t";
+		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$source\t'$date\t'$lines[0]\t'$lines[4] ($relmap)\t";
 		$result 		=	$result.prepare_stats($statistics);
 		$statistics		=	{};
-		print $logprint "<INFO>\t",timer(),"\tFinished preparing statistics for $fullID...\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished preparing statistics for $fullID!\n";
 		# Print statistics.
-		print $logprint "<INFO>\t",timer(),"\tStart printing statistics...\n";
+		print $logprint "<INFO>\t",timer(),"\tStart printing statistics into $stats_file...\n";
 		unless(-f "$STATS_OUT/$stats_file") {
-			open(OUT,">$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: $!\n";
-			my $header 	=	"Date\tSampleID\tLibraryID\tSource\tRun\tTotal Reads\tMapped Reads (%)\tTheoretical Coverage\tReal Coverage\t(Theoretical/Real)\tlog2(Theoretical/Real)\t";
+			open(OUT,">$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line 141.\n";
+			my $header 	=	"Date\tSampleID\tLibraryID\tSource\tRun\tTotal Reads\tMapped Reads (%)\t";
 			$header 	= 	$header."Genome Size\tGenome GC\t(Any) Total Bases (%)\t(Any) GC-Content\t(Any)Coverage mean/median\t(Unambiguous) Total Bases (%)\t(Unambiguous) GC-Content\t(Unambiguous) Coverage mean/median\t";
 			$header		=	$header."SNPs\tDeletions\tInsertions\tUncovered\tSubstitutions (including Stop Codons)\n";
 			print OUT $header;
 			close(OUT);
 		}
-		open(OUT,">>$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: $!\n";
+		open(OUT,">>$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line 148.\n";
 		print OUT $result;
 		close(OUT);
 	}
+	@bam_files      =       ();
 	$genes		=	{};
 	$annotation	=	{};
-	@bam_files	=	();
 	undef(%check_up);
 	# Finished.
-   	print $logprint "<INFO>\t",timer(),"\tFinished printing statistics!\n";
+   	print $logprint "<INFO>\t",timer(),"\tFinished printing statistics into $stats_file!\n";
 }
 
 
