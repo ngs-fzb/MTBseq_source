@@ -235,13 +235,12 @@ sub tbreads {
 			}
 			@uni_files = ();
 		}
-		print $logprint "<INFO>\t",timer(),"\tFinished file processing for $sampleID\_$libID!\n";
+		print $logprint "<INFO>\t",timer(),"\tFinished read file processing for $sampleID!\n";
 		@libID = ();
 	}
 	undef(%samples_hash);
 	undef(%machine_f_hash);
 	undef(%run_f_hash);
-	undef(%seq_f_hash);
 }
 
 

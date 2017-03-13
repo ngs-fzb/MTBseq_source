@@ -32,7 +32,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION        =       1.2.0
+$VERSION        =       1.2.0;
 @ISA            =       qw(Exporter);
 @EXPORT         =       qw(tbgroups);
 
