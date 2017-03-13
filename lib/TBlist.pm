@@ -53,7 +53,7 @@ sub tblist {
 		print $logprint "<INFO>\t",timer(),"\tReference genome size (bp): ",scalar(keys %$ref_hash),"!\n";
 	}
 	else {
-		print $logprint "<ERROR>\t",timer(),"\tReference genome, $ref not found: TBlist line 69.\n";
+		print $logprint "<ERROR>\t",timer(),"\tReference genome, $ref not found: TBlist line 70.\n";
 		exit 1;
 	}
 	# Start logic...

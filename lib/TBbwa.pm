@@ -123,8 +123,8 @@ sub tbbwa {
 		unlink("$BAM_OUT/$fullID.sorted.bam");
 		unlink("$BAM_OUT/$fullID.sorted.bam.bai");
 		# Renaming.
-		move("$BAM_OUT/$fullID.nodup.bam","$BAM_OUT/$fullID.bam") 		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBbwa line 137.\n";
-		move("$BAM_OUT/$fullID.nodup.bam.bai","$BAM_OUT/$fullID.bam.bai") 	|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBbwa line 138.\n";
+		move("$BAM_OUT/$fullID.nodup.bam","$BAM_OUT/$fullID.bam") 		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBbwa line 126.\n";
+		move("$BAM_OUT/$fullID.nodup.bam.bai","$BAM_OUT/$fullID.bam.bai") 	|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBbwa line 127.\n";
 		# Finished.
 		print $logprint "<INFO>\t",timer(),"\tFinished mapping for $fullID!\n";
 	}

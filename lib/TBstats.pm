@@ -121,7 +121,7 @@ sub tbstats {
 		$variants		=	{};
 		print $logprint "<INFO>\t",timer(),"\tFinished fetching variant statistics from $pos_file!\n";
 		print $logprint "<INFO>\t",timer(),"\tStart preparing statistics for $fullID...\n";
-		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$source\t'$date\t'$lines[0]\t'$lines[4] ($relmap)\t";
+		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$source\t'$date\t'$lines[0]\t'$lines[4]\t'$relmap\t";
 		$result 		=	$result.prepare_stats($statistics);
 		$statistics		=	{};
 		print $logprint "<INFO>\t",timer(),"\tFinished preparing statistics for $fullID!\n";
@@ -129,13 +129,13 @@ sub tbstats {
 		print $logprint "<INFO>\t",timer(),"\tStart printing statistics into $stats_file...\n";
 		unless(-f "$STATS_OUT/$stats_file") {
 			open(OUT,">$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line 141.\n";
-			my $header 	=	"Date\tSampleID\tLibraryID\tSource\tRun\tTotal Reads\tMapped Reads (%)\t";
-			$header 	= 	$header."Genome Size\tGenome GC\t(Any) Total Bases (%)\t(Any) GC-Content\t(Any)Coverage mean/median\t(Unambiguous) Total Bases (%)\t(Unambiguous) GC-Content\t(Unambiguous) Coverage mean/median\t";
-			$header		=	$header."SNPs\tDeletions\tInsertions\tUncovered\tSubstitutions (including Stop Codons)\n";
+			my $header 	=	"Date\tSampleID\tLibraryID\tSource\tRun\tTotal Reads\tMapped Reads\t% Mapped Reads\t";
+			$header 	= 	$header."Genome Size\tGenome GC\t(Any) Total Bases\t% (Any) Total Bases\t(Any) GC-Content\t(Any) Coverage mean\t(Any) Coverage median\t(Unambiguous) Total Bases\t% (Unambiguous) Total Bases\t(Unambiguous) GC-Content\t(Unambiguous) Coverage mean\t(Unambiguous) Coverage median\t";
+			$header		=	$header."SNPs\tDeletions\tInsertions\tUncovered\tSubstitutions (Including Stop Codons)\n";
 			print OUT $header;
 			close(OUT);
 		}
-		open(OUT,">>$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line 148.\n";
+		open(OUT,">>$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line 138.\n";
 		print OUT $result;
 		close(OUT);
 	}

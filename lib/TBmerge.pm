@@ -102,8 +102,8 @@ sub tbmerge {
 		my $logfile			=	$sampleID . "_" . $libID . "_" . $multisource . "_" . $date_string . ".mergelog";
 		unlink("$BAM_OUT/$logfile");
 		if(-f "$BAM_OUT/$old_multi_mergelog_file") {
-			cat($logprint,"$BAM_OUT/$old_multi_mergelog_file","$BAM_OUT/$logfile")			|| die print $logprint "<ERROR>\t",timer(),"\tcat failed: TBmerge line 115.\n";
-			move("$BAM_OUT/$old_multi_mergelog_file","$MBAM_OUT/$old_multi_mergelog_file") 		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 116.\n";
+			cat($logprint,"$BAM_OUT/$old_multi_mergelog_file","$BAM_OUT/$logfile")			|| die print $logprint "<ERROR>\t",timer(),"\tcat failed: TBmerge line 105.\n";
+			move("$BAM_OUT/$old_multi_mergelog_file","$MBAM_OUT/$old_multi_mergelog_file") 		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 106.\n";
 		}
 		my $bam_string;
 		foreach my $bam (sort { $a cmp $b } @bams) {
@@ -116,7 +116,7 @@ sub tbmerge {
 		print $logprint "<INFO>\t",timer(),"\tFinished merging using sambamba!\n";
 		# Recreate index with sambamba.
 		print $logprint "<INFO>\t",timer(),"\tStart recreating index using sambamba...\n";
-		rint $logprint "<INFO>\t",timer(),"\t$SAMBAMBA_dir/sambamba index $BAM_OUT/$multi_file\n";
+		print $logprint "<INFO>\t",timer(),"\t$SAMBAMBA_dir/sambamba index $BAM_OUT/$multi_file\n";
 		system("$SAMBAMBA_dir/sambamba index $BAM_OUT/$multi_file");
 		print $logprint "<INFO>\t",timer(),"\tFinished recreating index using sambamba!\n";
 		# Moving into specific directories.
@@ -124,10 +124,10 @@ sub tbmerge {
 		foreach my $file (sort { $a cmp $b } @bams) {
 			my $bamlog_file		=	$file . "log";
 			my $bai_file		=	$file . ".bai";
-			cat($logprint,"$BAM_OUT/$bamlog_file","$BAM_OUT/$logfile")	|| die print $logprint "<ERROR>\t",timer(),"\tcat failed: TBmerge line 137.\n";
-			move("$BAM_OUT/$file","$MBAM_OUT/$file")			|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 138.\n";
-			move("$BAM_OUT/$bamlog_file","$MBAM_OUT/$bamlog_file")		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 139.\n";
-			move("$BAM_OUT/$bai_file","$MBAM_OUT/$bai_file")		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 140.\n";
+			cat($logprint,"$BAM_OUT/$bamlog_file","$BAM_OUT/$logfile")	|| die print $logprint "<ERROR>\t",timer(),"\tcat failed: TBmerge line 127.\n";
+			move("$BAM_OUT/$file","$MBAM_OUT/$file")			|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 128.\n";
+			move("$BAM_OUT/$bamlog_file","$MBAM_OUT/$bamlog_file")		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 129.\n";
+			move("$BAM_OUT/$bai_file","$MBAM_OUT/$bai_file")		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBmerge line 130.\n";
 		}
 		# Removing existing downstream files.
 		print $logprint "<INFO>\t",timer(),"\tRemoving existing downstream files...\n";

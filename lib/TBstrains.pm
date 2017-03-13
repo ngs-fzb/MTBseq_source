@@ -50,7 +50,7 @@ sub tbstrains {
 	my $miphred20			=	shift;
 	my $date_string			=	shift;
 	my $all_vars			=	shift;
-	$all_vars			=	1;
+	$all_vars			=	1; # set to one for fetching all genome positions.
 	my $snp_vars			=	shift;
 	my $lowfreq_vars		=	shift;
 	my @position_tables		=	@_;
@@ -65,7 +65,7 @@ sub tbstrains {
 	my $output_file			=	"Strain_Classification.tab";
 	# Save already detected strains.
 	if(-f "$STRAIN_OUT/$output_file") {
-		open(IN,"$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output_file: TBstrains line 78.\n";
+		open(IN,"$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output_file: TBstrains line 68.\n";
 		<IN>;
 		while(<IN>) {
 			my $line		=	$_;
@@ -100,7 +100,7 @@ sub tbstrains {
 	print $logprint "<INFO>\t",timer(),"\t","Finished combining classification schemes!\n";
 	unless(-f "$STRAIN_OUT/$output_file") {
 		print $logprint "<INFO>\t",timer(),"\t","Start writing $output_file...\n";
-		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 113.\n";
+		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 103.\n";
 		my $header      =       "Date\tSampleID\tLibraryID\tSource\tRun";
         	$header         .=      "\tHomolka species\tHomolka lineage\tHomolka group\tQuality";
         	$header         .=      "\tColl lineage (branch)\tColl lineage_name (branch)\tColl quality (branch)";
@@ -111,7 +111,7 @@ sub tbstrains {
 		close(OUT);
 		print $logprint "<INFO>\t",timer(),"\t","Finished writing $output_file!\n";
 	}
-	open(OUT,">>$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 124.\n";
+	open(OUT,">>$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 114.\n";
 	# Start logic...
 	foreach my $file (sort { $a cmp $b } @position_tables) {
     		print $logprint "<INFO>\t",timer(),"\t","Start parsing $file...\n";

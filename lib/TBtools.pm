@@ -111,7 +111,7 @@ sub multi_fasta { # Creates a multi fasta file from input.
 	open(FASTA, ">$AMEND_OUT/$phylo_fasta") || print $logprint "<ERROR>\t",timer(),"\tCan't create $phylo_fasta: TBtools line 111.\n";
 	# string for complete FASTA output.
 	my $fasta;
-	foreach my $header(sort {$a cmp $b } keys %$strain_fasta) {
+	foreach my $header (sort {$a cmp $b } keys %$strain_fasta) {
 		my $seq		=	$strain_fasta->{$header};
 		$fasta		.=	">$header\n";
 		$fasta		.=	"$seq\n";
@@ -292,7 +292,7 @@ sub parse_mpile { # Parse a .mpileup file.
 			my $deletion_string	=	"-" . $deletion_length . $deletion_sequence;
 			# Remove the deletion indicator from $bases string, only remove the first instance.
 			$bases			=~	s/$deletion_string//;
-			for(my $i = 1;$i <= $deletion_length;$i++) {
+			for(my $i = 1; $i <= $deletion_length; $i++) {
 				my $base                =   	shift(@deletion_sequence);
 				my $deletion_position	=   	$position + $i;
 				# We want directional information for gaps, therefore we parse this instead of '*' indicators.
@@ -316,7 +316,7 @@ sub parse_mpile { # Parse a .mpileup file.
 			my $insertion_string	= 	$insertion_length . $insertion_sequence;
 			# Remove the insertion indicator from $bases string, only remove the first instance.
 			$bases			=~	s/\+$insertion_string//;
-			for(my $i = 1;$i <= $insertion_length;$i++) {
+			for(my $i = 1; $i <= $insertion_length; $i++) {
 	       	        	my $base	= 	shift(@insertion_sequence);
 				$pile_line_insertion{$position}{$i}{$base}++		if($base =~ /[ACGTNacgtn]/); # An insertion is outsite the reference. The $index is incremented.
 			}
@@ -347,7 +347,7 @@ sub parse_mpile { # Parse a .mpileup file.
 		}
 		my $out				=	""; # Initialize scalar for gathering output in parallel.
 		# We did not create a global genome hash because the worker have no permission to manipulate it.
-		foreach my $pos(keys %pile_line) {
+		foreach my $pos (keys %pile_line) {
 			my $ref_tmp;
 			$ref_tmp		=	$ref_hash->{$pos}->{A}		if(exists $ref_hash->{$pos}->{A}); # We get the information of a base at a certain position from the ref_hash. Subroutine parse_reference was modified for it.
 			$ref_tmp        	=       $ref_hash->{$pos}->{C}          if(exists $ref_hash->{$pos}->{C}); # We get the information of a base at a certain position from the ref_hash. Subroutine parse_reference was modified for it.
@@ -409,8 +409,8 @@ sub parse_mpile { # Parse a .mpileup file.
 			$out			.=	$position_line; # Save the line result to the out scalar that is gathered. If we had deletions in a line, we have more then one position within the hash.
 			# If we saw insertions than we can retrive the specific information from this hash.
 			if(exists $pile_line_insertion{$pos}) {
-				foreach my $insertion_index(keys %{$pile_line_insertion{$pos}}) {
-					foreach my $insertion_allel(keys %{$pile_line_insertion{$pos}{$insertion_index}}) {
+				foreach my $insertion_index (keys %{$pile_line_insertion{$pos}}) {
+					foreach my $insertion_allel (keys %{$pile_line_insertion{$pos}{$insertion_index}}) {
 						$insertion_allel		=       uc($insertion_allel);
 						my $Asins			=	0;
 						my $Csins			=	0;
@@ -472,7 +472,7 @@ sub parse_mpile { # Parse a .mpileup file.
 		if($index == 0) {
 			if(exists $position_table{$position}{$index}{$allel}) {
 				my @values=split(/\t/, $position_table{$position}{$index}{$allel});
-				for(my $i = 0;$i < scalar(@values);$i++) {
+				for(my $i = 0; $i < scalar(@values); $i++) {
 					# This we do because of the parallel processing artifact that we cannot access running childs. Therefore positions with deletions are occuruing more thant one time in the temporary output file.
 					$values[$i]	=	$fields[$i] unless($fields[$i] == 0);
 				}
@@ -485,7 +485,7 @@ sub parse_mpile { # Parse a .mpileup file.
 		else {
 			if(exists $position_table_insertion{$position}{$index}{$allel}) {
 				my @values=split(/\t/, $position_table_insertion{$position}{$index}{$allel});
-				for(my $i = 0;$i < scalar(@values);$i++) {
+				for(my $i = 0; $i < scalar(@values); $i++) {
 					$values[$i]     =       $fields[$i] unless($fields[$i] == 0);
 				}
 				$position_table_insertion{$position}{$index}{$allel}	=       join("\t", @values); # more memory efficient than HoA.
@@ -505,7 +505,7 @@ sub parse_mpile { # Parse a .mpileup file.
         $header			.=	"\tAqual_20\tCqual_20\tG_qual_20\tTqual_20\tNqual_20\tGAPqual_20\n";
         print OUT $header;
 	# Now we take the ref_hash from the parse_reference sub routine.
-	foreach my $pos(sort { by_number() } keys %$ref_hash) {
+	foreach my $pos (sort { by_number() } keys %$ref_hash) {
 		my $ref_tmp;
                 $ref_tmp        =       $ref_hash->{$pos}->{A}          if(exists $ref_hash->{$pos}->{A});
                 $ref_tmp        =       $ref_hash->{$pos}->{C}          if(exists $ref_hash->{$pos}->{C});
@@ -552,9 +552,9 @@ sub parse_mpile { # Parse a .mpileup file.
 		# If we see insertions, then we want to parse another hash instead. Because this hash is outsite of the ref_hash.
 		if(exists $position_table_insertion{$pos}) {
 			# We have now a true sorted insertion...
-			foreach my $insertion_index(sort { by_number() } keys %{$position_table_insertion{$pos}}) {
+			foreach my $insertion_index (sort { by_number() } keys %{$position_table_insertion{$pos}}) {
 				# And the insertion allel...
-				foreach my $allel(keys %{$position_table_insertion{$pos}{$insertion_index}}) {
+				foreach my $allel (keys %{$position_table_insertion{$pos}{$insertion_index}}) {
 					# And we print it after reference position that showed the insertion...
 					print OUT "$pos\t$insertion_index\t$allel\t", delete $position_table_insertion{$pos}{$insertion_index}{$allel},"\n";
 				}
@@ -687,12 +687,12 @@ sub parse_annotation { # Parse an annotation file.
 		$genes->{$id}			=	$entry;
 		# Reminder: overlapping ORFs on same strand are ignored when using this strategy. This should be changed.
 		if($start < $stop) {
-			for(my $i = $start;$i <= $stop;$i++) {
+			for(my $i = $start; $i <= $stop; $i++) {
 				$annotation->{$i}	=	$id;
 			}
 		}
 		else {
-			for(my $i = $stop;$i <= $start;$i++) {
+			for(my $i = $stop; $i <= $start; $i++) {
 				$annotation->{$i}	=	$id;
 			}
 		}
@@ -772,14 +772,14 @@ sub parse_variant_infos { # Parse infos about resistance and phylo SNPs or inter
 		if($line[2] eq 'Del') {
             		# Then we want to distiguish between resistance- and phylogentic information.
             		if($line[21] =~ /.*phylo.*/) {
-                		for(my $i = ($line[0] + 1);$i <= $line[1];$i++) {
+                		for(my $i = ($line[0] + 1); $i <= $line[1]; $i++) {
                     			$variant_infos->{$i}->{Del}->{PHYLO}    =	$line[21];
                 		}
             		}
             		else {
 				# If we are in a resistance determining gene than save the gene name.
                 		$resi_gene->{$line[7]}				= 	$line[8];
-                		for(my $i = ($line[0] + 1);$i <= $line[1];$i++) {
+                		for(my $i = ($line[0] + 1); $i <= $line[1]; $i++) {
                     			$variant_infos->{$i}->{Del}->{RESI}	= 	$line[21];
                 		}
             		}
@@ -790,7 +790,7 @@ sub parse_variant_infos { # Parse infos about resistance and phylo SNPs or inter
             		my @insertion_string		=	split(//, $line[5]);
             		# Then we want to distiguish between resistance- and phylogenetic information.
             		if($line[21] =~ /.*phylo.*/) {
-                		for(my $i = 1;$i <= $line[3];$i++) {
+                		for(my $i = 1; $i <= $line[3]; $i++) {
                     			$variant_infos->{$line[0]."i".$i}->{$insertion_string[$i]}->{PHYLO}		=	$line[21];
                 		}
             		}
@@ -798,7 +798,7 @@ sub parse_variant_infos { # Parse infos about resistance and phylo SNPs or inter
 				# If we are in a resistance determining gene than save the gene name.
                 		$resi_gene->{$line[7]}	= 	$line[8];
 				my $insertindex		=	1;
-                		for(my $i = 1;$i <= $line[3];$i++) {
+                		for(my $i = 1; $i <= $line[3]; $i++) {
                     			$variant_infos->{$line[0]."i".$i}->{$insertion_string[$i]}->{RESI}		=	$line[21];
                 		}
             		}
@@ -832,7 +832,7 @@ sub parse_variant_infos { # Parse infos about resistance and phylo SNPs or inter
         	# Split fields in line, defined by tab seperator.
         	my @line    =	split(/\t+/, $_);
         	# Save the resistance information entry for all region positions.
-		for(my $i = $line[1];$i <= $line[2];$i++) {
+		for(my $i = $line[1]; $i <= $line[2]; $i++) {
             		$variant_infos->{$i}->{TARGET}->{REGION}	=	$line[6];
         	}
     	}
@@ -941,7 +941,7 @@ sub parse_amend_table { # Parse an amended joint variant table.
         my $strain_header       =       <IN>;
         $strain_header          =~      s/\015?\012?$//;
         my @strain_header       =       split(/\t/, $strain_header);
-        foreach my $strain(@strain_header) {
+        foreach my $strain (@strain_header) {
                 next if $strain         =~      /^#/;
                 next unless $strain     =~      /\S+/;
                 push(@strains,$strain);
@@ -980,7 +980,7 @@ sub parse_amend_table { # Parse an amended joint variant table.
                         $position_info->{$pos}->{$index}        =       join("\t", @general_values);
                 }
                 # Now the line should consist of sets of eight values per strain.
-                foreach my $strain(@strains) {
+                foreach my $strain (@strains) {
                         my $type                =       shift(@line);
                         my $allel1              =       shift(@line);
                         my $covf                =       shift(@line);
@@ -1130,8 +1130,8 @@ sub print_variants { # Print a variant file.
 	my $resistance;
 	my $phylo;
 	my $region;
-	foreach my $pos(sort { by_number() } keys %$variants) {
-		foreach my $insertion_index(sort { by_number() } keys %{$variants->{$pos}}) {
+	foreach my $pos (sort { by_number() } keys %$variants) {
+		foreach my $insertion_index (sort { by_number() } keys %{$variants->{$pos}}) {
 			my @values		=	split(/\t/, $variants->{$pos}->{$insertion_index});
 			my $ref_tmp		=	shift(@values);
 			my $type		=	shift(@values);
@@ -1178,8 +1178,7 @@ sub print_variants { # Print a variant file.
 
 sub prepare_stats { # Prints a statistics file.
 	my $statistics			=	shift;
-	my $ref_genome_size 		=	$statistics->{reference}->{size};
-	$ref_genome_size		=	0	unless($ref_genome_size);
+	my $ref_genome_size 		=	$statistics->{reference}->{size};	$ref_genome_size		=	0	unless($ref_genome_size);
 	my $ref_a       		=	$statistics->{reference}->{A};
 	my $ref_c       		=	$statistics->{reference}->{C};
 	my $ref_g       		=	$statistics->{reference}->{G};
@@ -1191,24 +1190,17 @@ sub prepare_stats { # Prints a statistics file.
 		$gc_content_ref		=	($ref_g + $ref_c) / ($ref_a + $ref_t + $ref_g + $ref_c) * 100;
 	}
 	$gc_content_ref			=	sprintf("%.2f",$gc_content_ref);
-    	my $any_size    		=	$statistics->{any}->{size};
-	$any_size			=	0 					unless($any_size);
+    	my $any_size    		=	$statistics->{any}->{size};		$any_size			=	0 	unless($any_size);
     	my $any_perc    		=	$any_size / $ref_genome_size;
     	$any_perc       		=	sprintf("%.2f",$any_perc);
-	my $any_a       		=	$statistics->{any}->{A};
-	$any_a				=	0					unless($any_a);
-	my $any_c       		=	$statistics->{any}->{C};
-	$any_c				=	0					unless($any_c);
-	my $any_g       		=	$statistics->{any}->{G};
-	$any_g				=	0					unless($any_g);
-    	my $any_t       		=	$statistics->{any}->{T};
-	$any_t				=	0					unless($any_t);
-    	my $any_n       		=	$statistics->{any}->{N};
-	$any_n				=	0					unless($any_n);
-    	my $any_gaps    		=	$statistics->{any}->{gap};
-	$any_gaps			=	0					unless($any_gaps);
+	my $any_a       		=	$statistics->{any}->{A};		$any_a				=	0	unless($any_a);
+	my $any_c       		=	$statistics->{any}->{C};		$any_c				=	0	unless($any_c);
+	my $any_g       		=	$statistics->{any}->{G};		$any_g				=	0	unless($any_g);
+    	my $any_t       		=	$statistics->{any}->{T};		$any_t				=	0	unless($any_t);
+    	my $any_n       		=	$statistics->{any}->{N};		$any_n				=	0	unless($any_n);
+    	my $any_gaps    		=	$statistics->{any}->{gap};		$any_gaps			=	0	unless($any_gaps);
     	my $gc_content_any  		= 	0;
-    	$gc_content_any 		= 	($any_g + $any_c) / ($any_a + $any_t + $any_g + $any_c) * 100 if(($any_a + $any_t + $any_g + $any_c) != 0);
+    	$gc_content_any 		= 	($any_g + $any_c) / ($any_a + $any_t + $any_g + $any_c) * 100 				if(($any_a + $any_t + $any_g + $any_c) != 0);
     	$gc_content_any 		= 	sprintf("%.2f",$gc_content_any);
     	my @any_coverage 		= 	(0);
 	if(exists($statistics->{any}->{coverage})) {
@@ -1218,21 +1210,15 @@ sub prepare_stats { # Prints a statistics file.
 	$any_mean_coverage      	= 	sprintf("%.2f",$any_mean_coverage);
 	my $any_median_coverage 	= 	median(@any_coverage);
 	my $ein_size    		= 	$statistics->{eindeutig}->{size};
-	$ein_size			=	0				unless($ein_size);
-	my $ein_perc    		= 	$ein_size / $ref_genome_size 	if($ref_genome_size != 0);
-	$ein_perc			= 	sprintf("%.2f",$ein_perc)	if($ein_perc);
-	my $ein_a       		=	$statistics->{eindeutig}->{A};
-	$ein_a				=	0				unless($ein_a);
-	my $ein_c       		=	$statistics->{eindeutig}->{C};
-	$ein_c                          =       0                               unless($ein_c);
-	my $ein_g       		=	$statistics->{eindeutig}->{G};
-	$ein_g                          =       0                               unless($ein_g);
-	my $ein_t       		=	$statistics->{eindeutig}->{T};
-	$ein_t                          =       0                               unless($ein_t);
-	my $ein_n       		=	$statistics->{eindeutig}->{N};
-	$ein_n                          =       0                               unless($ein_n);
-	my $ein_gaps    		=	$statistics->{eindeutig}->{gap};
-	$ein_gaps                       =       0                               unless($ein_gaps);
+	$ein_size			=	0					unless($ein_size);
+	my $ein_perc    		= 	$ein_size / $ref_genome_size 		if($ref_genome_size != 0);
+	$ein_perc			= 	sprintf("%.2f",$ein_perc)		if($ein_perc);
+	my $ein_a       		=	$statistics->{eindeutig}->{A};		$ein_a		=	0	unless($ein_a);
+	my $ein_c       		=	$statistics->{eindeutig}->{C};		$ein_c         	=       0       unless($ein_c);
+	my $ein_g       		=	$statistics->{eindeutig}->{G};		$ein_g         	=       0      	unless($ein_g);
+	my $ein_t       		=	$statistics->{eindeutig}->{T};		$ein_t          =       0       unless($ein_t);
+	my $ein_n       		=	$statistics->{eindeutig}->{N};		$ein_n          =       0      	unless($ein_n);
+	my $ein_gaps    		=	$statistics->{eindeutig}->{gap};	$ein_gaps	=       0	unless($ein_gaps);
 	my $gc_content_ein      	=	0;
 	my $testifnull          	=	($ein_a + $ein_t + $ein_g + $ein_c);
 	my $ein_mean_coverage   	=	0;
@@ -1245,13 +1231,12 @@ sub prepare_stats { # Prints a statistics file.
 	}
 	$gc_content_ein         	=	sprintf("%.2f",$gc_content_ein);
 	$ein_mean_coverage		=	sprintf("%.2f",$ein_mean_coverage);
-	my $snps			=	$statistics->{SNP};	$snps	=	0	unless($snps);
-	my $dels			=	$statistics->{Del};	$dels	=	0	unless($dels);
-	my $ins				=	$statistics->{Ins};	$ins	=	0	unless($ins);
-	my $unc				=	$statistics->{Unc};	$unc	=	0	unless($unc);
-	my $substitutions		=	$statistics->{substitutions};
-	$substitutions			=	0						unless($substitutions);
-	my $results			=	"'$ref_genome_size\t'$gc_content_ref\t'$any_size ($any_perc)\t'$gc_content_any\t'$any_mean_coverage/$any_median_coverage\t'$ein_size ($ein_perc)\t'$gc_content_ein\t'$ein_mean_coverage/$ein_median_coverage\t";
+	my $snps			=	$statistics->{SNP};		$snps		=	0	unless($snps);
+	my $dels			=	$statistics->{Del};		$dels		=	0	unless($dels);
+	my $ins				=	$statistics->{Ins};		$ins		=	0	unless($ins);
+	my $unc				=	$statistics->{Unc};		$unc		=	0	unless($unc);
+	my $substitutions		=	$statistics->{substitutions};	$substitutions	=	0	unless($substitutions);
+	my $results			=	"'$ref_genome_size\t'$gc_content_ref\t'$any_size\t'$any_perc\t'$gc_content_any\t'$any_mean_coverage\t'$any_median_coverage\t'$ein_size\t'$ein_perc\t'$gc_content_ein\t'$ein_mean_coverage\t'$ein_median_coverage\t";
 	$results			=	$results."'$snps\t'$dels\t'$ins\t'$unc\t'$substitutions\n";
 	return($results);
 }
@@ -1267,19 +1252,19 @@ sub print_joint_table_scaffold { # Prints the scaffold of a joint SNP table.
 	my $genes		=	shift;
 	my @ids			=	@_;
 	# Print basic information to output_file.
-	open(OUT, ">$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $join_file: TBtools line 1272.\n";
+	open(OUT, ">$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $join_file: TBtools line 1255.\n";
 	# Prepare header for output.
 	my $header 		=	join("\t\t\t\t\t\t\t\t", @ids);
 	my $second_header 	=	"";
-	foreach my $id(@ids) {
+	foreach my $id (@ids) {
 		$second_header .= "Type\tAllel\tCovFor\tCovRev\tQual20\tFreq\tCov\tSubst\t";
     	}
 	print OUT "#\t\t\t\t\t\t$header\n";
 	print OUT "#Position\tInsindex\tRef\tGene\tGeneName\tAnnotation\t$second_header\n";
 	# We process input files in turn and print them directly.
 	# Print position and annotation info as first step.
-	foreach my $pos(sort { by_number() } keys %$var_positions) {
-		foreach my $insertion_index(sort { by_number() } keys %{$var_positions->{$pos}}) {
+	foreach my $pos (sort { by_number() } keys %$var_positions) {
+		foreach my $insertion_index (sort { by_number() } keys %{$var_positions->{$pos}}) {
 			my $ref_tmp	=	" ";
 			my $gene	=	" ";
 			my $gene_name	=	" ";
@@ -1304,8 +1289,8 @@ sub print_joint_table { # Print a joint SNP table.
 	my $strains		=	shift;
 	my $variants		=	shift;
 	my $tmp			=	$join_file . ".tmp";
-	open(IN, "$JOIN_OUT/$join_file") 	|| die print $logprint "<ERROR>\t",timer(),"\tCan't open $join_file: TBtools line 1309.\n";
-	open(OUT, ">$JOIN_OUT/$tmp") 		|| die print $logprint "<ERROR>\t",timer(),"\tCan't create $tmp: TBtools line 1310.\n";
+	open(IN, "$JOIN_OUT/$join_file") 	|| die print $logprint "<ERROR>\t",timer(),"\tCan't open $join_file: TBtools line 1292.\n";
+	open(OUT, ">$JOIN_OUT/$tmp") 		|| die print $logprint "<ERROR>\t",timer(),"\tCan't create $tmp: TBtools line 1293.\n";
 	my $header		=	<IN>;
 	my $subheader		=	<IN>;
 	print OUT $header;
@@ -1328,7 +1313,7 @@ sub print_joint_table { # Print a joint SNP table.
 		my $subs	=	$values[8];	$subs		=	" "	unless($subs);
 		$freq1		=	sprintf("%.2f", $freq1) 			unless($freq1 == 0);
 		# This marks the information added here not contained in the original variant files
-		$allel1		=	lc($allel1)	unless(exists $strains->{$pos.$index.$id});
+		$allel1		=	lc($allel1)					unless(exists $strains->{$pos.$index.$id});
 		$snpline	.=	"\t".$type;
 		$snpline	.=	"\t".$allel1;
 		$snpline 	.= 	"\t".$covf;
@@ -1341,7 +1326,7 @@ sub print_joint_table { # Print a joint SNP table.
 	}
 	close(OUT);
 	close(IN);
-	move("$JOIN_OUT/$tmp","$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBtools line 1346.\n";
+	move("$JOIN_OUT/$tmp","$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBtools line 1329.\n";
 	unlink("$JOIN_OUT/$tmp");
 }
 
@@ -1367,22 +1352,22 @@ sub print_position_stats {
 	my $positions_unambigous_90	=	0;
 	my $positions_unambigous_75	=	0;
 	my $positions_uncovered		=	0;
-	foreach my $pos(keys %$position_stats) {
+	foreach my $pos (keys %$position_stats) {
         	my $number_of_ids_with_any_coverage		=	0;
 		my $number_of_ids_with_unambiguous_coverage	=	0;
 		my $number_of_ids_without_any_coverage		=	0;
 		$number_of_ids_with_any_coverage		=	$position_stats->{$pos}->{0}->{any}		if(exists $position_stats->{$pos}->{0}->{any});
 		$number_of_ids_with_unambiguous_coverage	=	$position_stats->{$pos}->{0}->{unambigous}	if(exists $position_stats->{$pos}->{0}->{unambigous});
 		$number_of_ids_without_any_coverage		=	$position_stats->{$pos}->{0}->{nothing}		if(exists $position_stats->{$pos}->{0}->{nothing});
-		$positions_covered_100				+=	1	if($number_of_ids_with_any_coverage == $number_of_datasets);
-		$positions_covered_95				+=	1	if($number_of_ids_with_any_coverage >= $number_of_datasets_95);
-		$positions_covered_90				+=	1	if($number_of_ids_with_any_coverage >= $number_of_datasets_90);
-		$positions_covered_75				+=	1	if($number_of_ids_with_any_coverage >= $number_of_datasets_75);
-		$positions_unambigous_100			+=	1	if($number_of_ids_with_unambiguous_coverage == $number_of_datasets);
-		$positions_unambigous_95			+=	1	if($number_of_ids_with_unambiguous_coverage >= $number_of_datasets_95);
-		$positions_unambigous_90			+=	1	if($number_of_ids_with_unambiguous_coverage >= $number_of_datasets_90);
-		$positions_unambigous_75			+=	1	if($number_of_ids_with_unambiguous_coverage >= $number_of_datasets_75);
-		$positions_uncovered				+=	1	if($number_of_ids_without_any_coverage == $number_of_datasets);
+		$positions_covered_100				+=	1						if($number_of_ids_with_any_coverage == $number_of_datasets);
+		$positions_covered_95				+=	1						if($number_of_ids_with_any_coverage >= $number_of_datasets_95);
+		$positions_covered_90				+=	1						if($number_of_ids_with_any_coverage >= $number_of_datasets_90);
+		$positions_covered_75				+=	1						if($number_of_ids_with_any_coverage >= $number_of_datasets_75);
+		$positions_unambigous_100			+=	1						if($number_of_ids_with_unambiguous_coverage == $number_of_datasets);
+		$positions_unambigous_95			+=	1						if($number_of_ids_with_unambiguous_coverage >= $number_of_datasets_95);
+		$positions_unambigous_90			+=	1						if($number_of_ids_with_unambiguous_coverage >= $number_of_datasets_90);
+		$positions_unambigous_75			+=	1						if($number_of_ids_with_unambiguous_coverage >= $number_of_datasets_75);
+		$positions_uncovered				+=	1						if($number_of_ids_without_any_coverage == $number_of_datasets);
 	}
 	open (OUT,">$JOIN_OUT/$breadth_file");
 	print OUT "# Number of datasets:\t" . scalar(@ids) . "\n";
@@ -1400,13 +1385,13 @@ sub print_position_stats {
 	print OUT join("\n", @ids) . "\n";
 	print OUT "\n";
 	print OUT "# Position\tInsindex\tUnambigousCoverage\tAnyCoverager\tNoCoverage\n";
-	foreach my $pos(sort{ by_number() } keys %$position_stats) {
+	foreach my $pos (sort{ by_number() } keys %$position_stats) {
         my $unambigous_number	=	0;
         my $ambigous_number	=	0;
         my $nothing_number	=	0;
-        $unambigous_number      =	$position_stats->{$pos}->{0}->{unambigous}	if(exists $position_stats->{$pos}->{0}->{unambigous});
-        $ambigous_number        =	$position_stats->{$pos}->{0}->{any}		if(exists $position_stats->{$pos}->{0}->{any});
-        $nothing_number         =	$position_stats->{$pos}->{0}->{nothing}		if(exists $position_stats->{$pos}->{0}->{nothing});
+        $unambigous_number      =	$position_stats->{$pos}->{0}->{unambigous}					if(exists $position_stats->{$pos}->{0}->{unambigous});
+        $ambigous_number        =	$position_stats->{$pos}->{0}->{any}						if(exists $position_stats->{$pos}->{0}->{any});
+        $nothing_number         =	$position_stats->{$pos}->{0}->{nothing}						if(exists $position_stats->{$pos}->{0}->{nothing});
         print OUT "$pos\t0\t$unambigous_number\t$ambigous_number\t$nothing_number\n";
     }
     close(OUT);
@@ -1600,7 +1585,7 @@ sub cat { # a simple cat/copy function.
 	my $in		= 	shift;
 	my $out		= 	shift;
 	open(OUT,">>$out");
-	open(IN,"$in") || die print $logprint "<WARN>\t",timer(),"\tCan't open $in: TBtools line 1603.\n";
+	open(IN,"$in") || die print $logprint "<WARN>\t",timer(),"\tCan't open $in: TBtools line 1588.\n";
 	while(<IN>) {
 		print OUT $_;
 	}
@@ -1636,15 +1621,15 @@ sub amend_joint_table { # Amends a joint variant Table.
 	my $phylo_file			=	strip($join_file,("_amended_u".$unambigous."_phylo.tab"));
 	my $phylo_fasta			=	strip($join_file,("_amended_u".$unambigous."_phylo.fasta"));
 	# Open file handle for input file and output files.
-	open(IN,"$JOIN_OUT/$join_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't open file $join_file: TBtools line 1639.\n";
-	open(OUT,">$AMEND_OUT/$amended_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $amended_file: TBtools line 1640.\n";
-	open(OUTER,">$AMEND_OUT/$phylo_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $phylo_file: TBtools line 1641.\n";
+	open(IN,"$JOIN_OUT/$join_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't open file $join_file: TBtools line 1624.\n";
+	open(OUT,">$AMEND_OUT/$amended_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $amended_file: TBtools line 1625.\n";
+	open(OUTER,">$AMEND_OUT/$phylo_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $phylo_file: TBtools line 1626.\n";
 	# Get strain header and parse strain names.
 	my @strains			=	();
    	my $strain_header		=	<IN>;
 	$strain_header			=~	s/\015?\012?$//;
 	my @strain_header		=	split(/\t/, $strain_header);
-	foreach my $strain(@strain_header) {
+	foreach my $strain (@strain_header) {
 		next 			if($strain =~ /^#/);
 		next 			unless($strain =~ /\S+/);
 		push(@strains,$strain);
@@ -1657,7 +1642,7 @@ sub amend_joint_table { # Amends a joint variant Table.
    	my $first_header		=	join("\t\t\t\t\t\t\t\t",@strains);
    	$first_header			=	"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".$first_header;
    	my $variant_header		=	"";
-   	foreach my $strain(@strains) {
+   	foreach my $strain (@strains) {
 		$variant_header		.=	"\tType\tAllel\tCovFor\tCovRev\tQual20\tFreq\tCov\tSubst"
    	}
 	my $second_header		=	"Position\tInsindex\tRef\tGene\tGeneName\tAnnotation";
@@ -1676,7 +1661,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 	print OUTER "#$second_header\n";
 	# Prepare hash for fasta file.
 	my $strain_fasta			=	{};
-   	foreach my $strain(@strains) {
+   	foreach my $strain (@strains) {
        		$strain_fasta->{$strain}	=	"";
    	}
    	# Start processing one line of the pivot file.
@@ -1711,7 +1696,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 		my $codon_line			=	"";
 		# Now the line should consist only of sets of eight values for each strain.
 		# Collect and sum info for all strains.
-		foreach my $strain(@strains) {
+		foreach my $strain (@strains) {
 			my $type		=	shift(@line);
 			my $allel1		=	shift(@line);
 			my $covf		=	shift(@line);
@@ -1752,7 +1737,7 @@ sub amend_joint_table { # Amends a joint variant Table.
         	# Calculate majority allel and type.
         	my $main_allel				=	" ";
        		my $main_allelcount			=	0;
-       		foreach my $allel(keys %$allel_hash) {
+       		foreach my $allel (keys %$allel_hash) {
            		my $allelcount			=	$allel_hash->{$allel};
            		if($allelcount > $main_allelcount) {
                			$main_allel		=	$allel;
@@ -1761,7 +1746,7 @@ sub amend_joint_table { # Amends a joint variant Table.
         	}
         	my $main_type			=	"Unc";
         	my $main_typecount		=	0;
-        	foreach my $type(keys(%$type_hash)) {
+        	foreach my $type (keys %$type_hash) {
           		my $typecount		=	$type_hash->{$type};
 			if($typecount > $main_typecount) {
 				$main_type	=	$type;
@@ -1809,7 +1794,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 			# Print to phylogeny pivot file.
 			print OUTER $output_line;
 			# Add allel information to fasta hash.
-			foreach my $strain(@strains) {
+			foreach my $strain (@strains) {
 				my $old				=	$strain_fasta->{$strain};
 				my $allel			=	$fasta_hash->{$strain}->{allel};
 				my $new				=	$old . $allel;
@@ -1845,9 +1830,9 @@ sub filter_wlength { # Fiters for possible fals positive SNPs in a given window.
 	my @strains		=	@$strains;
 	# Record all positions with SNPs to variant_hash.
 	my $variant_hash	=	{};
-	foreach my $pos(keys %$pivot_hash) {
-		foreach my $index(keys %{$pivot_hash->{$pos}}) {
-			foreach my $strain(keys %{$pivot_hash->{$pos}->{$index}}) {
+	foreach my $pos (keys %$pivot_hash) {
+		foreach my $index (keys %{$pivot_hash->{$pos}}) {
+			foreach my $strain (keys %{$pivot_hash->{$pos}->{$index}}) {
 				$variant_hash->{$pos}->{$strain}		=	"present"	if($index == 0);
 			}
 		}
@@ -1855,8 +1840,8 @@ sub filter_wlength { # Fiters for possible fals positive SNPs in a given window.
 	# Now use the variant_hash to record variants with a neighbouring SNP within $window.
 	# Mark with entry "neighbour" in the window_hash.
 	my $window_hash		=	{};
-	foreach my $pos(sort { by_number() } keys %$variant_hash) {
-		foreach my $strain(sort { $a cmp $b } keys %{$variant_hash->{$pos}}) {
+	foreach my $pos (sort { by_number() } keys %$variant_hash) {
+		foreach my $strain (sort { $a cmp $b } keys %{$variant_hash->{$pos}}) {
 			for(my $i = 1; $i <= $window; $i++) {
 				my $index_down	=	$pos - $i;
 				my $index_up	=	$pos + $i;
@@ -1883,7 +1868,7 @@ sub filter_wlength { # Fiters for possible fals positive SNPs in a given window.
 	print OUTER $pos_header_again;
 	# Prepare to built fasta file of positions sorted for window.
 	my $strain_fasta			=	{};
-	foreach my $strain(@strains) {
+	foreach my $strain (@strains) {
 		$strain_fasta->{$strain}	=	"";
 	}
 	while(<IN>) {
@@ -1899,14 +1884,14 @@ sub filter_wlength { # Fiters for possible fals positive SNPs in a given window.
 		my $index			=	shift(@line);
 		# Strain specific window filtering.
 		my $neighbour			=	0;
-		foreach my $strain(@strains) {
+		foreach my $strain (@strains) {
 			$neighbour		=	1	if((exists($window_hash->{$pos}->{$strain})) && (($window_hash->{$pos}->{$strain}) eq "neighbour"));
 		}
 		# Now we can print the output if there is no neighbour.
 		if($neighbour == 0) {
 			print OUT $tmpline;
 			# Add allel information to fasta_hash.
-			foreach my $strain(@strains) {
+			foreach my $strain (@strains) {
 				my $old				=	$strain_fasta->{$strain};
 				my $allel 			= 	(split(/\t/, $pivot_hash->{$pos}->{$index}->{$strain}))[1];
 				my $new 			= 	$old . $allel;
@@ -1935,29 +1920,29 @@ sub build_matrix { # Builds a strain matrix.
         my $distance_matrix             =       shift;
         my $strains                     =       shift;
 	# Initialize matrix.
-        foreach my $mainstrain(@$strains) {
-                foreach my $strain(@$strains) {
+        foreach my $mainstrain (@$strains) {
+                foreach my $strain (@$strains) {
                         $distance_matrix->{$mainstrain}->{$strain} = 0;
                 }
         }
         # We calculate only half of the distance matrix, because we do not need more.
         # Remove self-self entries.
-        foreach my $mainstrain(keys %$distance_matrix) {
+        foreach my $mainstrain (keys %$distance_matrix) {
                 delete($distance_matrix->{$mainstrain}->{$mainstrain});
         }
         # Remove double entries.
         my @dummy_strains       =       sort(@$strains);
         while(my $mainstrain = shift(@dummy_strains)) {
-                foreach my $strain(@dummy_strains) {
+                foreach my $strain (@dummy_strains) {
                         delete($distance_matrix->{$mainstrain}->{$strain});
                 }
         }
         # Fill matrix.
-        foreach my $mainstrain(keys %$distance_matrix) {
-                foreach my $pos(keys %$pivot_hash) {
-                        foreach my $index(keys %{$pivot_hash->{$pos}}) {
+        foreach my $mainstrain (keys %$distance_matrix) {
+                foreach my $pos (keys %$pivot_hash) {
+                        foreach my $index (keys %{$pivot_hash->{$pos}}) {
                                 my $main_allel = uc((split("\t", $pivot_hash->{$pos}->{$index}->{$mainstrain}))[1]);
-                                foreach my $strain(keys %{$distance_matrix->{$mainstrain}}) {
+                                foreach my $strain (keys %{$distance_matrix->{$mainstrain}}) {
                                         my $allel = uc((split("\t", $pivot_hash->{$pos}->{$index}->{$strain}))[1]);
                                         $distance_matrix->{$mainstrain}->{$strain} += 1 unless($main_allel eq $allel);
                                 }
@@ -1966,9 +1951,9 @@ sub build_matrix { # Builds a strain matrix.
         }
         open(OUT,">$GROUPS_OUT/$matrix_file");
         # Print distance matrix.
-        foreach my $mainstrain(sort { $a cmp $b } keys(%$distance_matrix)) {
+        foreach my $mainstrain (sort { $a cmp $b } keys %$distance_matrix) {
                 print OUT $mainstrain . "\t";
-                foreach my $strain(sort { $a cmp $b } keys %{$distance_matrix->{$mainstrain}}) {
+                foreach my $strain (sort { $a cmp $b } keys %{$distance_matrix->{$mainstrain}}) {
                         my $number = $distance_matrix->{$mainstrain}->{$strain};
                         print OUT $number . "\t";
                 }
@@ -2001,7 +1986,7 @@ sub call_variants { # Calls variants.
 	my $all_vars		=	shift;
 	my $snp_vars		=	shift;
 	my $lowfreq_vars	=	shift;
-	foreach my $pos(keys %$position_table) {
+	foreach my $pos (keys %$position_table) {
 		foreach my $insertion_index (keys %{$position_table->{$pos}}) {
 			my @values	=	split(/\t/, $position_table->{$pos}->{$insertion_index});
 			my $ref_tmp	=	shift(@values);
@@ -2282,7 +2267,7 @@ sub call_variants { # Calls variants.
 					# Fetch the dna sequence from genome (genome starts with 0).
 					my $dna		=	substr($ref_genome, ($start - 1), $length);
 					my @codons;
-					for(my $i = 0;$i < (length($dna) - 2);$i += 3) {
+					for(my $i = 0; $i < (length($dna) - 2); $i += 3) {
 						my $codon=substr($dna, $i, 3);
 						push(@codons,$codon);
 					}
@@ -2293,7 +2278,7 @@ sub call_variants { # Calls variants.
 					my $snp_dna			= 	$dna;
 					substr($snp_dna,$gene_pos-1,1)	=	$allel1;
 					my @snp_codons;
-					for(my $i = 0;$i < (length($snp_dna) - 2); $i += 3) {
+					for(my $i = 0; $i < (length($snp_dna) - 2); $i += 3) {
 						my $codon		=	substr($snp_dna, $i, 3);
 						push(@snp_codons,$codon);
 					}
@@ -2318,7 +2303,7 @@ sub call_variants { # Calls variants.
 					my $rev_allel1			=	reverse_complement($allel1);
 					my $rev_ref			=	reverse_complement($ref_tmp);
 					my @codons;
-					for(my $i = 0;$i < (length($rev_dna) - 2);$i += 3) {
+					for(my $i = 0; $i < (length($rev_dna) - 2); $i += 3) {
 						my $codon		=	substr($rev_dna, $i, 3);
 						push(@codons, $codon);
  	      	         		}
@@ -2327,7 +2312,7 @@ sub call_variants { # Calls variants.
 					my $snp_dna				=	$rev_dna;
 					substr($snp_dna, $gene_pos - 1, 1)	=	$rev_allel1;
 					my @snp_codons;
-					for(my $i = 0;$i < (length($snp_dna) - 2);$i += 3) {
+					for(my $i = 0; $i < (length($snp_dna) - 2); $i += 3) {
 						my $codon=substr($snp_dna, $i, 3);
 						push(@snp_codons,$codon);
                 			}
@@ -2367,20 +2352,20 @@ sub call_groups { # Calls groups from a joint strain analysis.
         # The easy approach to call groups, just collect incrementally.
         # Stop if no group changes.
         # Initialize self entry.
-        foreach my $mainstrain(keys %$distance_matrix) {
+        foreach my $mainstrain (keys %$distance_matrix) {
                 $strain_affiliation->{$mainstrain} = "ungrouped";
         }
         my $min_distance        =       $distance + 1;
         # We need this to make sure that all strains get the right group .
         # If two groups grow together.
-        for(my $i = 0;$group_changed == 1;$i++) {
+        for(my $i = 0; $group_changed == 1; $i++) {
                 $min_distance           =       $distance + 1;
                 $group_changed          =       0;
                 my $mainstrain_save;
                 my $strain_save;
                 # Identify pair with smallest distance, take first smallest distance.
-                foreach my $mainstrain(keys %$distance_matrix) {
-                        foreach my $strain(keys %{$distance_matrix->{$mainstrain}}) {
+                foreach my $mainstrain (keys %$distance_matrix) {
+                        foreach my $strain (keys %{$distance_matrix->{$mainstrain}}) {
                                 my $number      =       $distance_matrix->{$mainstrain}->{$strain};
                                 if($number < $min_distance) {
                                         $min_distance           =       $number;
@@ -2416,7 +2401,7 @@ sub call_groups { # Calls groups from a joint strain analysis.
                         # If two groups grow together.
                         if(($mainstrain_group =~ /group_\d+/) && !($mainstrain_group eq $group)) {
                                 my @temp_strains                =       keys(%{$temp_groups->{$mainstrain_group}});
-                                foreach my $temp_strain(@temp_strains) {
+                                foreach my $temp_strain (@temp_strains) {
                                         $strain_affiliation->{$temp_strain}     =       $group;
                                         $temp_groups->{$group}->{$temp_strain}  =       1;
                                 }
@@ -2424,7 +2409,7 @@ sub call_groups { # Calls groups from a joint strain analysis.
                         }
                         if(($strain_group =~ /group_\d+/) && !($strain_group eq $group)) {
                                 my @temp_strains        =       keys(%{$temp_groups->{$strain_group}});
-                                foreach my $temp_strain(@temp_strains) {
+                                foreach my $temp_strain (@temp_strains) {
                                         $strain_affiliation->{$temp_strain}     =       $group;
                                         $temp_groups->{$group}->{$temp_strain}  =       1;
                                 }
@@ -2440,7 +2425,7 @@ sub call_groups { # Calls groups from a joint strain analysis.
         }
         my $groups              =       {};
         my $groups_renamed      =       {};
-        foreach my $strain(@$strains) {
+        foreach my $strain (@$strains) {
                 my $group       =       $strain_affiliation->{$strain};
                 if($strip_ids == 1) {
                         my @strain_ids  =       split("_",$strain);
@@ -2451,7 +2436,7 @@ sub call_groups { # Calls groups from a joint strain analysis.
         # Rename groups to have continous numbering.
         my @groups              =       sort(keys %$groups);
         my $number_of_groups    =       scalar(@groups);
-        for (my $i = 1;$i <= $number_of_groups;$i++) {
+        for (my $i = 1; $i <= $number_of_groups; $i++) {
                 my $new_group_name                      =       "group_" . "$i";
                 my $old_group_name                      =       shift(@groups);
                 $new_group_name                         =       $old_group_name if($old_group_name eq "ungrouped");
@@ -2460,15 +2445,15 @@ sub call_groups { # Calls groups from a joint strain analysis.
         $groups         =       $groups_renamed;
         open(OUT,">$GROUPS_OUT/$group_file");
         print OUT "### Output as groups:\n";
-        foreach my $group(sort { $a cmp $b } keys %$groups) {
+        foreach my $group (sort { $a cmp $b } keys %$groups) {
                 my @strains     =       @{$groups->{$group}};
                 print OUT "> $group\t" . scalar(@strains) . "\n" . join(",", sort(@strains)) . "\n";
         }
         print OUT "\n\n";
         print OUT "### Output as lists:\n";
-        foreach my $group(sort { $a cmp $b } keys %$groups) {
+        foreach my $group (sort { $a cmp $b } keys %$groups) {
                 my @strains = @{$groups->{$group}};
-                foreach my $strain (sort(@strains)) {
+                foreach my $strain (sort @strains) {
                         print OUT $strain . "\t" . $group . "\n";
                 }
         }

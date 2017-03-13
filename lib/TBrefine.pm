@@ -82,7 +82,7 @@ sub tbrefine {
 		my $logfile		=	$fullID.".gatk.bamlog";
 		unlink("$GATK_OUT/$logfile");
 		if(-f "$BAM_OUT/$old_logfile") {
-			cat($logprint,"$BAM_OUT/$old_logfile","$GATK_OUT/$logfile") || die print $logprint "<ERROR>\t",timer(),"\tcat failed: TBrefine line 97.\n";
+			cat($logprint,"$BAM_OUT/$old_logfile","$GATK_OUT/$logfile") || die print $logprint "<ERROR>\t",timer(),"\tcat failed: TBrefine line 85.\n";
 		}
 		my $dict		=	$ref;
 		$dict			=~	s/\.fasta/.dict/;
@@ -104,8 +104,8 @@ sub tbrefine {
 		# If $ref is not h37rv than we skip the next parts.
 		unless($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
 			print $logprint "<INFO>\t",timer(),"\tSkipping GATK BaseRecalibrator! This is only possible with M._tuberculosis_H37Rv_2015-11-13 as reference!\n";
-			move("$GATK_OUT/$fullID.realigned.bam","$GATK_OUT/$fullID.gatk.bam") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line 119.\n";
-			move("$GATK_OUT/$fullID.realigned.bai","$GATK_OUT/$fullID.gatk.bai") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line 120.!\n";
+			move("$GATK_OUT/$fullID.realigned.bam","$GATK_OUT/$fullID.gatk.bam") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line 107.\n";
+			move("$GATK_OUT/$fullID.realigned.bai","$GATK_OUT/$fullID.gatk.bai") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line 108.\n";
 			next;
 		}
 		# Index resistance list.
