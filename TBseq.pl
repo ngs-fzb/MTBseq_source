@@ -331,7 +331,6 @@ if(scalar(@fastq_files) == 0) {
 for(my $i = 0; $i < scalar(@fastq_files); $i++) {
 	my $tmp		=	$fastq_files[$i];
 	$tmp		=~	s/_R\d\.fastq.gz//;
-	$tmp            =~      s/(.*)bp$/$1/;
 	if(!exists $check_up{$tmp}) {
 		push(@fastq_files_new,$fastq_files[$i]);
 	}
