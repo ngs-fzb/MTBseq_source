@@ -1,26 +1,5 @@
 #!/usr/bin/perl
 
-=head1
-
-        TBseq - a computational pipeline for detecting variants in NGS-data
-
-        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-=cut
-
 # tabstop is set to 8.
 
 package TBreads;
@@ -32,7 +11,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION	=	1.2.0;
+$VERSION	=	1.0.0;
 @ISA		=	qw(Exporter);
 @EXPORT		= 	qw(tbreads);
 
@@ -102,63 +81,30 @@ sub tbreads {
 			if(@forward_files && @reverse_files) {
 				if(scalar(@forward_files) == 1 && scalar(@reverse_files == 1)) {
 					print $logprint "<INFO>\t",timer(),"\t$sampleID\_$libID has no multiple read files!\n";
-					if($forward_files[0] =~ /fastq\.gz$/) {
-						print $logprint "<INFO>\t",timer(),"\t$forward_files[0] already compressed! Will only rename the file.\n";
-						move("$W_dir/$forward_files[0]","$output_file_R1") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 107.\n";
+				}
+				if(scalar(@forward_files) != scalar(@reverse_files)) {
+					print $logprint "<INFO>\t",timer(),"\tInconsistent number of forward/reverse files for $sampleID\_$libID!\n";
+				}
+				foreach my $file (@forward_files) {
+					if($file =~ /fastq\.gz$/) {
+						print $logprint "<INFO>\t",timer(),"\t$file is already compressed!\n";
 					} 
 					else {
-						print $logprint "<INFO>\t",timer(),"\t$forward_files[0] is not compressed! Will compress and rename the file!\n";
-                                                system("gzip $forward_files[0]");
-                                                print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $forward_files[0]...\n";
-                                                unlink("$W_dir/$forward_files[0]");
-                                                print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $forward_files[0]!\n";
-						move("$W_dir/$forward_files[0].gz","$output_file_R1") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 115.\n";
+						print $logprint "<INFO>\t",timer(),"\t$file is not compressed! Start compressing $file...\n";
+                                                system("gzip $file");
+						print $logprint "<INFO>\t",timer(),"\tFinished compressing $file!\n";
 					}
-                                        if($reverse_files[0] =~ /fastq\.gz$/) {
-                                                print $logprint "<INFO>\t",timer(),"\t$reverse_files[0] already compressed! Will only rename the file.\n";
-						move("$W_dir/$reverse_files[0]","$output_file_R2") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 119.\n";
+				}
+				foreach my $file (@reverse_files) {
+                                        if($file =~ /fastq\.gz$/) {
+                                                print $logprint "<INFO>\t",timer(),"\t$file is already compressed!\n";
                                         }
                                         else {
-						print $logprint "<INFO>\t",timer(),"\t$reverse_files[0] is not compressed! Will compress and rename the file!\n";
-                                                system("gzip $reverse_files[0]");
-                                                print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $reverse_files[0]...\n";
-                                                unlink("$W_dir/$reverse_files[0]");
-                                                print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $reverse_files[0]!\n";
-						move("$W_dir/$reverse_files[0].gz","$output_file_R2") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 127.\n";
+						print $logprint "<INFO>\t",timer(),"\t$file is not compressed! Start compressing $file...\n";
+                                                system("gzip $file");
+						print $logprint "<INFO>\t",timer(),"\tFinished compressing $file!\n";
                                         }
 				}
-				else {
-					if(scalar(@forward_files) != scalar(@reverse_files)) {
-						print $logprint "<INFO>\t",timer(),"\tInconsistent number of forward/reverse files for $sampleID\_$libID!\n";
-                                	}
-					for(my $i = 0; $i < scalar(@forward_files); $i++) {
-						if($forward_files[$i] =~ /fastq\.gz$/) {
-							print $logprint "<INFO>\t",timer(),"\t$forward_files[$i] already compressed!\n";
-						}
-						else {
-							print $logprint "<INFO>\t",timer(),"\t$forward_files[$i] is not compressed! Will compress and rename the file!\n";
-							system("gzip $forward_files[$i]");
-							print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $forward_files[$i]...\n";
-							unlink("$W_dir/$forward_files[$i]");
-							print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $forward_files[$i]!\n"; 
-						}
-					}
-					for(my $i = 0; $i < scalar(@reverse_files); $i++) {
-						if($reverse_files[$i] =~ /fastq\.gz$/) {
-							print $logprint "<INFO>\t",timer(),"\t$reverse_files[$i] already compressed!\n";
-						}
-						else {
-							print $logprint "<INFO>\t",timer(),"\t$reverse_files[$i] is not compressed! Will compress and rename the file!\n";
-							system("gzip $reverse_files[$i]");
-							print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $reverse_files[$i]...\n";
-							unlink("$W_dir/$reverse_files[$i]");
-							print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $reverse_files[$i]!\n";
-						}
-					}
-				}
-                        	if((-f "$W_dir/$output_file_R1" && -f "$W_dir/$output_file_R2") || -f "$W_dir/$output_file_R0") {
-                               		next;
-                        	}				
 				my $file_string_1	=	"";
 				my $file_string_2	=	"";
 				foreach my $file (sort { $a cmp $b } @forward_files) {
@@ -169,10 +115,10 @@ sub tbreads {
 					$file =~ s/\.fastq.*$//;
 					$file_string_2	.=	" $W_dir/$file.fastq.gz";
 				}
-				print $logprint "<INFO>\t",timer(),"\tStart merging and compressing files for $sampleID\_$libID...\n";
+				print $logprint "<INFO>\t",timer(),"\tStart merging files for $sampleID\_$libID...\n";
 				system("zcat $file_string_1 | gzip -c > $output_file_R1");
 				system("zcat $file_string_2 | gzip -c > $output_file_R2");
-				print $logprint "<INFO>\t",timer(),"\tFinished merging and compressing files for $sampleID\_$libID!\n";
+				print $logprint "<INFO>\t",timer(),"\tFinished merging files for $sampleID\_$libID!\n";
 				print $logprint "<INFO>\t",timer(),"\tStart removing multiple files for $sampleID\_$libID...\n";
 				foreach my $file (sort { $a cmp $b } @forward_files) {
 					$file =~ s/\.fastq.*$//;
@@ -188,50 +134,32 @@ sub tbreads {
 			@reverse_files = ();
 			if(@uni_files) {
 				if(scalar(@uni_files) == 1) {
-					print $logprint "<INFO>\t",timer(),"\t$sampleID\_$libID has no multiple files!\n";
-                                        if($uni_files[0] =~ /fastq\.gz$/) {
-                                                print $logprint "<INFO>\t",timer(),"\t$uni_files[0] already compressed! Will only rename the file.\n";
-                                                move("$W_dir/$uni_files[0]","$output_file_R0") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 194.\n";
+					print $logprint "<INFO>\t",timer(),"\t$sampleID\_$libID has no multiple files!\n";               
+				}
+				foreach my $file (@uni_files) {
+					if($file =~ /fastq\.gz$/) {
+                                                print $logprint "<INFO>\t",timer(),"\t$file already compressed!\n";
                                         }
                                         else {
-						print $logprint "<INFO>\t",timer(),"\t$uni_files[0] is not compressed! Will compress and rename the file!\n";
-                                                system("gzip $uni_files[0]");
-                                                print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $uni_files[0]...\n";
-                                                unlink("$W_dir/$uni_files[0]");
-                                                print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $uni_files[0]!\n";
-                                                move("$W_dir/$uni_files[0].gz","$output_file_R0") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBreads line 202.\n";
-                                        }
-                                } 
-				else {
-					for(my $i = 0; $i < scalar(@uni_files); $i++) {
-						if($uni_files[$i] =~ /fastq.gz$/) {
-                	         			print $logprint "<INFO>\t",timer(),"\t$uni_files[$i] already compressed!\n";               	
-						}
-						else {
-							print $logprint "<INFO>\t",timer(),"\t$uni_files[$i] is not compressed! Will compress and rename the file!\n";
-                                                	system("gzip $uni_files[$i]");
-					        	print $logprint "<INFO>\t",timer(),"\tStart removing uncompressed $uni_files[$i]...\n";
-                                                	unlink("$W_dir/$uni_files[$i]");
-                                                	print $logprint "<INFO>\t",timer(),"\tFinished removing uncompressed $uni_files[$i]!\n";
-						}
+						print $logprint "<INFO>\t",timer(),"\t$file is not compressed! Start compressing $file...\n";
+                                                system("gzip $file");
+						print $logprint "<INFO>\t",timer(),"\tFinished compressing $file!\n";
 					}
-				}
-                        	if((-f "$W_dir/$output_file_R1" && -f "$W_dir/$output_file_R2") || -f "$W_dir/$output_file_R0") {
-                                	next;
-                        	}                                
+                                } 
 				my $file_string_1       	=       "";
 				foreach my $file (sort { $a cmp $b } @uni_files) {
 					$file =~ s/\.fastq.*$//;					
                                         $file_string_1          .=	" $W_dir/$file.fastq.gz";
                                 }
-				print $logprint "<INFO>\t",timer(),"\tStart merging and compressing files for $sampleID\_$libID...\n";
+				print $logprint "<INFO>\t",timer(),"\tStart merging files for $sampleID\_$libID...\n";
 				system("zcat $file_string_1 | gzip -c > $output_file_R0");
+				print $logprint "<INFO>\t",timer(),"\tFinished merging files for $sampleID\_$libID!\n";
 				print $logprint "<INFO>\t",timer(),"\tRemoving multiple files for $sampleID\_$libID...\n";
-				print $logprint "<INFO>\t",timer(),"\tFinished merging and compressing files for $sampleID\_$libID!\n";
                                 foreach my $file (sort { $a cmp $b } @uni_files) {
 					$file =~ s/\.fastq.*$//;
                                         unlink("$W_dir/$file.fastq.gz");
                                 }
+				print $logprint "<INFO>\t",timer(),"\tFinished removing multiple files for $sampleID\_$libID!\n";
 			}
 			@uni_files = ();
 		}

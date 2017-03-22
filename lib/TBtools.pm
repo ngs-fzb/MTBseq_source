@@ -1,26 +1,5 @@
 #!/usr/bin/perl
 
-=head1
-
-        TBseq - a computational pipeline for detecting variants in NGS-data
-
-        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-=cut
-
 # tabstop is set to 8.
 
 package TBtools;
@@ -34,7 +13,7 @@ use MCE;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION	=	1.2.0;
+$VERSION	=	1.0.0;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(parse_reference parse_fasta parse_mpile parse_position_table parse_annotation parse_variant_infos parse_categories parse_variants parse_amend_table parse_classification print_variants prepare_stats print_joint_table_scaffold print_joint_table print_position_stats help nostep badstep strip by_number timer cat log2 amend_joint_table filter_wlength build_matrix call_variants call_groups translate_homolka2coll translate_coll2homolka specificator_beijing_easy specificator_coll_easy specificator_coll_branch specificator_homolka);
 
