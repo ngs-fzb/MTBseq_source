@@ -77,7 +77,7 @@ sub tbstats {
 		}
 		print $logprint "<INFO>\t",timer(),"\tStart using Samtools for BWA mapping statistics of $file...\n";
 		my $content		=	qx/$SAMTOOLS_dir\/samtools flagstat $BAM_OUT\/$file/;	
-		die print $logprint "$BAM_OUT/$file does not exist" if(!$content);
+		die print $logprint "$BAM_OUT/$file does not exist, TBstats line: ", __LINE__ , " \n" if(!$content);
 		my @lines		=	split(/\n/,$content);
 		$lines[0]		=~	s/^(\d+)\s.*/$1/;
 		$lines[4]		=~	s/^(\d+)\s.*/$1/;
@@ -107,14 +107,14 @@ sub tbstats {
 		# Print statistics.
 		print $logprint "<INFO>\t",timer(),"\tStart printing statistics into $stats_file...\n";
 		unless(-f "$STATS_OUT/$stats_file") {
-			open(OUT,">$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line 141.\n";
+			open(OUT,">$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line: ", __LINE__ , " \n";
 			my $header 	=	"Date\tSampleID\tLibraryID\tSource\tRun\tTotal Reads\tMapped Reads\t% Mapped Reads\t";
 			$header 	= 	$header."Genome Size\tGenome GC\t(Any) Total Bases\t% (Any) Total Bases\t(Any) GC-Content\t(Any) Coverage mean\t(Any) Coverage median\t(Unambiguous) Total Bases\t% (Unambiguous) Total Bases\t(Unambiguous) GC-Content\t(Unambiguous) Coverage mean\t(Unambiguous) Coverage median\t";
 			$header		=	$header."SNPs\tDeletions\tInsertions\tUncovered\tSubstitutions (Including Stop Codons)\n";
 			print OUT $header;
 			close(OUT);
 		}
-		open(OUT,">>$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line 138.\n";
+		open(OUT,">>$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line: ", __LINE__ , " \n";
 		print OUT $result;
 		close(OUT);
 	}

@@ -260,7 +260,7 @@ my @samples;
 my $sample_number;
 my $output_mode = $all_vars . $snp_vars . $lowfreq_vars;
 if(-f $samples) {
-	open(IN,"$samples") || die print $logprint "<INFO>\t",timer(),"\tCan't find $samples file!\n";
+	open(IN,"$samples") || die print $logprint "<INFO>\t",timer(),"\tCan't find $samples file! TBseq.pl line: ", __LINE__ ," \n";
 	while(<IN>) {
 		chomp;
 		$sample_number++;
@@ -294,7 +294,7 @@ TBreads:
 if($step eq 'TBreads') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBreads] selected ###\n";
 }	
-opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: $!";
+opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: TBseq.pl line: ", __LINE__ ," \n";
 @fastq_files		=	grep { $_ =~ /^\w.*\.fastq/ && -f "$W_dir/$_" } readdir(WORKDIR);
 closedir(WORKDIR);
 if(scalar(@fastq_files) == 0) {
@@ -317,8 +317,8 @@ TBbwa:
 if($step eq 'TBbwa') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBbwa] selected ###\n";
 }
-opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: $!";
-opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
+opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: TBseq.pl line: ", __LINE__ ," \n";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @fastq_files		=	grep { $_ =~ /^\w.*R\d+\.fastq\.gz/ && -f "$W_dir/$_" } readdir(WORKDIR);
 @bam_files              =       grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 closedir(WORKDIR);
@@ -358,7 +358,7 @@ TBmerge:
 if($step eq 'TBmerge') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBmerge] selected ###\n";
 }
-opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @bam_files 		= 	grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 closedir(BAMDIR);
 if(scalar(@bam_files) == 0) {
@@ -381,8 +381,8 @@ TBrefine:
 if($step eq 'TBrefine') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBrefine] selected ###\n";
 }
-opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
-opendir(GATKDIR,"$GATK_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: $!";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(GATKDIR,"$GATK_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @bam_files 		= 	grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 @gatk_files		=	grep { $_ =~ /^\w.*\.gatk\.bam$/ && -f "$GATK_OUT/$_" } readdir(GATKDIR);
 closedir(BAMDIR);
@@ -422,8 +422,8 @@ TBpile:
 if($step eq 'TBpile') {
 	print $logprint "\n<INFO>\t",timer(),"\t### [TBpile] selected ###\n";
 }
-opendir(GATKDIR,"$GATK_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: $!";
-opendir(MPILEDIR,"$MPILE_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: $!";
+opendir(GATKDIR,"$GATK_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GATK_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(MPILEDIR,"$MPILE_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @gatk_files 		= 	grep { $_ =~ /^\w.*\.gatk\.bam$/ && -f "$GATK_OUT/$_" } readdir(GATKDIR);
 @mpile_files		=	grep { $_ =~ /^\w.*\.gatk\.mpileup$/ && -f "$MPILE_OUT/$_" } readdir(MPILEDIR);
 closedir(GATKDIR);
@@ -463,8 +463,8 @@ TBlist:
 if($step eq 'TBlist') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBlist] selected ###\n";
 }
-opendir(MPILEDIR,"$MPILE_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: $!";
-opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
+opendir(MPILEDIR,"$MPILE_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $MPILE_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @mpile_files 		= 	grep { $_ =~ /^\w.*\.gatk\.mpileup$/ && -f "$MPILE_OUT/$_" } readdir(MPILEDIR);
 @pos_files		=	grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
 closedir(MPILEDIR);
@@ -504,8 +504,8 @@ TBvariants:
 if($step eq 'TBvariants') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBvariants] selected ###\n";
 }
-opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
-opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: $!";
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @pos_files 		= 	grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
 @var_files		=	grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$/ && -f "$CALL_OUT/$_" } readdir(CALLDIR);
 closedir(POSDIR);
@@ -545,8 +545,8 @@ TBstats:
 if($step eq 'TBstats') {
         print $logprint "\n<INFO>\t",timer(),"\t### [TBstats] selected ###\n";
 }
-opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: $!";
-opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @bam_files              =       grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
 @pos_files              =       grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
 closedir(BAMDIR);
@@ -585,7 +585,7 @@ TBstrains:
 if($step eq 'TBstrains') {
         print $logprint "\n<INFO>\t",timer(),"\t### [TBstrains] selected ###\n";
 }
-opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: $!";
+opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @pos_files              =       grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_" } readdir(POSDIR);
 closedir(POSDIR);
 if(scalar(@pos_files) == 0) {
@@ -621,8 +621,8 @@ while(<IN>) {
 	$check_up{$fields[0]."_".$fields[1]}	=   $fields[0]."_".$fields[1];
 }
 close(IN);
-opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: $!";
-opendir(JOINDIR,"$JOIN_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: $!";
+opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(JOINDIR,"$JOIN_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @var_files		=	grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovf\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$/ && -f "$CALL_OUT/$_" } readdir(CALLDIR);
 @join_files		=	grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\.tab$/ && -f "$JOIN_OUT/$_" } readdir(JOINDIR);
 closedir(CALLDIR);
@@ -667,8 +667,8 @@ if($step eq 'TBamend') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBamend] selected ###\n";
 }
 
-opendir(JOINDIR,"$JOIN_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: $!";
-opendir(AMENDDIR,"$AMEND_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: $!";
+opendir(JOINDIR,"$JOIN_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(AMENDDIR,"$AMEND_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @join_files		=	grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\.tab$/ && -f "$JOIN_OUT/$_" } readdir(JOINDIR);
 @amend_files            =       grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window.tab$/ && -f "$AMEND_OUT/$_" } readdir(AMENDDIR);
 closedir(JOINDIR);
@@ -708,8 +708,8 @@ TBgroups:
 if($step eq 'TBgroups') {
     	print $logprint "\n<INFO>\t",timer(),"\t### [TBgroups] selected ###\n";
 }
-opendir(AMENDDIR,"$AMEND_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: $!";
-opendir(GROUPDIR,"$GROUPS_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GROUPS_OUT: $!";
+opendir(AMENDDIR,"$AMEND_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $AMEND_OUT: TBseq.pl line: ", __LINE__ ," \n";
+opendir(GROUPDIR,"$GROUPS_OUT") || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $GROUPS_OUT: TBseq.pl line: ", __LINE__ ," \n";
 @amend_files            =       grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window\.tab$/ && -f "$AMEND_OUT/$_" } readdir(AMENDDIR);
 @group_files		=	grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window\.matrix$/ && -f "$GROUPS_OUT/$_" } readdir(GROUPDIR);
 closedir(AMENDDIR);

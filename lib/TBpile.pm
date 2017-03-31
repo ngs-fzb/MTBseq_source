@@ -45,8 +45,8 @@ sub tbpile {
 		unlink("$GATK_OUT/$vcf_logfile");
 		unlink("$GATK_OUT/$mpile_logfile");
 		if(-f "$GATK_OUT/$old_logfile") {
-			# cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$vcf_logfile")	|| die "<ERROR>\t",timer(),"\tcat failed: $?\n";
-			cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$mpile_logfile") 	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile line 70.\n";
+			# cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$vcf_logfile")	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile line: ", __LINE__ , " \n";
+			cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$mpile_logfile") 	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile line: ", __LINE__ , " \n";
 		}
 
 ### UNDER CONSTRUCTION - Haplotype Caller and VCF Files ###

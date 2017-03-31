@@ -106,8 +106,8 @@ sub fastaids { # Creates an output of plain fasta IDs.
 	my $AMEND_OUT		=	shift;
 	my $infasta		=	shift;
 	my $outfasta		=	strip($infasta,(".plainIDs.fasta") );
-	open(IN,"$AMEND_OUT/$infasta")		||	die print $logprint "<ERROR>\t",timer(),"\tCan't open $infasta: TBtools line 130.\n";
-	open(OUT,">$AMEND_OUT/$outfasta")	||	die print $logprint "<ERROR>\t",timer(),"\tCan't create $outfasta: TBtools line 131.\n";
+	open(IN,"$AMEND_OUT/$infasta")		||	die print $logprint "<ERROR>\t",timer(),"\tCan't open $infasta: TBtools line: ", __LINE__ , " \n";
+	open(OUT,">$AMEND_OUT/$outfasta")	||	die print $logprint "<ERROR>\t",timer(),"\tCan't create $outfasta: TBtools line: ", __LINE__ , " \n";
 	while(<IN>) {
 		my $line		=	$_;
 		$line 			=~	s/\015?\012?$//;
@@ -137,7 +137,7 @@ sub parse_reference { # Parse a reference genome and save all posiitions as a un
 	my $ref			=	shift;
 	my $ref_hash		=	shift;
 	my $position		=	1;
-	open(IN,"$VAR_dir/$ref") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $ref: TBtools line 161.\n";
+	open(IN,"$VAR_dir/$ref") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $ref: TBtools line: ", __LINE__ , " \n";
 	while(<IN>) {
 		$_		=~ 	s/\015?\012?$//; # This will take care of different line break characters.
 		my @line	=	split(//, $_) unless($_ =~ /^>/ );
@@ -157,7 +157,7 @@ sub parse_fasta { # Parse a reference genome and save the genome as a whole valu
 	my $VAR_dir		=	shift;
 	my $ref			=	shift;
 	my $fasta		=	{};
-	open(IN,"$VAR_dir/$ref") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $ref: TBtools line 181.\n";
+	open(IN,"$VAR_dir/$ref") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $ref: TBtools line: ", __LINE__ , " \n";
 	while(<IN>) {
 		chomp;
 		my $line	=	$_;
@@ -440,7 +440,7 @@ sub parse_mpile { # Parse a .mpileup file.
 	close(OUT);
 	# Now we want to fill some gaps that are not in the mpileup file.
 	print $logprint "<INFO>\t",timer(),"\tStart loading temporary file into hash structure...\n";
-	open(IN,"$POS_OUT/$output\.tmp") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output\.tmp: TBtools line 464.\n";
+	open(IN,"$POS_OUT/$output\.tmp") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output\.tmp: TBtools line: ", __LINE__ , " \n";
         while(<IN>) {
                 chomp;
                 my @fields	=	split(/\t/, $_);
@@ -559,7 +559,7 @@ sub parse_position_table { # Parse a position table.
 	my $mifreq              =       shift;
 	my $position_table	=	shift;
 	my $position_stats	=	shift;
-	open(IN,"$POS_OUT/$position_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $position_file: TBtools line 583.\n";
+	open(IN,"$POS_OUT/$position_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $position_file: TBtools line: ", __LINE__ , " \n";
 	<IN>;
 	while(<IN>) {
 		my $line			=	$_;
@@ -631,7 +631,7 @@ sub parse_annotation { # Parse an annotation file.
     	my $genes		=	shift;
 	my $annotation		=	shift;
 	my $refg		=	shift;
-	open(IN,"$VAR_dir/$refg") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $refg: TBtools line 655.\n";
+	open(IN,"$VAR_dir/$refg") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $refg: TBtools line: ", __LINE__ , " \n";
 	while(<IN>) {
 		chomp;
 		my $line			=	$_;
@@ -867,7 +867,7 @@ sub parse_variants { # Parse a variant file.
 	my $micovr		=	shift;
 	my $mifreq		=	shift;
 	my $miphred20		=	shift;
-	open(IN,"$CALL_OUT/$file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $file: TBtools line 891.\n";
+	open(IN,"$CALL_OUT/$file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $file: TBtools line: ", __LINE__ , " \n";
 	<IN>;
 	while(<IN>) {
 		chomp;
@@ -914,7 +914,7 @@ sub parse_amend_table { # Parse an amended joint variant table.
         my $strains             =       shift;
         my $position_info       =       shift;
         # Parse phylogeny pivot file.
-        open(IN,"$AMEND_OUT/$phylo_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $phylo_file: TBtools line 938.\n";
+        open(IN,"$AMEND_OUT/$phylo_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $phylo_file: TBtools line: ", __LINE__ , " \n";
         # First get the strain header and parse strain names.
         my @strains             =       ();
         my $strain_header       =       <IN>;
@@ -1231,7 +1231,7 @@ sub print_joint_table_scaffold { # Prints the scaffold of a joint SNP table.
 	my $genes		=	shift;
 	my @ids			=	@_;
 	# Print basic information to output_file.
-	open(OUT, ">$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $join_file: TBtools line 1255.\n";
+	open(OUT, ">$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $join_file: TBtools line: ", __LINE__ , " \n";
 	# Prepare header for output.
 	my $header 		=	join("\t\t\t\t\t\t\t\t", @ids);
 	my $second_header 	=	"";
@@ -1268,8 +1268,8 @@ sub print_joint_table { # Print a joint SNP table.
 	my $strains		=	shift;
 	my $variants		=	shift;
 	my $tmp			=	$join_file . ".tmp";
-	open(IN, "$JOIN_OUT/$join_file") 	|| die print $logprint "<ERROR>\t",timer(),"\tCan't open $join_file: TBtools line 1292.\n";
-	open(OUT, ">$JOIN_OUT/$tmp") 		|| die print $logprint "<ERROR>\t",timer(),"\tCan't create $tmp: TBtools line 1293.\n";
+	open(IN, "$JOIN_OUT/$join_file") 	|| die print $logprint "<ERROR>\t",timer(),"\tCan't open $join_file: TBtools line: ", __LINE__ , " \n";
+	open(OUT, ">$JOIN_OUT/$tmp") 		|| die print $logprint "<ERROR>\t",timer(),"\tCan't create $tmp: TBtools line: ", __LINE__ , " \n";
 	my $header		=	<IN>;
 	my $subheader		=	<IN>;
 	print OUT $header;
@@ -1305,7 +1305,7 @@ sub print_joint_table { # Print a joint SNP table.
 	}
 	close(OUT);
 	close(IN);
-	move("$JOIN_OUT/$tmp","$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBtools line 1329.\n";
+	move("$JOIN_OUT/$tmp","$JOIN_OUT/$join_file") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBtools line: ", __LINE__ , " \n";
 	unlink("$JOIN_OUT/$tmp");
 }
 
@@ -1564,7 +1564,7 @@ sub cat { # a simple cat/copy function.
 	my $in		= 	shift;
 	my $out		= 	shift;
 	open(OUT,">>$out");
-	open(IN,"$in") || die print $logprint "<WARN>\t",timer(),"\tCan't open $in: TBtools line 1588.\n";
+	open(IN,"$in") || die print $logprint "<WARN>\t",timer(),"\tCan't open $in: TBtools line: ", __LINE__ , " \n";
 	while(<IN>) {
 		print OUT $_;
 	}
@@ -1600,9 +1600,9 @@ sub amend_joint_table { # Amends a joint variant Table.
 	my $phylo_file			=	strip($join_file,("_amended_u".$unambigous."_phylo.tab"));
 	my $phylo_fasta			=	strip($join_file,("_amended_u".$unambigous."_phylo.fasta"));
 	# Open file handle for input file and output files.
-	open(IN,"$JOIN_OUT/$join_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't open file $join_file: TBtools line 1624.\n";
-	open(OUT,">$AMEND_OUT/$amended_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $amended_file: TBtools line 1625.\n";
-	open(OUTER,">$AMEND_OUT/$phylo_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $phylo_file: TBtools line 1626.\n";
+	open(IN,"$JOIN_OUT/$join_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't open file $join_file: TBtools line: ", __LINE__ , " \n";
+	open(OUT,">$AMEND_OUT/$amended_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $amended_file: TBtools line: ", __LINE__ , " \n";
+	open(OUTER,">$AMEND_OUT/$phylo_file")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create file $phylo_file: TBtools line: ", __LINE__ , " \n";
 	# Get strain header and parse strain names.
 	my @strains			=	();
    	my $strain_header		=	<IN>;
@@ -1836,9 +1836,9 @@ sub filter_wlength { # Fiters for possible fals positive SNPs in a given window.
 	# Now we know the neighbours and can skip SNPs with neighbours.
 	# We parse the phylogeny pivot file and skip everything with a neighbour in $window distance (in the same strain!).
 	# At the same time we create the fasta file.
-	open(IN,"$AMEND_OUT/$phylo_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't open $phylo_file: TBtools line 1875.\n";
-	open(OUT, ">$AMEND_OUT/$window_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't create $window_file: TBtools line 1876.\n";
-	open(OUTER, ">$AMEND_OUT/$window_filtered")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create $window_filtered: TBtools line 1877.\n";
+	open(IN,"$AMEND_OUT/$phylo_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't open $phylo_file: TBtools line: ", __LINE__ , " \n";
+	open(OUT, ">$AMEND_OUT/$window_file")		|| die print $logprint "<ERROR>\t",timer(),"\t Can't create $window_file: TBtools line: ", __LINE__ , " \n";
+	open(OUTER, ">$AMEND_OUT/$window_filtered")	|| die print $logprint "<ERROR>\t",timer(),"\t Can't create $window_filtered: TBtools line: ", __LINE__ , " \n";
 	my $strain_header_again			=	<IN>;
 	my $pos_header_again			=	<IN>;
 	print OUT $strain_header_again;

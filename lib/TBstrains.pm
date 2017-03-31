@@ -44,7 +44,7 @@ sub tbstrains {
 	my $output_file			=	"Strain_Classification.tab";
 	# Save already detected strains.
 	if(-f "$STRAIN_OUT/$output_file") {
-		open(IN,"$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output_file: TBstrains line 68.\n";
+		open(IN,"$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output_file: TBstrains line: ", __LINE__ , " \n";
 		<IN>;
 		while(<IN>) {
 			my $line		=	$_;
@@ -79,7 +79,7 @@ sub tbstrains {
 	print $logprint "<INFO>\t",timer(),"\t","Finished combining classification schemes!\n";
 	unless(-f "$STRAIN_OUT/$output_file") {
 		print $logprint "<INFO>\t",timer(),"\t","Start writing $output_file...\n";
-		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 103.\n";
+		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line: ", __LINE__ , " \n";
 		my $header      =       "Date\tSampleID\tLibraryID\tSource\tRun";
         	$header         .=      "\tHomolka species\tHomolka lineage\tHomolka group\tQuality";
         	$header         .=      "\tColl lineage (branch)\tColl lineage_name (branch)\tColl quality (branch)";
@@ -90,7 +90,7 @@ sub tbstrains {
 		close(OUT);
 		print $logprint "<INFO>\t",timer(),"\t","Finished writing $output_file!\n";
 	}
-	open(OUT,">>$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line 114.\n";
+	open(OUT,">>$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line: ", __LINE__ , " \n";
 	# Start logic...
 	foreach my $file (sort { $a cmp $b } @position_tables) {
     		print $logprint "<INFO>\t",timer(),"\t","Start parsing $file...\n";
