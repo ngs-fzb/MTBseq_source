@@ -1,26 +1,5 @@
 #!/usr/bin/perl
 
-=head1
-
-        TBseq - a computational pipeline for detecting variants in NGS-data
-
-        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-=cut
-
 # tabstop is set to 8.
 
 package TBjoin;
@@ -32,19 +11,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package creates a joint variant list from input samples					###
-###                                                                                                             ###
-### Input:  .gatk_position_table.tab, .gatk_position_variants_cf*_cr*_fr*_ph*_outmode*.tab                      ###
-### Output: joint_cf*_cr*_fr*_ph*_outmode*_samples*.tab                                                         ###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.10;
+$VERSION	=	1.0.0;
 @ISA		=	qw(Exporter);
 @EXPORT		=	qw(tbjoin);
-
 
 sub tbjoin {
 	# Get parameter and input from front-end.
@@ -75,7 +44,7 @@ sub tbjoin {
 	my $breadth_file	=	"$group_name" . "_joint" . "$param_string" . "_samples" . scalar(@var_files) . ".log";
 	my @ids;
 	# Get the genomic sequence for determining substitutions.
-	print $logprint "<INFO>\t",timer(),"\tParsing $ref...\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $ref...\n";
 	my $genome		=	parse_fasta($logprint,$VAR_dir,$ref);
     	print $logprint "<INFO>\t",timer(),"\tFinished parsing $ref!\n";
 	# Prepare info for coverage_breadth output.
@@ -85,7 +54,7 @@ sub tbjoin {
 		$position_stats->{$i}->{0}->{nothing}        	=       0;
 	}
 	# Get all necessary annotation information.
-    	print $logprint "<INFO>\t",timer(),"\tParsing $refg...\n";	
+    	print $logprint "<INFO>\t",timer(),"\tStart parsing $refg...\n";	
 	parse_annotation($logprint,$VAR_dir,$genes,$annotation,$refg);
     	print $logprint "<INFO>\t",timer(),"\tFinished parsing $refg...\n";
 	# Parse all variant files to $positions_hash and @ids
@@ -97,11 +66,11 @@ sub tbjoin {
 		push(@ids, $id);
 	}
 	print $logprint "<INFO>\t",timer(),"\tFinished parsing variant files!\n";
-    	print $logprint "<INFO>\t",timer(),"\tPrinting joint variant file scaffold...\n";
+    	print $logprint "<INFO>\t",timer(),"\tSart printing joint variant file scaffold...\n";
 	print_joint_table_scaffold($logprint,$JOIN_OUT,$join_file,$var_positions,$annotation,$genes,@ids);
     	print $logprint "<INFO>\t",timer(),"\tFinished printing joint variant file scaffold!\n";
 	# Start logic..
-	print $logprint "<INFO>\t",timer(),"\tParsing position lists, extend called variants and complete joint variant list...\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing position lists, extend called variants and complete joint variant list...\n";
 	foreach my $id (@ids) {
 		my $position_file		=	$id.".gatk_position_table.tab";
 		next unless(-f "$POS_OUT/$position_file");
@@ -130,6 +99,7 @@ sub tbjoin {
 		# This already prints the information for the dataset to save RAM.
 		print_joint_table($logprint,$JOIN_OUT,$join_file,$id,$strain,$variants);
 	}
+        print $logprint "<INFO>\t",timer(),"\tFinished parsing position lists, extend called variants and complete joint variant list!\n";
 	$annotation		=	{};
         $genes			=	{};
         $var_positions		=	{};

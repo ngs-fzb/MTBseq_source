@@ -1,26 +1,5 @@
 #!/usr/bin/perl
 
-=head1
-
-        TBseq - a computational pipeline for detecting variants in NGS-data
-
-        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-=cut
-
 # tabstop is set to 8.
 
 package TBlist;
@@ -31,22 +10,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package creates a position table from a mpileup file. This position table is the input	###
-### for many downstream analysis. Every position of the reference genome is documented with the amount of reads	###
-### supporting a nucleotide, which kind of event occured (Insertion or Deletion) and gives a first impression	###
-### of alternative allels in comparison to the reference setting that was found within the sequencing.		###
-###                                                                                                             ###
-### Input:  .gatk.mpileup                                                                                       ###
-### Output: .gatk.position_table                                        					###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.11;
+$VERSION	=	1.0.0;
 @ISA		= 	qw(Exporter);
 @EXPORT		= 	qw(tblist);
-
 
 sub tblist {
 	# Get parameter and input from front-end.
@@ -66,7 +32,7 @@ sub tblist {
 		print $logprint "<INFO>\t",timer(),"\tReference genome size (bp): ",scalar(keys %$ref_hash),"!\n";
 	}
 	else {
-		print $logprint "<ERROR>\t",timer(),"\tReference genome, $ref not found! Can't continue!\n";
+		print $logprint "<ERROR>\t",timer(),"\tReference genome, $ref not found: TBlist line 70.\n";
 		exit 1;
 	}
 	# Start logic...
@@ -76,8 +42,8 @@ sub tblist {
 		# Create a position table.
 		parse_mpile($logprint,$MPILE_OUT,$POS_OUT,$output,$mpileup_file,$ref_hash,$mibqual,$threads);
 	}
+	@mpileup_files          =       ();
 	$ref_hash		=	{};
-	@mpileup_files		=	();
 }
 
 

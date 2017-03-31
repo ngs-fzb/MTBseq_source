@@ -1,26 +1,5 @@
 #!/usr/bin/env perl
 
-=head1
-
-        TBseq - a computational pipeline for detecting variants in NGS-data
-
-        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-=cut
-
 # tabstop is set to 8.
 
 package TBvariants;
@@ -31,21 +10,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###                                                                                                             ###
-### Description: This package creates a variant lists from your input samples					###
-###                                                                                                             ###
-### Input:  .gatk_position_table.tab                   								###
-### Output: .gatk_position_variants_cf*_cr*_fr*_ph*_outmode*.tab						###
-###	    .gatk_position_uncovered_cf*_cr*_fr*_ph*_outmode*.tab                                               ###
-###                                                                                                             ###
-###################################################################################################################
-
-$VERSION	=	1.11;
+$VERSION	=	1.0.0;
 @ISA		= 	qw(Exporter);
 @EXPORT		= 	qw(tbvariants);
-
-my $tbvariants;
 
 sub tbvariants {
 	# Get parameter and input from front-end.
@@ -70,14 +37,14 @@ sub tbvariants {
 	my $variant_infos		=	{};
 	my $resi_gene			=	{};
 	# Parse the genomic sequence for determining substitutions.
-	print $logprint "<INFO>\t",timer(),"\tParsing $ref...\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $ref...\n";
 	my $genome			=	parse_fasta($logprint,$VAR_dir,$ref);
     	print $logprint "<INFO>\t",timer(),"\tFinished parsing $ref!\n";
 	# Parse all necessary annotation information.
     	print $logprint "<INFO>\t",timer(),"\tParsing $refg...\n";
 	parse_annotation($logprint,$VAR_dir,$genes,$annotation,$refg);
     	print $logprint "<INFO>\t",timer(),"\tFinished parsing $refg!\n";
-	print $logprint "<INFO>\t",timer(),"\tParsing $resi_list_master and $int_regions...\n";
+	print $logprint "<INFO>\t",timer(),"\tStart parsing $resi_list_master and $int_regions...\n";
 	parse_variant_infos($logprint,$variant_infos,$resi_gene,$resi_list_master,$int_regions);
 	print $logprint "<INFO>\t",timer(),"\tFinished parsing $resi_list_master and $int_regions!\n";
 	# Start logic...
@@ -108,11 +75,11 @@ sub tbvariants {
 		$variants			=	{};
 		print $logprint "<INFO>\t",timer(),"\tPrinting finished!\n";
 	}
+	@pos_files                              =       ();
 	$annotation				=	{};
 	$genes					=	{};
 	$variant_infos				=	{};
 	$resi_gene				=	{};
-	@pos_files				=	();
 }
 
 

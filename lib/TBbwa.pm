@@ -1,26 +1,5 @@
 #!/usr/bin/perl
 
-=head1
-
-        TBseq - a computational pipeline for detecting variants in NGS-data
-
-        Copyright (C) 2016 Thomas A. Kohl, Robin Koch, Maria R. De Filippo, Viola Schleusener, Christian Utpatel, Daniela M. Cirillo, Stefan Niemann
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-=cut
-
 # tabstop is set to 8.
 
 package TBbwa;
@@ -32,20 +11,9 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-###################################################################################################################
-###														###
-### Description: This package use BWA for mapping the reads to the reference, using SAMTOOLS for duplicate read ###
-### removal and indexing of the resulting mapping file.								###
-###														###
-### Input:	.fastq.gz											###
-### Output:	.bam, .bam.bai, .bamlog										###
-###														###
-###################################################################################################################
-
-$VERSION	= 	1.12;
+$VERSION	= 	1.0.0;
 @ISA 		= 	qw(Exporter);
 @EXPORT 	= 	qw(tbbwa);
-
 
 sub tbbwa {
 	# Get parameter and input from front-end.
@@ -66,16 +34,14 @@ sub tbbwa {
 		my $libID		= 	shift(@file_name);
 		my $machine		= 	shift(@file_name);
 		my $run			=	shift(@file_name);
-		my $seqlength		=	shift(@file_name);
 		my $dir			=	shift(@file_name);
 		$dir			=~	s/\.fastq.gz$//;
-		my $fullID		=	join("_",($sampleID,$libID,$machine,$run,$seqlength));
+		my $fullID		=	join("_",($sampleID,$libID,$machine,$run));
 		$input{$fullID}{$dir}{fastq}	=	$file;
 		$input{$fullID}{$dir}{sampleID}	= 	$sampleID;
 		$input{$fullID}{$dir}{libID}	= 	$libID;
 		$input{$fullID}{$dir}{machine}	= 	$machine;
 		$input{$fullID}{$dir}{run}	= 	$run;
-		$input{$fullID}{$dir}{seqlength}      =       $seqlength;
 	}
 	@fastq_files = ();
 	foreach my $fullID (sort { $a cmp $b } keys %input) {
@@ -83,10 +49,6 @@ sub tbbwa {
 		my $libID;
 		my $files_string	=       "";
 		my @dirs		=	sort(keys %{$input{$fullID}});
-		if(scalar(@dirs) > 2) {
-			print $logprint "<WARN>\t",timer(),"\tSkipping $fullID, more than two files for $fullID!\n";
-			next;
-		}
 		foreach my $dir (sort { $a cmp $b } @dirs) {
 			my $file		=	$input{$fullID}{$dir}{fastq};
 			$sampleID		=	$input{$fullID}{$dir}{sampleID};
@@ -96,7 +58,7 @@ sub tbbwa {
 		@dirs 			=	();
 		my $read_naming_scheme  =       "\'\@RG\\tID:$fullID\\tSM:$sampleID\\tPL:Illumina\\tLB:$libID\'";
 		my $logfile             =       $fullID . ".bamlog";
-		unlink("$BAM_OUT/$logfile") || print $logprint "<WARN>\t",timer(),"\tCan't delete $logfile: No such file!\n";;
+		unlink("$BAM_OUT/$logfile");
 		print $logprint "<INFO>\t",timer(),"\tFound two files for $fullID!\n";
 		# Index reference
 		print $logprint "<INFO>\t",timer(),"\tStart indexing reference genome $ref...\n";
@@ -135,13 +97,13 @@ sub tbbwa {
 		print $logprint "<INFO>\t",timer(),"\tFinished recreating index for $fullID!\n";
 		# Removing temporary files.
 		print $logprint "<INFO>\t",timer(),"\tRemoving temporary files...\n";
-		unlink("$BAM_OUT/$fullID.sam")			|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID\.sam: No such file!\n";
-		unlink("$BAM_OUT/$fullID.bam") 			|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID\.bam: No such file!\n";
-		unlink("$BAM_OUT/$fullID.sorted.bam") 		|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID\.sorted.bam: No such file!\n";
-		unlink("$BAM_OUT/$fullID.sorted.bam.bai") 	|| print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID\.sorted.bam\.bai: No such file!\n";
+		unlink("$BAM_OUT/$fullID.sam");
+		unlink("$BAM_OUT/$fullID.bam");
+		unlink("$BAM_OUT/$fullID.sorted.bam");
+		unlink("$BAM_OUT/$fullID.sorted.bam.bai");
 		# Renaming.
-		move("$BAM_OUT/$fullID.nodup.bam","$BAM_OUT/$fullID.bam") 		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
-		move("$BAM_OUT/$fullID.nodup.bam.bai","$BAM_OUT/$fullID.bam.bai") 	|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: $!\n";
+		move("$BAM_OUT/$fullID.nodup.bam","$BAM_OUT/$fullID.bam") 		|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBbwa line 126.\n";
+		move("$BAM_OUT/$fullID.nodup.bam.bai","$BAM_OUT/$fullID.bam.bai") 	|| die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBbwa line 127.\n";
 		# Finished.
 		print $logprint "<INFO>\t",timer(),"\tFinished mapping for $fullID!\n";
 	}
