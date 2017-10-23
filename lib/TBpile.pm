@@ -6,6 +6,7 @@ package TBpile;
 
 use strict;
 use warnings;
+use diagnostics;
 use File::Copy;
 use TBtools;
 use Exporter;
@@ -27,14 +28,28 @@ sub tbpile {
 	my $threads		=	shift;
 	my @gbam_files		=	@_;
 	# Start logic...
-	foreach my $file (sort { $a cmp $b } @gbam_files) {
-		my @file_name		=	split(/_/,$file);
-		my $sampleID		= 	shift(@file_name);
-		my $libID 		=	shift(@file_name);
-		my $source		= 	shift(@file_name);
-		my $date		= 	shift(@file_name);
-		$date			=~	s/\.gatk\.bam//;
-		my $fullID		=	join("_",($sampleID,$libID,$source,$date));
+	@gbam_files = sort { $a cmp $b } @gbam_files;
+	print "FILES ciao" . join("@",@gbam_files)."\n";
+	foreach my $file (@gbam_files) {
+		print "FILE: $file\n";
+		
+			my @file_name		=	split(/_/,$file);
+			my $sampleID		= 	shift(@file_name);
+		print "SAMPLE: $sampleID\n";
+			my $libID		=	shift(@file_name);
+		print "LIBID: $libID\n";
+			#my $libID		=~	s/\.gatk\.bam//;
+			my $file_mod		=	join("_",@file_name);
+			print "FILE_MOD: $file_mod\n";
+			my $date		=	$1;
+			my $source		= 	$file_mod;
+			my $fullID		=	join("_",($sampleID,$libID));
+			if($source ne "") {
+			print "SOURCE: $source\n";
+			my $source_new = substr($source,0,(length($source)-4));
+			print "SOURCE_NEW: $source_new\n";
+			$fullID.="_".$source_new;
+		}
 		print $logprint "<INFO>\t",timer(),"\tUpdating logfile for $fullID...\n";		
 		my $basename		=	$file; 
 		$basename		=~	s/\.bam$//;

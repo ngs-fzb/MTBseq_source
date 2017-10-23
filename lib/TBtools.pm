@@ -6,6 +6,7 @@ package TBtools;
 
 use strict;
 use warnings;
+use diagnostics;
 use File::Copy;
 use List::Util qw(max);
 use Statistics::Basic qw(median mean);
@@ -161,6 +162,7 @@ sub parse_fasta { # Parse a reference genome and save the genome as a whole valu
 	while(<IN>) {
 		chomp;
 		my $line	=	$_;
+		#print $line;
 		$line		=~	s/\015?\012?$//; # This will take care of different line break characters
 		$fasta->{ref}	.=	$line unless($line =~ /^>/);
     	}
@@ -1392,7 +1394,6 @@ sub help { # Print a help message.
 	--step
 	<ESSENTIAL> This is an essential option! Choose your pipeline step as a parameter!
 		TBfull		Full workflow
-		TBreads		Read naming scheme adjustment
 		TBbwa		Read mapping
 		TBmerge		Merging of duplicate mapping files
 		TBrefine	Refinement of mapping(s)

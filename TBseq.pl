@@ -8,7 +8,6 @@ use FindBin qw($RealBin);
 use lib "$RealBin/lib";
 use Cwd;
 use Getopt::Long;
-use TBreads;
 use TBbwa;
 use TBstats;
 use TBmerge;
@@ -80,7 +79,8 @@ my	$unambigous		=	"";
 my	$window			=	"";
 my	$distance		=	"";
 my	$quiet			=	"";
-my      $threads                =       "";
+my	$threads		=	"";
+my	$naming_scheme		=	"";
 my  	$help			=	"";
 
 # Get the commandline parameter.
@@ -114,7 +114,6 @@ GetOptions	(	'step:s'        =>	\$step,
 if	($help eq '1'		)       	{	help();		exit 1;		}
 if	($step eq ''		)       	{	nostep();	exit 1;		}
 unless	(($step eq 'TBfull'	) 	||
-	 ($step eq 'TBreads'	)	||
 	 ($step eq 'TBbwa'	)	||
 	 ($step eq 'TBstats' 	)	||
 	 ($step eq 'TBmerge'	)	||
@@ -271,7 +270,6 @@ my %check_up;
 
 # Juming to certain pipeline steps.
 if($step	eq	'TBfull'	)	{   goto    TBfull	}
-if($step	eq	'TBreads'	)	{   goto    TBreads	}
 if($step	eq	'TBbwa'		)	{   goto    TBbwa	}
 if($step	eq	'TBmerge'	)	{   goto    TBmerge	}
 if($step	eq	'TBrefine'	)	{   goto    TBrefine	}
@@ -287,29 +285,6 @@ if($step        eq      'TBgroups'      )       {   goto    TBgroups    }
 # Pipeline execution.
 TBfull:
 print $logprint "\n<INFO>\t",timer(),"\t### [TBfull] selected ###\n";
-
-
-
-TBreads:
-if($step eq 'TBreads') {
-	print $logprint "\n<INFO>\t",timer(),"\t### [TBreads] selected ###\n";
-}	
-opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: TBseq.pl line: ", __LINE__ ," \n";
-@fastq_files		=	grep { $_ =~ /^\w.*\.fastq/ && -f "$W_dir/$_" } readdir(WORKDIR);
-closedir(WORKDIR);
-if(scalar(@fastq_files) == 0) {
-	print $logprint "\n<ERROR>\t",timer(),"\tNo read files to process! Check content of $W_dir!\n";
-	exit 1;
-}
-print $logprint "\n<INFO>\t",timer(),"\tProcessing read files:\n";
-foreach my $fastq (sort { $a cmp $b } @fastq_files) {
-	print $logprint "<INFO>\t",timer(),"\t$fastq\n";
-}
-print $logprint "\n<INFO>\t",timer(),"\tStart read file processing...\n";
-tbreads($logprint,$W_dir,$machine,$run_number,@fastq_files);
-print $logprint "<INFO>\t",timer(),"\tFinished read file processing!\n";
-@fastq_files		=	();
-if($continue == 0 && $step ne 'TBfull') { exit 1; }
 
 
 
@@ -344,7 +319,7 @@ foreach my $fastq (sort { $a cmp $b } @fastq_files_new) {
 	print $logprint "<INFO>\t",timer(),"\t$fastq\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart BWA mapping...\n";
-tbbwa($logprint,$W_dir,$VAR_dir,$BWA_dir,$SAMTOOLS_dir,$BAM_OUT,$ref,$threads,@fastq_files_new);
+tbbwa($logprint,$W_dir,$VAR_dir,$BWA_dir,$SAMTOOLS_dir,$BAM_OUT,$ref,$threads,$naming_scheme,@fastq_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished BWA mapping!\n";
 @fastq_files		=	();
 @bam_files		=	();
@@ -370,7 +345,7 @@ foreach my $bam (sort { $a cmp $b } @bam_files) {
 	print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart merging...\n";
-tbmerge($logprint,$SAMBAMBA_dir,$BAM_OUT,$MBAM_OUT,$GATK_OUT,$MPILE_OUT,$POS_OUT,$CALL_OUT,$threads,@bam_files);
+tbmerge($logprint,$SAMBAMBA_dir,$BAM_OUT,$MBAM_OUT,$GATK_OUT,$MPILE_OUT,$POS_OUT,$CALL_OUT,$threads,$naming_scheme,@bam_files);
 print $logprint "<INFO>\t",timer(),"\tFinished merging!\n";
 @bam_files		=	();
 if($continue == 0 && $step ne 'TBfull') { exit 1; }
@@ -636,7 +611,7 @@ if(scalar(@join_files) != 0) {
 	exit 1;
 }
 for(my $i = 0; $i < scalar(@var_files); $i++) {
-        my @tmp         =       split(/_/,$var_files[$i]);
+	my @tmp		=	split(/_|\./,$var_files[$i]);
         if(exists $check_up{$tmp[0]."_".$tmp[1]}) {
 		print $logprint "\n<INFO>\t",timer(),"\tFound $var_files[$i]! Using file for joint analysis...";
                 push(@var_files_new,$var_files[$i]);

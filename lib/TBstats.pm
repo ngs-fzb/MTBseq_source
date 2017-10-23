@@ -6,6 +6,7 @@ package TBstats;
 
 use strict;
 use warnings;
+use diagnostics;
 use File::Copy;
 use TBtools;
 use Exporter;
@@ -61,17 +62,34 @@ sub tbstats {
 		close(IN);
 	}
 	# Start logic...
-	foreach my $file (sort { $a cmp $b } @bam_files) {
-		next unless (-f "$BAM_OUT/$file");
-    		my @file_name		=	split(/_/,$file);
-		my $sampleID		=	shift(@file_name);
-		my $libID		=	shift(@file_name);
-    		my $source		=	shift(@file_name);
-    		my $date		=	shift(@file_name);
-		$date			=~	s/\.bam//;
-    		my $fullID		=	join("_",($sampleID,$libID,$source,$date));
+	@bam_files = sort { $a cmp $b } @bam_files;
+	print "FILES ciao" . join("@",@bam_files)."\n";
+	foreach my $file (@bam_files) {
+		print "FILE: $file\n";
+		
+			next unless (-f "$BAM_OUT/$file");
+    			my @file_name		=	split(/_/,$file);
+			my $sampleID		=	shift(@file_name);
+		print "SAMPLE: $sampleID\n";
+			my $libID		=	shift(@file_name);
+			$libID		=~	s/\.bam//;
+    		print "LIBID: $libID\n";
+			my $file_mod		=	join("_",@file_name);
+		print "FILE_MOD: $file_mod\n";
+			my $date		=	$1;
+			my $source		=	$file_mod;
+    			my $fullID		=	join("_",($sampleID,$libID));
+			print "FULLID: $fullID\n";
+			if($source ne ""){
+			print "SOURCE: $source\n";
+			my $source_new = substr($source,0,(length($source)-4));
+			print "SOURCE_NEW: $source_new\n";
+			$fullID.="_".$source_new;
+			print "FULLID: $fullID\n";
+		}
+	
 		# Check if sttistics for sample already exist.
-		if(exists $check_up{"\'$sampleID"."\'$libID"."\'$source"."\'$date"}) {
+		if(exists $check_up{"\'$sampleID"."\'$libID"}) {
 			print $logprint "<INFO>\t",timer(),"\tSkipping, statistics calculation for $fullID. Statisitcs already existing!\n";
 			next;
 		}
@@ -86,6 +104,7 @@ sub tbstats {
 		$relmap 		=	($lines[4] / $lines[0]) * 100 if($lines[0] != 0);
 		$relmap 		=  	sprintf("%.2f",$relmap);
 		print $logprint "<INFO>\t",timer(),"\tFinished using Samtools for BWA mapping statistics of $file!\n";
+		#my $pos_file_cor	=	substr($file,0,(length($file)-4));
 		my $pos_file		=	$fullID."\.gatk_position_table\.tab";
 		print $logprint "<INFO>\t",timer(),"\tStart parsing position list of $pos_file...\n";
 		# Get variant statistics.
@@ -100,7 +119,7 @@ sub tbstats {
 		$variants		=	{};
 		print $logprint "<INFO>\t",timer(),"\tFinished fetching variant statistics from $pos_file!\n";
 		print $logprint "<INFO>\t",timer(),"\tStart preparing statistics for $fullID...\n";
-		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$source\t'$date\t'$lines[0]\t'$lines[4]\t'$relmap\t";
+		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$lines[0]\t'$lines[4]\t'$relmap\t";
 		$result 		=	$result.prepare_stats($statistics);
 		$statistics		=	{};
 		print $logprint "<INFO>\t",timer(),"\tFinished preparing statistics for $fullID!\n";
@@ -108,7 +127,7 @@ sub tbstats {
 		print $logprint "<INFO>\t",timer(),"\tStart printing statistics into $stats_file...\n";
 		unless(-f "$STATS_OUT/$stats_file") {
 			open(OUT,">$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line: ", __LINE__ , " \n";
-			my $header 	=	"Date\tSampleID\tLibraryID\tSource\tRun\tTotal Reads\tMapped Reads\t% Mapped Reads\t";
+			my $header 	=	"Date\tSampleID\tLibraryID\tTotal Reads\tMapped Reads\t% Mapped Reads\t";
 			$header 	= 	$header."Genome Size\tGenome GC\t(Any) Total Bases\t% (Any) Total Bases\t(Any) GC-Content\t(Any) Coverage mean\t(Any) Coverage median\t(Unambiguous) Total Bases\t% (Unambiguous) Total Bases\t(Unambiguous) GC-Content\t(Unambiguous) Coverage mean\t(Unambiguous) Coverage median\t";
 			$header		=	$header."SNPs\tDeletions\tInsertions\tUncovered\tSubstitutions (Including Stop Codons)\n";
 			print OUT $header;

@@ -6,6 +6,7 @@ package TBstrains;
 
 use strict;
 use warnings;
+use diagnostics;
 use File::Copy;
 use TBtools;
 use Exporter;
@@ -80,7 +81,7 @@ sub tbstrains {
 	unless(-f "$STRAIN_OUT/$output_file") {
 		print $logprint "<INFO>\t",timer(),"\t","Start writing $output_file...\n";
 		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line: ", __LINE__ , " \n";
-		my $header      =       "Date\tSampleID\tLibraryID\tSource\tRun";
+		my $header      =       "Date\tSampleID\tLibraryID";
         	$header         .=      "\tHomolka species\tHomolka lineage\tHomolka group\tQuality";
         	$header         .=      "\tColl lineage (branch)\tColl lineage_name (branch)\tColl quality (branch)";
         	$header         .=      "\tColl lineage (easy)\tColl lineage_name (easy)\tColl quality (easy)";
@@ -97,8 +98,9 @@ sub tbstrains {
 		$file =~ /(\S+)\.gatk_position_table\.tab$/;
 		my $id 		=	$1;
 		my @sample	=	split(/_/,$id);
+		print "ID: $id\n";
 		# Check if strains classification already exists.
-		if(exists $check_up{"\'$sample[0]"."_"."\'$sample[1]"."_"."\'$sample[2]"."_"."\'$sample[3]"}) {
+		if(exists $check_up{"\'$sample[0]"."_"."\'$sample[1]"}) {
 			print $logprint "<INFO>\t",timer(),"\t","Skipping $file. Lineage classification already existing!\n";
 			next;
 		}
@@ -156,7 +158,7 @@ sub tbstrains {
 				$IDpositions->{$pos} 	= 	$allel1;
 			}	
 			my $quality			=	0;
-			my $outline			= 	"\'$date_string\t\'$sample[0]\t\'$sample[1]\t\'$sample[2]\t\'$sample[3]";
+			my $outline			= 	"\'$date_string\t\'$sample[0]\t\'$sample[1]";
 			($species,$lineage_name)	=	specificator_homolka($IDpositions);
 			$quality			=	$quality_homolka;
 			$lineage			=	translate_homolka2coll($lineage_name);

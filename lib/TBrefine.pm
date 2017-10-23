@@ -6,6 +6,7 @@ package TBrefine;
 
 use strict;
 use warnings;
+use diagnostics;
 use File::Copy;
 use TBtools;
 use Exporter;
@@ -31,14 +32,29 @@ sub tbrefine {
 	my @bam_files		=	@_;
 	my %input;
 	# Start logic...
-	foreach my $file (sort { $a cmp $b } @bam_files) {
-		my @file_name		=	split(/_/,$file);
-		my $sampleID		=	shift(@file_name);
-		my $libID		=	shift(@file_name);
-		my $source		=	shift(@file_name);
-		my $date		=	shift(@file_name);
-		$date			=~	s/\.bam//;
-		my $fullID		=	join("_",($sampleID,$libID,$source,$date));
+	@bam_files = sort {$a cmp $b } @bam_files;
+	print "FILES ciao" . join("@",@bam_files)."\n";
+	foreach my $file (@bam_files) {
+		print "FILE: $file\n";
+	
+			my @file_name		=	split(/_/,$file);
+			my $sampleID		=	shift(@file_name);
+		print "SAMPLE: $sampleID\n";
+			my $libID		=	shift(@file_name);
+		print "LIBID: $libID\n";
+			$libID			=~	s/\.bam//;
+			my $file_mod		=	join("_",@file_name);
+			print "FILE_MOD: $file_mod\n";
+			my $date		=	$1;	
+			#die ("wrong file name ($file_mod)") if not $file_mod =~ s/.bam//;
+			my $source		=	$file_mod;
+			my $fullID		=	join("_",($sampleID,$libID));
+			if($source ne ""){
+			print "SOURCE: $source\n";
+			my $source_new = substr($source,0,(length($source)-4));
+			print "SOURCE_NEW: $source_new\n";
+			$fullID.="_".$source_new;
+		}
 		push(@{$input{$fullID}},$file);
 	}
 	@bam_files = ();
@@ -51,9 +67,9 @@ sub tbrefine {
 		my @file_name		=	split(/_/,$fullID);
 		my $sampleID		=	shift(@file_name);
 		my $libID		=	shift(@file_name);
-		my $source		=	shift(@file_name);
-		my $date		=	shift(@file_name);
-		$date			=~      s/\.bam//;
+		my $file_mod		=	join("_",@file_name);
+		my $source		=	$file_mod;
+		my $date		=	$1;
 		print $logprint "<INFO>\t",timer(),"\tUpdating log file for $fullID...\n";
 		my $old_logfile		=	$fullID.".bamlog";
 		my $merge_logfile	=	$fullID.".mergelog";
@@ -72,13 +88,13 @@ sub tbrefine {
 		print $logprint "<INFO>\t",timer(),"\tFinished using Picard Tools for creating a dictionary of $ref!\n";
 		# Use RealignerTargetCreator.
 		print $logprint "<INFO>\t",timer(),"\tStart using GATK RealignerTargetCreator for $fullID...\n";
-		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type RealignerTargetCreator --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --downsample_to_coverage 10000 --num_threads $threads --out $GATK_OUT/$fullID.gatk.intervals 2>> $GATK_OUT/$logfile\n";
-		system("java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type RealignerTargetCreator --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --downsample_to_coverage 10000 --num_threads $threads --out $GATK_OUT/$fullID.gatk.intervals 2>> $GATK_OUT/$logfile");
+		print $logprint "<INFO>\t",timer(),"\t/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type RealignerTargetCreator --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --downsample_to_coverage 10000 --num_threads $threads --out $GATK_OUT/$fullID.gatk.intervals 2>> $GATK_OUT/$logfile\n";
+		system("/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type RealignerTargetCreator --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --downsample_to_coverage 10000 --num_threads $threads --out $GATK_OUT/$fullID.gatk.intervals 2>> $GATK_OUT/$logfile");
 		print $logprint "<INFO>\t",timer(),"\tFinished using GATK RealignerTargetCreator for $fullID!\n";
 		# Use IndelRealigner.
 		print $logprint "<INFO>\t",timer(),"\tStart using GATK IndelRealigner for $fullID...\n";
-		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type IndelRealigner --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --defaultBaseQualities 12 --targetIntervals $GATK_OUT/$fullID.gatk.intervals --noOriginalAlignmentTags --out $GATK_OUT/$fullID.realigned.bam 2>> $GATK_OUT/$logfile\n";
-		system("java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type IndelRealigner --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --defaultBaseQualities 12 --targetIntervals $GATK_OUT/$fullID.gatk.intervals --noOriginalAlignmentTags --out $GATK_OUT/$fullID.realigned.bam 2>> $GATK_OUT/$logfile");
+		print $logprint "<INFO>\t",timer(),"\t/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type IndelRealigner --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --defaultBaseQualities 12 --targetIntervals $GATK_OUT/$fullID.gatk.intervals --noOriginalAlignmentTags --out $GATK_OUT/$fullID.realigned.bam 2>> $GATK_OUT/$logfile\n";
+		system("/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type IndelRealigner --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --defaultBaseQualities 12 --targetIntervals $GATK_OUT/$fullID.gatk.intervals --noOriginalAlignmentTags --out $GATK_OUT/$fullID.realigned.bam 2>> $GATK_OUT/$logfile");
 		print $logprint "<INFO>\t",timer(),"\tFinished using GATK IndelRealigner for $fullID!\n";
 		# If $ref is not h37rv than we skip the next parts.
 		unless($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
@@ -94,13 +110,13 @@ sub tbrefine {
 		print $logprint "<INFO>\t",timer(),"\tFinished using IGVtools for indexing of $res!\n";
 		# Use BaseRecalibrator.
 		print $logprint "<INFO>\t",timer(),"\tStart using GATK BaseRecalibrator for $fullID...\n";
-		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $res --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile\n";
-		system("java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $res --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile");
+		print $logprint "<INFO>\t",timer(),"\t/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $res --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile\n";
+		system("/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $res --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile");
 		print $logprint "<INFO>\t",timer(),"\tFinished using GATK BaseRecalibrator for $fullID!\n";
 		# Use print PrintReads.
 		print $logprint "<INFO>\t",timer(),"\tStart using GATK PrintReads for $fullID...\n";
-		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar -T --analysis_type PrintReads --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --BQSR $GATK_OUT/$fullID.gatk.grp --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.bam  2>> $GATK_OUT/$logfile\n";
-		system("java -jar $GATK_dir/GenomeAnalysisTK.jar -T --analysis_type PrintReads --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --BQSR $GATK_OUT/$fullID.gatk.grp --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.bam  2>> $GATK_OUT/$logfile");
+		print $logprint "<INFO>\t",timer(),"\t/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar -T --analysis_type PrintReads --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --BQSR $GATK_OUT/$fullID.gatk.grp --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.bam  2>> $GATK_OUT/$logfile\n";
+		system("/usr/local/cluster/alternatives/bin/java -jar $GATK_dir/GenomeAnalysisTK.jar -T --analysis_type PrintReads --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --BQSR $GATK_OUT/$fullID.gatk.grp --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.bam  2>> $GATK_OUT/$logfile");
 		print $logprint "<INFO>\t",timer(),"\tFinished using GATK PrintReads for $fullID!\n";
 		# Index Reference.
 		print $logprint "<INFO>\t",timer(),"\tStart using IGVtools for indexing of $ref...\n";

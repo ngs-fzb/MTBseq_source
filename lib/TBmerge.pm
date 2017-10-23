@@ -6,6 +6,7 @@ package TBmerge;
 
 use strict;
 use warnings;
+use diagnostics;
 use File::Copy;
 use TBtools;
 use Exporter;
@@ -31,12 +32,18 @@ sub tbmerge {
 	my %input;
 	# Prepare input.
 	foreach my $file (sort { $a cmp $b } @bam_files) {
-		my @file_name		=	split(/_/,$file);
-		my $sampleID		=	shift(@file_name);
-		my $libID		=	shift(@file_name);
-		my $machine		=	shift(@file_name);
-		my $run			=	shift(@file_name);
-		my $samplelib		=	$sampleID."_".$libID;
+		print "FILE: $file\n";
+			my @file_name		=	split(/_/,$file);
+			my $sampleID		=	shift(@file_name);
+			print "SAMPLEID: $sampleID\n";
+			my $libID		=	shift(@file_name);
+			print "LIBID: $libID\n";
+			#$libID			=~	s/\.bam//;
+			my $file_mod		=	join("_",@file_name);
+		print "FILE_MOD: $file_mod\n";
+			my $machine		=	$file_mod;
+			my $samplelib		=	$sampleID."_".$libID;
+
 		push(@{$input{$samplelib}},$file);
 	}
 	@bam_files = ();
@@ -50,15 +57,14 @@ sub tbmerge {
 		my $sampleID			=	"";
 		my $libID			=	"";
 		my $machine			=	"";
-		my $run				=	"";
 		my $multi_merge 		= 	0;
 		my $old_multi_mergelog_file	=	"";
 		foreach my $file (sort { $a cmp $b } @bams) {
 			my @file_name		=	split(/_/,$file);
 			$sampleID		= 	shift(@file_name);
 			$libID			= 	shift(@file_name);
-			$machine		= 	shift(@file_name);
-			$run			= 	shift(@file_name);
+			my $file_mod		=	join("_",@file_name);
+			$machine		= 	$file_mod;
 			if($machine =~ /^multi(\d+)/) {	
 				$multi_merge			=	$1;
 				$old_multi_mergelog_file	= 	$file;
