@@ -63,8 +63,6 @@ sub tbrefine {
 		my $date		=	$1;
 		print $logprint "<INFO>\t",timer(),"\tUpdating log file for $fullID...\n";
 		my $old_logfile		=	$fullID.".bamlog";
-		my $merge_logfile	=	$fullID.".mergelog";
-		$old_logfile		=	$merge_logfile 	if (-f "$BAM_OUT/$merge_logfile");
 		my $logfile		=	$fullID.".gatk.bamlog";
 		unlink("$GATK_OUT/$logfile");
 		if(-f "$BAM_OUT/$old_logfile") {
