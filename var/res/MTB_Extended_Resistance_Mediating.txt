@@ -1,133 +1,43 @@
 H37Rv gene	start	stop	type	Rv number	coding strand	associated antibiotic resistance	comment	length	region analyzed in reference collection
-gyrB upstream	4998	5239	intergenic	-	forward	moxifloxacin, gatifloxacin, ofloxacin, levofloxacin, ciprofloxacin	-	242	yes
-gyrB	5240	7267	CDS	Rv0005	forward	moxifloxacin, gatifloxacin, ofloxacin, levofloxacin, ciprofloxacin	-	2028	yes
-gyrA upstream	7268	7301	intergenic	-	forward	moxifloxacin, gatifloxacin, ofloxacin, levofloxacin, ciprofloxacin	-	34	yes
-gyrA	7302	9818	CDS	Rv0006	forward	moxifloxacin, gatifloxacin, ofloxacin, levofloxacin, ciprofloxacin	-	2517	yes
-ponA1 upstream	53245	53662	intergenic	-	forward	rifampicin, rifabutin	-	418	no
-ponA1	53663	55699	CDS	Rv0050	forward	rifampicin, rifabutin	-	2037	no
-inbR	330933	331658	CDS	Rv0275c	reverse	isoniazid	-	726	no
-inbR upstream	331659	331747	intergenic	-	reverse	isoniazid	-	89	no
-fgd1 upstream	490706	490782	intergenic	-	forward	delamanid, PA-824	-	77	yes
-fgd1	490783	491793	CDS	Rv0407	forward	delamanid, PA-824	-	1011	yes
-mshA upstream	575301	575347	intergenic	-	forward	ethionamide, prothionamide	-	47	yes
-mshA	575348	576790	CDS	Rv0486	forward	ethionamide, prothionamide	-	1443	yes
-Rv0565c	656010	657470	CDS	Rv0565c	reverse	ethionamide, prothionamide	alternative activator Eto,Pto or compensation EthA deficit	1461	yes
-Rv0565c upstream	657471	657548	intergenic	-	reverse	ethionamide, prothionamide	-	78	yes
-hadA upstream	731880	731929	intergenic	-	forward	thioacetazone	-	50	no
-hadA,hadB,hadC	731930	733325	CDS	Rv0635,Rv0636, Rv0637	forward	thioacetazone	-	1396	no
-mmaA4	736298	737203	CDS	Rv0642c	reverse	thioacetazone	-	906	no
-mmaA4 upstream	737204	737267	intergenic	-	reverse	thioacetazone	-	64	no
-mmaA3	737268	738149	CDS	Rv0643c	reverse	isoniazid, ethionamide, prothionamide	-	882	no
-mmaA3 upstream	738150	738296	intergenic	-	reverse	isoniazid, ethionamide, prothionamide	-	147	no
-mmaA2	738297	739160	CDS	Rv0644c	reverse	thioacetazone	-	864	no
-mmaA2 upstream	739161	739326	intergenic	-	reverse	thioacetazone	-	166	no
-rpoB upstream	759310	759806	intergenic	-	forward	rifampicin, rifabutin	-	497	yes
-rpoB	759807	763325	CDS	Rv0667	forward	rifampicin, rifabutin	-	3519	yes
-rpoC upstream	763326	763369	intergenic	-	forward	compensates rpoB	compensates RpoB reduced activity	44	no
-rpoC	763370	767320	CDS	Rv0668	forward	compensates rpoB	compensates RpoB reduced activity	3951	yes
-mmpL5,mmpS5	775586	778905	CDS	Rv0676c	reverse	bedaquiline, clofazimine	-	3320	yes
-Rv0678 upstream	778906	778989	intergenic	-	reverse	bedaquiline, clofazimine	mmpS5-Rv0678 intergenic	84	yes
-Rv0678	778990	779487	CDS	Rv0678	forward	bedaquiline, clofazimine	-	498	yes
-rpsL upstream	781312	781559	intergenic	-	forward	streptomycin	-	248	yes
-rpsL	781560	781934	CDS	Rv0682	forward	streptomycin	-	375	yes
-rplC upstream	800793	800808	intergenic	-	forward	linezolid	-	16	yes
-rplC	800809	801462	CDS	Rv0701	forward	linezolid	-	654	yes
-ksgA upstream	1127884	1128090	intergenic	-	forward	clarithromycin	-	207	no
-ksgA	1129152	1130105	CDS	Rv1010	forward	clarithromycin	-	954	no
-mshB upstream	1300125	1300303	intergenic	-	forward	isoniazid	-	179	no
-mshB	1300304	1301215	CDS	Rv1170	forward	isoniazid	-	912	no
-fbiC upstream	1302682	1302930	intergenic	-	forward	delamanid, PA-824	-	249	yes
-fbiC	1302931	1305501	CDS	Rv1173	forward	delamanid, PA-824	-	2571	yes
-sigI upstream	1332011	1332091	intergenic	-	forward	isoniazid	-	81	no
-sigI	1332092	1332964	CDS	Rv1189	forward	isoniazid	-	873	no
-folP2 upstream	1351126	1351190	intergenic	-	forward	cotrimoxazol	-	65	no
-folP2	1351191	1352147	CDS	Rv1207	forward	cotrimoxazol	-	957	no
-tap	1406081	1407340	CDS	Rv1258c	reverse	streptomycin, PAS	-	1260	yes
-tap upstream	1407341	1408238	CDS	Rv1259	reverse	streptomycin, PAS	tap upstream region covers udgB CDS	898	no
-embR	1416181	1417347	CDS	Rv1267c	reverse	ethambutol	-	1167	yes
-embR upstream	1417348	1417657	intergenic	-	reverse	ethambutol	-	310	yes
-atpE upstream	1460997	1461044	intergenic	-	forward	bedaquiline, clofazimine	-	48	yes
-atpE	1461045	1461290	CDS	Rv1305	forward	bedaquiline, clofazimine	-	246	yes
-rrs upstream	1471743	1471845	intergenic	-	forward	streptomycin, amikacin, kanamycin, capreomycin	-	103	yes
-rrs	1471846	1473382	rRNA	Rvnr01	forward	streptomycin, amikacin, kanamycin, capreomycin	-	1537	yes
-rrl upstream	1473383	1473657	intergenic	-	forward	linezolid, capreomycin, clarithromycin	-	275	yes
-rrl	1473658	1476795	rRNA	Rvnr02	forward	linezolid, capreomycin, clarithromycin	-	3138	yes
-fabG1 upstream	1673300	1673439	intergenic	-	forward	isoniazid, ethionamide, prothionamide	-	140	yes
-fabG1	1673440	1674183	CDS	Rv1483	forward	isoniazid, ethionamide, prothionamide	-	744	yes
-inhA upstream	1674184	1674201	intergenic	-	forward	isoniazid, ethionamide, prothionamide	-	18	no
-inhA	1674202	1675011	CDS	Rv1484	forward	isoniazid, ethionamide, prothionamide	-	810	yes
-pykA upstream	1816082	1816188	intergenic	-	forward	cycloserine	-	107	no
-pykA	1816189	1817607	CDS	Rv1617	forward	cycloserine	-	1419	no
-rpsA upstream	1833380	1833541	intergenic	-	forward	pyrazinamide	-	162	yes
-rpsA	1833542	1834987	CDS	Rv1630	forward	pyrazinamide	-	1446	yes
-tlyA	1917940	1918746	CDS	Rv1694	forward	capreomycin	-	807	yes
-cycA	1929786	1931456	CDS	Rv1704c	reverse	cycloserine	-	1671	yes
-cycA upstream	1931457	1932654	intergenic	-	reverse	cycloserine	cycA TSS covers PPE22 CDS	1198	yes
-eccB5 upstream	2017477	2017739	intergenic	-	forward	moxifloxacin, gatifloxacin, ofloxacin, levofloxacin, ciprofloxacin	-	263	no
-eccB5,eccC5	2017740	2023432	CDS	Rv1782,Rv1783	forward	moxifloxacin, gatifloxacin, ofloxacin, levofloxacin, ciprofloxacin	-	5693	no
-ndh	2101651	2103042	CDS	Rv1854c	reverse	isoniazid, ethionamide, prothionamide, clofazimine, thioridazine	-	1392	yes
-ndh upstream	2103043	2103183	intergenic	-	reverse	isoniazid, ethionamide, prothionamide, clofazimine, thioridazine	-	141	yes
-katG	2153889	2156111	CDS	Rv1908c	reverse	isoniazid	-	2223	yes
-katG upstream	2156112	2156148	intergenic	-	reverse	isoniazid	-	37	yes
-furA	2156149	2156592	CDS	Rv1909c	reverse	isoniazid	-	444	yes
-furA upstream	2156593	2156705	intergenic	-	reverse	isoniazid	-	113	yes
-Rv1979c	2221719	2223164	CDS	Rv1979c	reverse	bedaquiline, clofazimine	-	1446	yes
-Rv1979c upstream	2223165	2223342	intergenic	-	reverse	bedaquiline, clofazimine	-	178	yes
-erm(37) upstream	2231455	2231679	intergenic	-	forward	clarithromycin	-	225	yes
-erm(37)	2231680	2232219	CDS	Rv1988	forward	clarithromycin	-	540	yes
-pncA	2288681	2289241	CDS	Rv2043c	reverse	pyrazinamide	-	561	yes
-pncA upstream	2289242	2289281	intergenic	-	reverse	pyrazinamide	-	40	yes
-mshC	2391215	2392459	CDS	Rv2130c	reverse	isoniazid, ethionamide, prothionamide	-	1245	no
-mshC upstream	2392460	2392516	intergenic	-	reverse	isoniazid, ethionamide, prothionamide	-	57	no
-eis	2714124	2715332	CDS	Rv2416c	reverse	amikacin, kanamycin, capreomycin	-	1209	yes
-eis upstream	2715333	2715471	intergenic	-	reverse	amikacin, kanamycin, capreomycin	-	139	yes
-ahpC upstream	2726088	2726192	intergenic	-	forward	compensates katG deficit	compensates KatG deficit	105	yes
-ahpC	2726193	2726780	CDS	Rv2428	forward	compensates katG deficit	compensates KatG deficit	588	no
-folC	2746135	2747598	CDS	Rv2447c	reverse	PAS	-	1464	yes
-pepQ	2859300	2860418	CDS	Rv2535c	reverse	bedaquiline, clofazimine	-	1119	yes
-pepQ upstream	2860419	2860451	intergenic	-	reverse	bedaquiline, clofazimine	-	33	yes
-Rv2671 upstream	2985731	2986838	CDS	Rv2670c	forward	PAS	Rv2671 upstream region covers Rv2670c CDS	1108	yes
-Rv2671	2986839	2987615	CDS	Rv2671	forward	PAS	-	777	yes
-Rv2731	3043026	3044378	CDS	Rv2731	forward	pyrazinamide	-	1353	yes
-thyX	3067193	3067945	CDS	Rv2754c	reverse	compensates ThyA deficit	compensates ThyA deficit	753	no
-thyX upstream	3067946	3068188	intergenic	-	reverse	compensates ThyA deficit	compensates ThyA deficit	243	yes
-dfrA	3073130	3073609	CDS	Rv2763c	reverse	PAS, cotrimoxazol	-	480	yes
-dfrA upstream	3073610	3073679	intergenic	-	reverse	PAS, cotrimoxazol	-	70	yes
-thyA	3073680	3074471	CDS	Rv2764c	reverse	PAS	-	792	yes
-thyA upstream	3074472	3074635	intergenic	-	reverse	PAS	-	164	yes
-ald upstream	3086755	3086819	intergenic	-	forward	cycloserine	-	65	yes
-ald	3086820	3087935	CDS	Rv2780	forward	cycloserine	-	1116	yes
-gpsI	3090339	3092597	CDS	Rv2783c	reverse	pyrazinamide	-	2259	yes
-gpsI upstream	3092598	3092950	intergenic	-	reverse	pyrazinamide	-	353	yes
-ddlA	3336796	3337917	CDS	Rv2981c	reverse	cycloserine	-	1122	yes
-ddlA upstream	3337918	3337994	intergenic	-	reverse	cycloserine	-	77	yes
-mymA upstream	3448427	3448503	intergenic	-	forward	ethionamide, prothionamide	-	77	yes
-mymA	3448504	3449991	CDS	Rv3083	forward	ethionamide, prothionamide	-	1488	yes
-Rv3169	3537238	3538362	CDS	Rv3169	forward	pyrazinamide	-	1125	yes
-whiB7	3568401	3568679	CDS	Rv3197A	reverse	streptomycin, kanamycin, clarithromycin, PAS	-	279	yes
-whiB7 upstream	3568680	3569108	intergenic	-	reverse	streptomycin, kanamycin, clarithromycin, PAS	-	429	yes
-nudC	3571602	3572543	CDS	Rv3199c	reverse	isoniazid, ethionamide, prothionamide	-	942	no
-nudC upstream	3572544	3572601	intergenic	-	reverse	isoniazid, ethionamide, prothionamide	-	58	no
-fbiA upstream	3640142	3640542	intergenic	-	forward	delamanid, PA-824	-	401	yes
-fbiA,B	3640543	3642881	CDS	Rv3261,Rv3262	forward	delamanid, PA-824	-	2339	yes
-alr	3840194	3841420	CDS	Rv3423c	reverse	cycloserine	3841348 corrected CDS start	1227	yes
-alr upstream	3841421	3841713	intergenic	-	reverse	cycloserine	-	293	yes
-rpoA	3877464	3878507	CDS	Rv3457c	reverse	compensates rpoB	compensates RpoB reduced activity	1044	yes
-rpoA upstream	3878508	3878658	intergenic	-	reverse	compensates rpoB	compensates RpoB reduced activity	151	no
-ddn upstream	3986733	3986843	intergenic	-	forward	delamanid, PA-824	-	111	yes
-ddn	3986844	3987299	CDS	Rv3547	forward	delamanid, PA-824	-	456	yes
-nat	4007331	4008182	CDS	Rv3566c	reverse	isoniazid	-	852	no
-nat upstream	4008183	4008433	CDS	Rv3566A	reverse	isoniazid	nat upstream region covers Rv3566A CDS	251	no
-panD	4043862	4044281	CDS	Rv3601c	reverse	pyrazinamide	-	420	yes
-folP1	4049138	4049980	CDS	Rv3608c	reverse	PAS, cotrimoxazol	-	843	no
-folP1 upstream	4049981	4050585	CDS	Rv3609c	reverse	PAS, cotrimoxazol	folP1 upstream region covers folE CDS	605	no
-aftA,embC	4237932	4243147	CDS	Rv3792,Rv3793	forward	ethambutol	-	5216	yes
-embA upstream	4243148	4243232	intergenic	-	forward	ethambutol	increases also embB transcription	85	yes
-embA,embB	4243233	4249810	CDS	Rv3794,Rv3795	forward	ethambutol	-	6578	yes
-ubiA	4268925	4269833	CDS	Rv3806c	reverse	ethambutol	-	909	yes
-ubiA upstream	4269834	4269839	intergenic	-	reverse	ethambutol	-	6	yes
-ethA	4326004	4327473	CDS	Rv3854c	reverse	ethionamide, prothionamide, thioacetazone	-	1470	yes
-ethA upstream	4327474	4327548	intergenic	-	reverse	ethionamide, prothionamide, thioacetazone	ethA-ethR intergenic	75	yes
-ethR	4327549	4328199	CDS	Rv3855	forward	ethionamide, prothionamide, thioacetazone	-	651	yes
-gidB	4407528	4408202	CDS	Rv3919c	reverse	streptomycin	-	675	yes
-gidB upstream	4408203	4408333	intergenic	-	reverse	streptomycin	-	131	yes
+gyrB upstream	4998	5239	intergenic	-	forward	fluoroquinolones (FQ)	-	242	-
+gyrB	5240	7267	CDS	Rv0005	forward	fluoroquinolones (FQ)	-	2028	-
+gyrA upstream	7268	7301	intergenic	-	forward	fluoroquinolones (FQ)	-	34	-
+gyrA	7302	9818	CDS	Rv0006	forward	fluoroquinolones (FQ)	-	2517	-
+mshA upstream	575301	575347	intergenic	-	forward	ethionamide (ETH)	-	47	-
+mshA	575348	576790	CDS	Rv0486	forward	ethionamide (ETH)	-	1443	-
+rpoB upstream	759310	759806	intergenic	-	forward	rifampicin (RMP)	-	497	-
+rpoB	759807	763325	CDS	Rv0667	forward	rifampicin (RMP)	-	3519	-
+rpsL upstream	781312	781559	intergenic	-	forward	streptomycin (SM)	-	248	-
+rpsL	781560	781934	CDS	Rv0682	forward	streptomycin (SM)	-	375	-
+rplC upstream	800793	800808	intergenic	-	forward	linezolid (LZD)	-	16	-
+rplC	800809	801462	CDS	Rv0701	forward	linezolid (LZD)	-	654	-
+rrs upstream	1471743	1471845	intergenic	-	forward	streptomycin (SM)	-	103	-
+rrs	1471846	1473382	rRNA	Rvnr01	forward	streptomycin (SM)	-	1537	-
+rrl upstream	1473383	1473657	intergenic	-	forward	linezolid (LZD)	-	275	-
+rrl	1473658	1476795	rRNA	Rvnr02	forward	linezolid (LZD)	-	3138	-
+fabG1 upstream	1673300	1673439	intergenic	-	forward	isoniazid (INH)	-	140	-
+fabG1	1673440	1674183	CDS	Rv1483	forward	isoniazid (INH)	-	744	-
+inhA upstream	1674184	1674201	intergenic	-	forward	isoniazid (INH) ethionamide (ETH)	-	18	-
+inhA	1674202	1675011	CDS	Rv1484	forward	isoniazid (INH) ethionamide (ETH)	-	810	-
+rpsA upstream	1833380	1833541	intergenic	-	forward	pyrazinamide (PZA)	-	162	-
+rpsA	1833542	1834987	CDS	Rv1630	forward	pyrazinamide (PZA)	-	1446	-
+tlyA	1917940	1918746	CDS	Rv1694	forward	capreomycin (CPR)	-	807	-
+ndh	2101651	2103042	CDS	Rv1854c	reverse	isoniazid (INH) ethionamide (ETH)	-	1392	-
+ndh upstream	2103043	2103183	intergenic	-	reverse	isoniazid (INH) ethionamide (ETH)	-	141	-
+katG	2153889	2156111	CDS	Rv1908c	reverse	isoniazid (INH)	-	2223	-
+katG upstream	2156112	2156148	intergenic	-	reverse	isoniazid (INH)	-	37	-
+pncA	2288681	2289241	CDS	Rv2043c	reverse	pyrazinamide (PZA)	-	561	-
+pncA upstream	2289242	2289281	intergenic	-	reverse	pyrazinamide (PZA)	-	40	-
+eis	2714124	2715332	CDS	Rv2416c	reverse	kanamycin (KAN)	-	1209	-
+eis upstream	2715333	2715471	intergenic	-	reverse	kanamycin (KAN)	-	139	-
+ahpC upstream	2726088	2726192	intergenic	-	forward	isoniazid (INH)	-	105	-
+ahpC	2726193	2726780	CDS	Rv2428	forward	isoniazid (INH)	-	588	-
+thyA	3073680	3074471	CDS	Rv2764c	reverse	para-aminosalicylic acid (PAS)	-	792	-
+thyA upstream	3074472	3074635	intergenic	-	reverse	para-aminosalicylic acid (PAS)	-	164	-
+aftA,embC	4237932	4243147	CDS	Rv3792,Rv3793	forward	ethambutol (EMB)	-	5216	-
+embA upstream	4243148	4243232	intergenic	-	forward	ethambutol (EMB)	-	85	-
+embA,embB	4243233	4249810	CDS	Rv3794,Rv3795	forward	ethambutol (EMB)	-	6578	-
+ethA	4326004	4327473	CDS	Rv3854c	reverse	ethionamide (ETH)	-	1470	-
+ethA upstream	4327474	4327548	intergenic	-	reverse	ethionamide (ETH)	-	75	-
+gidB	4407528	4408202	CDS	Rv3919c	reverse	streptomycin (SM)	-	675	-
+gidB upstream	4408203	4408333	intergenic	-	reverse	streptomycin (SM)	-	131	-

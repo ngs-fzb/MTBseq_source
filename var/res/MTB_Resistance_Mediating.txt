@@ -64,18 +64,18 @@ Variant position genome start	Variant position genome stop	Var. type	Number	WT b
 781821	781821	SNP	1	a	c	coding	Rv0682	rpsL	781560	781934	375	+	Lys	88	-	Gln	Lys88Gln	aag/cag	262	262	streptomycin (SM)	8849220	
 781822	781822	SNP	1	a	g	coding	Rv0682	rpsL	781560	781934	375	+	Lys	88	-	Arg	Lys88Arg	aag/agg	263	263	streptomycin (SM)	22646308	yes
 801268	801268	SNP	1	t	c	coding	Rv0701	rplC	800809	801462	654	+	Cys	154	-	Arg	Cys154Arg	tgt/cgt	460	460	linezolid (LZD)	22371899	
-1472337	1472337	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	492	492	streptomycin (SM)	9160326	
-1472358	1472358	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	513	513	streptomycin (SM)	7540819	
-1472359	1472359	SNP	1	a	c	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	514	514	streptomycin (SM)	9160326	
-1472362	1472362	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	517	517	streptomycin (SM)	9160326	
-1472750	1472750	SNP	1	c	a	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	905	905	streptomycin (SM)	7540819	
-1472751	1472751	SNP	1	a	g	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	906	906	streptomycin (SM)	9160326	
-1472752	1472752	SNP	1	a	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	907	907	streptomycin (SM)	9160326	
-1473246	1473246	SNP	1	a	g	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1401	1401	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	21300839	yes
-1473247	1473247	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1402	1402	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	16048924	yes
-1473329	1473329	SNP	1	g	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1484	1484	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	21562102	yes
-1475956	1475956	SNP	1	g	t	ribosomal	MTB000020	rrl	1473658	1476795	3138	+	-	-	-	-	---	-	2299	2299	linezolid (LZD)	18070973	
-1476471	1476471	SNP	1	g	t	ribosomal	MTB000020	rrl	1473658	1476795	3138	+	-	-	-	-	---	-	2814	2814	linezolid (LZD)	18070973	
+1472337	1472337	SNP	1	c	t	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	492	492	streptomycin (SM)	9160326	
+1472358	1472358	SNP	1	c	t	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	513	513	streptomycin (SM)	7540819	
+1472359	1472359	SNP	1	a	c	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	514	514	streptomycin (SM)	9160326	
+1472362	1472362	SNP	1	c	t	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	517	517	streptomycin (SM)	9160326	
+1472750	1472750	SNP	1	c	a	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	905	905	streptomycin (SM)	7540819	
+1472751	1472751	SNP	1	a	g	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	906	906	streptomycin (SM)	9160326	
+1472752	1472752	SNP	1	a	t	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	907	907	streptomycin (SM)	9160326	
+1473246	1473246	SNP	1	a	g	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1401	1401	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	21300839	yes
+1473247	1473247	SNP	1	c	t	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1402	1402	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	16048924	yes
+1473329	1473329	SNP	1	g	t	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1484	1484	amikacin (AMK) kanamycin (KAN) capreomycin (CPR)	21562102	yes
+1475956	1475956	SNP	1	g	t	ribosomal	Rvnr02	rrl	1473658	1476795	3138	+	-	-	-	-	---	-	2299	2299	linezolid (LZD)	18070973	
+1476471	1476471	SNP	1	g	t	ribosomal	Rvnr02	rrl	1473658	1476795	3138	+	-	-	-	-	---	-	2814	2814	linezolid (LZD)	18070973	
 1673423	1673423	SNP	1	g	t	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-17	-17	isoniazid (INH)	14638486	
 1673424	1673424	SNP	1	a	g	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-16	-16	isoniazid (INH)	19494067	
 1673425	1673425	SNP	1	c	t	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-15	-15	isoniazid (INH)	21300839	yes
@@ -294,7 +294,7 @@ Variant position genome start	Variant position genome stop	Var. type	Number	WT b
 2289223	2289223	SNP	1	g	t	coding	Rv2043c	pncA	2289241	2288681	561	-	Val	7	-	Phe	Val7Phe	gtc/ttc	19	19	pyrazinamide (PZA)	25336456	yes
 2289225	2289225	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ile	6	-	Thr	Ile6Thr	atc/acc	17	17	pyrazinamide (PZA)	25336456	yes
 2289226	-	Ins	1	t	tg	coding	Rv2043c	pncA	2289241	2288681	561	-	Ile	6	-	-	Ile6-	atc/catc	16	16	pyrazinamide (PZA)	22646308	
-2289231	2289231	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	4	-	Ser	Leu4Ser	ttg/tcg	11	11	pyrazinamide (PZA)	25336456	yes
+2289231	2289231	SNP	1	t	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	4	-	Ser	Leu4Ser	ttg/tcg	11	11	pyrazinamide (PZA)	25336456	yes
 2289231	2289231	SNP	1	t	g	coding	Rv2043c	pncA	2289241	2288681	561	-	Leu	4	-	Trp	Leu4Trp	ttg/tgg	11	11	pyrazinamide (PZA)	11641519	
 2289234	2289234	SNP	1	c	a	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	3	-	Glu	Ala3Glu	gcg/gag	8	8	pyrazinamide (PZA)	25336456	yes
 2289235	2289235	SNP	1	g	c	coding	Rv2043c	pncA	2289241	2288681	561	-	Ala	3	-	Pro	Ala3Pro	gcg/ccg	7	7	pyrazinamide (PZA)	10390238	
@@ -449,10 +449,10 @@ Variant position genome start	Variant position genome stop	Var. type	Number	WT b
 575907	575907	SNP	1	c	t	coding	Rv0486	mshA	575348	576790	1443	+	Ala	187	-	Val	Ala187Val	gca/gta	560	560	phylo (Beijing)	24458512	
 576077	576077	SNP	1	c	t	coding	Rv0486	mshA	575348	576790	1443	+	Leu	244	-	Leu	Leu244Leu	ctg/ttg	730	730	phylo (Tur)	24458512	
 1461251	1461251	SNP	1	g	t	coding	Rv1305	atpE	1461045	1461290	246	+	Ala	69	-	Ala	Ala69Ala	gcg/gct	207	207	phylo (West African 2)	24458512	
-1471848	-	Ins	1	t	tt	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	4	4	phylo (M. canettii)	24458512	
-1471851	1471851	SNP	1	t	g	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	6	6	phylo (M. canettii)	24458512	
-1473079	1473079	SNP	1	g	a	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1234	1234	phylo (M. microti)	24458512	
-1473094	1473094	SNP	1	t	c	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1249	1249	phylo (M. pinipedii)	24458512	
+1471848	-	Ins	1	t	tt	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	4	4	phylo (M. canettii)	24458512	
+1471851	1471851	SNP	1	t	g	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	6	6	phylo (M. canettii)	24458512	
+1473079	1473079	SNP	1	g	a	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1234	1234	phylo (M. microti)	24458512	
+1473094	1473094	SNP	1	t	c	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	1249	1249	phylo (M. pinipedii)	24458512	
 1673338	1673338	SNP	1	g	a	intergenic	Rv1483	fabG1	1673440	1674183	744	+	-	-	-	-	---	-	-102	-102	phylo (West African 1a, West African 1b)	24458512	
 1674434	1674434	SNP	1	t	c	coding	Rv1484	inhA	1674202	1675011	810	+	Val	78	-	Ala	Val78Ala	gtg/gcg	233	233	phylo (West African 2, 6)	24458512	
 1674520	1674520	SNP	1	c	t	coding	Rv1484	inhA	1674202	1675011	810	+	Pro	107	-	Ser	Pro107Ser	ccg/tcg	319	319	phylo (M. pinipedii)	24458512	
@@ -533,7 +533,7 @@ Variant position genome start	Variant position genome stop	Var. type	Number	WT b
 1416977	1416977	SNP	1	a	g	coding	Rv1267c	embR	1417347	1416181	1167	-	His	124	-	Arg	His124Arg	cac/cgc	371	371	phylo (7)	25176035	
 1417019	1417019	SNP	1	g	a	coding	Rv1267c	embR	1417347	1416181	1167	-	Cys	110	-	Tyr	Cys110Tyr	tgc/tac	329	329	phylo (1)	25176035	
 1455780	1455780	SNP	1	t	c	coding	Rv1299	prfA	1455495	1456568	1074	+	Leu	96	-	Leu	Leu96Leu	ttg/ctg	286	286	phylo (4,2,2,1)	25176035	
-1472337	1472337	SNP	1	c	t	ribosomal	MTB000019	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	492	492	phylo (4,3,2)	25176035	
+1472337	1472337	SNP	1	c	t	ribosomal	Rvnr01	rrs	1471846	1473382	1537	+	-	-	-	-	---	-	492	492	phylo (4,3,2)	25176035	
 1487796	1487796	SNP	1	c	a	coding	Rv1324	-	1487161	1488075	915	+	Ile	212	-	Ile	Ile212Ile	atc/ata	636	636	phylo (4,2,2)	25176035	
 1491275	1491275	SNP	1	c	t	coding	Rv1326c	glgB	1492312	1490117	2196	-	His	346	-	His	His346His	cac/cat	1038	1038	phylo (1,1,3)	25176035	
 1501468	1501468	SNP	1	g	c	coding	Rv1332	-	1500926	1501582	657	+	Pro	181	-	Pro	Pro181Pro	ccg/ccc	543	543	phylo (4,6,1,2)	25176035	
