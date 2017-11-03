@@ -30,13 +30,9 @@ sub tbbwa {
 	my %input;
 	# Start logic...
 	@fastq_files = sort { $a cmp $b } @fastq_files;
-	print "FILES ciao" . join("@",@fastq_files)."\n";
-	foreach my $file (@fastq_files) {
-		print "FILE: $file\n";
-	
+	foreach my $file (@fastq_files) {	
 			my @file_name		= 	split(/_/,$file);
 			my $sampleID		= 	shift(@file_name);
-		print "SAMPLE: $sampleID\n";
 			my $libID		= 	shift(@file_name);
 			my $file_mod		=	join("_",@file_name);
 			die("wrong file name ($file_mod)") if not $file_mod =~ s/(R1|R2).fastq.gz//;
@@ -44,9 +40,7 @@ sub tbbwa {
 			my $machine		= 	$file_mod;
 			my $fullID		=	join("_",($sampleID,$libID));
 			if($machine ne ""){
-				print "MACHINE: $machine\n";
 				my $machine_new = substr($machine,0,(length($machine)-1));
-				print "MACHINE_NEW: $machine_new\n";
 				$fullID.="_".$machine_new;
 			}
 		$input{$fullID}{$dir}{fastq}	=	$file;

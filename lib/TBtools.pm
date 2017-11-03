@@ -2578,7 +2578,7 @@ sub specificator_beijing_easy {
 sub specificator_coll_easy {
 	my $IDpositions			=		shift;
 	my $species			=		'unknown';
-	my $lineage			=		'unknown';
+	my $lineage			=		'-';
 	if($IDpositions->{931123}	eq "T")		{ $lineage = '4'		unless(length($lineage) > 1);	}		# wt allel L4 Euro-American
 	if($IDpositions->{62657} 	eq "A")  	{ $lineage = '4.1' 		unless(length($lineage) > 3);	}		# L4.1 Euro-American
 	if($IDpositions->{514245} 	eq "T") 	{ $lineage = '4.1.1' 		unless(length($lineage) > 5);	}		# L4.1.1 Euro-American (X-type)

@@ -29,25 +29,16 @@ sub tbpile {
 	my @gbam_files		=	@_;
 	# Start logic...
 	@gbam_files = sort { $a cmp $b } @gbam_files;
-	print "FILES ciao" . join("@",@gbam_files)."\n";
-	foreach my $file (@gbam_files) {
-		print "FILE: $file\n";
-		
+	foreach my $file (@gbam_files) {		
 			my @file_name		=	split(/_/,$file);
 			my $sampleID		= 	shift(@file_name);
-		print "SAMPLE: $sampleID\n";
 			my $libID		=	shift(@file_name);
-		print "LIBID: $libID\n";
-			#my $libID		=~	s/\.gatk\.bam//;
+			$libID		=~	s/\.gatk\.bam//;
 			my $file_mod		=	join("_",@file_name);
-			print "FILE_MOD: $file_mod\n";
-			my $date		=	$1;
 			my $source		= 	$file_mod;
 			my $fullID		=	join("_",($sampleID,$libID));
 			if($source ne "") {
-			print "SOURCE: $source\n";
 			my $source_new = substr($source,0,(length($source)-4));
-			print "SOURCE_NEW: $source_new\n";
 			$fullID.="_".$source_new;
 		}
 		print $logprint "<INFO>\t",timer(),"\tUpdating logfile for $fullID...\n";		
@@ -58,10 +49,10 @@ sub tbpile {
 		my $mpile_logfile	=	$basename.".mpileuplog";
 		my $mpile_file		=	$basename.".mpileup";
 		unlink("$GATK_OUT/$vcf_logfile");
-		unlink("$GATK_OUT/$mpile_logfile");
+		unlink("$MPILE_OUT/$mpile_logfile");
 		if(-f "$GATK_OUT/$old_logfile") {
 			# cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$vcf_logfile")	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile line: ", __LINE__ , " \n";
-			cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$mpile_logfile") 	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile line: ", __LINE__ , " \n";
+			cat($logprint,"$GATK_OUT/$old_logfile","$MPILE_OUT/$mpile_logfile") 	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile line: ", __LINE__ , " \n";
 		}
 
 ### UNDER CONSTRUCTION - Haplotype Caller and VCF Files ###

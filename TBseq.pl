@@ -10,7 +10,6 @@ use Cwd;
 use Getopt::Long;
 use TBbwa;
 use TBstats;
-use TBmerge;
 use TBrefine;
 use TBpile;
 use TBlist;
@@ -36,7 +35,6 @@ $date_string                    =~      s/_/-/g;
 
 # Define directories. Will be exported to certain modules for easier updating purposes.
 my	$BAM_OUT         	=	"$W_dir/Bam";
-my 	$MBAM_OUT        	=	"$W_dir/Merged_Bam";
 my 	$GATK_OUT        	=	"$W_dir/GATK_Bam";
 my 	$MPILE_OUT       	=	"$W_dir/Mpileup";
 my 	$POS_OUT         	=	"$W_dir/Position_Tables";
@@ -64,9 +62,7 @@ my      $group_name             =       "";
 my	$resi_list_master	=	"";
 my	$int_regions		=	"";
 my	$categories		=	"";
-my  	$ref			=	"";
-my  	$machine		=	"";
-my  	$run_number		=	"";
+my  $ref			=	"";
 my	$mibqual		=	"";
 my	$all_vars		=	"";
 my	$snp_vars		=	"";
@@ -92,8 +88,6 @@ GetOptions	(	'step:s'        =>	\$step,
 			'intregions:s'	=>	\$int_regions,
 			'categories:s'	=>	\$categories,
 			'ref:s'         =>	\$ref,
-			'machine:s'     =>	\$machine,
-			'run:s'         =>	\$run_number,
 			'minbqual:i'	=>	\$mibqual,
 			'all_vars'	=>	\$all_vars,
 			'snp_vars'	=>	\$snp_vars,
@@ -116,7 +110,6 @@ if	($step eq ''		)       	{	nostep();	exit 1;		}
 unless	(($step eq 'TBfull'	) 	||
 	 ($step eq 'TBbwa'	)	||
 	 ($step eq 'TBstats' 	)	||
-	 ($step eq 'TBmerge'	)	||
 	 ($step eq 'TBrefine'	)	||
 	 ($step eq 'TBpile'	)  	||
 	 ($step eq 'TBlist'	)	||
@@ -135,8 +128,6 @@ if($resi_list_master    eq      ''      )       {       $resi_list_master     	=
 if($int_regions    	eq      ''      )       {       $int_regions       	=       "NONE";                                 }
 if($categories		eq      ''      )       {       $categories		=       "NONE";                                 }
 if($ref			eq	''	)	{	$ref            	=	"M._tuberculosis_H37Rv_2015-11-13";	}
-if($machine		eq	''	)	{	$machine        	=	"NGS";					}
-if($run_number		eq	''	)	{	$run_number   		=	"nXXXX";				}
 if($mibqual		eq	''	)	{	$mibqual        	=	13;					}
 if($all_vars            eq      ''      )       {       $all_vars               =       0;                                      }
 if($snp_vars            eq      ''      )       {       $snp_vars               =       0;                                      }
@@ -190,8 +181,6 @@ print $logprint "<INFO>\t",timer(),"\t--resilist\t$resi_list_master\n";
 print $logprint "<INFO>\t",timer(),"\t--intregions\t$int_regions\n";
 print $logprint "<INFO>\t",timer(),"\t--categories\t$categories\n";
 print $logprint "<INFO>\t",timer(),"\t--ref\t\t$ref\n";
-print $logprint "<INFO>\t",timer(),"\t--machine\t$machine\n";
-print $logprint "<INFO>\t",timer(),"\t--run\t\t$run_number\n";
 print $logprint "<INFO>\t",timer(),"\t--minbqual\t$mibqual\n";
 print $logprint "<INFO>\t",timer(),"\t--all_vars\t$all_vars\n";
 print $logprint "<INFO>\t",timer(),"\t--snp_vars\t$snp_vars\n";
@@ -215,7 +204,6 @@ print $logprint "<INFO>\t",timer(),"\t$GATK_dir\n";
 
 print $logprint "\n<INFO>\t",timer(),"\tThe following directories will be used, if necessary:\n";
 print $logprint "<INFO>\t",timer(),"\t$BAM_OUT\n";
-print $logprint "<INFO>\t",timer(),"\t$MBAM_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$GATK_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$MPILE_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$POS_OUT\n";
@@ -226,7 +214,6 @@ print $logprint "<INFO>\t",timer(),"\t$STRAIN_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$GROUPS_OUT\n";
 
 system("mkdir -p $BAM_OUT");
-system("mkdir -p $MBAM_OUT");
 system("mkdir -p $GATK_OUT");
 system("mkdir -p $MPILE_OUT");
 system("mkdir -p $POS_OUT");
@@ -271,16 +258,15 @@ my %check_up;
 # Juming to certain pipeline steps.
 if($step	eq	'TBfull'	)	{   goto    TBfull	}
 if($step	eq	'TBbwa'		)	{   goto    TBbwa	}
-if($step	eq	'TBmerge'	)	{   goto    TBmerge	}
 if($step	eq	'TBrefine'	)	{   goto    TBrefine	}
 if($step	eq	'TBpile'	)	{   goto    TBpile	}
 if($step	eq	'TBlist'	)	{   goto    TBlist	}
 if($step	eq	'TBvariants'	)	{   goto    TBvariants	}
-if($step        eq      'TBstats'       )       {   goto    TBstats     }
+if($step    eq  'TBstats'       )   {   goto    TBstats     }
 if($step	eq	'TBjoin'	)	{   goto    TBjoin	}
 if($step	eq	'TBamend'	)	{   goto    TBamend	}
 if($step	eq	'TBstrains'	)	{   goto    TBstrains   }
-if($step        eq      'TBgroups'      )       {   goto    TBgroups    }
+if($step    eq  'TBgroups'  )   {   goto    TBgroups    }
 
 # Pipeline execution.
 TBfull:
@@ -325,29 +311,6 @@ print $logprint "<INFO>\t",timer(),"\tFinished BWA mapping!\n";
 @bam_files		=	();
 @fastq_files_new        =       ();
 undef(%check_up);
-if($continue == 0 && $step ne 'TBfull') { exit 1; }
-
-
-
-TBmerge:
-if($step eq 'TBmerge') {
-	print $logprint "\n<INFO>\t",timer(),"\t### [TBmerge] selected ###\n";
-}
-opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: TBseq.pl line: ", __LINE__ ," \n";
-@bam_files 		= 	grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_" } readdir(BAMDIR);
-closedir(BAMDIR);
-if(scalar(@bam_files) == 0) {
-   	print $logprint "\n<ERROR>\t",timer(),"\tNo mapping files to merge! Check content of $BAM_OUT\n";
-    	exit 1;
-}
-print $logprint "\n<INFO>\t",timer(),"\tMerging mappings:\n";
-foreach my $bam (sort { $a cmp $b } @bam_files) {
-	print $logprint "<INFO>\t",timer(),"\t$bam\n";
-}
-print $logprint "\n<INFO>\t",timer(),"\tStart merging...\n";
-tbmerge($logprint,$SAMBAMBA_dir,$BAM_OUT,$MBAM_OUT,$GATK_OUT,$MPILE_OUT,$POS_OUT,$CALL_OUT,$threads,$naming_scheme,@bam_files);
-print $logprint "<INFO>\t",timer(),"\tFinished merging!\n";
-@bam_files		=	();
 if($continue == 0 && $step ne 'TBfull') { exit 1; }
 
 

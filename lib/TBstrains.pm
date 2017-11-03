@@ -98,7 +98,6 @@ sub tbstrains {
 		$file =~ /(\S+)\.gatk_position_table\.tab$/;
 		my $id 		=	$1;
 		my @sample	=	split(/_/,$id);
-		print "ID: $id\n";
 		# Check if strains classification already exists.
 		if(exists $check_up{"\'$sample[0]"."_"."\'$sample[1]"}) {
 			print $logprint "<INFO>\t",timer(),"\t","Skipping $file. Lineage classification already existing!\n";

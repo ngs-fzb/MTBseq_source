@@ -63,32 +63,21 @@ sub tbstats {
 	}
 	# Start logic...
 	@bam_files = sort { $a cmp $b } @bam_files;
-	print "FILES ciao" . join("@",@bam_files)."\n";
-	foreach my $file (@bam_files) {
-		print "FILE: $file\n";
-		
+	foreach my $file (@bam_files) {		
 			next unless (-f "$BAM_OUT/$file");
     			my @file_name		=	split(/_/,$file);
 			my $sampleID		=	shift(@file_name);
-		print "SAMPLE: $sampleID\n";
 			my $libID		=	shift(@file_name);
 			$libID		=~	s/\.bam//;
-    		print "LIBID: $libID\n";
 			my $file_mod		=	join("_",@file_name);
-		print "FILE_MOD: $file_mod\n";
-			my $date		=	$1;
 			my $source		=	$file_mod;
     			my $fullID		=	join("_",($sampleID,$libID));
-			print "FULLID: $fullID\n";
 			if($source ne ""){
-			print "SOURCE: $source\n";
 			my $source_new = substr($source,0,(length($source)-4));
-			print "SOURCE_NEW: $source_new\n";
 			$fullID.="_".$source_new;
-			print "FULLID: $fullID\n";
 		}
 	
-		# Check if sttistics for sample already exist.
+		# Check if statistics for sample already exist.
 		if(exists $check_up{"\'$sampleID"."\'$libID"}) {
 			print $logprint "<INFO>\t",timer(),"\tSkipping, statistics calculation for $fullID. Statisitcs already existing!\n";
 			next;
