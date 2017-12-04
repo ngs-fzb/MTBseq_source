@@ -1171,8 +1171,9 @@ sub prepare_stats { # Prints a statistics file.
 		$gc_content_ref		=	($ref_g + $ref_c) / ($ref_a + $ref_t + $ref_g + $ref_c) * 100;
 	}
 	$gc_content_ref			=	sprintf("%.2f",$gc_content_ref);
-    	my $any_size    		=	$statistics->{any}->{size};		$any_size			=	0 	unless($any_size);
-    	my $any_perc    		=	$any_size / $ref_genome_size;
+    	my $any_size    		= 	$statistics->{any}->{size};		$any_size			=	0 	unless($any_size);
+    	my $any_perc    		=	0;
+		$any_perc 				= $any_size / $ref_genome_size if($ref_genome_size != 0);
     	$any_perc       		=	sprintf("%.2f",$any_perc);
 	my $any_a       		=	$statistics->{any}->{A};		$any_a				=	0	unless($any_a);
 	my $any_c       		=	$statistics->{any}->{C};		$any_c				=	0	unless($any_c);
@@ -1192,7 +1193,8 @@ sub prepare_stats { # Prints a statistics file.
 	my $any_median_coverage 	= 	median(@any_coverage);
 	my $ein_size    		= 	$statistics->{eindeutig}->{size};
 	$ein_size			=	0					unless($ein_size);
-	my $ein_perc    		= 	$ein_size / $ref_genome_size 		if($ref_genome_size != 0);
+	my $ein_perc = 0;
+	$ein_perc    		= 	$ein_size / $ref_genome_size 		if($ref_genome_size != 0);
 	$ein_perc			= 	sprintf("%.2f",$ein_perc)		if($ein_perc);
 	my $ein_a       		=	$statistics->{eindeutig}->{A};		$ein_a		=	0	unless($ein_a);
 	my $ein_c       		=	$statistics->{eindeutig}->{C};		$ein_c         	=       0       unless($ein_c);
@@ -1667,6 +1669,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 		my $number_Ns			=	0;
 		my $number_Us			=	0;
 		my $pure_SNP			=	1;
+		
 		# Initialize hashes to count base and type.
 		my $allel_hash			=	{};
 		my $type_hash			=	{};
@@ -1692,6 +1695,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 				$type_hash->{$type}	+=	1;
 				$allel_hash->{$allel1}	+=	1;
 			}
+			
 			my $unambiguous_base_call	=	0;
 			if(($covf >= $micovf) && ($covr >= $micovr) && ($freq1 >= $mifreq) && ($qual20 >= $miphred20)) {
 				if(($allel1 =~ /[ACGTacgt]/) || ($allel1 eq "GAP")) {
@@ -1713,7 +1717,8 @@ sub amend_joint_table { # Amends a joint variant Table.
 			$codon_line				.=	"\t$subs";
 		}
         	# Calculate percentage of strains with unambigous information at this position.
-		my $perc_unambigous			=	sprintf("%.2f", $unambigous_tmp / $number_of_strains * 100);
+		#my $perc_unambigous			=	sprintf("%.2f", $unambigous_tmp / $number_of_strains * 100);
+		
         	# Calculate majority allel and type.
         	my $main_allel				=	" ";
        		my $main_allelcount			=	0;
@@ -1733,6 +1738,15 @@ sub amend_joint_table { # Amends a joint variant Table.
 				$main_typecount	=	$typecount;
             		}
         	}
+			
+			### calculate percentage of strains with unambigous information at this position
+		my $perc_unambigous = "";
+		if ($main_type eq "Ins")	{
+			my $ins_counter = 0; $ins_counter = $type_hash->{"Ins"}; $perc_unambigous = sprintf("%.4f", $unambigous_tmp / $ins_counter * 100);
+		} else {
+			$perc_unambigous = sprintf("%.4f", $unambigous_tmp / $number_of_strains * 100);
+		}
+		
         	# Get further annotation information for this position.
        		my $category			=	" ";
         	my $resistance			=	" ";
@@ -2169,7 +2183,8 @@ sub call_variants { # Calls variants.
                         	my $nucleosin_prev   	=       $N_prev + $n_prev;
                         	my $gaps_prev        	=       $GAP_prev + $gap_prev;
 				my $cov_prev		=       $adenosin_prev + $cytosin_prev + $guanosin_prev + $thymin_prev + $nucleosin_prev + $gaps_prev;
-				$qual_20		=	$miphred20;
+				#Just set qual20 to number of reads showing the inserted allel.
+				$qual_20		=	$cov_f + $cov_r;
 				if($allel1 eq 'A') {
 					$freq1          =       sprintf("%.2f", $adenosin / $cov_prev * 100);
 				}
