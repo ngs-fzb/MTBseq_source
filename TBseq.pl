@@ -557,6 +557,7 @@ open(IN,"$samples") || die print $logprint "<INFO>\t",timer(),"\tCan't find $sam
 while(<IN>) {
 	my $line	=	$_;
 	$line		=~	s/\015?\012?$//;
+	next unless ($line);
 	my @fields	=	split(/\t/,$line);
 	$check_up{$fields[0]."_".$fields[1]}	=   $fields[0]."_".$fields[1];
 }
