@@ -247,8 +247,10 @@ my $sample_number;
 my $output_mode = $all_vars . $snp_vars . $lowfreq_vars;
 if(-f $samples) {
 	open(IN,"$samples") || die print $logprint "<INFO>\t",timer(),"\tCan't find $samples file! TBseq.pl line: ", __LINE__ ," \n";
-	while(<IN>) {
-		chomp;
+	while(my $line = <IN>) {
+		chomp($line);
+		$line =~ s/\015?\012?$//;
+		next unless ($line);
 		$sample_number++;
 	}
 	close(IN);
@@ -611,8 +613,10 @@ opendir(AMENDDIR,"$AMEND_OUT")  || die print $logprint "<ERROR>\t",timer(),"\tCa
 @amend_files            =       grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\_amended_u$unambigous\_phylo_w$window.tab$/ && -f "$AMEND_OUT/$_" } readdir(AMENDDIR);
 closedir(JOINDIR);
 closedir(AMENDDIR);
+
 if(scalar(@join_files) == 0) {
-    	print $logprint "\n<ERROR>\t",timer(),"\tNo joint variant file to amend! Check content of $JOIN_OUT!\n";
+		my $joint_file_name_tmp = $group_name . "_joint_cf" . $micovf . "_cr" . $micovr . "_fr" . $mifreq . "_ph" . $miphred20 . "_samples" . $sample_number . ".tab";
+    	print $logprint "\n<ERROR>\t",timer(),"\tNo joint variant file $joint_file_name_tmp to amend! Check content of $JOIN_OUT!\n";
     	exit 1;
 }
 %check_up               =       map { (my $id = $_) =~ s/\_amended_u$unambigous\_phylo_w$window.tab//; $id => $id; } @amend_files;
