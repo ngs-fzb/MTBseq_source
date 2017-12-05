@@ -57,7 +57,7 @@ sub tbstats {
 			my $line	=	$_;
 			$line		=~      s/\015?\012?$//;
 			my @fields	=	split(/\t/,$line);
-			$check_up{$fields[1].$fields[2].$fields[3].$fields[4]} = 1;
+			$check_up{$fields[1].$fields[2]} = 1;
 		}
 		close(IN);
 	}
@@ -79,7 +79,7 @@ sub tbstats {
 	
 		# Check if statistics for sample already exist.
 		if(exists $check_up{"\'$sampleID"."\'$libID"}) {
-			print $logprint "<INFO>\t",timer(),"\tSkipping, statistics calculation for $fullID. Statisitcs already existing!\n";
+			print $logprint "<INFO>\t",timer(),"\tSkipping, statistics calculation for $fullID Statisitcs already existing!\n";
 			next;
 		}
 		print $logprint "<INFO>\t",timer(),"\tStart using Samtools for BWA mapping statistics of $file...\n";
@@ -108,7 +108,7 @@ sub tbstats {
 		$variants		=	{};
 		print $logprint "<INFO>\t",timer(),"\tFinished fetching variant statistics from $pos_file!\n";
 		print $logprint "<INFO>\t",timer(),"\tStart preparing statistics for $fullID...\n";
-		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$lines[0]\t'$lines[4]\t'$relmap\t";
+		my $result              =       "'$date_string\t'$sampleID\t'$libID\t'$fullID\t'$lines[0]\t'$lines[4]\t'$relmap\t";
 		$result 		=	$result.prepare_stats($statistics);
 		$statistics		=	{};
 		print $logprint "<INFO>\t",timer(),"\tFinished preparing statistics for $fullID!\n";
@@ -116,7 +116,7 @@ sub tbstats {
 		print $logprint "<INFO>\t",timer(),"\tStart printing statistics into $stats_file...\n";
 		unless(-f "$STATS_OUT/$stats_file") {
 			open(OUT,">$STATS_OUT/$stats_file") || die print $logprint "<INFO>\t",timer(),"\tCan't create $stats_file: TBstats line: ", __LINE__ , " \n";
-			my $header 	=	"Date\tSampleID\tLibraryID\tTotal Reads\tMapped Reads\t% Mapped Reads\t";
+			my $header 	=	"Date\tSampleID\tLibraryID\tFullID\tTotal Reads\tMapped Reads\t% Mapped Reads\t";
 			$header 	= 	$header."Genome Size\tGenome GC\t(Any) Total Bases\t% (Any) Total Bases\t(Any) GC-Content\t(Any) Coverage mean\t(Any) Coverage median\t(Unambiguous) Total Bases\t% (Unambiguous) Total Bases\t(Unambiguous) GC-Content\t(Unambiguous) Coverage mean\t(Unambiguous) Coverage median\t";
 			$header		=	$header."SNPs\tDeletions\tInsertions\tUncovered\tSubstitutions (Including Stop Codons)\n";
 			print OUT $header;

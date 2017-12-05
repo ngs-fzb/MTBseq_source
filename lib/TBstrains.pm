@@ -51,7 +51,7 @@ sub tbstrains {
 			my $line		=	$_;
 			$line           	=~      s/\015?\012?$//;
 			my @fields		=	split(/\t/);
-			$check_up{$fields[1]."_".$fields[2]."_".$fields[3]."_".$fields[4]}	=	$fields[0];
+			$check_up{$fields[1]."_".$fields[2]}	=	$fields[0];
 		}
 	}
 	# Parse the genomic sequence for determining substitutions.
@@ -81,7 +81,7 @@ sub tbstrains {
 	unless(-f "$STRAIN_OUT/$output_file") {
 		print $logprint "<INFO>\t",timer(),"\t","Start writing $output_file...\n";
 		open(OUT,">$STRAIN_OUT/$output_file") || die print $logprint "<ERROR>\t",timer(),"\tCan't create $output_file: TBstrains line: ", __LINE__ , " \n";
-		my $header      =       "Date\tSampleID\tLibraryID";
+		my $header      =       "Date\tSampleID\tLibraryID\tFullID";
         	$header         .=      "\tHomolka species\tHomolka lineage\tHomolka group\tQuality";
         	$header         .=      "\tColl lineage (branch)\tColl lineage_name (branch)\tColl quality (branch)";
         	$header         .=      "\tColl lineage (easy)\tColl lineage_name (easy)\tColl quality (easy)";
@@ -157,7 +157,7 @@ sub tbstrains {
 				$IDpositions->{$pos} 	= 	$allel1;
 			}	
 			my $quality			=	0;
-			my $outline			= 	"\'$date_string\t\'$sample[0]\t\'$sample[1]";
+			my $outline			= 	"\'$date_string\t\'$sample[0]\t\'$sample[1]\t'$id";
 			($species,$lineage_name)	=	specificator_homolka($IDpositions);
 			$quality			=	$quality_homolka;
 			$lineage			=	translate_homolka2coll($lineage_name);
