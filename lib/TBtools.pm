@@ -1286,14 +1286,14 @@ sub print_joint_table { # Print a joint SNP table.
 		my $index	=	$line[1];
 		my $snpline	=	"";
 		my @values	=	split(/\t/, $variants->{$pos}->{$index}) if(exists $variants->{$pos}->{$index});
-		my $type	=	$values[1];	$type		=	" "	unless($type);
-		my $allel1	=	$values[2];	$allel1		=	" " 	unless($allel1);
+		my $type	=	$values[1];	$type		=	"-"	unless($type);
+		my $allel1	=	$values[2];	$allel1		=	"-" unless($allel1);
 		my $covf	=	$values[3];	$covf		=	"0"	unless($covf);
 		my $covr	=	$values[4];	$covr		=	"0"	unless($covr);
 		my $qual20	=	$values[5];	$qual20		=	"0"	unless($qual20);
 		my $freq1	=	$values[6];	$freq1		=	"0"	unless($freq1);
 		my $cov		=	$values[7];	$cov		=	"0"	unless($cov);
-		my $subs	=	$values[8];	$subs		=	" "	unless($subs);
+		my $subs	=	$values[8];	$subs		=	"-"	unless($subs);
 		$freq1		=	sprintf("%.2f", $freq1) 			unless($freq1 == 0);
 		# This marks the information added here not contained in the original variant files
 		$allel1		=	lc($allel1)					unless(exists $strains->{$pos.$index.$id});
@@ -1630,7 +1630,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 	my $second_header		=	"Position\tInsindex\tRef\tGene\tGeneName\tAnnotation";
 	$second_header			.=	"\tStrains\tCount_unamb\tPerc_unamb";
 	$second_header			.=	"\tNs\tUs\tPureSNP";
-	$second_header			.=	"\tMain_allel\tMain_type";
+	$second_header			.=	"\tMain_type\tMain_allel";
 	$second_header			.=	"\tCategory\tResistance\tPhylo\tInterestingRegion";
 	$second_header			.=	$variant_header;
    	# After the full output for each position, only the bases and only the amino acids are written in the line.
@@ -1691,7 +1691,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 			# Make sure that frequency is in the right format.
 			$freq1			=~	s/,/\./;
 			# Count bases and type for majority call.
-			unless(($type eq "Unc") || ($allel1 eq " ")) {
+			unless(($type eq "Unc") || ($allel1 eq "-")) {
 				$type_hash->{$type}	+=	1;
 				$allel_hash->{$allel1}	+=	1;
 			}
@@ -1720,7 +1720,7 @@ sub amend_joint_table { # Amends a joint variant Table.
 		#my $perc_unambigous			=	sprintf("%.2f", $unambigous_tmp / $number_of_strains * 100);
 		
         	# Calculate majority allel and type.
-        	my $main_allel				=	" ";
+        	my $main_allel				=	"U";
        		my $main_allelcount			=	0;
        		foreach my $allel (keys %$allel_hash) {
            		my $allelcount			=	$allel_hash->{$allel};
@@ -2151,7 +2151,7 @@ sub call_variants { # Calls variants.
 			# Uncovered positions.
 			unless($cov > 0) {
 				$type		=	"Unc";
-				$allel1		=	" ";
+				$allel1		=	"U";
 			}
 			# Insertions need special treatment.
 			if($insertion_index != 0) {
