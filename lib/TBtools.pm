@@ -1428,12 +1428,6 @@ sub help { # Print a help message.
 
 	--ref M._tuberculosis_H37Rv_2015-11-13
 	<OPTIONAL> Reference genome for mapping. Suported are: \"M._tuberculosis_H37Rv_2015-11-13\", \"M._chimaera_DSM44623_2016-01-28\", \"M._abscessus_CIP-104536T_2014-02-03\" and \"M._fortuitum_CT6_2016-01-08\".
-	
-	--machine NGS
-	<OPTIONAL> Defines the [Source] field within the read naming scheme.
-
-	--run nXXXX
-	<OPTIONAL> Defines the [Run] field within the read naming scheme.
 
 	--minbqual 13
         <OPTIONAL> Defines minimum positional mapping quality during variant calling.
