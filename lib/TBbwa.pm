@@ -64,7 +64,7 @@ sub tbbwa {
 		my $read_naming_scheme  =       "\'\@RG\\tID:$fullID\\tSM:$sampleID\\tPL:Illumina\\tLB:$libID\'";
 		my $logfile             =       $fullID . ".bamlog";
 		unlink("$BAM_OUT/$logfile");
-		print $logprint "<INFO>\t",timer(),"\tFound two files for $fullID!\n";
+		print $logprint "<INFO>\t",timer(),"\tFound at most two files for $fullID!\n";
 		# Index reference
 		print $logprint "<INFO>\t",timer(),"\tStart indexing reference genome $ref...\n";
 		print $logprint "<INFO>\t",timer(),"\t$BWA_dir/bwa index $VAR_dir/$ref >> $BAM_OUT/$logfile\n";
