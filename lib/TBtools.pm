@@ -1430,7 +1430,7 @@ sub help { # Print a help message.
 	<OPTIONAL> Specifies file for base quality recalibration. See the README.pdf for file properties.
 
 	--ref M._tuberculosis_H37Rv_2015-11-13
-	<OPTIONAL> Reference genome for mapping.
+	<OPTIONAL> Reference genome for mapping without .fasta extension.
 
 	--minbqual 13
 	<OPTIONAL> Defines minimum positional mapping quality during variant calling.
@@ -1441,8 +1441,8 @@ sub help { # Print a help message.
 	--snp_vars
 	<OPTIONAL> If set, only unambigous SNPs will be reported. No Insertions nd Deletions will be reported.
 
-	--lowfrew_vars
-	<OPTIONAL> If set, alternative low frewuency alleles competing with majority reference alleles will be reported (useful for the detection of subpopulations).
+	--lowfreq_vars
+	<OPTIONAL> If set, alternative low frequency alleles competing with majority reference alleles will be reported (useful for the detection of subpopulations).
 
 	--mincovf 4
 	<OPTIONAL> Defines minimum forward read coverage for a putative variant position.
@@ -1483,11 +1483,9 @@ sub help { # Print a help message.
 	TBseq --step TBbwa --continue
 	Default values and execute the \"TBbwa\" module as well as the downstream modules.
 
-	TBseq --step TBfull --threads 8 --machine nextseq --run n0101
-	Execute the whole pipeline with 8 threads and supported values.
+	TBseq --step TBfull --threads 8 --lowfreq_vars --minfreq 20 --mincovf 2 --mincovr 2 --intregions /path/to/intregions/file 
+	Execute the whole pipeline with 8 threads, reporting low frequency variants with altered minimum threshholds and using an alternative intregions file.
 
-	TBseq --help
-	Print this help message.
 	";
 	print "\n";
 }
