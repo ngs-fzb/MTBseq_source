@@ -1410,7 +1410,7 @@ sub help { # Print a help message.
 	
 	--continue
 	<OPTIONAL> Ensures that the pipeline continues after selecting a certain pipeline step that is not TBfull.
-	
+
 	--samples
 	<OPTIONAL> Specifies a column separated text file with sampleID in column 1 and libID in column 2 for pipeline steps after TBstats.
 
@@ -1426,12 +1426,15 @@ sub help { # Print a help message.
 	--categories
 	<OPTIONAL> Specifies a gene categories file to detect essential and non-essential genes as well as repetitive regions. See the README.pdf for file properties.
 
+	--basecalib
+	<OPTIONAL> Specifies file for base quality recalibration. See the README.pdf for file properties.
+
 	--ref M._tuberculosis_H37Rv_2015-11-13
-	<OPTIONAL> Reference genome for mapping. Suported are: \"M._tuberculosis_H37Rv_2015-11-13\", \"M._chimaera_DSM44623_2016-01-28\", \"M._abscessus_CIP-104536T_2014-02-03\" and \"M._fortuitum_CT6_2016-01-08\".
+	<OPTIONAL> Reference genome for mapping.
 
 	--minbqual 13
-        <OPTIONAL> Defines minimum positional mapping quality during variant calling.
-	
+	<OPTIONAL> Defines minimum positional mapping quality during variant calling.
+
 	--all_vars
 	<OPTIONAL> If set, all variant (unambiguous and ambiguous) and invariant sites will be reported.
 
