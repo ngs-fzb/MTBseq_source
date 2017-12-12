@@ -20,9 +20,6 @@ use TBstrains;
 use TBgroups;
 use TBtools;
 
-# Specials for MTBC.
-my  	$res             	=	"$RealBin/var/res/Base_Calibration_List.vcf"; # Known SNP positions for base call recalibration.
-
 # Get current working directory and time.
 my  	$W_dir			=	getcwd();
 my	$date_string		=	timer();
@@ -62,6 +59,7 @@ my      $group_name             =       "";
 my	$resi_list_master	=	"";
 my	$int_regions		=	"";
 my	$categories		=	"";
+my	$basecalib		=	"";
 my  $ref			=	"";
 my	$mibqual		=	"";
 my	$all_vars		=	"";
@@ -87,6 +85,7 @@ GetOptions	(	'step:s'        =>	\$step,
 			'resilist:s'	=>	\$resi_list_master,
 			'intregions:s'	=>	\$int_regions,
 			'categories:s'	=>	\$categories,
+			'basecalib:s'	=>	\$basecalib,
 			'ref:s'         =>	\$ref,
 			'minbqual:i'	=>	\$mibqual,
 			'all_vars'	=>	\$all_vars,
@@ -121,27 +120,28 @@ unless	(($step eq 'TBfull'	) 	||
   	)					{	badstep($step);	exit 1;		}
 
 # Test the commandline options and set default vaules if necessary.
-if($continue		eq	''	)	{	$continue       	=	0;					}
-if($samples             eq      ''      )       {       $samples        	=       "NONE";     				}
-if($group_name          eq      ''      )       {       $group_name     	=       "NONE";                           	}
-if($resi_list_master    eq      ''      )       {       $resi_list_master     	=       "NONE";                                 }
-if($int_regions    	eq      ''      )       {       $int_regions       	=       "NONE";                                 }
-if($categories		eq      ''      )       {       $categories		=       "NONE";                                 }
-if($ref			eq	''	)	{	$ref            	=	"M._tuberculosis_H37Rv_2015-11-13";	}
-if($mibqual		eq	''	)	{	$mibqual        	=	13;					}
-if($all_vars            eq      ''      )       {       $all_vars               =       0;                                      }
-if($snp_vars            eq      ''      )       {       $snp_vars               =       0;                                      }
-if($lowfreq_vars        eq      ''      )       {       $lowfreq_vars           =       0;                                      }
-if($micovf		eq	''	)	{	$micovf         	=	4;					}
-if($micovr		eq	''	)	{	$micovr         	=	4;                                      }
-if($miphred20		eq	''	)	{	$miphred20		=	4;                                      }
-if($mifreq		eq	''	)	{	$mifreq         	=	75;					}
-if($unambigous		eq	''	)	{	$unambigous		=	95;					}
-if($window		eq	''	)	{	$window			=	12;					}
-if($distance		eq	''	)	{	$distance		=	12;					}
-if($quiet		eq	''	)	{	$quiet			=	0;					}
-if($threads		eq	''	)	{	$threads		=	1;					}
-if($threads             >      	8       )       {       $threads        	=	8;                                      }
+if($continue			eq		''	)	{	$continue       	=	0;									}
+if($samples             eq      ''  )   {   $samples        	=       "NONE";     					}
+if($group_name          eq      ''  )   {   $group_name     	=       "NONE";                         }
+if($resi_list_master    eq      ''  )   {   $resi_list_master   =       "NONE";                         }
+if($int_regions    		eq      ''  )   {   $int_regions       	=       "NONE";                         }
+if($categories			eq      ''  )   {   $categories			=       "NONE";                         }
+if($basecalib			eq		''	)	{	$basecalib			=		"NONE";							}
+if($ref					eq		''	)	{	$ref            	=	"M._tuberculosis_H37Rv_2015-11-13";	}
+if($mibqual				eq		''	)	{	$mibqual        	=	13;									}
+if($all_vars            eq      ''  )   {   $all_vars           =   0;                                  }
+if($snp_vars            eq      ''  )   {   $snp_vars           =   0;                                  }
+if($lowfreq_vars        eq      ''  )   {   $lowfreq_vars       =   0;                                  }
+if($micovf				eq		''	)	{	$micovf         	=	4;									}
+if($micovr				eq		''	)	{	$micovr         	=	4;                                  }
+if($miphred20			eq		''	)	{	$miphred20			=	4;                                  }
+if($mifreq				eq		''	)	{	$mifreq         	=	75;									}
+if($unambigous			eq		''	)	{	$unambigous			=	95;									}
+if($window				eq		''	)	{	$window				=	12;									}
+if($distance			eq		''	)	{	$distance			=	12;									}
+if($quiet				eq		''	)	{	$quiet				=	0;									}
+if($threads				eq		''	)	{	$threads			=	1;									}
+if($threads             >      	8   )   {   $threads        	=	8;                                  }
 
 # Set the name of the $ref fasta file and gene annotation.
 my $refg     =      $ref;
@@ -153,6 +153,7 @@ if($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
 	$resi_list_master       =       "$RealBin/var/res/MTB_Resistance_Mediating.txt" if($resi_list_master eq 'NONE'); 	# MTBC Resistance mediating variants and MTBC phylogentic SNPs.
 	$int_regions            =       "$RealBin/var/res/MTB_Extended_Resistance_Mediating.txt" if($int_regions eq 'NONE'); 	# MTBC extended intergenic resistance mediating positions.	
 	$categories             =       "$RealBin/var/cat/MTB_Gene_Categories.txt" if($categories eq 'NONE'); 			# MTBC essential and non-essential genes.
+	$basecalib				= 		"$RealBin/var/res/Base_Calibration_List.vcf" if($basecalib eq 'NONE'); 			# MTBC base calibration list. Known SNP positions for base call recalibration.
 }
 
 # Creating log file and log on screen if --quiet is unset.
@@ -180,6 +181,7 @@ print $logprint "<INFO>\t",timer(),"\t--project\t$group_name\n";
 print $logprint "<INFO>\t",timer(),"\t--resilist\t$resi_list_master\n";
 print $logprint "<INFO>\t",timer(),"\t--intregions\t$int_regions\n";
 print $logprint "<INFO>\t",timer(),"\t--categories\t$categories\n";
+print $logprint "<INFO>\t",timer(),"\t--basecalib\t$basecalib\n";
 print $logprint "<INFO>\t",timer(),"\t--ref\t\t$ref\n";
 print $logprint "<INFO>\t",timer(),"\t--minbqual\t$mibqual\n";
 print $logprint "<INFO>\t",timer(),"\t--all_vars\t$all_vars\n";
@@ -348,7 +350,7 @@ foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
 	print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart GATK refinement...\n";
-tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$IGV_dir,$GATK_dir,$BAM_OUT,$GATK_OUT,$ref,$res,$threads,@gatk_files_new);
+tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$IGV_dir,$GATK_dir,$BAM_OUT,$GATK_OUT,$ref,$basecalib,$threads,@gatk_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished GATK logic!\n";
 @bam_files		=	();
 @gatk_files		=	();

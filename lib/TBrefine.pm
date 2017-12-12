@@ -18,18 +18,18 @@ $VERSION	=	1.0.0;
 
 sub tbrefine {
 	# Get parameter and input from front-end.
-	my $logprint		=	shift;
+	my $logprint	=	shift;
 	my $W_dir		=	shift;
 	my $VAR_dir		=	shift;
-        my $PICARD_dir          =       shift;
-	my $IGV_dir             =       shift;
-        my $GATK_dir            =       shift;
+    my $PICARD_dir  =   shift;
+	my $IGV_dir     =   shift;
+    my $GATK_dir    =   shift;
 	my $BAM_OUT		=	shift;
-	my $GATK_OUT		=	shift;
-	my $ref                 =       shift;
-        my $res                 =       shift;
+	my $GATK_OUT	=	shift;
+	my $ref         =   shift;
+	my $basecalib	=	shift;
 	my $threads		=	shift;
-	my @bam_files		=	@_;
+	my @bam_files	=	@_;
 	my %input;
 	# Start logic...
 	@bam_files = sort {$a cmp $b } @bam_files;
@@ -85,22 +85,22 @@ sub tbrefine {
 		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type IndelRealigner --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --defaultBaseQualities 12 --targetIntervals $GATK_OUT/$fullID.gatk.intervals --noOriginalAlignmentTags --out $GATK_OUT/$fullID.realigned.bam 2>> $GATK_OUT/$logfile\n";
 		system("java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type IndelRealigner --reference_sequence $VAR_dir/$ref --input_file $BAM_OUT/$fullID.bam --defaultBaseQualities 12 --targetIntervals $GATK_OUT/$fullID.gatk.intervals --noOriginalAlignmentTags --out $GATK_OUT/$fullID.realigned.bam 2>> $GATK_OUT/$logfile");
 		print $logprint "<INFO>\t",timer(),"\tFinished using GATK IndelRealigner for $fullID!\n";
-		# If $ref is not h37rv than we skip the next parts.
-		unless($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
-			print $logprint "<INFO>\t",timer(),"\tSkipping GATK BaseRecalibrator! This is only possible with M._tuberculosis_H37Rv_2015-11-13 as reference!\n";
+		# If $basecalib is not defined we skip the next parts.
+		if($basecalib eq 'NONE') {
+			print $logprint "<INFO>\t",timer(),"\tSkipping GATK BaseRecalibrator! No calibration file specified!\n";
 			move("$GATK_OUT/$fullID.realigned.bam","$GATK_OUT/$fullID.gatk.bam") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line: ", __LINE__ , " \n";
 			move("$GATK_OUT/$fullID.realigned.bai","$GATK_OUT/$fullID.gatk.bai") || die print $logprint "<ERROR>\t",timer(),"\tmove failed: TBrefine line: ", __LINE__ , " \n";
 			next;
-		}
+		}		
 		# Index resistance list.
-		print $logprint "<INFO>\t",timer(),"\tStart using IGVtools for indexing of $res...\n";
-		print $logprint "<INFO>\t",timer(),"\tjava -jar $IGV_dir/igvtools.jar index $res >> $GATK_OUT/$logfile\n";
-		system("java -jar $IGV_dir/igvtools.jar index $res >> $GATK_OUT/$logfile");
-		print $logprint "<INFO>\t",timer(),"\tFinished using IGVtools for indexing of $res!\n";
+		print $logprint "<INFO>\t",timer(),"\tStart using IGVtools for indexing of $basecalib...\n";
+		print $logprint "<INFO>\t",timer(),"\tjava -jar $IGV_dir/igvtools.jar index $basecalib >> $GATK_OUT/$logfile\n";
+		system("java -jar $IGV_dir/igvtools.jar index $basecalib >> $GATK_OUT/$logfile");
+		print $logprint "<INFO>\t",timer(),"\tFinished using IGVtools for indexing of $basecalib!\n";
 		# Use BaseRecalibrator.
 		print $logprint "<INFO>\t",timer(),"\tStart using GATK BaseRecalibrator for $fullID...\n";
-		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $res --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile\n";
-		system("java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $res --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile");
+		print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $basecalib --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile\n";
+		system("java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $basecalib --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile");
 		print $logprint "<INFO>\t",timer(),"\tFinished using GATK BaseRecalibrator for $fullID!\n";
 		# Use print PrintReads.
 		print $logprint "<INFO>\t",timer(),"\tStart using GATK PrintReads for $fullID...\n";
