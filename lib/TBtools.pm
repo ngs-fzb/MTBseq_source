@@ -1418,7 +1418,7 @@ sub help { # Print a help message.
 	<OPTIONAL> Specifiies a project name to identify your joint analysis. Essential for TBamend and TBgroups.
 
 	--resilist
-	<OPTIONAL> Specifies a resistance mediating file for resistance prediction. See the README.pdf for file properties.
+	<OPTIONAL> Specifies a  file of resistance mediating SNPs for resistance prediction. See the README.pdf for file properties.
 
 	--intregions
 	<OPTIONAL> Specifies an interesting region files for extended resistance prediction. See the README.pdf for file properties.
