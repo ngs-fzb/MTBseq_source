@@ -1385,7 +1385,7 @@ sub print_position_stats {
 sub help { # Print a help message.
 	print 
 	"
-	[USAGE]: TBseq [--OPTION PARAMETER]
+	[USAGE]: MTBseq [--OPTION PARAMETER]
 
 	
 	[DESCRIPTION]: This pipeline generates mappings and calls variants from input samples.
@@ -1397,7 +1397,6 @@ sub help { # Print a help message.
 	<ESSENTIAL> This is an essential option! Choose your pipeline step as a parameter!
 		TBfull		Full workflow
 		TBbwa		Read mapping
-		TBmerge		Merging of duplicate mapping files
 		TBrefine	Refinement of mapping(s)
 		TBpile		Creation of mpileup file(s)
 		TBlist		Creation of position list(s)
@@ -1474,16 +1473,16 @@ sub help { # Print a help message.
 	
 	[EXAMPLES]:
 
-	TBseq --step TBfull
+	MTBseq --step TBfull
 	Default values and execute the whole pipeline.
 
-	TBseq --step TBrefine
+	MTBseq --step TBrefine
 	Default values and execute only the \"TBrefine\" step.
 
-	TBseq --step TBbwa --continue
+	MTBseq --step TBbwa --continue
 	Default values and execute the \"TBbwa\" module as well as the downstream modules.
 
-	TBseq --step TBfull --threads 8 --lowfreq_vars --minfreq 20 --mincovf 2 --mincovr 2 --intregions /path/to/intregions/file 
+	MTBseq --step TBfull --threads 8 --lowfreq_vars --minfreq 20 --mincovf 2 --mincovr 2 --intregions /path/to/intregions/file 
 	Execute the whole pipeline with 8 threads, reporting low frequency variants with altered minimum threshholds and using an alternative intregions file.
 
 	";
@@ -1493,7 +1492,7 @@ sub help { # Print a help message.
 
 
 sub nostep { # Print an error message when --step is missing.
-	print  "\n<ERROR>\t",timer(),"\tNo pipeline step defined. Run: TBseq --help for information!\n\n";
+	print  "\n<ERROR>\t",timer(),"\tNo pipeline step defined. Run: MTBseq --help for information!\n\n";
 }
 
 
