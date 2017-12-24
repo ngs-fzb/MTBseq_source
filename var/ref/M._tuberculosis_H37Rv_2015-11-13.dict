@@ -1,2 +1,2 @@
-@HD	VN:1.4	SO:unsorted
-@SQ	SN:M.tuberculosis_H37Rv	LN:4411532	UR:file:/home/mrdefilippo/TBseq_source-master_oct17/var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta	M5:57b12ff2773c5fd3a0f879972f176e50
+@HD	VN:1.5
+@SQ	SN:M.tuberculosis_H37Rv	LN:4411532	M5:57b12ff2773c5fd3a0f879972f176e50	UR:file:/media/sf_shared_folder/MTBseq_source/var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta
