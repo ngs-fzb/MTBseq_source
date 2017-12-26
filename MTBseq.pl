@@ -166,6 +166,17 @@ else {
 select($logprint);
 $| = 1;
 
+# print license.
+print $logprint
+"\n
+MTBseq - Copyright (C) 2017   Thomas A. Kohl, Robin Koch, Christian Utpatel,
+                              Maria Rosaria De Filippo, Viola Schleusener,
+                              Daniela M. Cirillo, Stefan Niemann
+
+This program comes with ABSOLUTELY NO WARRANTY. This is free software,
+and you are welcome to redistribute it under certain conditions.
+\n";
+
 # inform the user what you will do.
 print $logprint "\n<INFO>\t",timer(),"\tYou are $ENV{USER}.\n";
 print $logprint "<INFO>\t",timer(),"\tYour current working directory is: $W_dir\n";

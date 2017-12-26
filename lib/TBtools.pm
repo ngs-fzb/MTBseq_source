@@ -1455,6 +1455,15 @@ sub print_position_stats {
 sub help { # Print a help message.
    print
    '
+
+   MTBseq - Copyright (C) 2017   Thomas A. Kohl, Robin Koch, Christian Utpatel,
+                                 Maria Rosaria De Filippo, Viola Schleusener,
+                                 Daniela M. Cirillo, Stefan Niemann
+
+   This program comes with ABSOLUTELY NO WARRANTY. This is free software,
+   and you are welcome to redistribute it under certain conditions.
+
+
    [USAGE]: MTBseq [--OPTION PARAMETER]
 
    [DESCRIPTION]: This pipeline generates mappings and calls variants from input samples.
