@@ -4,7 +4,7 @@ MTBseq is a automated pipeline for mapping, variant calling and detection of res
 
 ## Getting Started
 
-For complete installation instructions and usage examples please read the [Readme.pdf] (https://github.com/TaKohl/TBseq_source/blob/master/README.pdf).
+For complete installation instructions and usage examples please read the [Readme.pdf] (https://github.com/ngs-fzb/MTBseq_source/blob/master/README.pdf).
 
 ### Requirements
 
@@ -28,10 +28,9 @@ For complete installation instructions and usage examples please read the [Readm
 
 ** MTBseq uses the following third party software: **
 ** Binaries (compiled on Ubuntu 16.04) are included **
-* bwa                 (v0.7.15)
-* GenomeAnalysisTK    (v3.6)
-* IGVTools            (v2.3.88)
-* picard              (v2.7.1)
-* sambamba            (v0.6.5)
-* samtools            (v1.3.1)
+* bwa                 (v0.7.17)
+* GenomeAnalysisTK    (v3.8)
+* IGVTools            (v2.3.98)
+* picard              (v2.17.0)
+* samtools            (v1.6)
 ```

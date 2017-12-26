@@ -18,7 +18,7 @@ sub tbbwa {
    my $logprint         =  shift;
    my $W_dir            =  shift;
    my $VAR_dir          =  shift;
-	my $BWA_dir          =  shift;
+   my $BWA_dir          =  shift;
    my $SAMTOOLS_dir     =  shift;
    my $BAM_OUT          =  shift;
    my $ref              =  shift;

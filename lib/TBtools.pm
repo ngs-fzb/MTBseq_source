@@ -245,27 +245,27 @@ sub parse_fasta { # Parse a reference genome and save the genome as a whole valu
 sub parse_mpile { # Parse a .mpileup file.
 
    ##################################################################################################################
-	##                                                                                                              ##
-	## The .mpileup format:                                                                                         ##
-	## [1]     [2]     [3]     [4]     [5]     [6]                                                                  ##
-	## ID      pos     ref     cov     bases   quality                                                              ##
-	##                                                                                                              ##
-	## .       match forward strand                                                                                 ##
-	## ,       match reverse strand                                                                                 ##
-	## ACGTN   SNP forward                                                                                          ##
-	## acgtn   SNP reverse                                                                                          ##
-	## ^       start of a read, next character -33 = mapping quality                                                ##
-	## $       end or a read                                                                                        ##
-	## *       deleted base (indicated in previous line)                                                            ##
-	## <       reference skip in read (intron)                                                                      ##
-	## >       reference skip in read (intron)                                                                      ##
-	##                                                                                                              ##
-	## \+[0-9]+[ACGTNacgtn]+       Insertion between this reference position and the next reference position.       ##
-	##                             The length of the insertion is given by the integer in the pattern,              ##
-	##                             followed by the inserted sequence.                                               ##
-	## -[0-9]+[ACGTNacgtn]+        Deletion from the reference. The deleted bases will be presented as '*' in       ##
-	##                             the following lines.                                                             ##
-	##################################################################################################################
+   ##                                                                                                              ##
+   ## The .mpileup format:                                                                                         ##
+   ## [1]     [2]     [3]     [4]     [5]     [6]                                                                  ##
+   ## ID      pos     ref     cov     bases   quality                                                              ##
+   ##                                                                                                              ##
+   ## .       match forward strand                                                                                 ##
+   ## ,       match reverse strand                                                                                 ##
+   ## ACGTN   SNP forward                                                                                          ##
+   ## acgtn   SNP reverse                                                                                          ##
+   ## ^       start of a read, next character -33 = mapping quality                                                ##
+   ## $       end or a read                                                                                        ##
+   ## *       deleted base (indicated in previous line)                                                            ##
+   ## <       reference skip in read (intron)                                                                      ##
+   ## >       reference skip in read (intron)                                                                      ##
+   ##                                                                                                              ##
+   ## \+[0-9]+[ACGTNacgtn]+       Insertion between this reference position and the next reference position.       ##
+   ##                             The length of the insertion is given by the integer in the pattern,              ##
+   ##                             followed by the inserted sequence.                                               ##
+   ## -[0-9]+[ACGTNacgtn]+        Deletion from the reference. The deleted bases will be presented as '*' in       ##
+   ##                             the following lines.                                                             ##
+   ##################################################################################################################
 
    my $logprint      =  shift;
    my $MPILE_OUT     =  shift;
@@ -1103,7 +1103,7 @@ sub parse_classification {
    $phylo_positions_coll->{62657}         =  "G";
    $phylo_positions_coll->{514245}        =  "C";
    $phylo_positions_coll->{1850119}       =  "C";
-	$phylo_positions_coll->{541048}        =  "T";
+   $phylo_positions_coll->{541048}        =  "T";
    $phylo_positions_coll->{4229087}       =  "C";
    $phylo_positions_coll->{891756}        =  "A";
    $phylo_positions_coll->{107794}        =  "C";
