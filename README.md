@@ -1,6 +1,6 @@
 # MTBseq
 
-MTBseq is a automated pipeline for mapping, variant calling and detection of resistance mediating and phylogenetic variants from Illumina whole genome sequence data of *Mycobacterium tuberculosis* complex isolates.
+MTBseq is an automated pipeline for mapping, variant calling and detection of resistance mediating and phylogenetic variants from Illumina whole genome sequence data of *Mycobacterium tuberculosis* complex isolates.
 
 ## Getting Started
 
