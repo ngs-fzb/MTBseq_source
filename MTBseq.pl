@@ -45,7 +45,6 @@ my $VAR_dir       =     "$RealBin/var/ref";
 my $BWA_dir       =     "$RealBin/opt/bwa_0.7.17";
 my $SAMTOOLS_dir  =     "$RealBin/opt/samtools_1.6";
 my $PICARD_dir    =     "$RealBin/opt/picard_2.17.0";
-my $IGV_dir       =     "$RealBin/opt/IGVTools_2.3.98";
 my $GATK_dir      =     "$RealBin/opt/GenomeAnalysisTK_3.8";
 
 # initialize command-line parameter.
@@ -105,14 +104,14 @@ if($help eq '1') { help();     exit 1; }
 if($step eq '' ) { nostep();   exit 1; }
 unless(($step eq 'TBfull'     )  ||
        ($step eq 'TBbwa'      )  ||
-       ($step eq 'TBstats'    )  ||
        ($step eq 'TBrefine'   )  ||
        ($step eq 'TBpile'     )  ||
        ($step eq 'TBlist'     )  ||
        ($step eq 'TBvariants' )  ||
+       ($step eq 'TBstats'    )  ||
+       ($step eq 'TBstrains'  )  ||
        ($step eq 'TBjoin'     )  ||
        ($step eq 'TBamend'    )  ||
-       ($step eq 'TBstrains'  )  ||
        ($step eq 'TBgroups'   )
       ) { badstep($step); exit 1; }
 
@@ -208,7 +207,6 @@ print $logprint "\n<INFO>\t",timer(),"\tThe following programs will be used, if 
 print $logprint "<INFO>\t",timer(),"\t$BWA_dir\n";
 print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir\n";
 print $logprint "<INFO>\t",timer(),"\t$PICARD_dir\n";
-print $logprint "<INFO>\t",timer(),"\t$IGV_dir\n";
 print $logprint "<INFO>\t",timer(),"\t$GATK_dir\n";
 
 print $logprint "\n<INFO>\t",timer(),"\tThe following directories will be used, if necessary:\n";
@@ -233,7 +231,7 @@ system("mkdir -p $AMEND_OUT");
 system("mkdir -p $STRAIN_OUT");
 system("mkdir -p $GROUPS_OUT");
 
-# Initialize check up and content arrays.
+# initialize check up and content arrays.
 my %check_up;
 my @fastq_files;
 my @fastq_files_new;
@@ -274,12 +272,12 @@ if($step eq 'TBpile'       ) { goto TBpile      }
 if($step eq 'TBlist'       ) { goto TBlist      }
 if($step eq 'TBvariants'   ) { goto TBvariants  }
 if($step eq 'TBstats'      ) { goto TBstats     }
+if($step eq 'TBstrains'    ) { goto TBstrains   }
 if($step eq 'TBjoin'       ) { goto TBjoin      }
 if($step eq 'TBamend'      ) { goto TBamend     }
-if($step eq 'TBstrains'    ) { goto TBstrains   }
 if($step eq 'TBgroups'     ) { goto TBgroups    }
 
-# Pipeline execution.
+# pipeline execution.
 TBfull:
 print $logprint "\n<INFO>\t",timer(),"\t### [TBfull] selected ###\n";
 
@@ -357,7 +355,7 @@ foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart GATK refinement...\n";
-tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$IGV_dir,$GATK_dir,$BAM_OUT,$GATK_OUT,$ref,$basecalib,$threads,@gatk_files_new);
+tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$GATK_dir,$BAM_OUT,$GATK_OUT,$ref,$basecalib,$threads,@gatk_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished GATK logic!\n";
 @bam_files        =  ();
 @gatk_files       =  ();

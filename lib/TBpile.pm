@@ -14,7 +14,7 @@ $VERSION =  1.0.0;
 @EXPORT  =  qw(tbpile);
 
 sub tbpile {
-   # Get parameter and input from front-end.
+   # get parameter and input from front-end.
    my $logprint      =  shift;
    my $VAR_dir       =  shift;
    my $SAMTOOLS_dir  =  shift;
@@ -24,7 +24,7 @@ sub tbpile {
    my $ref           =  shift;
    my $threads       =  shift;
    my @gbam_files    =  @_;
-   # Start logic...
+   # start logic...
    foreach my $file (sort { $a cmp $b } @gbam_files) {
       my @file_name     =  split(/_/,$file);
       my $sampleID      =  shift(@file_name);
@@ -41,10 +41,10 @@ sub tbpile {
       my $basename      =  $file;
       $basename         =~ s/\.bam$//;
       my $old_logfile   =  $basename.".bamlog";
-      my $vcf_logfile   =  $basename.".vcflog";
+      # my $vcf_logfile   =  $basename.".vcflog";
       my $mpile_logfile =  $basename.".mpileuplog";
       my $mpile_file    =  $basename.".mpileup";
-      unlink("$GATK_OUT/$vcf_logfile");
+      # unlink("$GATK_OUT/$vcf_logfile");
       unlink("$MPILE_OUT/$mpile_logfile");
       if(-f "$GATK_OUT/$old_logfile") {
          #cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$vcf_logfile")    || die "<ERROR>\t",timer(),"\tcat failed: TBpile line: ", __LINE__ , " \n";

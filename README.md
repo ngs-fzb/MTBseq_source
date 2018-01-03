@@ -30,7 +30,6 @@ For complete installation instructions and usage examples please read the [Readm
 ** Binaries (compiled on Ubuntu 16.04) are included **
 * bwa                 (v0.7.17)
 * GenomeAnalysisTK    (v3.8)
-* IGVTools            (v2.3.98)
 * picard              (v2.17.0)
 * samtools            (v1.6)
 ```

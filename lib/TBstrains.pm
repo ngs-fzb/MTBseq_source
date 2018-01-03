@@ -64,7 +64,7 @@ sub tbstrains {
    parse_classification($phylo_positions_homolka,$phylo_positions_coll,$phylo_positions_beijing);
    print $logprint "<INFO>\t",timer(),"\t","Finsihed loading classification schemes!\n";
    print $logprint "<INFO>\t",timer(),"\t","Start combining classification schemes...\n";
-   # This hash will contain the data we need.
+   # this hash will contain the data we need.
    foreach my $pos (keys %$phylo_positions_homolka) {
       $phylo_positions->{$pos}->{0}    =     $phylo_positions_homolka->{$pos};
    }

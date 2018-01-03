@@ -88,7 +88,6 @@ sub tbstats {
       $relmap        =  ($lines[4] / $lines[0]) * 100 if($lines[0] != 0);
       $relmap        =  sprintf("%.2f",$relmap);
       print $logprint "<INFO>\t",timer(),"\tFinished using Samtools for BWA mapping statistics of $file!\n";
-      #my $pos_file_cor	=	substr($file,0,(length($file)-4));
       my $pos_file   =  $fullID . "\.gatk_position_table\.tab";
       print $logprint "<INFO>\t",timer(),"\tStart parsing position list of $pos_file...\n";
       # get variant statistics.
