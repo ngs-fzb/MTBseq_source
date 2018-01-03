@@ -1,6 +1,6 @@
     MTBseq - A computational pipeline for whole genome sequencing analysis
     of Mycobacterium tuberculosis complex isolates
-    Copyright (C) 2017  Thomas A. Kohl, Robin Koch, Christian Utpatel, 
+    Copyright (C) 2018  Thomas A. Kohl, Robin Koch, Christian Utpatel, 
                         Maria Rosaria De Filippo, Viola Schleusener, 
                         Daniela M. Cirillo, Stefan Niemann
 
