@@ -9,22 +9,22 @@ For complete installation instructions and usage examples please read the [Readm
 ### Requirements
 
 ```
-* Perl: perl 5, version 18, subversion 2 (v5.18.2) or higher
+* Perl: Perl 5, version 22, subversion 1 (v5.22.1)
 * Java: Oracle Java 8 or OpenJDK 8
 
 ** MTBseq uses the following CPAN modules: **
-* MCE                 (v1.810)
+* MCE                 (v1.833)
 * Statistics::Basic   (v1.6611)
 * FindBin             (v1.51)
 * Cwd                 (v3.62)
-* Getopt::Long        (v2.49)
-* File::Copy          (v2.31)
-* List::Util          (v1.47)
+* Getopt::Long        (v2.5)
+* File::Copy          (v2.30)
+* List::Util          (v1.49)
 * Exporter            (v5.72)
 * vars                (v1.03)
 * lib                 (v0.63)
-* strict              (v1.11)
-* warnings            (v1.36)
+* strict              (v1.09)
+* warnings            (v1.34)
 
 ** MTBseq uses the following third party software: **
 ** Binaries (compiled on Ubuntu 16.04) are included **
