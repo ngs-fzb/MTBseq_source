@@ -169,7 +169,7 @@ $| = 1;
 # print license.
 print $logprint
 "\n
-MTBseq - Copyright (C) 2017   Thomas A. Kohl, Robin Koch, Christian Utpatel,
+MTBseq - Copyright (C) 2018   Thomas A. Kohl, Robin Koch, Christian Utpatel,
                               Maria Rosaria De Filippo, Viola Schleusener,
                               Daniela M. Cirillo, Stefan Niemann
 
