@@ -1,2 +1,9 @@
 
 .DS_Store
+var/ref/M._tuberculosis_H37Rv_2015-11-13.dict
+var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta.amb
+var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta.ann
+var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta.bwt
+var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta.fai
+var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta.pac
+var/ref/M._tuberculosis_H37Rv_2015-11-13.fasta.sa
