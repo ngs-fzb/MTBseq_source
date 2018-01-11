@@ -74,6 +74,7 @@ sub tbpile {
  print $logprint "<INFO>\t",timer(),"\tRemoving temporary files for $fullID...\n";
  unlink("$GATK_OUT/$fullID.g.vcf")     || print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.g.vcf: No such file!\n";
  unlink("$GATK_OUT/$fullID.g.vcf.idx") || print $logprint "<WARN>\t",timer(),"\tCan't delete $fullID.g.vcf.idx: No such file!\n";
+ print $logprint "<INFO>\t",timer(),"\tGATK variant calling finished for $fullID!\n";
 =cut
 
       # create .mpileup files.
@@ -82,7 +83,6 @@ sub tbpile {
       system("$SAMTOOLS_dir/samtools mpileup -B -A -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile");
       print $logprint "<INFO>\t",timer(),"\tFinished using samtools for creating a .mpileup file for $fullID!\n";
       # finished.
-      print $logprint "<INFO>\t",timer(),"\tGATK variant calling finished for $fullID!\n";
    }
    @gbam_files = ();
 }

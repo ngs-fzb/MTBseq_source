@@ -149,7 +149,7 @@ if($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
    $resi_list_master    =   "$RealBin/var/res/MTB_Resistance_Mediating.txt"             if($resi_list_master eq 'NONE');   # MTBC Resistance mediating variants and MTBC phylogentic SNPs.
    $int_regions         =   "$RealBin/var/res/MTB_Extended_Resistance_Mediating.txt"    if($int_regions eq 'NONE');        # MTBC extended intergenic resistance mediating positions.
    $categories          =   "$RealBin/var/cat/MTB_Gene_Categories.txt"                  if($categories eq 'NONE');         # MTBC essential and non-essential genes.
-   $basecalib           =   "$RealBin/var/res/Base_Calibration_List.vcf"                if($basecalib eq 'NONE');          # MTBC base calibration list. Known SNP positions for base call recalibration.
+   $basecalib           =   "$RealBin/var/res/MTB_Base_Calibration_List.vcf"                if($basecalib eq 'NONE');          # MTBC base calibration list. Known SNP positions for base call recalibration.
 }
 
 # create log file and log on screen if --quiet is unset.
@@ -356,7 +356,7 @@ foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart GATK refinement...\n";
 tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$GATK_dir,$BAM_OUT,$GATK_OUT,$ref,$basecalib,$threads,@gatk_files_new);
-print $logprint "<INFO>\t",timer(),"\tFinished GATK logic!\n";
+print $logprint "<INFO>\t",timer(),"\tFinished GATK refinement!\n";
 @bam_files        =  ();
 @gatk_files       =  ();
 @gatk_files_new   =  ();
@@ -395,9 +395,9 @@ print $logprint "\n<INFO>\t",timer(),"\tCreating mpileups:\n";
 foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
-print $logprint "\n<INFO>\t",timer(),"\tStart creating mpileup files...\n";
+print $logprint "\n<INFO>\t",timer(),"\tStart creating .mpileup files...\n";
 tbpile($logprint,$VAR_dir,$SAMTOOLS_dir,$GATK_dir,$GATK_OUT,$MPILE_OUT,$ref,$threads,@gatk_files_new);
-print $logprint "<INFO>\t",timer(),"\tFinished creating mpileup files!\n";
+print $logprint "<INFO>\t",timer(),"\tFinished creating .mpileup files!\n";
 @gatk_files       =  ();
 @mpile_files      =  ();
 @gatk_files_new   =  ();
