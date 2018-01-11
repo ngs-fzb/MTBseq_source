@@ -90,8 +90,8 @@ sub tbrefine {
       }
 	  # use BaseRecalibrator from GATK.
       print $logprint "<INFO>\t",timer(),"\tStart using GATK BaseRecalibrator for $fullID...\n";
-      print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --disable_auto_index_creation_and_locking_when_reading_rods --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $basecalib --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile\n";
-      system("java -jar $GATK_dir/GenomeAnalysisTK.jar --disable_auto_index_creation_and_locking_when_reading_rods --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $basecalib --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile");
+      print $logprint "<INFO>\t",timer(),"\tjava -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $basecalib --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile\n";
+      system("java -jar $GATK_dir/GenomeAnalysisTK.jar --analysis_type BaseRecalibrator --reference_sequence $VAR_dir/$ref --input_file $GATK_OUT/$fullID.realigned.bam --knownSites $basecalib --maximum_cycle_value 600 --num_cpu_threads_per_data_thread $threads --out $GATK_OUT/$fullID.gatk.grp 2>> $GATK_OUT/$logfile");
       print $logprint "<INFO>\t",timer(),"\tFinished using GATK BaseRecalibrator for $fullID!\n";
       # use PrintReads with GATK.
       print $logprint "<INFO>\t",timer(),"\tStart using GATK PrintReads for $fullID...\n";
