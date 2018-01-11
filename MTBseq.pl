@@ -306,7 +306,7 @@ for(my $i = 0; $i < scalar(@fastq_files); $i++) {
    }
 }
 if(scalar(@fastq_files_new) == 0) {
-   print $logprint "\n<ERROR>\t",timer(),"\tAll read files have been mapped from $W_dir!\n";
+   print $logprint "\n<ERROR>\t",timer(),"\tAll read files have been already mapped from $W_dir!\n";
    exit 1;
 }
 print $logprint "\n<INFO>\t",timer(),"\tMapping samples:\n";
@@ -347,7 +347,7 @@ for(my $i = 0; $i < scalar(@bam_files); $i++) {
    }
 }
 if(scalar(@gatk_files_new) == 0) {
-   print $logprint "\n<ERROR>\t",timer(),"\tAll mapping files have been refined from $BAM_OUT!\n";
+   print $logprint "\n<ERROR>\t",timer(),"\tAll mapping files have been already refined from $BAM_OUT!\n";
    exit 1;
 }
 print $logprint "\n<INFO>\t",timer(),"\tRefining mappings:\n";
@@ -356,7 +356,7 @@ foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart GATK refinement...\n";
 tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$GATK_dir,$BAM_OUT,$GATK_OUT,$ref,$basecalib,$threads,@gatk_files_new);
-print $logprint "<INFO>\t",timer(),"\tFinished GATK refinement!\n";
+print $logprint "<INFO>\t",timer(),"\tFinished GATK logic!\n";
 @bam_files        =  ();
 @gatk_files       =  ();
 @gatk_files_new   =  ();
@@ -388,16 +388,16 @@ for(my $i = 0; $i < scalar(@gatk_files); $i++) {
    }
 }
 if(scalar(@gatk_files_new) == 0) {
-   print $logprint "\n<ERROR>\t",timer(),"\tAll mpileup files have been created from $GATK_OUT!\n";
+   print $logprint "\n<ERROR>\t",timer(),"\tAll mpileup files have been already created from $GATK_OUT!\n";
    exit 1;
 }
 print $logprint "\n<INFO>\t",timer(),"\tCreating mpileups:\n";
 foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
-print $logprint "\n<INFO>\t",timer(),"\tStart creating .mpileup files...\n";
+print $logprint "\n<INFO>\t",timer(),"\tStart creating mpileup files...\n";
 tbpile($logprint,$VAR_dir,$SAMTOOLS_dir,$GATK_dir,$GATK_OUT,$MPILE_OUT,$ref,$threads,@gatk_files_new);
-print $logprint "<INFO>\t",timer(),"\tFinished creating .mpileup files!\n";
+print $logprint "<INFO>\t",timer(),"\tFinished creating mpileup files!\n";
 @gatk_files       =  ();
 @mpile_files      =  ();
 @gatk_files_new   =  ();
@@ -429,7 +429,7 @@ for(my $i = 0; $i < scalar(@mpile_files); $i++) {
    }
 }
 if(scalar(@mpile_files_new) == 0) {
-   print $logprint "\n<ERROR>\t",timer(),"\tAll position lists have been created from $MPILE_OUT!\n";
+   print $logprint "\n<ERROR>\t",timer(),"\tAll position lists have been already created from $MPILE_OUT!\n";
    exit 1;
 }
 print $logprint "\n<INFO>\t",timer(),"\tCreating position lists:\n";
@@ -470,7 +470,7 @@ for(my $i = 0; $i < scalar(@pos_files); $i++) {
    }
 }
 if(scalar(@pos_files_new) == 0) {
-   print $logprint "\n<ERROR>\t",timer(),"\tAll variant files have been created from $POS_OUT!\n";
+   print $logprint "\n<ERROR>\t",timer(),"\tAll variant files have been already created from $POS_OUT!\n";
    exit 1;
 }
 print $logprint "\n<INFO>\t",timer(),"\tCalling variants:\n";

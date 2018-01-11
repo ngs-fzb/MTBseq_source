@@ -80,8 +80,9 @@ sub tbpile {
       print $logprint "<INFO>\t",timer(),"\tStart using samtools for creating a .mpileup file for $fullID...\n";
       print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools mpileup -B -A -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile\n";
       system("$SAMTOOLS_dir/samtools mpileup -B -A -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile");
-      # finished.
       print $logprint "<INFO>\t",timer(),"\tFinished using samtools for creating a .mpileup file for $fullID!\n";
+      # finished.
+      print $logprint "<INFO>\t",timer(),"\tGATK variant calling finished for $fullID!\n";
    }
    @gbam_files = ();
 }
