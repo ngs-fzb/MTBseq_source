@@ -524,7 +524,7 @@ sub parse_mpile { # parse .mpileup file.
             my @values=split(/\t/, $position_table{$position}{$index}{$allel});
             for(my $i = 0; $i < scalar(@values); $i++) {
                # parallel processing artifact that we cannot access running childs. Therefore positions with deletions are occuruing more thant one time in the temporary output file.
-               $values[$i] =  $fields[$i] unless($fields[$i] == 0);
+               $values[$i] +=  $fields[$i] unless($fields[$i] == 0);
             }
             $position_table{$position}{$index}{$allel}   =  join("\t", @values); # more memory efficient than HoA.
          }
@@ -536,7 +536,7 @@ sub parse_mpile { # parse .mpileup file.
          if(exists $position_table_insertion{$position}{$index}{$allel}) {
             my @values=split(/\t/, $position_table_insertion{$position}{$index}{$allel});
             for(my $i = 0; $i < scalar(@values); $i++) {
-               $values[$i] =  $fields[$i] unless($fields[$i] == 0);
+               $values[$i] +=  $fields[$i] unless($fields[$i] == 0);
             }
             $position_table_insertion{$position}{$index}{$allel}  =  join("\t", @values); # more memory efficient than HoA.
          }
