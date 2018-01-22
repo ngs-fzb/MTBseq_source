@@ -49,7 +49,7 @@ sub tbpile {
       if(-f "$GATK_OUT/$old_logfile") {
          #cat($logprint,"$GATK_OUT/$old_logfile","$GATK_OUT/$vcf_logfile")    || die "<ERROR>\t",timer(),"\tcat failed: TBpile line: ", __LINE__ , " \n";
          cat($logprint,"$GATK_OUT/$old_logfile","$MPILE_OUT/$mpile_logfile") 	|| die "<ERROR>\t",timer(),"\tcat failed: TBpile.pm line: ", __LINE__ , " \n";
-      }
+    }
 
 ### UNDER CONSTRUCTION - Haplotype Caller and VCF Files ###
 =head2
@@ -79,8 +79,8 @@ sub tbpile {
 
       # create .mpileup files.
       print $logprint "<INFO>\t",timer(),"\tStart using samtools for creating a .mpileup file for $fullID...\n";
-      print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools mpileup -B -A -x -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile\n";
-      system("$SAMTOOLS_dir/samtools mpileup -B -A -x -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile");
+    print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools mpileup -B -A -x -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile\n";
+    system("$SAMTOOLS_dir/samtools mpileup -B -A -x -f $VAR_dir/$ref $GATK_OUT/$file > $MPILE_OUT/$mpile_file 2>> $MPILE_OUT/$mpile_logfile");
       print $logprint "<INFO>\t",timer(),"\tFinished using samtools for creating a .mpileup file for $fullID!\n";
       # finished.
    }
