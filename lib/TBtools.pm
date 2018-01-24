@@ -276,7 +276,6 @@ sub parse_mpile { # parse .mpileup file.
    my $threads       =  shift;
    my $ref_length    =  scalar(keys(%$ref_hash));
    my %position_table; # this hash is for the final position table.
-   my %position_table_insertion; # this hash is for the final position table.
    # temporary file for parallel processing.
    print $logprint "<INFO>\t",timer(),"\tStart creating temporary output file...\n";
    open(OUT,">$POS_OUT/$output\.tmp");
@@ -289,7 +288,7 @@ sub parse_mpile { # parse .mpileup file.
       return sub {
          my ($chunk_id,$data) =  @_;
          $tmp{$chunk_id}      =  $data; # look up hash for preserving order is set.
-         while(1) { # loop for workers that are coming.
+         while(1) { # loop for workers coming.
             last unless exists $tmp{$order_id}; # if u havent seen this worker before than call back.
             print OUT delete $tmp{$order_id++}; # print worker content and delete directly. Post increment ensures that loop will work with next worker ID.
          }
@@ -297,36 +296,31 @@ sub parse_mpile { # parse .mpileup file.
       };
    }
    # set multi core environment with $threads available cores.
-   # parallel foreach loop with user requested threads but max 8.
+   # parallel foreach loop with user requested threads but max. 8.
    print $logprint "<INFO>\t",timer(),"\tStart parallel processing...\n";
    my $mce                             =     MCE->new(max_workers => $threads, chunk_size => 1, gather => preserve_order);
    $mce->foreach("$MPILE_OUT/$mpileup_file", sub {
       my ($mce,$chunk_ref,$chunk_id)   =  @_;
       my $line                         =  $_;
-      my %pile_line; # for saving local line results.
-      my %pile_line_insertion; # for saving local line insertions.
-      my $index                        =  0; # need this for non-insertion positions. Because I switched to a three dimensional hash. Now, every insertion will get its pattern.
+      my %pile_line; # for saving local mpileline results.
+      my %pile_line_insertion; # for saving local mpileline insertions.
+      my $index                        =  0; # need this for non-insertion positions.
       $line                            =~ s/\015?\012?$//; # this will take care of different line break characters.
-      my @fields                       =  split(/\s+/, $line); # split according to multiple white spaces because there was an error with tabs. FIXED in samtools 1.6!!!
-      # fields 0 to 2 seem to work every time. FIXED in samtools 1.6!!!
-      my $chromosome                   =  $fields[0];
-      my $position                     =  $fields[1];
-      my $mpileup_ref                  =  $fields[2];
-      # but there is inconsistency with 3 to 5. FIXED in samtools 1.6!!!
-      my $cov                          =  0;
-      my $bases                        =  0;
-      my $qualities                    =  0;
-      $cov                             =  $fields[3]  if($fields[3] && $fields[4] && $fields[5]);
-      $bases                           =  $fields[4]  if($fields[3] && $fields[4] && $fields[5]);
-      $qualities                       =  $fields[5]	if($fields[3] && $fields[4] && $fields[5]);
-      # starting with removing indication signals from bases string.
-      # remove indicator for read start, and the next character indicating read mapping quality.
+      my @fields                       =  split(/\s+/, $line);
+      my $chromosome                   =  shift(@fields);
+      my $position                     =  shift(@fields);
+      my $mpileup_ref                  =  shift(@fields);
+      my $cov                          =  shift(@fields);
+      my $bases                        =  shift(@fields);
+      my $qualities                    =  shift(@fields);
+      # start with removing indication signals from bases string.
+      # remove indicator for read start and the next character, indicating read mapping quality.
       # remove special characters from $bases.
       $bases            =~ s/\^.{1}//g;
       $bases            =~ s/\$//g;
-      $bases            =~ s/<//g;
-      $bases            =~ s/>//g;
-      # remove deletion indications.
+      $bases            =~ s/\<//g;
+      $bases            =~ s/\>//g;
+      ### remove deletion indications.
       while($bases =~ /(-[0-9]+[ACGTNacgtn]+)/g) {
          # save the length and sequence of the insertion.
          my $deletion            =  $1;
@@ -342,15 +336,8 @@ sub parse_mpile { # parse .mpileup file.
          my $deletion_string     =  "-" . $deletion_length . $deletion_sequence;
          # remove the deletion indicator from $bases string, only remove the first instance.
          $bases                  =~ s/$deletion_string//;
-         for(my $i = 1; $i <= $deletion_length; $i++) {
-            my $base                =     shift(@deletion_sequence);
-            my $deletion_position   =     $position + $i;
-            # we want directional information for gaps, therefore we parse this instead of '*' indicators.
-            $pile_line{$deletion_position}{$index}{GAP}++   if($base =~ /[ACGTN]/); # $index is set to 0. Deletions can only occure in the reference.
-            $pile_line{$deletion_position}{$index}{gap}++   if($base =~ /[acgtn]/); # $index is set to 0. Deletions can only occure in the reference.
-         }
       }
-      # remove insertion indications.
+      ### remove insertion indications and work with the insertions.
       while($bases =~ /(\+[0-9]+[ACGTNacgtn]+)/g) {
          # save the length and sequence of the insertion.
          my $insertion           =  $1;
@@ -358,7 +345,7 @@ sub parse_mpile { # parse .mpileup file.
          my $insertion_length    =  $1;
          my $insertion_sequence  =  $2;
          my @insertion_sequence  =  split(//, $insertion_sequence);
-         # there is a stupid problem if there are non-matching bases directly after an deletion or insertion.
+         # there is a stupid problem if there are non-matching bases directly after a deletion or insertion.
          while(scalar(@insertion_sequence) > $insertion_length) {
             pop(@insertion_sequence);
          }
@@ -368,7 +355,7 @@ sub parse_mpile { # parse .mpileup file.
          $bases                  =~ s/\+$insertion_string//;
          for(my $i = 1; $i <= $insertion_length; $i++) {
             my $base             =  shift(@insertion_sequence);
-            $pile_line_insertion{$position}{$i}{$base}++ if($base =~ /[ACGTNacgtn]/); # insertion is outsite the reference. The $index is incremented.
+            $pile_line_insertion{$position}{$i}{$base}++ if($base =~ /[ACGTNacgtn]/); # insertion is outsite the reference. The $index is incremented!!!
          }
       }
       # now $bases and $qualities should have equal length.
@@ -378,6 +365,7 @@ sub parse_mpile { # parse .mpileup file.
          print $logprint "<WARN>\t",timer(),"\tQualities array and Bases array are not equal in size in genome position $position! Maybe mpileup creation is error proned?\n";
          return(0);
       }
+      ### work with the reference bases.
       while(my $base = shift(@bases)) {
          my $quality             =  shift(@qualities);
          my $translated_quality  =  ascii_translator($quality);
@@ -392,11 +380,13 @@ sub parse_mpile { # parse .mpileup file.
             $pile_line{$position}{$index}{$key_20}++     if($translated_quality >= 20); # $index is set to 0. We are in the reference.
          }
          if($base =~ /\*/) {
+            $pile_line{$position}{$index}{GAP}++; # save deletion base.
             $pile_line{$position}{$index}{GAP_qual_20}++ if($translated_quality >= 20); # $index is set to 0. We are in the reference.
          }
       }
-      my $out      = ""; # initialize scalar for gathering output in parallel.
-      # we did not create a global genome hash because the worker have no permission to manipulate it.
+      my $out      = ""; # initialize output scalar.
+      # At this point we cannot write not covered positions, unfortunately. Because we have no access to such positions. Only positions available in the mpileup file can be accessed. Samtools 1.6 supports a parameter for that.
+      # If this parameter would be implemented in TBpile, we wouldn't need the .tmp file anymore.
       foreach my $pos (keys %pile_line) {
          my $ref_tmp;
          $ref_tmp  = $ref_hash->{$pos}->{A}  if(exists $ref_hash->{$pos}->{A}); # we get the information of a base at a certain position from the ref_hash. Subroutine parse_reference was modified for it.
@@ -412,7 +402,6 @@ sub parse_mpile { # parse .mpileup file.
          $ref_tmp  = uc($ref_tmp);
          my $index = 0; # the $index is set to 0. We are in the reference.
          # forward read nucleotides count.
-         # retrive results from local hash.
          my $As      =  0;
          my $Cs      =  0;
          my $Gs      =  0;
@@ -438,7 +427,7 @@ sub parse_mpile { # parse .mpileup file.
          $ts         =  $pile_line{$pos}{$index}{t}      if(exists $pile_line{$pos}{$index}{t});
          $ns         =  $pile_line{$pos}{$index}{n}      if(exists $pile_line{$pos}{$index}{n});
          $gaps       =  $pile_line{$pos}{$index}{gap}    if(exists $pile_line{$pos}{$index}{gap});
-         # quality Values above Q20.
+         # quality values above Q20.
          my $A_qual_20     =  0;
          my $C_qual_20     =  0;
          my $G_qual_20     =  0;
@@ -456,47 +445,44 @@ sub parse_mpile { # parse .mpileup file.
          $position_line    .= "\t$As\t$Cs\t$Gs\t$Ts\t$Ns\t$GAPs";
          $position_line    .= "\t$as\t$cs\t$gs\t$ts\t$ns\t$gaps";
          $position_line    .= "\t$A_qual_20\t$C_qual_20\t$G_qual_20\t$T_qual_20\t$N_qual_20\t$GAP_qual_20\n";
-         $out              .= $position_line; # save the line result to the out scalar that is gathered. If we had deletions in a line, we have more then one position within the hash.
-         # if we saw insertions than we can retrive the specific information from this hash.
+         $out              .= $position_line; # save the result.
+         # if we saw insertions than we can retrive information from the insertion hash.
          if(exists $pile_line_insertion{$pos}) {
             foreach my $insertion_index (keys %{$pile_line_insertion{$pos}}) {
-               foreach my $insertion_allel (keys %{$pile_line_insertion{$pos}{$insertion_index}}) {
-                  $insertion_allel     =  uc($insertion_allel);
-                  my $Asins            =  0;
-                  my $Csins            =  0;
-                  my $Gsins            =  0;
-                  my $Tsins            =  0;
-                  my $Nsins            =  0;
-                  my $GAPsins          =  0;
-                  my $asins            =  0;
-                  my $csins            =  0;
-                  my $gsins            =  0;
-                  my $tsins            =  0;
-                  my $nsins            =  0;
-                  my $gapsins          =  0;
-                  my $A_qual_20ins     =  0;
-                  my $C_qual_20ins     =  0;
-                  my $G_qual_20ins     =  0;
-                  my $T_qual_20ins     =  0;
-                  my $N_qual_20ins     =  0;
-                  my $GAP_qual_20ins   =  0;
-                  $Asins               =  $pile_line_insertion{$pos}{$insertion_index}{A} if(exists $pile_line_insertion{$pos}{$insertion_index}{A});
-                  $Csins               =  $pile_line_insertion{$pos}{$insertion_index}{C} if(exists $pile_line_insertion{$pos}{$insertion_index}{C});
-                  $Gsins               =  $pile_line_insertion{$pos}{$insertion_index}{G} if(exists $pile_line_insertion{$pos}{$insertion_index}{G});
-                  $Tsins               =  $pile_line_insertion{$pos}{$insertion_index}{T} if(exists $pile_line_insertion{$pos}{$insertion_index}{T});
-                  $Nsins               =  $pile_line_insertion{$pos}{$insertion_index}{N} if(exists $pile_line_insertion{$pos}{$insertion_index}{N});
-                  $asins               =  $pile_line_insertion{$pos}{$insertion_index}{a} if(exists $pile_line_insertion{$pos}{$insertion_index}{a});
-                  $csins               =  $pile_line_insertion{$pos}{$insertion_index}{c} if(exists $pile_line_insertion{$pos}{$insertion_index}{c});
-                  $gsins               =  $pile_line_insertion{$pos}{$insertion_index}{g} if(exists $pile_line_insertion{$pos}{$insertion_index}{g});
-                  $tsins               =  $pile_line_insertion{$pos}{$insertion_index}{t} if(exists $pile_line_insertion{$pos}{$insertion_index}{t});
-                  $nsins               =  $pile_line_insertion{$pos}{$insertion_index}{n} if(exists $pile_line_insertion{$pos}{$insertion_index}{n});
-                  # save also this results to the gather scalar. Now, every insertion is in the right order.
-                  my $position_line2   =  "$pos\t$insertion_index\t$ref_tmp"; # Unfortunately I cannot save the insertion allel here bcecause joint table module needs here the reference...
-                  $position_line2      .= "\t$Asins\t$Csins\t$Gsins\t$Tsins\t$Nsins\t$GAPsins";
-                  $position_line2      .= "\t$asins\t$csins\t$gsins\t$tsins\t$nsins\t$gapsins";
-                  $position_line2      .= "\t$A_qual_20ins\t$C_qual_20ins\t$G_qual_20ins\t$T_qual_20ins\t$N_qual_20ins\t$GAP_qual_20ins\n";
-                  $out                 .= $position_line2;
-               }
+               my $Asins            =  0;
+               my $Csins            =  0;
+               my $Gsins            =  0;
+               my $Tsins            =  0;
+               my $Nsins            =  0;
+               my $GAPsins          =  0;
+               my $asins            =  0;
+               my $csins            =  0;
+               my $gsins            =  0;
+               my $tsins            =  0;
+               my $nsins            =  0;
+               my $gapsins          =  0;
+               my $A_qual_20ins     =  0;
+               my $C_qual_20ins     =  0;
+               my $G_qual_20ins     =  0;
+               my $T_qual_20ins     =  0;
+               my $N_qual_20ins     =  0;
+               my $GAP_qual_20ins   =  0;
+               $Asins               =  $pile_line_insertion{$pos}{$insertion_index}{A} if(exists $pile_line_insertion{$pos}{$insertion_index}{A});
+               $Csins               =  $pile_line_insertion{$pos}{$insertion_index}{C} if(exists $pile_line_insertion{$pos}{$insertion_index}{C});
+               $Gsins               =  $pile_line_insertion{$pos}{$insertion_index}{G} if(exists $pile_line_insertion{$pos}{$insertion_index}{G});
+               $Tsins               =  $pile_line_insertion{$pos}{$insertion_index}{T} if(exists $pile_line_insertion{$pos}{$insertion_index}{T});
+               $Nsins               =  $pile_line_insertion{$pos}{$insertion_index}{N} if(exists $pile_line_insertion{$pos}{$insertion_index}{N});
+               $asins               =  $pile_line_insertion{$pos}{$insertion_index}{a} if(exists $pile_line_insertion{$pos}{$insertion_index}{a});
+               $csins               =  $pile_line_insertion{$pos}{$insertion_index}{c} if(exists $pile_line_insertion{$pos}{$insertion_index}{c});
+               $gsins               =  $pile_line_insertion{$pos}{$insertion_index}{g} if(exists $pile_line_insertion{$pos}{$insertion_index}{g});
+               $tsins               =  $pile_line_insertion{$pos}{$insertion_index}{t} if(exists $pile_line_insertion{$pos}{$insertion_index}{t});
+               $nsins               =  $pile_line_insertion{$pos}{$insertion_index}{n} if(exists $pile_line_insertion{$pos}{$insertion_index}{n});
+               # constructing output line.
+               my $position_line2   =  "$pos\t$insertion_index\t$ref_tmp";
+               $position_line2      .= "\t$Asins\t$Csins\t$Gsins\t$Tsins\t$Nsins\t$GAPsins";
+               $position_line2      .= "\t$asins\t$csins\t$gsins\t$tsins\t$nsins\t$gapsins";
+               $position_line2      .= "\t$A_qual_20ins\t$C_qual_20ins\t$G_qual_20ins\t$T_qual_20ins\t$N_qual_20ins\t$GAP_qual_20ins\n";
+               $out                 .= $position_line2; # save the result.
             }
          }
       }
@@ -509,7 +495,6 @@ sub parse_mpile { # parse .mpileup file.
    $mce->shutdown; # shut down parallel processing.
    print $logprint "<INFO>\t",timer(),"\tFinished parallel processing!\n";
    close(OUT);
-   # now we want to fill some gaps that are not in the mpileup file. Probabaly not needed anymore with samtools 1.6!!!
    print $logprint "<INFO>\t",timer(),"\tStart loading temporary file into hash structure...\n";
    open(IN,"$POS_OUT/$output\.tmp") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $output\.tmp: TBtools line: ", __LINE__ , " \n";
    while(<IN>) {
@@ -518,32 +503,7 @@ sub parse_mpile { # parse .mpileup file.
       my $position      =	shift(@fields);
       my $index         =  shift(@fields);
       my $allel         =  shift(@fields);
-      # this is only true for reference and deletions.
-      if($index == 0) {
-         if(exists $position_table{$position}{$index}{$allel}) {
-            my @values=split(/\t/, $position_table{$position}{$index}{$allel});
-            for(my $i = 0; $i < scalar(@values); $i++) {
-               # parallel processing artifact that we cannot access running childs. Therefore positions with deletions are occuruing more thant one time in the temporary output file.
-               $values[$i] +=  $fields[$i] unless($fields[$i] == 0);
-            }
-            $position_table{$position}{$index}{$allel}   =  join("\t", @values); # more memory efficient than HoA.
-         }
-         else {
-            $position_table{$position}{$index}{$allel}   =  join("\t", @fields); # more memory efficient than HoA.
-         }
-      }
-      else {
-         if(exists $position_table_insertion{$position}{$index}{$allel}) {
-            my @values=split(/\t/, $position_table_insertion{$position}{$index}{$allel});
-            for(my $i = 0; $i < scalar(@values); $i++) {
-               $values[$i] +=  $fields[$i] unless($fields[$i] == 0);
-            }
-            $position_table_insertion{$position}{$index}{$allel}  =  join("\t", @values); # more memory efficient than HoA.
-         }
-         else {
-            $position_table_insertion{$position}{$index}{$allel}  =  join("\t", @fields); # more memory efficient than HoA.
-         }
-      }
+      $position_table{$position}{$index}{$allel} = join("\t", @fields) if(!exists $position_table{$position}{$index}{$allel});
    }
    close(IN);
    print $logprint "<INFO>\t",timer(),"\tFinished loading temporary file into hash structure!\n";
@@ -568,7 +528,6 @@ sub parse_mpile { # parse .mpileup file.
       $ref_tmp          =     $ref_hash->{$pos}->{t}     if(exists $ref_hash->{$pos}->{t});
       $ref_tmp          =     $ref_hash->{$pos}->{n}     if(exists $ref_hash->{$pos}->{n});
       $ref_tmp          =     uc($ref_tmp);
-      my $index         =     0; # we set index to 0 because we are in the reference.
       my $As            =     0;
       my $Cs            =     0;
       my $Gs            =     0;
@@ -588,31 +547,23 @@ sub parse_mpile { # parse .mpileup file.
       my $N_qual_20     =     0;
       my $GAP_qual_20   =     0;
       # if we see results in the position_table hash, then we want this information instead.
-      if(exists $position_table{$pos}{$index}{$ref_tmp}) {
-         print OUT "$pos\t$index\t$ref_tmp\t", delete $position_table{$pos}{$index}{$ref_tmp},"\n";
+      if(exists $position_table{$pos}) {
+         foreach my $index (sort { by_number() } keys %{$position_table{$pos}}) {
+            foreach my $allel (keys %{$position_table{$pos}{$index}}) {
+               print OUT "$pos\t$index\t$ref_tmp\t", delete $position_table{$pos}{$index}{$allel},"\n";
+            }
+         }
       }
       # if information was missing, then we print empty values just for completeness.
       else {
-         my $position_line    =  "$pos\t$index\t$ref_tmp";
+         my $position_line    =  "$pos\t0\t$ref_tmp";
          $position_line       .= "\t$As\t$Cs\t$Gs\t$Ts\t$Ns\t$GAPs";
          $position_line       .= "\t$as\t$cs\t$gs\t$ts\t$ns\t$gaps";
          $position_line       .= "\t$A_qual_20\t$C_qual_20\t$G_qual_20\t$T_qual_20\t$N_qual_20\t$GAP_qual_20\n";
          print OUT $position_line;
       }
-      # if we see insertions, then we want to parse another hash instead. Because this hash is outsite of the ref_hash.
-      if(exists $position_table_insertion{$pos}) {
-         # we have now a sorted insertion...
-         foreach my $insertion_index (sort { by_number() } keys %{$position_table_insertion{$pos}}) {
-            # and the insertion allel...
-            foreach my $allel (keys %{$position_table_insertion{$pos}{$insertion_index}}) {
-               # and we print it after reference position that showed the insertion...
-               print OUT "$pos\t$insertion_index\t$allel\t", delete $position_table_insertion{$pos}{$insertion_index}{$allel},"\n";
-            }
-         }
-      }
    }
    undef(%position_table);
-   undef(%position_table_insertion);
    close(OUT);
    print $logprint "<INFO>\t",timer(),"\tFinished creating final output file!\n";
    # runtime approx. 8 minutes on 8 cores.

@@ -146,10 +146,10 @@ $refg       .=  "_genes.txt";
 
 # if $ref is MTB than turn on resistance check.
 if($ref eq 'M._tuberculosis_H37Rv_2015-11-13.fasta') {
-   $resi_list_master    =   "$RealBin/var/res/MTB_Resistance_Mediating.txt"             if($resi_list_master eq 'NONE');   # MTBC Resistance mediating variants and MTBC phylogentic SNPs.
-   $int_regions         =   "$RealBin/var/res/MTB_Extended_Resistance_Mediating.txt"    if($int_regions eq 'NONE');        # MTBC extended intergenic resistance mediating positions.
-   $categories          =   "$RealBin/var/cat/MTB_Gene_Categories.txt"                  if($categories eq 'NONE');         # MTBC essential and non-essential genes.
-   $basecalib           =   "$RealBin/var/res/MTB_Base_Calibration_List.vcf"                if($basecalib eq 'NONE');          # MTBC base calibration list. Known SNP positions for base call recalibration.
+   $resi_list_master    =   "$RealBin/var/res/MTB_Resistance_Mediating.txt"            if($resi_list_master eq 'NONE');   # MTBC Resistance mediating variants and MTBC phylogentic SNPs.
+   $int_regions         =   "$RealBin/var/res/MTB_Extended_Resistance_Mediating.txt"   if($int_regions eq 'NONE');        # MTBC extended intergenic resistance mediating positions.
+   $categories          =   "$RealBin/var/cat/MTB_Gene_Categories.txt"                 if($categories eq 'NONE');         # MTBC essential and non-essential genes.
+   $basecalib           =   "$RealBin/var/res/MTB_Base_Calibration_List.vcf"           if($basecalib eq 'NONE');          # MTBC base calibration list. Known SNP positions for base call recalibration.
 }
 
 # create log file and log on screen if --quiet is unset.
