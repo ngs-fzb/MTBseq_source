@@ -460,8 +460,8 @@ sub parse_mpile { # parse .mpileup file.
          # if we saw insertions than we can retrive the specific information from this hash.
          if(exists $pile_line_insertion{$pos}) {
             foreach my $insertion_index (keys %{$pile_line_insertion{$pos}}) {
-               foreach my $insertion_allel (keys %{$pile_line_insertion{$pos}{$insertion_index}}) {
-                  $insertion_allel     =  uc($insertion_allel);
+               #foreach my $insertion_allel (keys %{$pile_line_insertion{$pos}{$insertion_index}}) {
+                  #$insertion_allel     =  uc($insertion_allel);
                   my $Asins            =  0;
                   my $Csins            =  0;
                   my $Gsins            =  0;
@@ -496,7 +496,7 @@ sub parse_mpile { # parse .mpileup file.
                   $position_line2      .= "\t$asins\t$csins\t$gsins\t$tsins\t$nsins\t$gapsins";
                   $position_line2      .= "\t$A_qual_20ins\t$C_qual_20ins\t$G_qual_20ins\t$T_qual_20ins\t$N_qual_20ins\t$GAP_qual_20ins\n";
                   $out                 .= $position_line2;
-               }
+               #}
             }
          }
       }
