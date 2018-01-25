@@ -336,6 +336,13 @@ sub parse_mpile { # parse .mpileup file.
          my $deletion_string     =  "-" . $deletion_length . $deletion_sequence;
          # remove the deletion indicator from $bases string, only remove the first instance.
          $bases                  =~ s/$deletion_string//;
+         for(my $i = 1; $i <= $deletion_length; $i++) {
+            my $base                =     shift(@deletion_sequence);
+            my $deletion_position   =     $position + $i;
+            # we want directional information for gaps, therefore we parse this instead of '*' indicators.
+            $pile_line{$deletion_position}{$index}{GAP}++   if($base =~ /[ACGTN]/); # $index is set to 0. Deletions can only occure in the reference.
+            $pile_line{$deletion_position}{$index}{gap}++   if($base =~ /[acgtn]/); # $index is set to 0. Deletions can only occure in the reference.
+         }
       }
       ### remove insertion indications and work with the insertions.
       while($bases =~ /(\+[0-9]+[ACGTNacgtn]+)/g) {
@@ -380,7 +387,6 @@ sub parse_mpile { # parse .mpileup file.
             $pile_line{$position}{$index}{$key_20}++     if($translated_quality >= 20); # $index is set to 0. We are in the reference.
          }
          if($base =~ /\*/) {
-            $pile_line{$position}{$index}{GAP}++; # save deletion base.
             $pile_line{$position}{$index}{GAP_qual_20}++ if($translated_quality >= 20); # $index is set to 0. We are in the reference.
          }
       }
@@ -503,7 +509,16 @@ sub parse_mpile { # parse .mpileup file.
       my $position      =	shift(@fields);
       my $index         =  shift(@fields);
       my $allel         =  shift(@fields);
-      $position_table{$position}{$index}{$allel} = join("\t", @fields) if(!exists $position_table{$position}{$index}{$allel});
+      if(exists $position_table{$position}{$index}{$allel}) {
+         my @values     =  split(/\t/, $position_table{$position}{$index}{$allel});
+         for(my $i = 0; $i < scalar(@values); $i++) {
+            $values[$i] +=  $fields[$i] unless($fields[$i] == 0);
+         }
+         $position_table{$position}{$index}{$allel} = join("\t", @values);
+      }
+      else {
+         $position_table{$position}{$index}{$allel} = join("\t", @fields);
+      }
    }
    close(IN);
    print $logprint "<INFO>\t",timer(),"\tFinished loading temporary file into hash structure!\n";
