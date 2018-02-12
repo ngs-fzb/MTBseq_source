@@ -1888,7 +1888,8 @@ sub filter_wlength { # filter for possible biased SNPs in a given window.
    foreach my $pos (keys %$pivot_hash) {
       foreach my $index (keys %{$pivot_hash->{$pos}}) {
          foreach my $strain (keys %{$pivot_hash->{$pos}->{$index}}) {
-            $variant_hash->{$pos}->{$strain} =  "present"   if($index == 0);
+            my $type = (split(/\t/, $pivot_hash->{$pos}->{$index}->{$strain}))[0];
+            $variant_hash->{$pos}->{$strain} =  "present"   if($index == 0) and ($type =~ m/SNP/i);
          }
       }
    }
