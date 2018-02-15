@@ -2406,15 +2406,19 @@ sub call_groups { # call groups from a joint strain analysis.
    my $max_distance        =  0;
    my $strain_affiliation  =  {};
    my $temp_groups         =  {};
-   # the easy approach to call groups, just collect incrementally.
+   
+   # we use an easy approach to call groups, just collect incrementally.
    # stop if no group changes.
+   # we need $temp_groups to make sure that all strains get the right group
+   # if two groups grow together.
+   
    # initialize self entry.
    foreach my $mainstrain (keys %$distance_matrix) {
       $strain_affiliation->{$mainstrain} = "ungrouped";
    }
+   # safeguard against specified distance of 0
    my $min_distance           =  $distance + 1;
-   # we need this to make sure that all strains get the right group .
-   # if two groups grow together.
+   
    for(my $i = 0; $group_changed == 1; $i++) {
       $min_distance           =  $distance + 1;
       $group_changed          =  0;
@@ -2443,8 +2447,8 @@ sub call_groups { # call groups from a joint strain analysis.
             $group   =  $strain_group;
          }
          if(($mainstrain_group =~ /group_\d+/) && ($strain_group =~ /group_\d+/)) {
-            my $mainstrain_group_number   =  $mainstrain_group    =~    /group_(\d+)/;
-            my $strain_group_number       =  $strain_group        =~    /group_(\d+)/;
+            my ($mainstrain_group_number)   =  $mainstrain_group    =~    /group_(\d+)/;
+            my ($strain_group_number)       =  $strain_group        =~    /group_(\d+)/;
             $group                        =  "group_" . $mainstrain_group_number;
             $group                        =  "group_" . $strain_group_number if($strain_group_number < $mainstrain_group_number);
          }
@@ -2454,7 +2458,8 @@ sub call_groups { # call groups from a joint strain analysis.
          }
          $strain_affiliation->{$mainstrain_save}            =  $group;
          $strain_affiliation->{$strain_save}                =  $group;
-         # we need this to make sure that all strains get the right group.
+         
+		 # we need this to make sure that all strains get the right group.
          # if two groups grow together.
          if(($mainstrain_group =~ /group_\d+/) && !($mainstrain_group eq $group)) {
             my @temp_strains                                =  keys(%{$temp_groups->{$mainstrain_group}});
