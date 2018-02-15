@@ -33,7 +33,7 @@ sub tbgroups {
       $group_file          =  strip($joint_file,("_d" . $distance . ".groups"));
       print $logprint "<INFO>\t",timer(),"\tStart parsing $joint_file...\n";
       parse_amend_table($logprint,$AMEND_OUT,$joint_file,$pivot_hash,$strains,$position_info);
-      print $logprint "<INFO>\t",timer(),"\tFinsiehd parsing $joint_file!\n";
+      print $logprint "<INFO>\t",timer(),"\tFinished parsing $joint_file!\n";
       print $logprint "<INFO>\t",timer(),"\tStart building distance matrix for $joint_file...\n";
       build_matrix($GROUPS_OUT,$matrix_file,$pivot_hash,$distance_matrix,$strains);
       print $logprint "<INFO>\t",timer(),"\tFinished building distance matrix for $joint_file!\n";
