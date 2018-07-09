@@ -1,4 +1,4 @@
-#!/usr/bin/pel
+#!/usr/bin/env perl
 
 package TBrefine;
 

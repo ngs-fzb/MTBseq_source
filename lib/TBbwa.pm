@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 package TBbwa;
 
@@ -32,7 +32,7 @@ sub tbbwa {
       my $sampleID         =  shift(@file_name);
       my $libID            =  shift(@file_name);
       my $file_mod         =  join("_",@file_name);
-      die("wrong file name ($file_mod)") if not $file_mod =~ s/(R1|R2).fastq.gz//;
+      die("wrong file name ($file_mod)") if not $file_mod =~ s/(R1|R2).f(ast)?q.gz//;
       my $dir              =  $1;
       my $machine          =  $file_mod;
       my $fullID           =  join("_",($sampleID,$libID));

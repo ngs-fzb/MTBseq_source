@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 package TBtools;
 
@@ -2643,8 +2643,8 @@ sub specificator_beijing_easy {
    my $IDpositions         =  shift;;
    my $species             =  'unknown';
    my $lineage             =  'unknown';
-   if($IDpositions->{782634}  eq "G") {   $lineage = 'Asian/Africa';                   }  #Beijing Subgroup Asian/Africa 1
-   if($IDpositions->{3061703} eq "A") {   $lineage = 'Asian/Africa';                   }  #Beijing Subgroup Asian/Africa 2
+   if($IDpositions->{782634}  eq "G") {   $lineage = 'Asian/Africa 1';                   }  #Beijing Subgroup Asian/Africa 1
+   if($IDpositions->{3061703} eq "A") {   $lineage = 'Asian/Africa 2';                   }  #Beijing Subgroup Asian/Africa 2
    if($IDpositions->{2428517} eq "G") {   $lineage = 'Pacific RD150';                  }  #Beijing Subgroup Pacific RD150
    if($IDpositions->{1584762} eq "A") {   $lineage = 'Europe/Russian W148 Outbreak';   }  #Beijing Subgroup Europe/Russian W148 Outbreak
    if($IDpositions->{4238675} eq "T") {   $lineage = 'Central Asia';                   }  #Beijing Subgroup Central Asia
