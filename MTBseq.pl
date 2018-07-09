@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 use strict;
 use warnings;
@@ -18,6 +18,9 @@ use TBstrains;
 use TBgroups;
 use TBtools;
 
+
+my $VERSION =  "1.0.1";
+ 
 # get current working directory and time.
 my $W_dir         =     getcwd();
 my $date_string   =     timer();
@@ -72,6 +75,7 @@ my $quiet               =     "";
 my $threads             =     "";
 my $naming_scheme       =     "";
 my $help                =     "";
+my $opt_version         =     "";
 
 # get command-line parameter.
 GetOptions('step:s'        =>    \$step,
@@ -96,11 +100,13 @@ GetOptions('step:s'        =>    \$step,
            'distance:i'    =>    \$distance,
            'quiet'         =>    \$quiet,
            'threads:i'     =>    \$threads,
-           'help'          =>    \$help
+           'help'          =>    \$help,
+           'version'       =>    \$opt_version
           );
 
 # print help message if specified or error if step is not defined or wrong.
-if($help eq '1') { help();     exit 1; }
+if($help eq '1') { help($VERSION);     exit 0; }
+if($opt_version eq '1') { version($VERSION);     exit 0; }
 if($step eq '' ) { nostep();   exit 1; }
 unless(($step eq 'TBfull'     )  ||
        ($step eq 'TBbwa'      )  ||
@@ -168,7 +174,7 @@ $| = 1;
 # print license.
 print $logprint
 "\n
-MTBseq - Copyright (C) 2018   Thomas A. Kohl, Robin Koch, Christian Utpatel,
+MTBseq $VERSION - Copyright (C) 2018   Thomas A. Kohl, Robin Koch, Christian Utpatel,
                               Maria Rosaria De Filippo, Viola Schleusener,
                               Patrick Beckert, Daniela M. Cirillo, Stefan Niemann
 
@@ -289,7 +295,7 @@ if($step eq 'TBbwa') {
 }
 opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: MTBseq.pl line: ", __LINE__ ," \n";
 opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: MTBseq.pl line: ", __LINE__ , "\n";
-@fastq_files      =  grep { $_ =~ /^\w.*R\d+\.fastq\.gz/ && -f "$W_dir/$_"    }  readdir(WORKDIR);
+@fastq_files      =  grep { $_ =~ /^\w.*R\d+\.f(ast)?q\.gz/ && -f "$W_dir/$_"    }  readdir(WORKDIR);
 @bam_files        =  grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_"           }  readdir(BAMDIR);
 closedir(WORKDIR);
 closedir(BAMDIR);

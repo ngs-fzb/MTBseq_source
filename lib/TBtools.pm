@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 package TBtools;
 
@@ -11,7 +11,7 @@ use MCE;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION    =  1.0.0;
+$VERSION    =  1.0.1;
 @ISA        =  qw(Exporter);
 @EXPORT     =  qw(parse_reference
                   parse_fasta
@@ -29,6 +29,7 @@ $VERSION    =  1.0.0;
                   print_joint_table
                   print_position_stats
                   help
+                  version
                   nostep
                   badstep
                   strip
@@ -1449,10 +1450,11 @@ sub print_position_stats {
 
 
 sub help { # print a help message.
+   my $VERSION =  shift;
    print
-   '
+   "
 
-   MTBseq - Copyright (C) 2018   Thomas A. Kohl, Robin Koch, Christian Utpatel,
+   MTBseq $VERSION - Copyright (C) 2018   Thomas A. Kohl, Robin Koch, Christian Utpatel,
                                  Maria Rosaria De Filippo, Viola Schleusener,
                                  Patrick Beckert, Daniela M. Cirillo, Stefan Niemann
 
@@ -1466,6 +1468,8 @@ sub help { # print a help message.
 
    [OPTIONS & PARAMETER]: Please read the README.pdf for detailed information about the parameter!
 
+   --help         This help message
+   --version      Version of MTBseq
    --step
       <ESSENTIAL> This is an essential option! Choose your pipeline step as a parameter!
       TBfull      Full workflow
@@ -1556,10 +1560,15 @@ sub help { # print a help message.
 
    MTBseq --step TBfull --threads 8 --lowfreq_vars --minfreq 20 --mincovf 2 --mincovr 2 --intregions /path/to/intregions/file
    Execute the whole pipeline with 8 threads, reporting low frequency variants with altered minimum threshholds and using an alternative intregions file.
-   ';
+   ";
    print "\n";
 }
 
+
+sub version { # print the MTBseq version
+   my $VERSION =  shift;
+   print "This is MTBseq $VERSION\n\n"
+}
 
 
 sub nostep { # print an error message when --step is missing.
@@ -2643,8 +2652,8 @@ sub specificator_beijing_easy {
    my $IDpositions         =  shift;;
    my $species             =  'unknown';
    my $lineage             =  'unknown';
-   if($IDpositions->{782634}  eq "G") {   $lineage = 'Asian/Africa';                   }  #Beijing Subgroup Asian/Africa 1
-   if($IDpositions->{3061703} eq "A") {   $lineage = 'Asian/Africa';                   }  #Beijing Subgroup Asian/Africa 2
+   if($IDpositions->{782634}  eq "G") {   $lineage = 'Asian/Africa 1';                   }  #Beijing Subgroup Asian/Africa 1
+   if($IDpositions->{3061703} eq "A") {   $lineage = 'Asian/Africa 2';                   }  #Beijing Subgroup Asian/Africa 2
    if($IDpositions->{2428517} eq "G") {   $lineage = 'Pacific RD150';                  }  #Beijing Subgroup Pacific RD150
    if($IDpositions->{1584762} eq "A") {   $lineage = 'Europe/Russian W148 Outbreak';   }  #Beijing Subgroup Europe/Russian W148 Outbreak
    if($IDpositions->{4238675} eq "T") {   $lineage = 'Central Asia';                   }  #Beijing Subgroup Central Asia
