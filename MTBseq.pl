@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 use strict;
 use warnings;
@@ -100,7 +100,7 @@ GetOptions('step:s'        =>    \$step,
           );
 
 # print help message if specified or error if step is not defined or wrong.
-if($help eq '1') { help();     exit 1; }
+if($help eq '1') { help();     exit 0; }
 if($step eq '' ) { nostep();   exit 1; }
 unless(($step eq 'TBfull'     )  ||
        ($step eq 'TBbwa'      )  ||
@@ -289,7 +289,7 @@ if($step eq 'TBbwa') {
 }
 opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: MTBseq.pl line: ", __LINE__ ," \n";
 opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: MTBseq.pl line: ", __LINE__ , "\n";
-@fastq_files      =  grep { $_ =~ /^\w.*R\d+\.fastq\.gz/ && -f "$W_dir/$_"    }  readdir(WORKDIR);
+@fastq_files      =  grep { $_ =~ /^\w.*R\d+\.f(ast)?q\.gz/ && -f "$W_dir/$_"    }  readdir(WORKDIR);
 @bam_files        =  grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_"           }  readdir(BAMDIR);
 closedir(WORKDIR);
 closedir(BAMDIR);
