@@ -83,6 +83,7 @@ sub tbbwa {
       # map reads with bwa-mem and -t parameter.
       print $logprint  "<INFO>\t",timer(),"\tStart BWA mapping for $fullID...\n";
       print $logprint "<INFO>\t",timer(),"\t$BWA_dir/bwa mem -t $threads -R $read_naming_scheme $VAR_dir/$ref $files_string > $BAM_OUT/$fullID.sam 2>> $BAM_OUT/$logfile\n";
+      $commandline = "$BWA_dir/bwa mem -t $threads -R $read_naming_scheme $VAR_dir/$ref $files_string > $BAM_OUT/$fullID.sam 2>> $BAM_OUT/$logfile";
       system($commandline)==0 or die "$commandline failed: $?\n";
       print $logprint "<INFO>\t",timer(),"\tFinished BWA mapping for $fullID!\n";
       # convert from .sam to .bam format with samtools -S (sam input) and (-b bam output) and -T (reference).
@@ -100,16 +101,19 @@ sub tbbwa {
       # indexing with samtools.
       print $logprint "<INFO>\t",timer(),"\tStart using samtools for indexing of $fullID...\n";
       print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools index -b $BAM_OUT/$fullID.sorted.bam 2>> $BAM_OUT/$logfile\n";
+      $commandline = "$SAMTOOLS_dir/samtools index -b $BAM_OUT/$fullID.sorted.bam 2>> $BAM_OUT/$logfile";
       system($commandline)==0 or die "$commandline failed: $?\n";
       print $logprint "<INFO>\t",timer(),"\tFinished using samtools for indexing of $fullID!\n";
       # removing pcr duplicates with samtools.
       print $logprint "<INFO>\t",timer(),"\tStart removing putative PCR duplicates from $fullID...\n";
       print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools rmdup $BAM_OUT/$fullID.sorted.bam $BAM_OUT/$fullID.nodup.bam 2>> $BAM_OUT/$logfile\n";
+      $commandline = "$SAMTOOLS_dir/samtools rmdup $BAM_OUT/$fullID.sorted.bam $BAM_OUT/$fullID.nodup.bam 2>> $BAM_OUT/$logfile";
       system($commandline)==0 or die "$commandline failed: $?\n";
       print $logprint "<INFO>\t",timer(),"\tFinished removing putative PCR duplicates for $fullID!\n";
       # recreate index with samtools.
       print $logprint "<INFO>\t",timer(),"\tStart recreating index for $fullID...\n";
       print $logprint "<INFO>\t",timer(),"\t$SAMTOOLS_dir/samtools index -b $BAM_OUT/$fullID.nodup.bam 2>> $BAM_OUT/$logfile\n";
+      $commandline = "$SAMTOOLS_dir/samtools index -b $BAM_OUT/$fullID.nodup.bam 2>> $BAM_OUT/$logfile";
       system($commandline)==0 or die "$commandline failed: $?\n";
       print $logprint "<INFO>\t",timer(),"\tFinished recreating index for $fullID!\n";
       # removing temporary files.
