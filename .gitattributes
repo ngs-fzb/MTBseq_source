@@ -4,7 +4,11 @@
 # Keep LF EOL
 *.fai text eol=lf
 *.fasta text eol=lf
+*.vcf text eol=lf
+*.idx text eol=lf
 
+# Keep as is
+*.vcf.idx binary
 
 # Custom for Visual Studio
 *.cs     diff=csharp
