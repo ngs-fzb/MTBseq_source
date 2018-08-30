@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<p><img src="fzb_neueslogo_2017_englisch_Cmyk.jpg" /></p>
+<p><span style="color:blue"> A computational pipeline<br />
+for whole genome sequencing analysis of<br />
+ <em>Mycobacterium tuberculosis</em> complex isolates</span></p>
+<h1><span style="color:red"> <em>MTB</em></span><span style="color:blue"><em>seq</em></span></h1>
+<h2><span style="color:lightblue">[DESCRIPTION]</span></h2>
+<p>MTBseq is an automated and modular bioinformatics pipeline for the analysis of next generation sequencing
+data of Mycobacterium tuberculosis complex samples by performing reference mapping, variant detection,
+annotation of variants for resistance association and phylogenetic information, and comparative analysis of a
+set of samples. The pipeline consists of open source software for read mapping (SAMTOOLS, BWA), base call
+recalibration and refinement (PICARD, GATK), and variant calling (SAMTOOLS), with the full workflow and
+additional functionality implemented in Perl.</p>
+<p>The modular architecture allows the pipeline to be fully customizable, including swapping out or adding entire
+complete functional modules. Per default, the pipeline uses the genome of M. tuberculosis H37Rv
+(NC_000962.3) as basis for reference mapping, variant calling and annotation, any bacterial reference genome
+can be set by the user if the appropriate sequence and annotation files are provided.</p>
+<p>In addition to the sample specific workflow, MTBseq performs a comparative variant analysis for a set of
+samples, determining likely related samples by pairwise distance, and constructing an alignment of informative
+variant positions in FASTA format, which can be used to calculate phylogenetic trees.</p>
+<h2><span style="color:lightblue">TABLE OF CONTENTS</h2>
+<ul>
+<li>[DESCRIPTION]</li>
+<li>[REQUIREMENTS]</li>
+<li>[INSTALLATION]</li>
+<li>[OVERVIEW]</li>
+<li>[OPTIONS &amp; VALUES]</li>
+<li>[EXCHANGING THE REFERENCE GENOME]</li>
+<li>[CUSTOMIZING THE CODE]</li>
+<li>[EXAMPLES]</li>
+<li>[AUTHORS]</li>
+<li>[COPYRIGHT AND LICENSE]</li>
+<li>[HOMEPAGE AND SOURCE REPOSITORY]</li>
+<li>[REFERENCES]</li>
+</ul>
+<h2><span style="color:lightblue">[REQUIREMENTS]</h2>
+<p><strong>Perl:</strong> perl 5, version 22 , subversion 1 (v5. 22. 1 ) or higher</p>
+<p><strong>Java:</strong> Oracle Java 8 or OpenJDK 8</p>
+<p><strong>MTBseq uses the following CPAN modules:</strong></p>
+<ul>
+<li>MCE (v1.8 33 )</li>
+<li>Statistics::Basic (v1.6611)</li>
+<li>FindBin (v1.51)</li>
+<li>Cwd (v3.62)</li>
+<li>Getopt::Long (v2. 5 )</li>
+<li>File::Copy (v2.3 0 )</li>
+<li>List::Util (v1.4 9 )</li>
+<li>Exporter (v5.72)</li>
+<li>vars (v1.03)</li>
+<li>lib (v0.63)</li>
+<li>strict (v1. 09 )</li>
+<li>warnings (v1.3 4 )  </li>
+</ul>
+<p><strong>MTBseq uses the following third party software:</strong><br />
+Binaries (compiled on Ubuntu 16.04) are included</p>
+<ul>
+<li>bwa (v0.7.1 7 )</li>
+<li>GenomeAnalysisTK (v3. 8 )</li>
+<li>picard (v2. 1 7. 0 )</li>
+<li>samtools (v1. 6 )</li>
+</ul>
+<p><strong>Hardware requirements:</strong><br />
+MTBseq is able to run on 1 thread up to a maximum of 8 threads. RAM usage is highly dependent on the
+size of FASTQ files and the number of datasets chosen for a joint analysis. 20 - 25GB of RAM is
+recommended. Required hard drive space is depended on the FASTQ file size accordingly. A dataset
+consisting of two 250MB FASTQs will need approximately 2.5GB disk space taking into account the files
+produced during analysis.</p>
+<h2><span style="color:lightblue">[INSTALLATION]</h2>
+<p>The following installation guide explains how to install MTBseq on a computer running the Linux operating
+system and has been thoroughly tested for Ubuntu 16.04 LTS. If necessary, please adapt accordingly for
+other Linux distributions. If you want to use MTBseq with a different OS, the easiest option is to use a
+virtual machine running the Linux OS.</p>
+<ol>
+<li>
+<p><strong>Download MTBseq from github and extract:</strong><br />
+<a href="https://github.com/ngs-fzb/MTBseq_source/">https://github.com/ngs-fzb/MTBseq_source/</a><br />
+<strong>Or clone the repository:</strong><br />
+<code>git clone https://github.com/ngs-fzb/MTBseq_source</code>        <br />
+<strong>Check whether MTBseq.pl and the executables from the opt/ directory are executable and
+change permissions with <code>chmod</code> where necessary.</strong></p>
+</li>
+<li>
+<p><strong>You can ensure that MTBseq is executable from anywhere on your system by adding the
+MTBseq_source folder to your PATH variable or creating a symlink of MTBseq.pl to a folder
+that is already in your PATH variable. Otherwise, call MTBseq.pl with its full path, e.g.:</strong><br />
+<code>perl /home/$USER/path/to/MTBseq_source/MTBseq.pl</code>
+<code></code></p>
+</li>
+<li>
+<strong>Install modules via CPAN by typing in the command-line:</strong><br />
+<code>cpan</code>
+</li>
+<li>
+<p><strong>Install the modules by typing:</strong><br />
+install MCE<br />
+install Statistics::Basic<br />
+install FindBin<br />
+install Cwd<br />
+install Getopt::Long<br />
+install File::Copy<br />
+install List::Util<br />
+install Exporter<br />
+install vars<br />
+install lib<br />
+install strict<br />
+install warnings  
+</p>
+</li>
+<li>
+<p><strong>If third party programs (e.g. BWA and SAMTOOLS) in MTBseq/opt/ are not working correctly,
+try to re-compile them (this may even be necessary for Ubuntu 14.04). The re-compiled
+executables MUST be located within the appropriate folders:<br />
+For BWA:</strong><br />
+<code>cd path/to/MTBseq_source/opt/bwa_0.7.17/</code> <br />
+<code>make</code><br />
+<strong>For SAMTOOLS:</strong><br />
+<code>cd path/to/MTBseq_source/opt/samtools_1.6/</code> <br />
+<code>./configure --prefix=[PATH_TO_YOUR_MTBSEQ]/opt/samtools_1.6/</code>  <br />
+<code>make</code>  <br />
+<code>make install</code>    
+</p>
+</li>
+</ol>
+<p><strong>If BWA or SAMTOOLS are already installed on your system you can create a symlink to the binaries in the
+appropriate folders of MTBseq.</strong></p>
+<h2><span style="color:lightblue">[OVERVIEW]</h2>
+<p>MTBseq is executed from the command line and upon invocation will create its own working environment
+consisting of dedicated folders for the different output files created during runtime of the pipeline. Next generation
+sequencing data is entered into the pipeline by placing FASTQ files into the folder in which MTBseq is executed.
+The complete workflow can be run from a single command, or individual functional modules can be invoked
+directly.</p>
+<p>The input for MTBseq is next generation sequencing data in the form of FASTQ files from single end or paired
+end sequencing runs (tested for Illumina and Ion Torrent files). These files need to confirm to a certain naming
+scheme, in that they contain no other special characters other than hyphens and possess <strong>at least</strong> three fields separated by <strong>underscores</strong>:</p>
+<pre><code>        [SampleID]_[LibID]_[*]_[Direction].f(ast)q.gz
+</code></pre>
+
+<p>example: 
+            <code>H37Rv_library789_R1.fastq.gz + H37Rv_library789_R2.fastq.gz</code></p>
+<p>Here, <strong>[SampleID]</strong> represents the identifier for a specific bacterial sample and <strong>[LibID]</strong> is an identifier for the next
+generation sequencing library used. <strong>[Direction]</strong> is an <strong>essential</strong> field and indicates if reads are in forward (R1)
+or reverse (R2) orientation in paired end data. Files for single end data have to use the <strong>[Direction]</strong> R1. Other
+than these, file names can be freely given, including further <strong>[*]</strong> fields.
+During execution, the program will assume a certain combination of <strong>[SampleID]</strong> with a <strong>[LibID]</strong> as unique dataset
+identifier, and collect data for this identifier in e.g. statistics lists. Allowed FASTQ file extensions are fastq.gz or
+fq.gz.
+The basic invocation of MTBseq on the command-line can be modified with OPTIONS and the corresponding
+VALUES that enable the user to call functional modules directly and set parameters:</p>
+<pre><code>MTBseq [OPTIONS] [VALUES]
+</code></pre>
+
+<p><img src="MTBseq.png" /></p>
+<h2><span style="color:lightblue">[OPTIONS &amp; VALUES]</h2>
+<p>Using OPTIONS and their respective VALUES, a user can modify the execution of MTBseq by directly calling
+functional modules and supplying parameters used in the analysis.</p>
+<pre>
+ [OPTIONS]
+     [VALUES]  
+ <b>--step</b>  The OPTION <b>--step</b> is essential and requires a user specified VALUE. MTBseq has a modular architecture with functional modules encapsulating distinct steps in the analysis pipeline. Using the <b>--step</b> OPTION, you can specify whether the full pipeline is executed, call a specific pipeline step only or as starting point for the pipeline. During execution, MTBseq will only create output files not already present in the working environment. If you choose a specific pipeline step, make sure that the output files of previous steps needed as input are present. In the following, all possible VALUES for this OPTION are described:
+      <b>TBfull</b> VALUE of <b>--step</b> for executing the whole pipeline. If you choose this VALUE, make sure that you specify all analysis parameters for which you do not want to use the preset defaults using the appropriate OPTIONS.    
+      <b>TBbwa</b> VALUE of <b>--step</b> for mapping next generation sequencing read files to a reference genome, using BWA mem. This is the first step within the pipeline. Depending on the library type (single-end or paired-end), this module will align single end or paired end FASTQ files to a reference genome. Please ensure that FASTQ files used as input follow the required naming scheme described above.
+          By default, MTBseq uses the <i>Mycobacterium tuberculosis</i> H37Rv genome (NC_000962.3) as a reference and maps reads with the BWA mem program with default settings. After mapping, files (.sam) are converted into binary mapping files (.bam). The mapping is sorted, indexed and putative PCR duplicates are removed, using the program SAMTOOLS. Wherever possible, multi-threading is activated by the user provided VALUES for the <b>--threads</b> OPTION.
+                 <b>Input:</b>
+                 [SampleID]_[LibID]_[*]_[Direction].fastq.gz
+                 <b>Output:</b>
+                 Bam/[SampleID]_[LibID]_[*].bam
+                 Bam/[SampleID]_[LibID]_[*].bai
+                 Bam/[SampleID]_[LibID]_[*].bamlog
+          <b>TBrefine</b> VALUE of <b>--step</b> for realignment around insertions and deletions and base call recalibration, using the program GATK. The GATK program is invoked with the parameters:
+                 --downsample_to_coverage 10000 --defaultBaseQualities 12 --maximum_cycle_value 600 --noOriginalAlignmentTags
+                 For base call recalibration, MTBseq employs a set of known resistance associated variants if _Mycobacterium tuberculosis_ H37Rv was used as reference genome. The calibration list is stored in the directory "var/res/MTB_Base_Calibration_List.vcf" of the package. For other reference genomes, the file needs to be specified with the <b>--basecalib</b> OPTION or this step will be skipped.
+                 <b>Input:</b>
+                 Bam/[SampleID]_[LibID]_[*].bam
+                 <b>Output:</b>
+                 GATK_Bam/[SampleID]_[LibID]_[*].gatk.bam
+                 GATK_Bam/[SampleID]_[LibID]_[*].gatk.bai
+                 GATK_Bam/[SampleID]_[LibID]_[*].gatk.bamlog
+                 GATK_Bam/[SampleID]_[LibID]_[*].gatk.grp
+                 GATK_Bam/[SampleID]_[LibID]_[*].gatk.intervals
+      <b>TBpile</b> VALUE of <b>--step</b> for creating pileup files (.mpileup) from refined mapping files (.gatk.bam), using the program SAMTOOLS. The SAMTOOLS program is executed with the parameters - B - A
+         <b>Input:</b>
+             GATK_Bam/[SampleID]_[LibID]_[*].gatk.bam
+         <b>Output:</b>
+         Mpileup/[SampleID]_[LibID]_[*].gatk.mpileup
+         Mpileup/[SampleID]_[LibID]_[*].gatk.mpileuplog
+      <b>TBlist</b> VALUE of <b>--step</b> for creating position lists from pileup files (.gatk.mpileup). Position list files capture the essential data from a mapping in a table format with 21 columns, containing the nucleotide counts in mapped reads for each position of the reference genome. This step will take into account the <b>--threads</b> and the <b>--minbqual</b> OPTIONS. The columns in the position list file are listed in table 1.
+         <b>Input:</b>
+         Mpileup/[SampleID]_[LibID]_[*].gatk.mpileup
+         <b>Output:</b>
+         Position_Tables/[SampleID]_[LibID]_[*].gatk_position_table.tab
+      <b>TBvariants</b> VALUE of <b>--step</b> for variant detection from position lists. Variant calling can be run in different detection modes using the OPTIONS <b>--all_vars, --snp_vars</b>, and <b>--lowfreq_vars</b> (with the respective changes to the detection algorithm explained in detail in the description for these OPTIONS). In the default mode, a variant is called if it is supported by a minimum number of 4 reads in both forward and reverse direction, by a minimum number of 4 reads indicating the allele with a phred score of at least 20, and if the allele is indicated by a minimum frequency of 75% in mapped reads. These thresholds can all be set using the respective modifiers ( <b>--mincovf</b>, <b>--mincovr</b>, <b>--minphred20</b>, <b>--minfreq</b>). In addition, positions fulfilling these thresholds will be counted as 'unambigous' in the calculation of quality values for the dataset. The parameters used by the pipeline will be recorded in the file names by dedicated fields, and the detection mode will be recorded in the output files as a binary string (e.g. "outmode100" indicates <b>--all_vars</b> but not <b>--snp_vars</b> and <b>--lowfreq_vars</b> active).
+         <b>Input:</b>
+         Position_Tables/[SampleID]_[LibID]_[*].gatk_position_table.tab
+         <b>Output:</b>
+         Called/[SampleID]_[LibID]_[*].gatk_position_uncovered_[mincovf]_[mincovr]_[minfreq]_[minphred20]_[all_vars][snp_vars][lowfreq_vars].tab
+         Called/[SampleID]_[LibID]_[*].gatk_position_variants_[mincovf]_[mincovr]_[minfreq]_[minphred20]_[all_vars][snp_vars][lowfreq_vars].tab
+     <b>TBstats</b> VALUE of <b>--step</b> for calculating an overview of mapping quality and detected variants for a dataset, using the SAMTOOLS flagstat program. This step creates or updates a tabular delimited file "Mapping_and_Variant_Statistics.tab". This file stores all sample statistics for the analyzed datasets present in the working environment. This module employs the same thresholds to discern unambiguously covered positions as the TBvariants module (set by the <b>--mincovf</b>, <b>--mincovr</b>, <b>--minphred20</b>, <b>--minfreq</b>).The columns of the output are shown in table 2.*
+         <b>Input:</b>
+         Bam/[SampleID]_[LibID]_[*].bam
+         Position_Tables/[SampleID]_[LibID]_[*].gatk_position_table.tab
+         <b>Output:</b>
+         Statistics/Mapping_and_Variant_Statistics.tab
+     <b>TBstrains</b> VALUE of <b>--step</b> for lineage classification based on a set of phylogenetic SNPs (Homolka et al., 2012; Coll et al., 2014; Merker et al., 2015). This module creates a tabular delimited file within the "Classification" directory. Within this file, the majority lineage is reported for each dataset. This entry also gives an indication of the data quality for the positions used to infer the phylogenetic classification. The column indicating the quality will contain the label _good_ if all phylogenetic positions contained in the set are covered at least 10fold and show a frequency of at least 75%, _bad_ if any phylogenetic position does not meet these, and _ugly_ if any phylogenetic position does not have a clear base call.
+         <b>Input:</b>
+         Position_Tables/[SampleID]_[LibID]_[*].gatk_position_table.tab
+         <b>Output:</b>
+         Classification/Strain_Classification.tab
+     <b>TBjoin</b> VALUE of <b>--step</b> for creating a comparative SNP analysis of a set of samples specified by the user with the <b>--samples</b> OPTION. The comparative analysis can be run in different detection modes using the OPTIONS <b>--snp_vars</b>, and <b>--lowfreq_vars</b> (with the respective changes to the detection algorithm explained in detail in the description for these OPTIONS). For the joint analysis, first a scaffold of all variant positions is built from the individual variant files. Second, for all positions with a variant detected for any of the input samples, the allele information is recalculated from the original mappings to produce a comprehensive table. Output files will be created starting with the project name specified with the <b>--project</b> OPTION, otherwise the default file name will start with “NONE”.
+         The first line within the tabular delimited file joint variant table is a sample header line. The second line starts with position specific columns and continuing with sample specific entries shown in table 3.
+         <b>Input:</b>
+         samples.txt
+         --project
+         Called/[SampleID]_[LibID]_[*].gatk_position_variants_[mincovf]_[mincovr]_[minfreq]_[minphred20]_[all_vars][snp_vars][lowfreq_vars].tab
+         Position_Tables/[SampleID]_[LibID]_[*].gatk_position_table.tab
+         <b>Output</b>
+         Joint/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples.tab
+         Joint/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples.log
+     <b>TBamend</b> VALUE of <b>--step</b> for post-processing of joint variant tables. If you call this step directly, you need to specify the correct <b>--project</b> OPTION. This step will produce a comprehensive variant table including calculated summary values for each position. In addition, the set of positions will be processed in consecutive filtering steps. In the first step, positions will be excluded if less than a minimum percentage of samples have unambiguous base calls at this position, with this threshold set by the <b>--unambig</b> OPTION. In addition, all samples need to have either a SNP or wild type base at the position, and positions within repetitive regions of the reference genome or within a resistance associated genes are excluded. This filtering step results in output files carrying the “_amended_[unambig]_phylo” ending; a full table (ending in .tab), a FASTA file containing the aligned alleles of all samples for the given position (.fasta), and a corresponding FASTA file with the headers consisting solely of the respective sample ID (_plainIDs.fasta). The second filtering step removes positions that are located within a maximum distance to each other in the same sample, with this threshold set by the <b>--window</b> OPTION. Output files from this filtering step are generated with the same naming scheme as for the first step and carry the selected window threshold as additional field. In addition, positions not passing the window criteria are reported in the output file carrying the tag "removed".
+         <b>Input</b>
+         samples.txt
+         --project
+         Joint/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples.tab
+         <b>Output</b>
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended.tab
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo.tab
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo.fasta
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_plainIDs.fasta
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_[window].tab
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_[window].fasta
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_[window]_plainIDs.fasta
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_[window]_removed.tab
+     <b>TBgroups</b> VALUE of <b>--step</b> for inferring likely related isolates based on pairwise distance of distinct SNP positions. In an agglomerative process, samples are grouped together if they are within the threshold set by the <b>--distance</b> OPTION. The output files consist of a text file listing the detected groups and ungrouped isolates, and the calculated pairwise distance matrix.
+         <b>Input:</b>
+         Amend/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_[window].tab
+         <b>Output:</b>
+         Groups/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_[window].matrix
+         Groups/[PROJECT]_joint_[mincovf]_[mincovr]_[minfreq]_[minphred20]_samples_amended_[unambig]_phylo_[window]_[distance].groups
+ <b>--continue</b> If a module was chosen with the <b>--step</b> OPTION, the <b>--continue</b> OPTION ensures that the pipeline will continue the analysis with downstream modules. This is automatically set if the <b>--step</b> OPTION is set to the VALUE <b>TBfull</b>.
+
+ <b>--samples</b> This OPTION requires a user supplied file specifying a set of datasets (e.g. samples.txt) as VALUE. The file must be a two-column, tab-separated file. Column 1 has to be your <b>[SampleID]</b>. Column 2 has to be your <b>[LibID]</b>. <b>TBjoin</b> requires this OPTION to be set.
+
+ <b>--project</b> This OPTION allows the user to set a project name for the steps <b>TBjoin</b>, <b>TBamend</b> and <b>TBgroups</b>. If you do not support a project name, <b>[NONE]</b> is used as a default value.
+
+ <b>--ref</b> This OPTION sets the reference genome for the read mapping. By default, the genome of <i>Mycobacterium tuberculosis</i> H37Rv (NC_000962.3) is set as reference. User supplied FASTA files for other reference genomes should be placed in the directory /MTBseq_source/var/ref/, and the respective name given without .fasta extension. Please be aware that for other reference genomes, you need to provide the respective annotation files as well or annotations will be skipped.
+
+ <b>--resilist</b> This OPTION sets a list of known variant positions associated to drug resistance for resistance prediction. Give the full path to the file. The required structure of the file can be seen here: /MTBseq_source/var/res/MTB_Resistance_Mediating.txt
+ 
+ <b>--intregions</b> This OPTION sets a list of interesting regions to be used for annotation of detected variants. Give the full path to the file. The required structure of the file can be seen here: /MTBseq_source/var/res/MTB_Extended_Resistance_Mediating.txt
+
+ <b>--categories</b> This OPTION specifies a gene categories file to annotate essential and non-essential genes as well as repetitive regions. SNPs in repetitive regions will be excluded for phylogenetic analysis. Give the full path to the file. The required structure of the file can be seen here: /MTBseq_source/var/cat/MTB_Gene_Categories.txt
+
+ <b>--basecalib</b> This OPTION specifies a file for base quality recalibration. The list must be in VCF format and should contain known SNPs. Give the full path to the file. The required structure of the file can be seen here: /MTBseq_source/var/res/MTB_Base_Calibration_List.vcf
+
+ <b>--all_vars</b> This OPTION is used in the modules <b>TBvariants</b>, <b>TBstats</b>, <b>TBjoin</b>, and <b>TBstrains</b>. By default, the OPTION is not active. Setting this OPTION will skip all filtering steps and report the calculated information for all positions in the input file.
+
+ <b>--snp_vars</b> This OPTION is used in <b>TBvariants</b>, <b>TBstats</b>, <b>TBjoin</b>, and <b>TBstrains</b>. By default, the OPTION is not active. Setting this OPTION will add an additional filter that excludes all variants except SNPs.
+
+ <b>--lowfreq_vars</b> This OPTION is used in <b>TBvariants</b>, <b>TBstats</b>, <b>TBjoin</b>, and <b>TBstrains</b>. By default, the OPTION is not active. Setting this OPTION has major implications on how the mapping data for each position is processed. By default, the majority allele is called and taken for further calculations. If the <b>--lowfreq_vars</b> OPTION is set, MTBseq will consider the majority allele distinct from wild type, if such an allele is present. This means that only in this detection mode, MTBseq will report variants present only in subpopulations, i.e. low frequency mutations. Of course, OPTIONS <b>--mincovf</b>, <b>--mincovr</b>, <b>--minphred20</b>, and <b>--minfreq</b> need to be set accordingly. Please be aware that output generated in this detection mode should not be used for phylogenetic analysis.
+
+ <b>--minbqual</b> This OPTION is used in <b>TBlist</b>. By default, the OPTION is set to 13. The OPTION sets a threshold for the sequence data quality to be used for the mpileup creation.
+
+ <b>--mincovf</b> This OPTION is used in <b>TBvariants</b>, <b>TBjoin</b>, <b>TBamend</b>, and <b>TBstrains</b>. By default, the OPTION is set to 4. The OPTION sets a minimum forward read coverage threshold. Alleles must have a forward coverage of this VALUE or higher to be considered.
+
+ <b>--mincovr</b> This OPTION is used in <b>TBvariants</b>, <b>TBjoin</b>, <b>TBamend</b>, and <b>TBstrains</b>. By default, the OPTION is set to 4. The OPTION sets a minimum reverse read coverage threshold. Alleles must have a reverse coverage of this VALUE or higher to be considered.
+
+
+ <b>--minphred</b> This OPTION is used in <b>TBvariants</b>, <b>TBjoin</b>, <b>TBamend</b>, and <b>TBstrains</b>. By default, the OPTION is set to 4. The OPTION sets a minimum number of reads indicating an allele with a phred score of at least 20.
+
+ <b>--minfreq</b> This OPTION is used in <b>TBvariants</b>, <b>TBjoin</b>, <b>TBamend</b>, and <b>TBstrains</b>. By default, the OPTION is set to 75. The OPTION sets a minimum frequency for an allele.
+
+ <b>--unambig</b> This OPTION is used in <b>TBamend</b>. By default, the OPTION is set to 95. The option sets a minimum percentage of samples with unambiguous information for position.
+
+ <b>--window</b> This OPTION is used in <b>TBamend</b>. By default, the OPTION is set to 12. The OPTION sets a window size in which the algorithm scans for the occurrence of multiple variants within the same sample. If more than one variant occurs within this window in the same sample, the positions will be excluded.
+
+ <b>--distance</b> This OPTION is used in <b>TBgroups</b>. By default, the OPTION is set to 12. The OPTION sets a SNP distance that is used to classify samples into groups of samples, using agglomerative clustering. If SNP distances between samples are less or equal this VALUE, they are grouped together.
+
+ <b>--quiet</b> This OPTION turns off the display logging function and will report the logging only in a file, called "MTBseq_[DATE]_[USER].log".
+
+ <b>--threads</b> This OPTION is used in <b>TBbwa</b>, <b>TBmerge</b>, <b>TBrefine</b>, <b>TBpile</b> and <b>TBlist</b>. By default, the OPTION is set to 1. The OPTION sets the maximum number of CPUs to use within the pipeline. You can use more than one core in order to execute the pipeline faster. 8 is the current maximum.
+
+ <b>--help</b> This OPTION will show you all available OPTIONs and corresponding VALUEs used by MTBseq.
+
+ <b>--version</b> This OPTION will show you the current version of MTBseq.
+</pre>
+<p><strong>Table 1. Columns of the position list</strong></p>
+<table>
+<thead>		<tr>
+<th> Column	</th>		<th> Descritpion</th>
+</thead>
+<tr>	
+<td> Pos </td>
+<td> Indicates the reference genome position</td>	
+</tr>
+<tr>
+<td>Insindex</td>
+<td>An index for reporting insertion sites, with insertion positions numbered in ascending order</td>
+</tr>	
+<tr>
+<td>RefBase</td>
+<td>The reference genome nucleotide at this position</td>
+</tr>	
+<tr>
+<td>As</td>
+<td>Number of forward mapped reads indicating adenine</td>
+</tr>	
+<tr>
+<td>Cs </td>
+<td>Number of forward mapped reads indicating cytosine</td>
+</tr>	
+<tr>
+<td>Gs</td>
+<td>Number of forward mapped reads indicating guanine</td>
+</tr>	
+<tr>
+<td>Ts</td>
+<td>Number of forward mapped reads indicating thymine</td>
+</tr>	
+<tr>
+<td>Ns </td>
+<td>Number of forward mapped reads with ambiguous nucleotide calls</td>
+</tr>	
+<tr>
+<td> GAPs</td>
+<td>Number of forward mapped reads indicating a GAP (a deletion)</td>
+</tr>
+<tr>
+<td>as</td>
+<td>Number of reverse mapped reads indicating adenine</td>
+</tr>	
+<tr>
+<td>cs</td>
+<td>Number of reverse mapped reads indicating cytosine</td>
+</tr>	
+<tr>
+<td>gs</td>
+<td>Number of reverse mapped reads indicating guanine</td>
+</tr>	
+<tr>
+<td>ts</td>
+<td>Number of reverse mapped reads indicating thymine</td>
+</tr>
+<tr>
+<td>ns</td>
+<td>Number of reverse mapped reads with ambiguous nucleotide calls</td>
+</tr>	
+<tr>
+<td>gaps</td>
+<td>Number of reverse mapped reads indicating a gap (a deletion)</td>
+</tr>	
+<tr>
+<td>Aqual</td>
+<td>Number of reads indicating adenine with a phred score of at least 20</td>
+</tr>	
+<tr>
+<td>Cqual</td>
+<td>Number of reads indicating cytosine with a phred score of at least 20</td>
+</tr>	
+<tr>
+<td>Gqual</td>
+<td>Number of reads indicating guanine with a phred score of at least 20</td>
+</tr>	
+<tr>
+<td>Tqual</td>
+<td>Number of reads indicating thymine with a phred score of at least 20</td>
+</tr>
+<tr>
+<td>Nqual</td>
+<td> Number of reads with an ambiguous nucleotide call with a phred score of at least 20</td>
+</tr>	
+<tr>
+<td>GAPqual</td>
+<td>Number of reads indicating a deletion GAPs with a phred score of at least 20</td>
+</tr>						
+</table>				  
+<p><strong>Table 2. The columns of the TBstats output</strong></p>
+<table>
+<thead>
+<th>Column
+<th>Description
+</thead>
+<tr>
+<td>Date
+<td>The date of MTBseq execution
+</tr>
+<tr>
+<td>SampleID
+<td>The sample ID
+</tr>
+<tr>
+<td>LibraryID
+<td>The library ID
+</tr>
+<tr>
+<td>FullID
+<td>Complete dataset name
+</tr>
+<tr>
+<td>Total Reads
+<td>The total amount of sequenced reads
+</tr>
+<tr>
+<td>Mapped Reads (%)
+<td>The percentage of reads mapped to the reference genome
+</tr>
+<tr>
+<td>Genome Size
+<td>The size of the reference genome
+</tr>
+<tr>
+<td>Genome GC
+<td>The GC content of the reference genome
+</tr>
+<tr>
+<td>(Any) Total Bases (%)
+<td>Percentage of the reference genome covered by reads
+</tr>
+<tr>
+<td>(Any) GC-Content GC
+<td>content of the reference genome covered by reads
+</tr>
+<tr>
+<td>(Any) Coverage mean 
+<td>Mean coverage depth
+</tr>
+<tr>
+<td>(Any) Coverage median
+<td>Median coverage depth
+</tr>
+<tr>
+<td>(Unambiguous)
+<td>Total Bases (%) Percentage of the reference genome covered unambiguously
+</tr>
+<tr>
+<td>(Unambiguous) GC-Content
+<td>GC content of the reference genome covered unambiguously
+</tr>
+<tr>
+<td>(Unambiguous) Coverage mean
+<td>Mean coverage depth of unambiguously covered positions
+</tr>
+<tr>
+<td>(Unambiguous) Coverage median
+<td>Median coverage depth of unambiguously covered positions
+</tr>
+<tr>
+<td>SNPs
+<td>Number of detected SNPs
+</tr>
+<tr>
+<td>Deletions
+<td>Number of detected deletions
+</tr>
+<tr>
+<td>Insertions
+<td>Number of detected insertions
+</tr>
+<tr>
+<td>Uncovered
+<td>Positions of the reference genome not covered by a read
+</tr>
+<tr>
+<td>Substitutions (including Stop Codons)
+<td> Number of substitutions within genes
+</tr>
+</table>
+<p><strong>Table 3. Addition to TBjoin</strong></p>
+<table>
+<td><b>Position specific columns:</td>
+<td>
+<thead>
+<th>Name
+<th> Description
+</thead>
+<tr>
+<td>Position
+<td>Position of the reference genome
+</tr>
+<tr>
+<td>Insindex
+<td>An index for reporting insertion sites, with 0 indicating no insertion
+</tr>
+<tr>
+<td>Ref
+<td>The allele present in the reference genome at this position
+</tr>
+<tr>
+<td>Gene
+<td> Gene ID as given in the reference genome annotation
+</tr>
+<tr>
+<td>GeneName
+<td>Gene name as given in the reference genome annotation
+</tr>
+<tr>
+<td>Annotation
+<td>Gene product as given in the reference genome annotation
+</tr>
+<tr>
+<td><b>Sample specific fields:
+<td>
+</tr>
+<tr>
+<td>Type
+<td>Type of the detected variant
+</tr>
+<tr>
+<td>Allele
+<td>Allele detected for the respective sample at this position
+</tr>
+<tr>
+<td>CovFor
+<td>Number of forward mapped reads indicating the detected allele
+</tr>
+<tr>
+<td>CovRev
+<td> Number of reverse mapped reads indicating the detected allele
+</tr>
+<tr>
+<td>Qual20
+<td>Number of reads indicating the detected allele with a phred score of at least 20
+</tr>
+<tr>
+<td>Freq
+<td>Frequency of the detected allele
+</tr>
+<tr>
+<td>Cov
+<td>Total coverage depth at this position
+</tr>
+<tr>
+<td>Subst
+<td>Information about a possible substitution
+</tr>
+</table>
+<h2><span style="color:lightblue">[EXCHANGING THE REFERENCE GENOME]</h2>
+<p>Apart from the supplied <em>Mycobacterium tuberculosis</em> H37Rv (NC_000962.3) reference genome, any other
+bacterial genome can be used for MTBseq if the necessary files are provided. First, the FASTA formatted
+genome sequence has to be placed in the directory /MTBseq_source/var/ref/ and <strong>–-ref</strong> has to be set during
+program execution to the respective file name but omitting the .fasta extension. In order for MTBseq to provide
+gene annotations, a respective annotation file with the extension _genes.txt needs to be placed in the same
+directory. For file formatting, follow the example of the existing annotation files, e.g. in the
+M._tuberculosis_H37Rv_2015-11-13_genes.txt file. In addition to <em>Mycobacterium tuberculosis</em> H37Rv, three
+other reference genomes are provided (<em>Mycobacterium abscessus, Mycobacterium chimaera</em> and
+<em>Mycobacterium fortuitum</em>).
+Variant annotations regarding association to resistance, interesting regions or gene categories are only
+performed if the respective annotation files are provided to MTBseq with the OPTIONs <strong>–-resilist</strong>, <strong>--intregions</strong>
+or <strong>–-categories</strong>. See these OPTIONs for details and the required structure of the files.</p>
+<p>Base calibration of the <strong>TBrefine</strong> module is only done for a modified reference if a list of known SNP positions
+is provided through the <strong>–-basecalib</strong> OPTION, otherwise it will be skipped. This will not affect the realignment
+functionality of the <strong>TBrefine</strong> module.</p>
+<h2><span style="color:lightblue">[CUSTOMIZING THE CODE]</h2>
+<p>External programs used in MTBseq are implemented as SYSTEM calls and are used in <strong>TBbwa</strong> and <strong>TBrefine</strong>.
+To get access to the full range of parameters of included programs, the respective SYSTEM call can be
+modified with the desired parameters as long as the output remains in the same format. Be absolutely sure to
+understand the options and their impact, i.e. consult the documentation of the respective program first. This
+can go as far as exchanging individual programs such as the tool used for read alignment.</p>
+<p>MTBseq is built on a modular structure, thus it is possible to write your own modules in addition to or in
+replacement of existing modules. Programming knowledge is required. The currently available modules can be
+found in the /MTBseq_source/lib/ directory and can serve as templates. The following steps will give a short
+introduction to build your own module:</p>
+<ol>
+<li>Define your module and create YOURmodule.pm in MTBseq_source/lib/</li>
+<li>
+Define the module’s environment in MTBseq_source/MTBseq.pl. See code comments for the respective sections
+<ol>
+<li>Input/Output directories ($W_dir)</li>
+<li>Program directories ($RealBin/opt/)</li>
+<li>Implement the module (use YOURmodule)</li>
+<li>Define options and parameters for the module</li>
+<li>Make the module part of the pipeline (--step)</li>
+<li>Define working variables for checkups (@ARRAYS, %HASHES)</li>
+<li>Define the module call logic (Input files, checks, hand over options, and directories)</li>
+</ol>
+</li>
+<li>
+Write the module
+<ol>
+<li>Implement necessary modules</li>
+<li>Define the main function of the module and export it (@EXPORT = qw(yourmodule))</li>
+<li>Implement the main function (with the parameters handed over from MTBseq.pl)</li>
+</ol>
+</li>
+</ol>
+<h2><span style="color:lightblue">[EXAMPLES]</h2>
+<p><code>MTBseq --step TBfull</code><br />
+or in case of no symlink <br />
+<code>perl /path/to/your/MTBseq.pl --step TBfull</code><br />
+Will execute the whole pipeline with default values. All log output is written into a file called
+&quot;MTBseq_[DATE]_[USER].log&quot; and on screen. The log file is located in the working environment, i.e. the folder
+in which you executed the pipeline.</p>
+<p><code>MTBseq --step TBbwa --continue --threads 8</code><br />
+or<br />
+<code>perl path/to/your/MTBseq.pl --step TBbwa --continue --threads 8</code><br />
+The pipeline starts with the read mapping module and continues after finishing this module. The system will use
+8 cores whenever possible. All log output is written into a file called &quot;MTBseq_[DATE]_[USER].log&quot; and on
+screen.</p>
+<p><code>MTBseq --step TBlist --threads 8</code><br />
+or<br />
+<code>perl /path/to/your/MTBseq.pl --step TBlist --threads 8</code><br />
+This example executes the <strong>TBlist</strong> module with 8 threads. All log output is written into a file called
+&quot;MTBseq_[DATE]_[USER].log&quot; and on screen. To execute this module, you need to have the respective output
+from the previous module <strong>TBpile</strong> available in the working environment.</p>
+<p><code>MTBseq --step TBjoin --sample samples.txt --project TEST</code><br />
+or<br />
+<code>perl /path/to/your/MTBseq.pl --step TBjoin --sample samples.txt --project TEST</code>  <br />
+This example uses the <strong>TBjoin</strong> module with default settings. All log output is written into a file called
+&quot;MTBseq_[DATE]_[USER].log&quot; and on screen. To execute this module, you need to have the respective output
+from the previous modules <strong>TBlist</strong> and <strong>TBvariants</strong> available in the working environment.</p>
+<p><code>MTBseq --step TBstrains</code><br />
+or <br />
+<code>perl /path/to/your/MTBseq.pl --step TBstrains</code><br />
+This example uses <strong>TBstrains</strong> with default settings. To execute this module, you need to have the respective
+output from the previous module TBlist available in the working environment. All log output is written into a file
+called &quot;MTBseq_[DATE]_[USER].log&quot; and on screen.</p>
+<p><code>MTBseq --step TBvariants --mincovf 10 --mincovr 10 --minfreq 80 --minphred20 10</code><br />
+or<br />
+<code>perl /path/to/your/MTBseq.pl --step TBvariants --mincovf 10 --mincovr 10 --minfreq 80 --minphred20 10</code>
+This example uses <strong>TBvariants</strong> with a modified settings for variant calling. All log output is written into a file
+called &quot;MTBseq_[DATE]_[USER].log&quot; and on screen. To execute this module, you need to have the respective
+output from the previous module <strong>TBlist</strong> available in the working environment.</p>
+<h2><span style="color:lightblue">[AUTHORS]</h2>
+<p>Thomas A. Kohl (source code, core logic)<br />
+Robin Koch (source code, package building)<br />
+Christian Utpatel (source code, core logic)<br />
+Maria R. De Filippo (source code, beta test)<br />
+Viola Schleusener (performance comparison, beta test)<br />
+Patrick Beckert (annotation data, beta test)<br />
+Daniela M. Cirillo (Head)<br />
+Stefan Niemann (Head)  </p>
+<h2><span style="color:lightblue">[COPYRIGHT AND LICENSE]</h2>
+<p>Copyright (C) 2018 Thomas A. Kohl, Robin Koch, Christian Utpatel, Maria R. De Filippo, Viola Schleusener,
+Patrick Beckert, Daniela M. Cirillo, Stefan Niemann. This program is free software: you can redistribute it and/or
+modify it under the terms of the GNU General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that
+it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should
+have received a copy of the GNU General Public License along with this program. If not, see
+<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+<h2><span style="color:lightblue">[HOMEPAGE AND SOURCE REPOSITORY].................................................................................................</h2>
+<p>MTBseq on github: <a href="https://github.com/ngs-fzb/MTBseq_source/">https://github.com/ngs-fzb/MTBseq_source/</a><br />
+Research center Borstel: <a href="http://www.fz-borstel.de/cms/en/science/start.html">http://www.fz-borstel.de/cms/en/science/start.html</a></p>
+<h2><span style="color:lightblue">[REFERENCES]</h2>
+<ol>
+<li>
+<p>Homolka, S. et al. High resolution discrimination of clinical Mycobacterium tuberculosis complex
+strains based on single nucleotide polymorphisms. PLoS One 7, e39855 (2012).</p>
+</li>
+<li>
+<p>Coll, F. et al. A robust SNP barcode for typing Mycobacterium tuberculosis complex strains. Nature
+Communications 5, 4812 (2014).</p>
+</li>
+<li>
+<p>Merker, M. et al. Evolutionary history and global spread of the Mycobacterium tuberculosis Beijing
+lineage. Nature Genetics 47(3), 242 - 249 (2015).</p>
+</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
