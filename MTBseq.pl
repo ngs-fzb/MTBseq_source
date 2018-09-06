@@ -140,7 +140,7 @@ for my $executable (qw(bwa samtools gatk picard)) {
       if ($executable=~"samtools"){
       $SAMTOOLS_call="$SAMTOOLS_dir\/$executable";}
       elsif ($executable=~"bwa"){
-      $BWA_call="$BWA_dir\/$executable";}
+      $BWA_call="$BWA_dir\/$executable";}}
    elsif ($executable=~"gatk"){
       if (-f "$GATK_dir\/GenomeAnalysisTK.jar"){
       $GATK_call="java -jar $GATK_dir\/GenomeAnalysisTK.jar";
@@ -152,7 +152,6 @@ for my $executable (qw(bwa samtools gatk picard)) {
       print "<INFO>\t",timer(),"\tFound $executable in the MTBseq $PICARD_dir folder!\n";}
       else {die "<ERROR>\t",timer(),"\t$executable is not installed or not in your PATH!\n\n";}}
    else {die "<ERROR>\t",timer(),"\t$executable is not installed or not in your PATH!\n\n";}}
-}
 
 #check version
 open (my $sam_ver, '-|', 'samtools --version 2>&1') or die "<ERROR>\t",timer(),"\tCould not test samtools version\n"; my $sam_ver_out = <$sam_ver>; close $sam_ver;
