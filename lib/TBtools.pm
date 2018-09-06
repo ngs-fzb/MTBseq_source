@@ -1567,7 +1567,7 @@ sub help { # print a help message.
 
 sub version { # print the MTBseq version
    my $VERSION =  shift;
-   print "This is MTBseq $VERSION\n\n"
+   print "MTBseq $VERSION\n"
 }
 
 

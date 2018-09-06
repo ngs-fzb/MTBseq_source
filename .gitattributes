@@ -5,6 +5,10 @@
 *.fai text eol=lf
 *.fasta text eol=lf
 *.vcf text eol=lf
+*.pl text eol=lf
+*.pm text eol=lf
+*.txt eol=lf
+
 
 # Keep as is
 *.vcf.idx binary
