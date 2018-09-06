@@ -6,6 +6,7 @@ use FindBin qw($RealBin);
 use lib "$RealBin/lib";
 use Cwd;
 use Getopt::Long;
+use IPC::Cmd qw[can_run run];
 use TBbwa;
 use TBstats;
 use TBrefine;
@@ -19,7 +20,7 @@ use TBgroups;
 use TBtools;
 
 
-my $VERSION =  "1.0.1";
+my $VERSION =  "1.0.2";
  
 # get current working directory and time.
 my $W_dir         =     getcwd();
@@ -49,6 +50,8 @@ my $BWA_dir       =     "$RealBin/opt/bwa_0.7.17";
 my $SAMTOOLS_dir  =     "$RealBin/opt/samtools_1.6";
 my $PICARD_dir    =     "$RealBin/opt/picard_2.17.0";
 my $GATK_dir      =     "$RealBin/opt/GenomeAnalysisTK_3.8";
+my $BIN_dir       =     "$RealBin/opt";
+#my $TEST_dir      =     "$RealBin/test";
 
 # initialize command-line parameter.
 my $step                =     "";
@@ -76,6 +79,8 @@ my $threads             =     "";
 my $naming_scheme       =     "";
 my $help                =     "";
 my $opt_version         =     "";
+#my $test_run            =     "";
+my $check         =     "";
 
 # get command-line parameter.
 GetOptions('step:s'        =>    \$step,
@@ -101,13 +106,71 @@ GetOptions('step:s'        =>    \$step,
            'quiet'         =>    \$quiet,
            'threads:i'     =>    \$threads,
            'help'          =>    \$help,
-           'version'       =>    \$opt_version
+           'version'       =>    \$opt_version,
+#           'test'          =>    \$test_run,
+           'check'       =>    \$check,
           );
+
+#set tool calls
+my $GATK_call       =   "gatk";
+my $PICARD_call     =   "picard";
+my $SAMTOOLS_call     =   "samtools";
+my $BWA_call     =   "bwa";
 
 # print help message if specified or error if step is not defined or wrong.
 if($help eq '1') { help($VERSION);     exit 0; }
 if($opt_version eq '1') { version($VERSION);     exit 0; }
+
+#check for neccessary perl modules
+for my $module (qw(
+    MCE
+    Statistics::Basic)) {
+    eval "use $module";
+    if ($@) {
+        die "<ERROR>\t",timer(),"\tNot found perl module: $module\n" if $@;} 
+     else {
+        print "<INFO>\t",timer(),"\tFound perl module: $module\n";}}
+
+# check for neccessary programs
+for my $executable (qw(bwa samtools gatk picard)) {
+   if (my $canrun = can_run($executable)){
+      print "<INFO>\t",timer(),"\tFound $executable in your PATH!\n";}
+   elsif ($canrun = can_run("$BIN_dir\/$executable")){
+      print "<INFO>\t",timer(),"\tFound $executable in the MTBseq /opt folder!\n";
+      if ($executable=~"samtools"){
+      $SAMTOOLS_call="$SAMTOOLS_dir\/$executable";}
+      elsif ($executable=~"bwa"){
+      $BWA_call="$BWA_dir\/$executable";}
+   elsif ($executable=~"gatk"){
+      if (-f "$GATK_dir\/GenomeAnalysisTK.jar"){
+      $GATK_call="java -jar $GATK_dir\/GenomeAnalysisTK.jar";
+      print "<INFO>\t",timer(),"\tFound $executable in the MTBseq $GATK_dir folder!\n";}
+      else {die "<ERROR>\t",timer(),"\t$executable is not installed or not in your PATH!\n\n";}}
+   elsif ($executable=~"picard"){
+      if (-f "$PICARD_dir\/picard.jar"){
+      $PICARD_call="java -jar $PICARD_dir\/picard.jar";
+      print "<INFO>\t",timer(),"\tFound $executable in the MTBseq $PICARD_dir folder!\n";}
+      else {die "<ERROR>\t",timer(),"\t$executable is not installed or not in your PATH!\n\n";}}
+   else {die "<ERROR>\t",timer(),"\t$executable is not installed or not in your PATH!\n\n";}}
+}
+
+#check version
+open (my $sam_ver, '-|', 'samtools --version 2>&1') or die "<ERROR>\t",timer(),"\tCould not test samtools version\n"; my $sam_ver_out = <$sam_ver>; close $sam_ver;
+$sam_ver_out =~ qr/samtools\s(\d+\.\d+)/ms;
+my $sam_version = defined $1 ? $1 : 0;
+if ($sam_version < 1.6) {
+warn "<WARN>\t",timer(),"\tNeed samtools >= 1.6, please upgrade the version of samtools in your PATH.\n";
+warn "<WARN>\t",timer(),"\tFor this execution of MTBseq $SAMTOOLS_dir from the MTBseq /opt directory will be used\n";
+$SAMTOOLS_call="$SAMTOOLS_dir\/samtools";}
+
+if($check eq '1') {exit 0;}
+
+#if($test_run eq '1') {
+#chdir $TEST_dir;
+#my $commandline = "$RealBin/MTBseq --step TBfull";
+#system($commandline)==0 or die "$commandline failed: $?\n"; }
 if($step eq '' ) { nostep();   exit 1; }
+
 unless(($step eq 'TBfull'     )  ||
        ($step eq 'TBbwa'      )  ||
        ($step eq 'TBrefine'   )  ||
@@ -143,7 +206,6 @@ if($window           eq    ''    ) { $window             =     12;              
 if($distance         eq    ''    ) { $distance           =     12;                                 }
 if($quiet            eq    ''    ) { $quiet              =     0;                                  }
 if($threads          eq    ''    ) { $threads            =     1;                                  }
-if($threads          >     8     ) { $threads            =     8;                                  }
 
 # set name of $ref fasta file and gene annotation.
 my $refg    =   $ref;
@@ -226,16 +288,6 @@ print $logprint "<INFO>\t",timer(),"\t$AMEND_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$STRAIN_OUT\n";
 print $logprint "<INFO>\t",timer(),"\t$GROUPS_OUT\n";
 
-system("mkdir -p $BAM_OUT");
-system("mkdir -p $GATK_OUT");
-system("mkdir -p $MPILE_OUT");
-system("mkdir -p $POS_OUT");
-system("mkdir -p $CALL_OUT");
-system("mkdir -p $STATS_OUT");
-system("mkdir -p $JOIN_OUT");
-system("mkdir -p $AMEND_OUT");
-system("mkdir -p $STRAIN_OUT");
-system("mkdir -p $GROUPS_OUT");
 
 # initialize check up and content arrays.
 my %check_up;
@@ -294,15 +346,29 @@ if($step eq 'TBbwa') {
    print $logprint "\n<INFO>\t",timer(),"\t### [TBbwa] selected ###\n";
 }
 opendir(WORKDIR,"$W_dir")       || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $W_dir: MTBseq.pl line: ", __LINE__ ," \n";
-opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: MTBseq.pl line: ", __LINE__ , "\n";
 @fastq_files      =  grep { $_ =~ /^\w.*R\d+\.f(ast)?q\.gz/ && -f "$W_dir/$_"    }  readdir(WORKDIR);
-@bam_files        =  grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_"           }  readdir(BAMDIR);
 closedir(WORKDIR);
-closedir(BAMDIR);
+
 if(scalar(@fastq_files) == 0) {
    print $logprint "\n<ERROR>\t",timer(),"\tNo read files to map! Check content of $W_dir!\n";
    exit 1;
 }
+
+system("mkdir -p $BAM_OUT");
+system("mkdir -p $GATK_OUT");
+system("mkdir -p $MPILE_OUT");
+system("mkdir -p $POS_OUT");
+system("mkdir -p $CALL_OUT");
+system("mkdir -p $STATS_OUT");
+system("mkdir -p $JOIN_OUT");
+system("mkdir -p $AMEND_OUT");
+system("mkdir -p $STRAIN_OUT");
+system("mkdir -p $GROUPS_OUT");
+
+opendir(BAMDIR,"$BAM_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $BAM_OUT: MTBseq.pl line: ", __LINE__ , "\n";
+@bam_files        =  grep { $_ =~ /^\w.*\.bam$/ && -f "$BAM_OUT/$_"           }  readdir(BAMDIR);
+closedir(BAMDIR);
+
 %check_up         =  map { (my $id = $_) =~ s/\.bam$//; $id => $id; } @bam_files;
 for(my $i = 0; $i < scalar(@fastq_files); $i++) {
    my $tmp        =  $fastq_files[$i];
@@ -320,7 +386,7 @@ foreach my $fastq (sort { $a cmp $b } @fastq_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$fastq\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart BWA mapping...\n";
-tbbwa($logprint,$W_dir,$VAR_dir,$BWA_dir,$SAMTOOLS_dir,$BAM_OUT,$ref,$threads,$naming_scheme,@fastq_files_new);
+tbbwa($logprint,$W_dir,$VAR_dir,$BWA_dir,$SAMTOOLS_dir,$BWA_call,$SAMTOOLS_call,$BAM_OUT,$ref,$threads,$naming_scheme,@fastq_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished BWA mapping!\n";
 @fastq_files      =  ();
 @bam_files        =  ();
@@ -361,7 +427,7 @@ foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart GATK refinement...\n";
-tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$GATK_dir,$BAM_OUT,$GATK_OUT,$ref,$basecalib,$threads,@gatk_files_new);
+tbrefine($logprint,$W_dir,$VAR_dir,$PICARD_dir,$GATK_dir,$PICARD_call,$GATK_call,$BAM_OUT,$GATK_OUT,$ref,$basecalib,$threads,@gatk_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished GATK refinement!\n";
 @bam_files        =  ();
 @gatk_files       =  ();
@@ -402,7 +468,7 @@ foreach my $bam (sort { $a cmp $b } @gatk_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart creating .mpileup files...\n";
-tbpile($logprint,$VAR_dir,$SAMTOOLS_dir,$GATK_dir,$GATK_OUT,$MPILE_OUT,$ref,$threads,@gatk_files_new);
+tbpile($logprint,$VAR_dir,$SAMTOOLS_dir,$SAMTOOLS_call,$GATK_dir,$GATK_OUT,$MPILE_OUT,$ref,$threads,@gatk_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished creating .mpileup files!\n";
 @gatk_files       =  ();
 @mpile_files      =  ();
@@ -524,7 +590,7 @@ foreach my $bam (sort { $a cmp $b } @bam_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart statistics calculation...\n";
-tbstats($logprint,$W_dir,$VAR_dir,$SAMTOOLS_dir,$BAM_OUT,$POS_OUT,$STATS_OUT,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$all_vars,$snp_vars,$lowfreq_vars,$date_string,@bam_files_new);
+tbstats($logprint,$W_dir,$VAR_dir,$SAMTOOLS_dir,$SAMTOOLS_call,$BAM_OUT,$POS_OUT,$STATS_OUT,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$all_vars,$snp_vars,$lowfreq_vars,$date_string,@bam_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished statistics calculation!\n";
 @bam_files     =  ();
 @pos_files     =  ();
