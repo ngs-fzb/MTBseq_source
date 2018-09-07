@@ -11,7 +11,7 @@ use MCE;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION    =  1.0.1;
+$VERSION    =  1.0.2;
 @ISA        =  qw(Exporter);
 @EXPORT     =  qw(parse_reference
                   parse_fasta
@@ -1165,6 +1165,7 @@ sub print_variants { # print a variant file.
    my $resi_gene        =  shift;
    my $variants_file    =  shift;
    my $uncovered_file   =  shift;
+   my $genes            =  shift;
    my $header           =  "#Pos\tInsindex\tRef\tType\tAllel\tCovFor\tCovRev\tQual20\tFreq\tCov";
    $header              .= "\tSubst\tGene\tGeneName\tProduct\tResistanceSNP\tPhyloSNP\tInterestingRegion\n";
    my $output_variant   =  $header;
@@ -1191,7 +1192,7 @@ sub print_variants { # print a variant file.
          my $subst      =  shift(@values);
          my $gene       =  shift(@values);
          my $gene_name  =  " ";
-         $gene_name     =  $resi_gene->{$gene}                                      if(exists $resi_gene->{$gene});
+         $gene_name     =  $genes->{$gene}->{name}                                      if(exists $genes->{$gene}->{name});
          my $product    =  shift(@values);
          my $resistance =  " ";
          my $phylo      =  " ";

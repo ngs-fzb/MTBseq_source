@@ -8,7 +8,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION =  1.0.0;
+$VERSION =  1.0.1;
 @ISA     =  qw(Exporter);
 @EXPORT  =  qw(tbvariants);
 
@@ -69,7 +69,7 @@ sub tbvariants {
       print $logprint "<INFO>\t",timer(),"\tPrinting:\n";
       print $logprint "<INFO>\t",timer(),"\t$variants_file\n";
       print $logprint "<INFO>\t",timer(),"\t$uncovered_file\n";
-      print_variants($CALL_OUT,$variants,$variant_infos,$resi_gene,$variants_file,$uncovered_file);
+      print_variants($CALL_OUT,$variants,$variant_infos,$resi_gene,$variants_file,$uncovered_file,$genes);
       $variants            =  {};
       print $logprint "<INFO>\t",timer(),"\tPrinting finished!\n";
    }
