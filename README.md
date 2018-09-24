@@ -6,7 +6,7 @@ MTBseq is an automated pipeline for mapping, variant calling and detection of re
 
 ## Getting Started
 
-For complete installation instructions, description and usage examples please read the [manual.md](https://github.com/ngs-fzb/MTBseq_source/blob/master/manual.md).
+For complete installation instructions, description and usage examples please read the [MANUAL.md](https://github.com/ngs-fzb/MTBseq_source/blob/master/MANUAL.md).
 
 # Installation
 
