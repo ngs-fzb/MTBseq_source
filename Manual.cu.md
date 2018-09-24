@@ -41,13 +41,13 @@ variant positions in FASTA format, which can be used to calculate phylogenetic t
 
 ## <span style="color:lightblue">[REQUIREMENTS]
 
-**Perl:** perl 5, version 22 , subversion 1 (v5. 22. 1 ) or higher
+**Perl:** perl 5, version 22 , subversion 1 (v5.22.1) or higher
 
-**Java:** Oracle Java 8 or OpenJDK 8, v1.8
+**Java:** Oracle Java 8 or OpenJDK 8 (v1.8)
 
 **MTBseq uses the following CPAN/core modules:**
 
--  MCE (v1.8 33 )
+-  MCE (v1.833 )
 -  Statistics::Basic (v1.6611)
 -  FindBin (v1.51) [core module]
 -  Cwd (v3.62) [core module]
@@ -146,7 +146,8 @@ end sequencing runs (tested for Illumina and Ion Torrent files). These files nee
 scheme, in that they contain no other special characters other than hyphens and possess **at least** three fields separated by **underscores**:
 
     [SampleID]_[LibID]_[*]_[Direction].f(ast)q.gz
-example: 
+Example:
+
     H37Rv_library789_R1.fastq.gz + H37Rv_library789_R2.fastq.gz
 
 Here, **[SampleID]** represents the identifier for a specific bacterial sample and **[LibID]** is an identifier for the next
@@ -166,9 +167,11 @@ VALUES that enable the user to call functional modules directly and set paramete
 
 Using OPTIONS and their respective VALUES, a user can modify the execution of MTBseq by directly calling
 functional modules and supplying parameters used in the analysis.
+
 <pre>
  [OPTIONS]
      [VALUES]  
+
  <b>--step</b>  The OPTION <b>--step</b> is essential and requires a user specified VALUE. MTBseq has a modular architecture with functional modules encapsulating distinct steps in the analysis pipeline. Using the <b>--step</b> OPTION, you can specify whether the full pipeline is executed, call a specific pipeline step only or as starting point for the pipeline. During execution, MTBseq will only create output files not already present in the working environment. If you choose a specific pipeline step, make sure that the output files of previous steps needed as input are present. In the following, all possible VALUES for this OPTION are described:
       <b>TBfull</b> VALUE of <b>--step</b> for executing the whole pipeline. If you choose this VALUE, make sure that you specify all analysis parameters for which you do not want to use the preset defaults using the appropriate OPTIONS.    
       <b>TBbwa</b> VALUE of <b>--step</b> for mapping next generation sequencing read files to a reference genome, using BWA mem. This is the first step within the pipeline. Depending on the library type (single-end or paired-end), this module will align single end or paired end FASTQ files to a reference genome. Please ensure that FASTQ files used as input follow the required naming scheme described above.
