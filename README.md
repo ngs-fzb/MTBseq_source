@@ -26,7 +26,7 @@ gatk3-register /path/to/GenomeAnalysisTK[-$PKG_VERSION.tar.bz2|.jar]
 , which will copy GATK into your conda environment.
 
 ## Source
-Please see the [manual.md](https://github.com/ngs-fzb/MTBseq_source/blob/master/manual.md) for installation from source.
+Please see the [MANUAL.md](https://github.com/ngs-fzb/MTBseq_source/blob/master/MANUAL.md) for installation from source.
 
 ### Requirements
 
