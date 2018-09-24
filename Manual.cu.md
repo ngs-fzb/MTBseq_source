@@ -89,7 +89,7 @@ virtual machine running the Linux OS.
 Install Conda or Miniconda: Please see [https://conda.io/docs/](https://conda.io/docs/) for this.  
 MTBseq can then be installed with:
 
-    conda install -c bioconda mtbseq
+`conda install -c bioconda mtbseq`
 
 Due to license restrictions, even bioconda cannot install the dependency GenomeAnalysisTK 3.8 directly. After installation of MTBseq to fully install the GATK, you must download a licensed copy of the GenomeAnalysisTK 3.8  from the Broad Institute ([GATK Version 3.8](https://software.broadinstitute.org/gatk/download/auth?package=GATK-archive&version=3.8-0-ge9d806836)), and call 
 
@@ -112,8 +112,7 @@ Due to license restrictions, even bioconda cannot install the dependency GenomeA
 MTBseq\_source folder to your PATH variable or creating a symlink of MTBseq to a folder
 that is already in your PATH variable. Otherwise, call MTBseq with its full path, e.g.:**  
 ```/home/$USER/path/to/MTBseq_source/MTBseq```
-```
-```
+
 3. **Install modules via CPAN by typing in the command-line:**  
     ```cpan```
 4. **Install the modules by typing:**  
@@ -146,9 +145,9 @@ The input for MTBseq is next generation sequencing data in the form of FASTQ fil
 end sequencing runs (tested for Illumina and Ion Torrent files). These files need to confirm to a certain naming
 scheme, in that they contain no other special characters other than hyphens and possess **at least** three fields separated by **underscores**:
 
-            [SampleID]_[LibID]_[*]_[Direction].f(ast)q.gz
+    [SampleID]_[LibID]_[*]_[Direction].f(ast)q.gz
 example: 
-            ```H37Rv_library789_R1.fastq.gz + H37Rv_library789_R2.fastq.gz```
+    H37Rv_library789_R1.fastq.gz + H37Rv_library789_R2.fastq.gz
 
 Here, **[SampleID]** represents the identifier for a specific bacterial sample and **[LibID]** is an identifier for the next
 generation sequencing library used. **[Direction]** is an **essential** field and indicates if reads are in forward (R1)
@@ -297,7 +296,7 @@ functional modules and supplying parameters used in the analysis.
  <b>--version</b> This OPTION will show you the current version of MTBseq.
 </pre>
 
-| Table 1  | Columns of the position list                                                                 |
+| Table 1  | The columns of the position list                                                                 |
 |----------|----------------------------------------------------------------------------------------------|
 | Pos      | Indicates the reference genome position                                                      |
 | Insindex | An index for reporting insertion sites, with insertion positions numbered in ascending order |
@@ -398,13 +397,13 @@ introduction to build your own module:
 
 1. Define your module and create YOURmodule.pm in MTBseq_source/lib/
 2. Define the module’s environment in MTBseq\_source/MTBseq. See code comments for the respective sections
-       1. Input/Output directories ($W_dir)
-       2. Program directories ($RealBin/opt/)
-       3. Implement the module (use YOURmodule)
-       4. Define options and parameters for the module
-       5. Make the module part of the pipeline (--step)
-       6. Define working variables for checkups (@ARRAYS, %HASHES)
-       7. Define the module call logic (Input files, checks, hand over options, and directories)
+   1. Input/Output directories ($W_dir)
+   2. Program directories ($RealBin/opt/)
+   3. Implement the module (use YOURmodule)
+   4. Define options and parameters for the module
+   5. Make the module part of the pipeline (--step)
+   6. Define working variables for checkups (@ARRAYS, %HASHES)
+   7. Define the module call logic (Input files, checks, hand over options, and directories)
 3. Write the module
     1. Implement necessary modules
     2. Define the main function of the module and export it (@EXPORT = qw(yourmodule))
