@@ -1,7 +1,7 @@
-![](https://github.com/ngs-fzb/MTBseq_source/blob/Dev/fzb_neueslogo_2017_englisch_cmyk.jpg)
+![](https://github.com/ngs-fzb/MTBseq_source/blob/master/fzb_neueslogo_2017_englisch_cmyk.jpg)
 
 
-![](https://github.com/ngs-fzb/MTBseq_source/blob/Dev/mtbseq_logo.png)
+![](https://github.com/ngs-fzb/MTBseq_source/master/Dev/mtbseq_logo.png)
 
 ## <span style="color:lightblue">[DESCRIPTION]</span>
 
@@ -162,7 +162,7 @@ VALUES that enable the user to call functional modules directly and set paramete
 
     MTBseq [OPTIONS] [VALUES]
 
-![](https://github.com/ngs-fzb/MTBseq_source/blob/Dev/mtbseq_flow.png)
+![](https://github.com/ngs-fzb/MTBseq_source/blob/master/mtbseq_flow.png)
 ## <span style="color:lightblue">[OPTIONS & VALUES]
 
 Using OPTIONS and their respective VALUES, a user can modify the execution of MTBseq by directly calling
