@@ -1,7 +1,7 @@
 ![](https://github.com/ngs-fzb/MTBseq_source/blob/master/fzb_neueslogo_2017_englisch_cmyk.jpg)
 
 
-![](https://github.com/ngs-fzb/MTBseq_source/master/Dev/mtbseq_logo.png)
+![](https://github.com/ngs-fzb/MTBseq_source/blob/master/mtbseq_logo.png)
 
 ## <span style="color:lightblue">[DESCRIPTION]</span>
 
