@@ -154,7 +154,7 @@ for my $executable (qw(bwa samtools gatk picard)) {
    else {die "<ERROR>\t",timer(),"\t$executable is not installed or not in your PATH!\n\n";}}
 
 #check version
-open (my $sam_ver, '-|', 'samtools --version 2>&1') or die "<ERROR>\t",timer(),"\tCould not test samtools version\n"; my $sam_ver_out = <$sam_ver>; close $sam_ver;
+open (my $sam_ver, '-|', '$SAMTOOLS_call --version 2>&1') or die "<ERROR>\t",timer(),"\tCould not test samtools version\n"; my $sam_ver_out = <$sam_ver>; close $sam_ver;
 $sam_ver_out =~ qr/samtools\s(\d+\.\d+)/ms;
 my $sam_version = defined $1 ? $1 : 0;
 if ($sam_version < 1.6) {
