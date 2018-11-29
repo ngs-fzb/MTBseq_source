@@ -297,6 +297,7 @@ functional modules and supplying parameters used in the analysis.
  <b>--help</b> This OPTION will show you all available OPTIONs and corresponding VALUEs used by MTBseq.
 
  <b>--version</b> This OPTION will show you the current version of MTBseq.
+ <b>--check</b> This OPTION will check the dependencies of MTBseq.
 </pre>
 
 | Table 1  | The columns of the position list                                                                 |

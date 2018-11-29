@@ -1471,6 +1471,7 @@ sub help { # print a help message.
 
    --help         This help message
    --version      Version of MTBseq
+   --check        Check the dependencies of MTBseq
    --step
       <ESSENTIAL> This is an essential option! Choose your pipeline step as a parameter!
       TBfull      Full workflow
