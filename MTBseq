@@ -163,7 +163,7 @@ warn "<WARN>\t",timer(),"\tFor this execution of MTBseq samtools 1.6 from the MT
 $SAMTOOLS_call="$BIN_dir\/samtools";}
 
 open (my $java_ver, '-|', 'java -version 2>&1') or die "<ERROR>\t",timer(),"\tCould not test java version\n"; my $java_ver_out = <$java_ver>; close $java_ver;
-$java_ver_out =~ qr/openjdk\sversion\s\"(\d+\.\d+)\.\d+_\S+\"/ms;
+$java_ver_out =~ qr/(\d+\.\d+)/ms;
 my $java_version = defined $1 ? $1 : 0;
 unless ($java_version == 1.8) {
 die "<ERROR>\t",timer(),"\tNeed exatly java 1.8 for GATK execution. You have java $java_version!\n";}
