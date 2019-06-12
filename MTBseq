@@ -112,7 +112,7 @@ GetOptions('step:s'        =>    \$step,
           );
 
 #set tool calls
-my $GATK_call       =   "gatk";
+my $GATK_call       =   "gatk3";
 my $PICARD_call     =   "picard";
 my $SAMTOOLS_call     =   "samtools";
 my $BWA_call     =   "bwa";
@@ -132,7 +132,7 @@ for my $module (qw(
         print "<INFO>\t",timer(),"\tFound perl module: $module\n";}}
 
 # check for neccessary programs
-for my $executable (qw(bwa samtools gatk picard)) {
+for my $executable (qw(bwa samtools gatk3 picard)) {
    if (my $canrun = can_run($executable)){
       print "<INFO>\t",timer(),"\tFound $executable in your PATH!\n";}
    elsif ($canrun = can_run("$BIN_dir\/$executable")){
@@ -141,7 +141,7 @@ for my $executable (qw(bwa samtools gatk picard)) {
       $SAMTOOLS_call="$BIN_dir\/$executable";}
       elsif ($executable=~"bwa"){
       $BWA_call="$BIN_dir\/$executable";}}
-   elsif ($executable=~"gatk"){
+   elsif ($executable=~"gatk3"){
       if (-f "$BIN_dir\/GenomeAnalysisTK.jar"){
       $GATK_call="java -jar $BIN_dir\/GenomeAnalysisTK.jar";
       print "<INFO>\t",timer(),"\tFound $executable in the MTBseq $BIN_dir folder!\n";}
@@ -154,7 +154,7 @@ for my $executable (qw(bwa samtools gatk picard)) {
    else {die "<ERROR>\t",timer(),"\t$executable is not installed or not in your PATH!\n\n";}}
 
 #check version
-open (my $sam_ver, '-|', '$SAMTOOLS_call --version 2>&1') or die "<ERROR>\t",timer(),"\tCould not test samtools version\n"; my $sam_ver_out = <$sam_ver>; close $sam_ver;
+open (my $sam_ver, '-|', "$SAMTOOLS_call --version 2>&1") or die "<ERROR>\t",timer(),"\tCould not test samtools version\n"; my $sam_ver_out = <$sam_ver>; close $sam_ver;
 $sam_ver_out =~ qr/samtools\s(\d+\.\d+)/ms;
 my $sam_version = defined $1 ? $1 : 0;
 if ($sam_version < 1.6) {
