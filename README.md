@@ -21,7 +21,7 @@ After installation of MTBseq to fully install the GATK, you must download a lice
  from the Broad Institute (https://software.broadinstitute.org/gatk/download/auth?package=GATK-archive&version=3.8-0-ge9d806836), 
  and call
 ``` 
-gatk-register /path/to/GenomeAnalysisTK[-$PKG_VERSION.tar.bz2|.jar]
+gatk3-register /path/to/GenomeAnalysisTK[-$PKG_VERSION.tar.bz2|.jar]
 ```
 , which will copy GATK into your conda environment.
 
