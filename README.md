@@ -1,4 +1,11 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![GitHub release](https://img.shields.io/github/release/ngs-fzb/mtbseq_source.svg)
+
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/mtbseq/README.html)
+![Conda (channel only)](https://img.shields.io/conda/vn/bioconda/mtbseq.svg)
+![Conda](https://img.shields.io/conda/dn/bioconda/mtbseq.svg)
+
+[![Docker](https://quay.io/repository/biocontainers/mtbseq/status)](https://quay.io/repository/biocontainers/mtbseq/)
 
 # MTBseq
 
