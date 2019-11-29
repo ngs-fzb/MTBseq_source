@@ -64,7 +64,7 @@ sub tbjoin {
       push(@ids, $id);
    }
    print $logprint "<INFO>\t",timer(),"\tFinished parsing variant files!\n";
-   print $logprint "<INFO>\t",timer(),"\tSart printing joint variant file scaffold...\n";
+   print $logprint "<INFO>\t",timer(),"\tStart printing joint variant file scaffold...\n";
    print_joint_table_scaffold($logprint,$JOIN_OUT,$join_file,$var_positions,$annotation,$genes,@ids);
    print $logprint "<INFO>\t",timer(),"\tFinished printing joint variant file scaffold!\n";
    # start logic..
