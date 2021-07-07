@@ -20,7 +20,7 @@ use TBgroups;
 use TBtools;
 
 
-my $VERSION =  "1.0.3";
+my $VERSION =  "1.0.4";
  
 # get current working directory and time.
 my $W_dir         =     getcwd();
