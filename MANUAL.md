@@ -28,6 +28,7 @@ variant positions in FASTA format, which can be used to calculate phylogenetic t
 - [DESCRIPTION]
 - [REQUIREMENTS]
 - [INSTALLATION]
+- [USAGE]
 - [OVERVIEW]
 - [OPTIONS & VALUES]
 - [EXCHANGING THE REFERENCE GENOME]
@@ -130,6 +131,24 @@ Check the version:
 Check the dependencies:  
 ```MTBseq --check```
 
+
+**USAGE**
+
+`MTBseq` expects the fastq files to be named in a specific way, please refer the `OVERVIEW` section of this manual. Here's a quick example
+
+```sh
+(base) root@server:~/MTBseq_source/test# ls
+Test-20_MTBSeq_nextseq_151bp_R1.fastq.gz  
+Test-20_MTBSeq_nextseq_151bp_R2.fastq.gz  
+```
+
+In this folder simply invoke
+
+```sh
+MTBseq --step TBfull
+
+```
+The above command will tell `MTBseq` to run the entire pipeline. For skipping/starting at specific steps please read `OVERVIEW` and the refer parameters table below.
 
 
 
