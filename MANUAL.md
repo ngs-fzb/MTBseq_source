@@ -134,7 +134,7 @@ Check the dependencies:
 
 **USAGE**
 
-`MTBseq` expects the files. to be named in a specific way, please refer the `OVERVIEW` section of this manual. Here's a quick example
+`MTBseq` expects the fastq files to be named in a specific way, please refer the `OVERVIEW` section of this manual. Here's a quick example
 
 ```sh
 (base) root@server:~/MTBseq_source/test# ls
