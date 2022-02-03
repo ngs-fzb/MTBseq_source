@@ -155,18 +155,23 @@ for my $executable (qw(bwa samtools gatk3 picard)) {
 
 #check version
 open (my $sam_ver, '-|', "$SAMTOOLS_call --version 2>&1") or die "<ERROR>\t",timer(),"\tCould not test samtools version\n"; my $sam_ver_out = <$sam_ver>; close $sam_ver;
-$sam_ver_out =~ qr/samtools\s(\d+\.\d+)/ms;
-my $sam_version = defined $1 ? $1 : 0;
-if ($sam_version < 1.6) {
-warn "<WARN>\t",timer(),"\tNeed samtools >= 1.6, please upgrade the version of samtools in your PATH.\n";
-warn "<WARN>\t",timer(),"\tFor this execution of MTBseq samtools 1.6 from the MTBseq /opt directory will be used\n";
-$SAMTOOLS_call="$BIN_dir\/samtools";}
+if ($sam_ver_out =~ qr/samtools\s(\d+\.\d+)/ms) {
+	my $sam_version = defined $1 ? $1 : 0;
+	if ($sam_version < 1.6) {
+	warn "<WARN>\t",timer(),"\tNeed samtools >= 1.6, please upgrade the version of samtools in your PATH.\n";
+	warn "<WARN>\t",timer(),"\tFor this execution of MTBseq samtools 1.6 from the MTBseq /opt directory will be used\n";
+	$SAMTOOLS_call="$BIN_dir\/samtools";}
+}
+else {warn "<WARN>\t",timer(),"\tsamtools version checking failed. Pipeline could run anyway, but please enter samtools and check the output manually.\n"}
 
 open (my $java_ver, '-|', 'java -version 2>&1') or die "<ERROR>\t",timer(),"\tCould not test java version\n"; my $java_ver_out = <$java_ver>; close $java_ver;
-$java_ver_out =~ qr/(\d+\.\d+)/ms;
-my $java_version = defined $1 ? $1 : 0;
-unless ($java_version == 1.8) {
-die "<ERROR>\t",timer(),"\tNeed exatly java 1.8 for GATK execution. You have java $java_version!\n";}
+if ($java_ver_out =~ qr/(\d+\.\d+)/ms) {
+	my $java_version = defined $1 ? $1 : 0;
+	unless ($java_version == 1.8) {
+	die "<ERROR>\t",timer(),"\tNeed exatly java 1.8 for GATK execution. You have java $java_version!\n";}
+}
+else {die "<ERROR>\t",timer(),"\tjava version checking failed. Please enter java -version and check the output manually.\n"}
+
 
 if($check eq '1') {exit 0;}
 
