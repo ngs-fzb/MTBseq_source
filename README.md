@@ -23,6 +23,9 @@ Install [Conda](https://conda.io/docs/) or [Miniconda](https://conda.io/minicond
 conda install -c bioconda mtbseq
 ```
 
+
+### NOT NECESSARY ANYMORE - GATK will be installed through cona now!
+
 Due to license restrictions, even bioconda cannot install the dependency GenomeAnalysisTK 3.8 directly. 
 After installation of MTBseq to fully install the GATK, you must download a licensed copy of the GenomeAnalysisTK 3.8
 from the Broad Institute (https://console.cloud.google.com/storage/browser/gatk-software/package-archive/gatk).
