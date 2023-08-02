@@ -5,7 +5,8 @@
 ![Conda (channel only)](https://img.shields.io/conda/vn/bioconda/mtbseq.svg)
 ![Conda](https://img.shields.io/conda/dn/bioconda/mtbseq.svg)
 
-[![Docker](https://quay.io/repository/biocontainers/mtbseq/status)](https://quay.io/repository/biocontainers/mtbseq)
+[![Container](https://img.shields.io/badge/container-quay.io-violet)](https://quay.io/repository/biocontainers/mtbseq?tab=tags)
+
 
 # MTBseq
 
