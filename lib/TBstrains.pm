@@ -9,7 +9,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION    =  1.0.0;
+$VERSION    =  1.1.0;
 @ISA        =  qw(Exporter);
 @EXPORT     =  qw(tbstrains);
 
@@ -26,9 +26,9 @@ sub tbstrains {
    my $mifreq                    =  shift;
    my $miphred20                 =  shift;
    my $date_string               =  shift;
-   my $all_vars                  =  shift;
-   $all_vars                     =  1; # set to 1 for fetching all genome positions.
-   my $snp_vars                  =  shift;
+   #my $all_vars                  =  shift;
+   my $all_vars                  =  1; # set to 1 for fetching all genome positions.
+   my $snp_vars                  =  0; #deactivated the option
    my $lowfreq_vars              =  shift;
    my @position_tables           =  @_;
    my $genes                     =  {};

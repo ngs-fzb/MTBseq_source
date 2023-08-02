@@ -9,7 +9,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION    =  1.0.0;
+$VERSION    =  1.1.0;
 @ISA        =  qw(Exporter);
 @EXPORT     =  qw(tbjoin);
 
@@ -27,8 +27,8 @@ sub tbjoin {
    my $micovr           =  shift;
    my $miphred20        =  shift;
    my $mifreq           =  shift;
-   my $all_vars         =  shift;
-   $all_vars            =  1;
+   #my $all_vars         =  shift; #deactivated the option
+   my $all_vars         =  1;
    my $snp_vars         =  shift;
    my $lowfreq_vars     =  shift;
    my @var_files        =  @_;
@@ -60,7 +60,7 @@ sub tbjoin {
    foreach my $file(sort { $a cmp $b } @var_files) {
       $file    =~ /^(.*)\.gatk_position_variants_.*\.tab$/;
       my $id   =  $1;
-      parse_variants($logprint,$CALL_OUT,$file,$id,$var_positions,$strain,$micovf,$micovr,$mifreq,$miphred20);
+      parse_variants($logprint,$CALL_OUT,$file,$id,$var_positions,$strain,$micovf,$micovr,$mifreq,$miphred20,$snp_vars);
       push(@ids, $id);
    }
    print $logprint "<INFO>\t",timer(),"\tFinished parsing variant files!\n";

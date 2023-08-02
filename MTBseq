@@ -20,7 +20,7 @@ use TBgroups;
 use TBtools;
 
 
-my $VERSION =  "1.0.4";
+my $VERSION =  "1.1.0";
  
 # get current working directory and time.
 my $W_dir         =     getcwd();
@@ -320,7 +320,7 @@ my @amend_files_new;
 my @group_files;
 my @samples;
 my $sample_number;
-my $output_mode = $all_vars . $snp_vars . $lowfreq_vars;
+
 if(-f $samples) {
    open(IN,"$samples") || die print $logprint "<INFO>\t",timer(),"\tCan't find $samples file! MTBseq.pl line: ", __LINE__ ," \n";
    while(my $line = <IN>) {
@@ -536,14 +536,14 @@ if($step eq 'TBvariants') {
 opendir(POSDIR,"$POS_OUT")      || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $POS_OUT: MTBseq.pl line: ", __LINE__ ," \n";
 opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: MTBseq.pl line: ", __LINE__ ," \n";
 @pos_files        =  grep { $_ =~ /^\w.*\.gatk_position_table\.tab$/ && -f "$POS_OUT/$_"                                                                          }  readdir(POSDIR);
-@var_files        =  grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$/ && -f "$CALL_OUT/$_"   }  readdir(CALLDIR);
+@var_files        =  grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_outmode[01]$snp_vars$lowfreq_vars\.tab$/ && -f "$CALL_OUT/$_"   }  readdir(CALLDIR);
 closedir(POSDIR);
 closedir(CALLDIR);
 if(scalar(@pos_files) == 0) {
    print $logprint "\n<ERROR>\t",timer(),"\tNo files to call variants! Check content of $POS_OUT!\n";
    exit 1;
 }
-%check_up         =  map { (my $id = $_) =~ s/\.gatk_position_variants_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$//; $id => $id; } @var_files;
+%check_up         =  map { (my $id = $_) =~ s/\.gatk_position_variants_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_outmode[01]$snp_vars$lowfreq_vars\.tab$//; $id => $id; } @var_files;
 for(my $i = 0; $i < scalar(@pos_files); $i++) {
    my $tmp        =  $pos_files[$i];
    $tmp           =~ s/\.gatk_position_table\.tab//;
@@ -560,7 +560,7 @@ foreach my $pos_file (sort { $a cmp $b } @pos_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$pos_file\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart variant calling...\n";
-tbvariants($logprint,$VAR_dir,$POS_OUT,$CALL_OUT,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$resi_list_master,$int_regions,$all_vars,$snp_vars,$lowfreq_vars,@pos_files_new);
+tbvariants($logprint,$VAR_dir,$POS_OUT,$CALL_OUT,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$resi_list_master,$int_regions,$snp_vars,$lowfreq_vars,@pos_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished variant calling!\n";
 @pos_files     =  ();
 @var_files     =  ();
@@ -600,7 +600,7 @@ foreach my $bam (sort { $a cmp $b } @bam_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$bam\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart statistics calculation...\n";
-tbstats($logprint,$W_dir,$VAR_dir,$SAMTOOLS_dir,$SAMTOOLS_call,$BAM_OUT,$POS_OUT,$STATS_OUT,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$all_vars,$snp_vars,$lowfreq_vars,$date_string,@bam_files_new);
+tbstats($logprint,$W_dir,$VAR_dir,$SAMTOOLS_dir,$SAMTOOLS_call,$BAM_OUT,$POS_OUT,$STATS_OUT,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$snp_vars,$lowfreq_vars,$date_string,@bam_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished statistics calculation!\n";
 @bam_files     =  ();
 @pos_files     =  ();
@@ -626,7 +626,7 @@ foreach my $pos_file (sort { $a cmp $b } @pos_files) {
    print $logprint "<INFO>\t",timer(),"\t$pos_file\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart strain call...\n";
-tbstrains($logprint,$VAR_dir,$POS_OUT,$STRAIN_OUT,$ref,$refg,$micovf,$micovr,$mifreq,$miphred20,$date_string,$all_vars,$snp_vars,$lowfreq_vars,@pos_files);
+tbstrains($logprint,$VAR_dir,$POS_OUT,$STRAIN_OUT,$ref,$refg,$micovf,$micovr,$mifreq,$miphred20,$date_string,$lowfreq_vars,@pos_files);
 print $logprint "<INFO>\t",timer(),"\tFinished strain call!\n";
 @pos_files     =  ();
 if($continue == 0 && $step ne 'TBfull') { exit 1; }
@@ -653,7 +653,13 @@ while(<IN>) {
 close(IN);
 opendir(CALLDIR,"$CALL_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $CALL_OUT: MTBseq.pl line: ", __LINE__ ," \n";
 opendir(JOINDIR,"$JOIN_OUT")    || die print $logprint "<ERROR>\t",timer(),"\tCan\'t open directory $JOIN_OUT: MTBseq.pl line: ", __LINE__ ," \n";
-@var_files     =  grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovf\_fr$mifreq\_ph$miphred20\_outmode$output_mode\.tab$/ && -f "$CALL_OUT/$_"   }  readdir(CALLDIR);
+if($snp_vars == 1){
+@var_files     =  grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovf\_fr$mifreq\_ph$miphred20\_outmode[01][01]$lowfreq_vars\.tab$/ && -f "$CALL_OUT/$_"   }  readdir(CALLDIR);
+}
+else {
+@var_files     =  grep { $_ =~ /^\w.*\.gatk_position_variants_cf$micovf\_cr$micovf\_fr$mifreq\_ph$miphred20\_outmode[01]$snp_vars$lowfreq_vars\.tab$/ && -f "$CALL_OUT/$_"   }  readdir(CALLDIR);
+}
+
 @join_files    =  grep { $_ =~ /$group_name\_joint_cf$micovf\_cr$micovr\_fr$mifreq\_ph$miphred20\_samples$sample_number\.tab$/ && -f "$JOIN_OUT/$_"            }  readdir(JOINDIR);
 closedir(CALLDIR);
 closedir(JOINDIR);
@@ -682,7 +688,7 @@ foreach my $var_file (sort { $a cmp $b } @var_files_new) {
    print $logprint "<INFO>\t",timer(),"\t$var_file\n";
 }
 print $logprint "\n<INFO>\t",timer(),"\tStart creating joint variant table...\n";
-tbjoin($logprint,$VAR_dir,$POS_OUT,$CALL_OUT,$JOIN_OUT,$group_name,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$all_vars,$snp_vars,$lowfreq_vars,@var_files_new);
+tbjoin($logprint,$VAR_dir,$POS_OUT,$CALL_OUT,$JOIN_OUT,$group_name,$ref,$refg,$micovf,$micovr,$miphred20,$mifreq,$snp_vars,$lowfreq_vars,@var_files_new);
 print $logprint "<INFO>\t",timer(),"\tFinished creating joint variant table!\n";
 @var_files     =  ();
 @join_files    =  ();

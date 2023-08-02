@@ -11,7 +11,7 @@ use MCE;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION    =  1.0.2;
+$VERSION    =  1.1.0;
 @ISA        =  qw(Exporter);
 @EXPORT     =  qw(parse_reference
                   parse_fasta
@@ -935,6 +935,7 @@ sub parse_variants { # parse a variant file.
    my $micovr        =  shift;
    my $mifreq        =  shift;
    my $miphred20     =  shift;
+   my $snp_vars      =  shift;
    open(IN,"$CALL_OUT/$file") || die print $logprint "<ERROR>\t",timer(),"\tCan't open $file: TBtools line: ", __LINE__ , " \n";
    <IN>;
    while(<IN>) {
@@ -959,6 +960,7 @@ sub parse_variants { # parse a variant file.
       my $resistance =  shift(@fields);
       my $phylo      =  shift(@fields);
       my $region     =  shift(@fields);
+      next if(($snp_vars == 1) && !($type eq "SNP"));
       my $unambiguous_base_call = 0;
       if(($covf >= $micovf) && ($covr >= $micovr) && ($freq1 >= $mifreq) && ($qual20 >= $miphred20)) {
          if(($allel1 =~ /[ACGTacgt]/) || ($allel1 =~ /GAP/)) {

@@ -92,12 +92,6 @@ MTBseq can then be installed with:
 
 `conda install -c bioconda mtbseq`
 
-Due to license restrictions, even bioconda cannot install the dependency GenomeAnalysisTK 3.8 directly. After installation of MTBseq to fully install the GATK, you must download a licensed copy of the GenomeAnalysisTK 3.8  from the Broad Institute ([GATK Version 3.8](https://software.broadinstitute.org/gatk/download/auth?package=GATK-archive&version=3.8-0-ge9d806836)), and call 
-
-`gatk3-register /path/to/GenomeAnalysisTK[-$PKG_VERSION.tar.bz2|.jar]`
-
- which will copy GATK into your conda environment.
-
 **SOURCE**
 
 
@@ -286,9 +280,7 @@ functional modules and supplying parameters used in the analysis.
 
  <b>--basecalib</b> This OPTION specifies a file for base quality recalibration. The list must be in VCF format and should contain known SNPs. Give the full path to the file. The required structure of the file can be seen here: /MTBseq_source/var/res/MTB_Base_Calibration_List.vcf
 
- <b>--all_vars</b> This OPTION is used in the modules <b>TBvariants</b>, <b>TBstats</b>, <b>TBjoin</b>, and <b>TBstrains</b>. By default, the OPTION is not active. Setting this OPTION will skip all filtering steps and report the calculated information for all positions in the input file.
-
- <b>--snp_vars</b> This OPTION is used in <b>TBvariants</b>, <b>TBstats</b>, <b>TBjoin</b>, and <b>TBstrains</b>. By default, the OPTION is not active. Setting this OPTION will add an additional filter that excludes all variants except SNPs.
+ <b>--snp_vars</b> This OPTION is used in <b>TBvariants</b> and <b>TBjoin</b>. By default, the OPTION is not active. Setting this OPTION will add an additional filter that excludes all variants except SNPs. TBvariants could be run without the option and the filter can only be activated for TBjoin afterwards.
 
  <b>--lowfreq_vars</b> This OPTION is used in <b>TBvariants</b>, <b>TBstats</b>, <b>TBjoin</b>, and <b>TBstrains</b>. By default, the OPTION is not active. Setting this OPTION has major implications on how the mapping data for each position is processed. By default, the majority allele is called and taken for further calculations. If the <b>--lowfreq_vars</b> OPTION is set, MTBseq will consider the majority allele distinct from wild type, if such an allele is present. This means that only in this detection mode, MTBseq will report variants present only in subpopulations, i.e. low frequency mutations. Of course, OPTIONS <b>--mincovf</b>, <b>--mincovr</b>, <b>--minphred20</b>, and <b>--minfreq</b> need to be set accordingly. Please be aware that output generated in this detection mode should not be used for phylogenetic analysis.
 
@@ -311,7 +303,7 @@ functional modules and supplying parameters used in the analysis.
 
  <b>--quiet</b> This OPTION turns off the display logging function and will report the logging only in a file, called "MTBseq_[DATE]_[USER].log".
 
- <b>--threads</b> This OPTION is used in <b>TBbwa</b>, <b>TBmerge</b>, <b>TBrefine</b>, <b>TBpile</b> and <b>TBlist</b>. By default, the OPTION is set to 1. The OPTION sets the maximum number of CPUs to use within the pipeline. You can use more than one core in order to execute the pipeline faster. 8 is the current maximum.
+ <b>--threads</b> This OPTION is used in <b>TBbwa</b>, <b>TBmerge</b>, <b>TBrefine</b>, <b>TBpile</b> and <b>TBlist</b>. By default, the OPTION is set to 1. The OPTION sets the maximum number of CPUs to use within the pipeline. You can use more than one core in order to execute the pipeline faster.
 
  <b>--help</b> This OPTION will show you all available OPTIONs and corresponding VALUEs used by MTBseq.
 

@@ -8,7 +8,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION =  1.0.1;
+$VERSION =  1.1.0;
 @ISA     =  qw(Exporter);
 @EXPORT  =  qw(tbvariants);
 
@@ -26,7 +26,7 @@ sub tbvariants {
    my $mifreq              =  shift;
    my $resi_list_master    =  shift;
    my $int_regions         =  shift;
-   my $all_vars            =  shift;
+   my $all_vars            =  0; #deactivated the option
    my $snp_vars            =  shift;
    my $lowfreq_vars        =  shift;
    my @pos_files           =  @_;

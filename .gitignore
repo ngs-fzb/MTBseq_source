@@ -1,2 +1,7 @@
 
 .DS_Store
+lib/TBtools_specifications.pm
+MANUAL.md.backup
+opt/GenomeAnalysisTK.jar
+README.md.backup
+Thumbs.db

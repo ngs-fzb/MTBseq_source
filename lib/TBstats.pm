@@ -9,7 +9,7 @@ use TBtools;
 use Exporter;
 use vars qw($VERSION @ISA @EXPORT);
 
-$VERSION =  1.0.0;
+$VERSION =  1.1.0;
 @ISA     =  qw(Exporter);
 @EXPORT  =  qw(tbstats);
 
@@ -29,7 +29,7 @@ sub tbstats {
    my $micovr        =  shift;
    my $miphred20     =  shift;
    my $mifreq        =  shift;
-   my $all_vars      =  shift;
+   my $all_vars      =  0; #deactivated the option
    my $snp_vars      =  shift;
    my $lowfreq_vars  =  shift;
    my $date_string   =  shift;
