@@ -18,7 +18,10 @@ For complete installation instructions, description and usage examples please re
 
 # Installation
 
-## Conda
+## Conda 
+### v.1.0.4 is now broken on bioconda as picard is requesting now a higher java version. You can fix this by downgrading picard to a version smaller than 3. `conda install picard=2.27.5`
+### This has been fixed in the bioconda v.1.1.0 which should be available soon on bioconda.
+
 Install [Conda](https://conda.io/docs/) or [Miniconda](https://conda.io/miniconda.html) hereafter install MTBseq with:
 ```
 conda install -c bioconda mtbseq
