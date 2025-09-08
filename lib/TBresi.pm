@@ -389,7 +389,7 @@ sub tbresi {
 			$gene_position = ($pos-3986844)+1;
 			$wt_allel =~ tr/AGTC/agtc/;
 			$better_res_change = $gene_name." ".$gene_position."_del_".$wt_allel;
-			$better_res ="DEL-R";
+			$better_res ="DLM-R";
 			}
 			elsif ($gene_name eq "ddn" and $type eq "Ins"){
 			my $subst_allel = $allel;
@@ -397,12 +397,12 @@ sub tbresi {
 				$gene_position = ($pos_insertion-3986844)+1;
 				$subst_allel =~ tr/AGTC/agtc/;
 				$better_res_change = $gene_name." ".$gene_position."_ins_".$subst_allel;
-				$better_res ="DEL-R";
+				$better_res ="DLM-R";
 				}
 			}
 			elsif ($gene_name eq "ddn" and $type eq "SNP"){
 				if ($subst=~/.*_$/){
-				$better_res ="DEL-R";
+				$better_res ="DLM-R";
 				$better_res_change = $gene_name." ".$subst;
 				}
 			}
@@ -497,7 +497,7 @@ sub tbresisummary {
        $R->send('library("readr")');#R-Library for reading in tab-seperated files
         
        $R->run(qq'table<-read_delim(file="${RESI_OUT}/${resi_file}", "\t", escape_double =F, trim_ws=T);'); #Read in Table with resistance-calls 
-       @names=("INH-R (INH)","RIF-R (RMP)","SM-R (SM)","EMB-R (EMB)","PZA-R (PZA)","MFX-R (MFX)","LFX-R (LFX)","CFZ-R (CFZ)","KAN-R (KAN)","AMI-R (AMK)","CAP-R (CPR)","ETH-R (ETH)","LZD-R (LZD)","BDQ-R (BDQ)","CS-R (CS)","PAS-R (PAS)","DEL-R (DEL)");
+       @names=("INH-R (INH)","RIF-R (RMP)","SM-R (SM)","EMB-R (EMB)","PZA-R (PZA)","MFX-R (MFX)","LFX-R (LFX)","CFZ-R (CFZ)","KAN-R (KAN)","AMI-R (AMK)","CAP-R (CPR)","ETH-R (ETH)","LZD-R (LZD)","BDQ-R (BDQ)","CS-R (CS)","PAS-R (PAS)","DLM-R (DLM)");
             foreach $a (@names){#loop over all antibiotics
     
 			$R->run(qq'name<-"$a"
@@ -561,9 +561,9 @@ sub tbresisummary {
     }elsif ($mutations{INH} ne "-" && $mutations{RMP} ne "-" && (($mutations{MFX} ne "-" || $mutations{LFX} ne "-"))){$prediction = "preXDR";
     }elsif ($mutations{INH} ne "-" && $mutations{RMP} ne "-"){$prediction = "MDR";
     }elsif ($mutations{RMP} ne "-") {$prediction = "RR";
-    }elsif ($mutations{INH} eq "-" && $mutations{RMP} eq "-" && $mutations{SM} eq "-" && $mutations{EMB} eq "-" && $mutations{PZA} eq "-" && $mutations{MFX} eq "-" && $mutations{LFX} eq "-" && $mutations{CFZ} eq "-" && $mutations{KAN} eq "-" && $mutations{AMK} eq "-" && $mutations{CPR} eq "-" && $mutations{ETH} eq "-" && $mutations{LZD} eq "-" && $mutations{BDQ} eq "-" && $mutations{CS} eq "-" && $mutations{PAS} eq "-" && $mutations{DEL} eq "-"){$prediction = "S";
+    }elsif ($mutations{INH} eq "-" && $mutations{RMP} eq "-" && $mutations{SM} eq "-" && $mutations{EMB} eq "-" && $mutations{PZA} eq "-" && $mutations{MFX} eq "-" && $mutations{LFX} eq "-" && $mutations{CFZ} eq "-" && $mutations{KAN} eq "-" && $mutations{AMK} eq "-" && $mutations{CPR} eq "-" && $mutations{ETH} eq "-" && $mutations{LZD} eq "-" && $mutations{BDQ} eq "-" && $mutations{CS} eq "-" && $mutations{PAS} eq "-" && $mutations{DLM} eq "-"){$prediction = "S";
     }else{$prediction = "nonMDR";}
-    print Fout "$ID[0]\t$ID[1]\t$mutations{INH}\t$mutations{INH_Freq}\t$mutations{RMP}\t$mutations{RMP_Freq}\t$mutations{SM}\t$mutations{SM_Freq}\t$mutations{EMB}\t$mutations{EMB_Freq}\t$mutations{PZA}\t$mutations{PZA_Freq}\t$mutations{MFX}\t$mutations{MFX_Freq}\t$mutations{LFX}\t$mutations{LFX_Freq}\t$mutations{CFZ}\t$mutations{CFZ_Freq}\t$mutations{KAN}\t$mutations{KAN_Freq}\t$mutations{AMK}\t$mutations{AMK_Freq}\t$mutations{CPR}\t$mutations{CPR_Freq}\t$mutations{ETH}\t$mutations{ETH_Freq}\t$mutations{LZD}\t$mutations{LZD_Freq}\t$mutations{BDQ}\t$mutations{BDQ_Freq}\t$mutations{CS}\t$mutations{CS_Freq}\t$mutations{PAS}\t$mutations{PAS_Freq}\t$mutations{DEL}\t$mutations{DEL_Freq}\t$prediction\n";
+    print Fout "$ID[0]\t$ID[1]\t$mutations{INH}\t$mutations{INH_Freq}\t$mutations{RMP}\t$mutations{RMP_Freq}\t$mutations{SM}\t$mutations{SM_Freq}\t$mutations{EMB}\t$mutations{EMB_Freq}\t$mutations{PZA}\t$mutations{PZA_Freq}\t$mutations{MFX}\t$mutations{MFX_Freq}\t$mutations{LFX}\t$mutations{LFX_Freq}\t$mutations{CFZ}\t$mutations{CFZ_Freq}\t$mutations{KAN}\t$mutations{KAN_Freq}\t$mutations{AMK}\t$mutations{AMK_Freq}\t$mutations{CPR}\t$mutations{CPR_Freq}\t$mutations{ETH}\t$mutations{ETH_Freq}\t$mutations{LZD}\t$mutations{LZD_Freq}\t$mutations{BDQ}\t$mutations{BDQ_Freq}\t$mutations{CS}\t$mutations{CS_Freq}\t$mutations{PAS}\t$mutations{PAS_Freq}\t$mutations{DLM}\t$mutations{DLM_Freq}\t$prediction\n";
     $R->stopR();
     close Fin;
     close Fout;
